@@ -1,7 +1,5 @@
 /** @format */
 
-import { set } from "date-fns";
-import { CurrencyEnum } from "../types/cargo.type";
 import { CurrencyRate } from "../hooks/useCurrencyRates";
 
 export function convertToKZT(
@@ -9,6 +7,18 @@ export function convertToKZT(
     currency: string,
     rates: CurrencyRate[]
 ): number {
+    if (!amount) {
+        throw new Error("Не указана сумма для конвертации");
+    }
+
+    if (!currency) {
+        throw new Error("Не указана валюта для конвертации");
+    }
+
+    if (!rates || rates.length === 0) {
+        throw new Error("Не указаны курсы валют для конвертации");
+    }
+
     if (currency === "KZT") {
         return amount; // Если тенге, конвертация не нужна
     }

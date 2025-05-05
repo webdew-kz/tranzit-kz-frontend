@@ -9,7 +9,8 @@ import { Button } from '@/shared/components/ui/button'
 import Loader from '@/shared/components/widgets/Loader'
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Star } from 'lucide-react'
+import Link from 'next/link'
 
 
 
@@ -23,6 +24,13 @@ export default function CargoSearchList() {
 
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
+
+	const [wishlistLength, setWishlistLength] = useState(0)
+
+	useEffect(() => {
+		const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+		setWishlistLength(stored.length);
+	}, []);
 
 	const loadMore = async () => {
 		if (!hasMore) return;
@@ -72,6 +80,8 @@ export default function CargoSearchList() {
 	}, [])
 
 
+
+
 	if (cargos.length === 0 || loading) {
 		return <Loader />
 	}
@@ -102,8 +112,29 @@ export default function CargoSearchList() {
 			cargos.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center">
+						<div className=" flex justify-between items-center sticky top-15 bg-background py-5">
 							<span>Всего грузов: {total}</span>
+
+							{wishlistLength > 0 ? (
+								<Link
+									href='/dashboard/cargo/wishlist'
+									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
+
+								>
+									<Star size={16} fill='#b4802e' />
+									<span>{`В избранном (${wishlistLength})`}</span>
+								</Link>
+							) : (
+								<Link
+									href='/dashboard/cargo/wishlist'
+									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
+
+								>
+									<Star size={16} />
+									<span>Избранное</span>
+								</Link>
+							)}
+
 						</div>
 						{cargos.map((cargo) => (
 							<CargoSearchItem
@@ -111,6 +142,7 @@ export default function CargoSearchList() {
 								cargo={cargo}
 								loading={loading}
 								rates={rates}
+								setWishlistLength={setWishlistLength}
 							/>
 						))}
 						{isLoading &&

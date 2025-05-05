@@ -68,3 +68,71 @@ export async function addView(id: string) {
         throw new Error(error instanceof Error ? error.message : String(error));
     }
 }
+
+export async function addToWishlist(cargoId: string) {
+    try {
+        const res = await fetch(
+            `${process.env.SERVER_URL}/cargo/add-to-wishlist`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cargoId }),
+                credentials: "include",
+            }
+        );
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}
+
+export async function removeFromWishlist(cargoId: string) {
+    try {
+        const res = await fetch(
+            `${process.env.SERVER_URL}/cargo/remove-from-wishlist`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cargoId }),
+                credentials: "include",
+            }
+        );
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}
+
+export async function getWishlist() {
+    try {
+        const res = await fetch(`${process.env.SERVER_URL}/cargo/wishlist`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+        });
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}

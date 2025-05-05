@@ -8,19 +8,21 @@ import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
 import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
-import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Truck, Wallet, Weight, X } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
-import React, { memo, useEffect, useState } from 'react'
-import { addView } from '../actions'
+import React, { memo, useEffect, useState, useTransition } from 'react'
+import { addToWishlist, addView, removeFromWishlist } from '../actions'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 interface CargoSearchItemProps {
 	cargo: ICargo
 	rates?: any
 	loading?: boolean
+	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const CargoSearchItem = memo(({ cargo, rates, loading }: CargoSearchItemProps) => {
+const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: CargoSearchItemProps) => {
 
 	const [places, setPlaces] = useState<string[]>([])
 
@@ -31,6 +33,17 @@ const CargoSearchItem = memo(({ cargo, rates, loading }: CargoSearchItemProps) =
 
 	const [amountPrice, setAmountPrice] = useState(0)
 	const [amountTariff, setAmountTariff] = useState(0)
+
+
+	const [pending, startTransition] = useTransition()
+	const [isWishlist, setIsWishlist] = useState(false)
+
+	useEffect(() => {
+		const current = getWishlist();
+		if (current.includes(cargo.id!)) {
+			setIsWishlist(true);
+		}
+	}, [])
 
 	useEffect(() => {
 		setPlaces([...cargo.placesLoading, ...cargo.placesUnloading]);
@@ -52,6 +65,63 @@ const CargoSearchItem = memo(({ cargo, rates, loading }: CargoSearchItemProps) =
 		await addView(id)
 	}
 
+	const handleToggleWishlist = () => {
+		if (isWishlist) {
+			startTransition(async () => {
+				try {
+					const res = await removeFromWishlist(cargo.id!);
+					const current = getWishlist().filter((id) => id !== cargo.id!);
+					localStorage.setItem("wishlist", JSON.stringify(current));
+					const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+					if (setWishlistLength) {
+						setWishlistLength(stored.length);
+					}
+					toast.success(res.message, {
+						position: "top-center",
+					});
+				} catch (error: any) {
+					toast.error(error.message, {
+						position: "top-center",
+					});
+				}
+			});
+		} else {
+			startTransition(async () => {
+				try {
+					const res = await addToWishlist(cargo.id!);
+					const current = getWishlist();
+					if (!current.includes(cargo.id!)) {
+						localStorage.setItem("wishlist", JSON.stringify([...current, cargo.id!]));
+					}
+					const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+					if (setWishlistLength) {
+						setWishlistLength(stored.length);
+					}
+					toast.success(res.message, {
+						position: "top-center",
+					});
+				} catch (error: any) {
+					toast.error(error.message, {
+						position: "top-center",
+					});
+				}
+			});
+		}
+
+		setIsWishlist(!isWishlist);
+	};
+
+
+	function getWishlist(): string[] {
+		if (typeof window === "undefined") return [];
+		const data = localStorage.getItem("wishlist");
+		return data ? JSON.parse(data) : [];
+	}
+
+	function isInWishlist(cargoId: string): boolean {
+		return getWishlist().includes(cargoId);
+	}
+
 
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>
@@ -65,17 +135,17 @@ const CargoSearchItem = memo(({ cargo, rates, loading }: CargoSearchItemProps) =
 						<CalendarDays size={16} />
 						<span className='text-nowrap'>{cargo.endDate && checkEndDate(cargo.startDate, cargo.endDate)}</span>
 					</div>
-					<div className=" flex items-center gap-4 justify-end">
-						{cargo.user.isVerified ? (
-							<div className="flex items-center gap-2">
-								<ShieldCheck size={16} />
-								<span>Верифицирован</span>
-							</div>
+					<div className=" flex items-center">
+						{isInWishlist(cargo.id!) ? (
+							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+								<Star size={16} fill='#b4802e' />
+								<span>Убрать из избранного</span>
+							</button>
 						) : (
-							<div className="flex items-center gap-2">
-								<ShieldOff size={16} />
-								<span>Не верифицирован</span>
-							</div>
+							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+								<Star size={16} />
+								<span>Добавить в избранное</span>
+							</button>
 						)}
 					</div>
 				</div>
@@ -384,7 +454,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading }: CargoSearchItemProps) =
 							</Popover>
 						)}
 					</div>
-					<div className="">
+					<div>
 						{cargo.userPhone && (
 							<Popover>
 								<PopoverTrigger asChild>
@@ -394,7 +464,6 @@ const CargoSearchItem = memo(({ cargo, rates, loading }: CargoSearchItemProps) =
 										onClick={() => cargo.id && handleAddView(cargo.id)}
 									>
 										<span className=''>Показать контакты</span>
-										{/* <ChevronDown size={16} className=' stroke-background group-hover:stroke-(--dark-accent)' /> */}
 									</Button>
 								</PopoverTrigger>
 								<PopoverContent align='end' className='p-5 w-auto'>
