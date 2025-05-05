@@ -1,0 +1,46 @@
+/** @format */
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 28px;
+    max-width: 164px;
+    position: relative;
+
+    select {
+        appearance: none; /* removes default arrow */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        padding: 0 12px;
+        line-height: 24px;
+        border: 1px solid var(--dark-accent);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+        text-transform: capitalize;
+        background-color: transparent;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .selectDark {
+        // background-color: var(--background);
+
+        option {
+            background-color: var(--background);
+        }
+    }
+}
+
+.chevronDown {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    stroke: var(--dark-accent);
+    z-index: -1;
+}
