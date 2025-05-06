@@ -29,7 +29,7 @@ export async function loginAction(data: ILoginForm) {
         cookie.set("accessToken", accessToken, {
             httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
             domain: ".itranzit.kz",
             path: "/",
             maxAge: 1000 * 60 * 60 * 24,
@@ -37,7 +37,7 @@ export async function loginAction(data: ILoginForm) {
         cookie.set("userId", user.id, {
             httpOnly: true,
             secure: true,
-            sameSite: "none",
+            sameSite: "lax",
             domain: ".itranzit.kz",
             path: "/",
             maxAge: 1000 * 60 * 60 * 24,
