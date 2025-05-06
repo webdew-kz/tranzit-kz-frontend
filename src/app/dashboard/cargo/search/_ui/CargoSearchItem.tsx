@@ -481,10 +481,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 												</Link>
 											</Button>
 										)}
-										{cargo.user.whatsappNumbers && cargo.user.whatsappNumbers.length > 0 && cargo.user.whatsappNumbers.map((whatsapp, index) => (
-											<Button key={index} variant='link' asChild>
+										{cargo.user.whatsapp && (
+											<Button variant='link' asChild>
 												<Link
-													href={`https://wa.me/${whatsapp}`}
+													href={`https://wa.me/${cargo.user.whatsapp}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -493,11 +493,11 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 													<span>WhatsApp</span>
 												</Link>
 											</Button>
-										))}
-										{cargo.user.viberNumbers && cargo.user.viberNumbers.length > 0 && cargo.user.viberNumbers.map((viber, index) => (
-											<Button key={index} variant='link' asChild>
+										)}
+										{cargo.user.viber && (
+											<Button variant='link' asChild>
 												<Link
-													href={`viber://chat?number=%2B${viber}`}
+													href={`viber://chat?number=%2B${cargo.user.viber}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -506,11 +506,11 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 													<span>Viber</span>
 												</Link>
 											</Button>
-										))}
-										{cargo.user.skypeNumbers && cargo.user.skypeNumbers.length > 0 && cargo.user.skypeNumbers.map((skype, index) => (
-											<Button key={index} variant='link' asChild>
+										)}
+										{cargo.user.skype && (
+											<Button variant='link' asChild>
 												<Link
-													href={`skype:live.${skype}?chat`}
+													href={`skype:live.${cargo.user.skype}?chat`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -519,11 +519,11 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 													<span>Skype</span>
 												</Link>
 											</Button>
-										))}
-										{cargo.user.telegramNumbers && cargo.user.telegramNumbers.length > 0 && cargo.user.telegramNumbers.map((telegram, index) => (
-											<Button key={index} variant='link' asChild>
+										)}
+										{cargo.user.telegram && (
+											<Button variant='link' asChild>
 												<Link
-													href={`https://t.me/${telegram}`}
+													href={`https://t.me/${cargo.user.telegram}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -532,7 +532,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 													<span>Telegram</span>
 												</Link>
 											</Button>
-										))}
+										)}
 									</div>
 								</PopoverContent>
 							</Popover>

@@ -250,7 +250,10 @@ export interface ICargo {
 
     userName: string;
     userPhone: string;
-
+    whatsapp?: string;
+    telegram?: string;
+    viber?: string;
+    skype?: string;
     user: User;
 }
 

@@ -5,9 +5,9 @@ import { Input } from '@/shared/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select';
 import { MultiCityInput } from '@/shared/components/widgets/InputCity';
 import { z } from "zod"
-import { useEffect, useState, useTransition } from 'react';
-import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/shared/components/ui/dialog';
-import { AdditionallyEnum, CurrencyEnum, DocumentsAdrEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type';
+import { useEffect, useTransition } from 'react';
+import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle, DialogFooter, DialogClose } from '@/shared/components/ui/dialog';
+import { AdditionallyEnum, CurrencyEnum, DocumentsAdrEnum, DocumentsEnum, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type';
 import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
 import MultiCheckbox from '@/shared/components/widgets/MultiCheckbox';
 import { TimePicker } from '@/shared/components/widgets/TimePicker';
@@ -71,6 +71,11 @@ export default function CargoFormAdd() {
 
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
+
+		whatsapp: z.string().optional(),
+		telegram: z.string().optional(),
+		viber: z.string().optional(),
+		skype: z.string().optional(),
 	});
 
 
@@ -122,6 +127,11 @@ export default function CargoFormAdd() {
 
 			userName: user?.name!,
 			userPhone: user?.phone!,
+
+			whatsapp: user?.whatsapp,
+			telegram: user?.telegram,
+			viber: user?.viber,
+			skype: user?.skype,
 		},
 	})
 
@@ -131,6 +141,19 @@ export default function CargoFormAdd() {
 		}
 		if (user?.phone) {
 			form.setValue('userPhone', user.phone);
+		}
+
+		if (user?.whatsapp) {
+			form.setValue('whatsapp', user.whatsapp);
+		}
+		if (user?.telegram) {
+			form.setValue('telegram', user.telegram);
+		}
+		if (user?.viber) {
+			form.setValue('viber', user.viber);
+		}
+		if (user?.skype) {
+			form.setValue('skype', user.skype);
 		}
 	}, [user, form]);
 
@@ -664,7 +687,7 @@ export default function CargoFormAdd() {
 					</div>
 
 
-					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+					<div className="grid sm:grid-cols-2 md:grid-cols-6  w-full gap-3 md:gap-5 items-start">
 
 						<Input
 							type="text"
@@ -682,10 +705,47 @@ export default function CargoFormAdd() {
 							{...form.register('userPhone')}
 						/>
 
+						<Input
+							type="text"
+							placeholder="Whatsapp"
+							className="text-sm"
+							required
+							{...form.register('whatsapp')}
+						/>
+
+						<Input
+							type="text"
+							placeholder="Telegram"
+							className="text-sm"
+							required
+							{...form.register('telegram')}
+						/>
+
+						<Input
+							type="text"
+							placeholder="Viber"
+							className="text-sm"
+							required
+							{...form.register('viber')}
+						/>
+
+						<Input
+							type="text"
+							placeholder="Skype"
+							className="text-sm"
+							required
+							{...form.register('skype')}
+						/>
+					</div>
+
+					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+
+
+
 
 						<Button
 							type='submit'
-							className=' bg-(--dark-accent)'
+							className=' bg-(--dark-accent) col-start-2'
 							disabled={pending}
 						>
 							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}

@@ -11,11 +11,10 @@ export interface User {
     city: string | null;
     avatar: string | null;
     role: string;
-    whatsappNumbers: string[];
-    telegramNumbers: string[];
-    viberNumbers: string[];
-    skypeNumbers: string[];
-    otherNumbers: string[];
+    whatsapp?: string;
+    telegram?: string;
+    viber?: string;
+    skype?: string;
     subscriptionStartDate: string | null;
     subscriptionEndDate: string | null;
     subscriptionStatus: boolean | null;
