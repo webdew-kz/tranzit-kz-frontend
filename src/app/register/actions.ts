@@ -46,6 +46,7 @@ export async function registerAction(data: RegisterFormProps) {
 export async function isExistingUser(login: string) {
     try {
         const res = await fetch(
+            // `${process.env.SERVER_URL}/auth/is-existing-user`,
             `https://api.itranzit.kz/auth/is-existing-user`,
             {
                 method: "POST",
