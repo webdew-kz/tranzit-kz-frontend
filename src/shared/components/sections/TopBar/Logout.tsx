@@ -40,7 +40,7 @@ export default function Logout() {
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при выходе из системы11', {
+				toast.error('Ошибка при выходе из системы!', {
 					position: 'top-center',
 				})
 			} finally {
