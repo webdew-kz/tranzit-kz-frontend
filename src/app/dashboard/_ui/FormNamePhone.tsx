@@ -48,110 +48,22 @@ export default function FormNamePhone() {
 
 	useEffect(() => {
 		if (!window.recaptchaVerifier) {
-			window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-				'size': 'invisible',
+			const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+				size: 'invisible',
 				callback: (response: string) => {
 					console.log('reCAPTCHA resolved', response);
 				},
-			})
-
-			window.recaptchaVerifier.render().then((widgetId) => {
+			});
+			verifier.render().then((widgetId) => {
+				window.recaptchaVerifier = verifier;
 				window.recaptchaWidgetId = widgetId;
 			});
 		}
 	}, []);
 
-	// function handleValidPhone(values: z.infer<typeof baseSchema>) {
-
-	// 	startTransition(async () => {
-
-	// 		try {
-	// 			const res = await isExistingUser(values.phone)
-
-	// 			if (res.isExistingUser) {
-	// 				toast.error('Пользователь уже существует', {
-	// 					position: 'top-center',
-	// 				});
-	// 				return
-	// 			}
-
-	// 			let appVerifier = window.recaptchaVerifier;
-
-	// 			signInWithPhoneNumber(auth, '+' + values.phone, appVerifier)
-	// 				.then((confirmationResult) => {
-	// 					window.confirmationResult = confirmationResult
-	// 					toast.success('Введите код из СМС', {
-	// 						position: 'top-center',
-	// 						duration: 5000,
-	// 					})
-	// 					setSendData(values)
-	// 					setStep('code')
-	// 				})
-	// 				.catch((error) => {
-	// 					console.error(error)
-	// 					toast.error('Ошибка при отправке кода', {
-	// 						position: 'top-center',
-	// 					})
-	// 				}).finally(() => {
-	// 					formCode.setValue("otp", "")
-	// 				})
-
-
-	// 		} catch (error) {
-	// 			console.error(error)
-	// 			toast.error('Ошибка проверке существования пользователя', {
-	// 				position: 'top-center',
-	// 			})
-	// 		}
-	// 	})
-
-	// }
-
-	// function handleSubmit(values: z.infer<typeof codeSchema>) {
-	// 	window.confirmationResult.confirm(values.otp)
-	// 		.then((result: any) => {
-	// 			const user = result.user
-	// 			console.log(user);
-
-	// 			toast.success(`Телефон подтвержден`, {
-	// 				position: 'top-center',
-	// 			})
-
-	// 			startTransition(async () => {
-
-	// 				const res: any = await endRegister(sendData)
-
-	// 				toast.success(res.message, {
-	// 					position: 'top-center',
-	// 				})
-
-	// 				setUser(res.updatedUser)
-	// 			})
-
-	// 		}).catch((error: any) => {
-	// 			console.error(error)
-	// 			toast.error('Неверный код', {
-	// 				position: 'top-center',
-	// 			})
-	// 		})
-	// }
 
 	const onSubmit = async (values: z.infer<typeof schema>) => {
 		if (step === "number") {
-			// // проверка на существование
-			// const res = await isExistingUser(values.phone)
-			// if (res.isExistingUser) {
-			// 	toast.error("Пользователь уже существует")
-			// 	return
-			// }
-
-			// // Firebase: отправка SMS
-			// const appVerifier = window.recaptchaVerifier
-			// const confirmation = await signInWithPhoneNumber(auth, "+" + values.phone, appVerifier)
-			// window.confirmationResult = confirmation
-
-			// toast.success("Введите код из СМС")
-			// setStep("code")
 
 			const res = await isExistingUser(values.phone)
 
