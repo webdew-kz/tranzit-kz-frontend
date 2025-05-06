@@ -27,6 +27,7 @@ export async function registerAction(data: RegisterFormProps) {
             secure: true,
             sameSite: "lax",
             path: "/",
+            domain: ".itranzit.kz",
             maxAge: 1000 * 60 * 60 * 24,
         });
         cookie.set("userId", user.id, {
@@ -34,6 +35,7 @@ export async function registerAction(data: RegisterFormProps) {
             secure: true,
             sameSite: "lax",
             path: "/",
+            domain: ".itranzit.kz",
             maxAge: 1000 * 60 * 60 * 24,
         });
 

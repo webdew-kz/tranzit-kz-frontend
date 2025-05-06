@@ -30,6 +30,7 @@ export async function loginAction(data: ILoginForm) {
             httpOnly: true,
             secure: true,
             sameSite: "none",
+            domain: ".itranzit.kz",
             path: "/",
             maxAge: 1000 * 60 * 60 * 24,
         });
@@ -37,6 +38,7 @@ export async function loginAction(data: ILoginForm) {
             httpOnly: true,
             secure: true,
             sameSite: "none",
+            domain: ".itranzit.kz",
             path: "/",
             maxAge: 1000 * 60 * 60 * 24,
         });
