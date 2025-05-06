@@ -64,6 +64,6 @@ export async function loginAction(data: ILoginForm) {
         throw new Error(message || "Login failed");
     }
 
-    const result = await res.json();
-    return { success: true, user: result.user };
+    const { accessToken, user, message } = await res.json();
+    return { success: true, user, message, accessToken };
 }
