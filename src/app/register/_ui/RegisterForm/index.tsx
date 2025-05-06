@@ -293,7 +293,7 @@ export default function RegisterForm() {
 				setStepEmailRegister('code')
 			} catch (error) {
 				console.error(error)
-				toast.error('Пользователь уже существует', {
+				toast.error('Пользователь уже существует1', {
 					position: 'top-center',
 				})
 			} finally {
