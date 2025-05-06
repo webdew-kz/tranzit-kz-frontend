@@ -21,19 +21,21 @@ export async function registerAction(data: RegisterFormProps) {
 
         const { accessToken, user, message } = await res.json();
 
-        const cookie = await cookies();
-        cookie.set("accessToken", accessToken, {
-            httpOnly: true,
-            sameSite: "lax",
-            path: "/",
-            maxAge: 1000 * 60 * 60 * 24,
-        });
-        cookie.set("userId", user.id, {
-            httpOnly: true,
-            sameSite: "lax",
-            path: "/",
-            maxAge: 1000 * 60 * 60 * 24,
-        });
+        // const cookie = await cookies();
+        // cookie.set("accessToken", accessToken, {
+        //     httpOnly: true,
+        //     secure: true,
+        //     sameSite: "lax",
+        //     path: "/",
+        //     maxAge: 1000 * 60 * 60 * 24,
+        // });
+        // cookie.set("userId", user.id, {
+        //     httpOnly: true,
+        //     secure: true,
+        //     sameSite: "lax",
+        //     path: "/",
+        //     maxAge: 1000 * 60 * 60 * 24,
+        // });
 
         return { success: true, user, message, accessToken };
     } catch (error: any) {
