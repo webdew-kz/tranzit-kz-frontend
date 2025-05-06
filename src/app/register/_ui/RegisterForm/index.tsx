@@ -281,7 +281,18 @@ export default function RegisterForm() {
 
 			try {
 
-				const res = await isExistingUserForEmail(values.email)
+				// const res = await isExistingUserForEmail(values.email)
+				const response = await fetch(
+					// `${process.env.SERVER_URL}/auth/is-existing-user-for-email`,
+					`https://api.itranzit.kz/auth/is-existing-user`,
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ email: values.email }),
+					}
+				);
+
+				const res = await response.json();
 
 				setCode(res)
 
