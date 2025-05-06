@@ -71,6 +71,7 @@ export async function isExistingUserForEmail(email: string) {
                 body: JSON.stringify({ email }),
             }
         );
+        console.log(process.env.SERVER_URL);
 
         if (!res.ok)
             throw new Error(res.statusText || "Пользователь уже существует!!!");
