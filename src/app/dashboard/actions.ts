@@ -2,8 +2,8 @@
 
 export async function endRegister(data: any) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/user`, {
-            method: "PATCH",
+        const res = await fetch(`${process.env.SERVER_URL}/user/end-register`, {
+            method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
             credentials: "include",
