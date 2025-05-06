@@ -1,5 +1,7 @@
 /** @format */
 
+import { cookies } from "next/headers";
+
 export async function logoutAction() {
     try {
         const res = await fetch(`${process.env.SERVER_URL}/auth/logout`, {
