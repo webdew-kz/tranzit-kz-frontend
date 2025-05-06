@@ -292,6 +292,14 @@ export default function RegisterForm() {
 					}
 				);
 
+				if (!response.ok) {
+					toast.error('Пользователь уже существует1111', {
+						position: 'top-center',
+					});
+					setLoading(false)
+					return
+				}
+
 				const res = await response.json();
 
 				setCode(res)
