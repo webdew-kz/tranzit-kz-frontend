@@ -65,17 +65,13 @@ export async function isExistingUser(login: string) {
 export async function isExistingUserForEmail(email: string) {
     try {
         const res = await fetch(
-            // `${process.env.SERVER_URL}/auth/is-existing-user-for-email`,
-            `https://api.itranzit.kz/auth/is-existing-user`,
+            `${process.env.SERVER_URL}/auth/is-existing-user-for-email`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email }),
             }
         );
-
-        if (!res.ok)
-            throw new Error(res.statusText || "Пользователь уже существует!!!");
 
         return await res.json();
     } catch (error: any) {

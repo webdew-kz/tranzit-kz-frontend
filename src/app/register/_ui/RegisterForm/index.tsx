@@ -281,26 +281,7 @@ export default function RegisterForm() {
 
 			try {
 
-				// const res = await isExistingUserForEmail(values.email)
-				const response = await fetch(
-					// `${process.env.SERVER_URL}/auth/is-existing-user-for-email`,
-					`https://api.itranzit.kz/auth/is-existing-user`,
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ email: values.email }),
-					}
-				);
-
-				if (!response.ok) {
-					toast.error('Пользователь уже существует1111', {
-						position: 'top-center',
-					});
-					setLoading(false)
-					return
-				}
-
-				const res = await response.json();
+				const res = await isExistingUserForEmail(values.email)
 
 				setCode(res)
 
@@ -312,7 +293,7 @@ export default function RegisterForm() {
 				setStepEmailRegister('code')
 			} catch (error) {
 				console.error(error)
-				toast.error('Пользователь уже существует1', {
+				toast.error('Пользователь уже существует2', {
 					position: 'top-center',
 				})
 			} finally {
