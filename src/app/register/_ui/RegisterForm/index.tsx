@@ -273,34 +273,31 @@ export default function RegisterForm() {
 		})
 	}
 
-	function onSubmitEmail(values: FormEmailValues) {
+	async function onSubmitEmail(values: FormEmailValues) {
 
 		setLoading(true)
 
-		startTransition(async () => {
+		try {
 
-			try {
+			const res = await isExistingUserForEmail(values.email)
+			console.log(res);
 
-				const res = await isExistingUserForEmail(values.email)
+			setCode(res)
 
-				setCode(res)
+			setFormData((prev) => ({
+				...prev,
+				login: values.email,
+			}))
 
-				setFormData((prev) => ({
-					...prev,
-					login: values.email,
-				}))
-
-				setStepEmailRegister('code')
-			} catch (error) {
-				console.error(error)
-				toast.error('Пользователь уже существует2', {
-					position: 'top-center',
-				})
-			} finally {
-				setLoading(false)
-			}
-		})
-
+			setStepEmailRegister('code')
+		} catch (error) {
+			console.error(error)
+			toast.error('Пользователь уже существует2', {
+				position: 'top-center',
+			})
+		} finally {
+			setLoading(false)
+		}
 
 	}
 

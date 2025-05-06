@@ -68,14 +68,23 @@ export async function isExistingUserForEmail(email: string) {
             `${process.env.SERVER_URL}/auth/is-existing-user-for-email`,
             {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify({ email }),
             }
         );
 
-        return await res.json();
+        const data = await res.json();
+
+        if (!res.ok) {
+            console.error("API error:", res.status, data);
+            throw new Error(data.message || "Ошибка проверки email");
+        }
+
+        return data; // { isExistingUser: boolean }
     } catch (error: any) {
-        console.error(error);
+        console.error("Fetch error:", error);
         throw new Error("Ошибка при проверке существования пользователя");
     }
 }
