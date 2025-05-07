@@ -19,10 +19,12 @@ interface CargoSearchItemProps {
 	cargo: ICargo
 	rates?: any
 	loading?: boolean
-	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>;
+	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>
+	isContact?: boolean
+	isWishBtn?: boolean
 }
 
-const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: CargoSearchItemProps) => {
+const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: CargoSearchItemProps) => {
 
 	const [places, setPlaces] = useState<string[]>([])
 
@@ -141,12 +143,12 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 						<span className='text-nowrap'>{cargo.endDate && checkEndDate(cargo.startDate, cargo.endDate)}</span>
 					</div>
 					<div className=" flex items-center">
-						{isInWishlist(cargo.id!) ? (
+						{isWishBtn && isInWishlist(cargo.id!) ? (
 							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} fill='#b4802e' />
 								<span>Убрать из избранного</span>
 							</button>
-						) : (
+						) : isWishBtn && (
 							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} />
 								<span>Добавить в избранное</span>
@@ -469,7 +471,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 						)}
 					</div>
 					<div>
-						{cargo.userPhone && (
+						{(cargo.userPhone && isContact) && (
 							<Popover>
 								<PopoverTrigger asChild>
 									<Button
@@ -495,10 +497,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 												</Link>
 											</Button>
 										)}
-										{cargo?.user?.whatsapp && (
+										{cargo.userPhone && (
 											<Button variant='link' asChild>
 												<Link
-													href={`https://wa.me/${cargo?.user?.whatsapp}`}
+													href={`https://wa.me/${cargo.userPhone}?text=Здравствуйте. Данная заявка актуальна? https://itranzit.kz/dashboard/cargo/${cargo.id}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'

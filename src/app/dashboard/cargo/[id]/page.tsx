@@ -1,7 +1,14 @@
-import React from 'react'
+import Cargo from './_ui/Cargo'
 
-export default function page() {
+
+export default async function Page({
+	params,
+}: {
+	params: Promise<{ id: string }>
+}) {
+	const { id } = await params
+
 	return (
-		<div>page</div>
+		<Cargo id={id} />
 	)
 }
