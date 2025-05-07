@@ -174,19 +174,26 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 						</span>
 					</span>
 				</div>
-				<div className=" w-full flex gap-2  flex-wrap mb-3">
-					{places.length > 0 && places.map((place, index) => {
-						const [city, country] = place.split(",").map((str) => str.trim());
+				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+					<div className=" w-full flex gap-2 flex-wrap">
+						{places.length > 0 && places.map((place, index) => {
+							const [city, country] = place.split(",").map((str) => str.trim());
 
-						return (
-							<span key={`${city}-${country}-${index}`} className="flex items-center gap-3 ">
-								<span className="font-medium leading-none uppercase">
-									{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
+							return (
+								<span key={`${city}-${country}-${index}`} className="flex items-center gap-3 ">
+									<span className="font-medium leading-none uppercase">
+										{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
+									</span>
+									{index < places.length - 1 && <MoveRight size={16} />}
 								</span>
-								{index < places.length - 1 && <MoveRight size={16} />}
-							</span>
-						);
-					})}
+							);
+						})}
+					</div>
+					<a
+						href={cargo.routeLink}
+						target='_blank'
+						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
+					>Посмотреть маршрут</a>
 				</div>
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
