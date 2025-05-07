@@ -722,7 +722,7 @@ export default function CargoFormAdd() {
 							{...form.register('whatsapp')}
 						/>
 
-						<Input
+						{/* <Input
 							type="text"
 							placeholder="Telegram"
 							className="text-sm"
@@ -744,7 +744,7 @@ export default function CargoFormAdd() {
 							className="text-sm"
 
 							{...form.register('skype')}
-						/>
+						/> */}
 					</div>
 
 					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
