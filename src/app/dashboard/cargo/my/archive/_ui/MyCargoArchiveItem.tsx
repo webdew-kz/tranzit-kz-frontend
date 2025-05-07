@@ -51,7 +51,7 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 
 	useEffect(() => {
 
-		if (!loading) {
+		if (!loading && rates && cargo && cargo.price && cargo.tariff && cargo.currency) {
 			setAmountPrice(convertToKZT(Number(cargo.price), cargo.currency, rates))
 			setAmountTariff(convertToKZT(Number(cargo.tariff), cargo.currency, rates))
 

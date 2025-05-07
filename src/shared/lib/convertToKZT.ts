@@ -7,7 +7,7 @@ export function convertToKZT(
     currency: string,
     rates: CurrencyRate[]
 ): number {
-    if (!amount) {
+    if (amount === undefined || amount === null) {
         throw new Error("Не указана сумма для конвертации");
     }
 
