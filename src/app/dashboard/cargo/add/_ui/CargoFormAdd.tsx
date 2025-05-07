@@ -330,7 +330,7 @@ export default function CargoFormAdd() {
 
 						<Input
 							type='text'
-							placeholder="Наименование груза"
+							placeholder="Название груза"
 							className='text-sm'
 							required
 							{...form.register('title')}
@@ -717,7 +717,7 @@ export default function CargoFormAdd() {
 
 						<Input
 							type="text"
-							placeholder="Whatsapp"
+							placeholder="Whatsapp (необязательно)"
 							className="text-sm"
 							{...form.register('whatsapp')}
 						/>
