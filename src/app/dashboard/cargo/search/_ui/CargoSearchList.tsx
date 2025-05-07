@@ -24,6 +24,7 @@ export default function CargoSearchList() {
 
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
+	const [isLoad, setIsLoad] = useState(false);
 
 	const [wishlistLength, setWishlistLength] = useState(0)
 
@@ -57,12 +58,15 @@ export default function CargoSearchList() {
 
 	const firstLoad = async () => {
 
+		setIsLoad(true)
 		try {
 			const res = await findAll(page);
 			setCargos(res.cargos);
 			setTotal(res.total)
 		} catch (error) {
 			console.error("Ошибка загрузки:", error);
+		} finally {
+			setIsLoad(false)
 		}
 
 	}
@@ -82,7 +86,7 @@ export default function CargoSearchList() {
 
 
 
-	if (cargos.length === 0 || loading) {
+	if (isLoad || loading) {
 		return <Loader />
 	}
 
