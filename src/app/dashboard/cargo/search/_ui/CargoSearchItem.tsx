@@ -137,7 +137,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 
 	const truckTypes = cargo.truckType?.map((item) => TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]).join(", ");
 
-	const message = `Здравствуйте. Данная заявка актуальна?\n\nГруз: ${cargo.title}\nМаршрут: ${route}\nЦена: ${cargo.price} ${getCurrencySymbol(cargo.currency)}\nТип фуры: ${truckTypes}\nСсылка на груз: https://${process.env.DOMAIN}/dashboard/cargo/${cargo.id}`
+	const message = `Здравствуйте. Данная заявка актуальна?\n\nГруз: ${cargo.title}\nМаршрут: ${route}\nЦена: ${cargo.price} ${getCurrencySymbol(cargo.currency)}\nТип фуры: ${truckTypes}\n\nСсылка на груз: https://${process.env.DOMAIN}/dashboard/cargo/${cargo.id}`
 	const link = `https://wa.me/${cargo.userPhone}?text=${encodeURIComponent(message)}`
 
 
