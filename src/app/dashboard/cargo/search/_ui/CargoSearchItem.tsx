@@ -52,11 +52,11 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 	useEffect(() => {
 
 		if (!loading) {
-			setAmountPrice(convertToKZT(Number(cargo.price), cargo.currency, rates))
-			setAmountTariff(convertToKZT(Number(cargo.tariff), cargo.currency, rates))
+			setAmountPrice(convertToKZT(Number(cargo?.price), cargo?.currency, rates))
+			setAmountTariff(convertToKZT(Number(cargo?.tariff), cargo?.currency, rates))
 
-			setBaseAmountPriceKZT(convertToKZT(Number(cargo.price), cargo.currency, rates))
-			setBaseAmountTariffKZT(convertToKZT(Number(cargo.tariff), cargo.currency, rates))
+			setBaseAmountPriceKZT(convertToKZT(Number(cargo?.price), cargo?.currency, rates))
+			setBaseAmountTariffKZT(convertToKZT(Number(cargo?.tariff), cargo?.currency, rates))
 		}
 
 	}, [rates, cargo.tariff, cargo.price, cargo.currency])
