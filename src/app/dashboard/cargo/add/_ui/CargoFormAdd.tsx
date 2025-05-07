@@ -18,6 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { addCargo } from '../actions';
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 
 export default function CargoFormAdd() {
@@ -25,6 +26,8 @@ export default function CargoFormAdd() {
 	const { user } = useUserStore()
 
 	const [pending, startTransition] = useTransition()
+
+	const router = useRouter()
 
 	const cargoSchema = z.object({
 		title: z.string().min(1),
@@ -72,10 +75,10 @@ export default function CargoFormAdd() {
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
 
-		whatsapp: z.string().optional(),
-		telegram: z.string().optional(),
-		viber: z.string().optional(),
-		skype: z.string().optional(),
+		skype: z.string().nullable().default(''),
+		telegram: z.string().nullable().default(''),
+		viber: z.string().nullable().default(''),
+		whatsapp: z.string().nullable().default('')
 	});
 
 
@@ -91,15 +94,15 @@ export default function CargoFormAdd() {
 
 			placesLoading: [""],
 			placesUnloading: [""],
-			weight: undefined,
-			volume: undefined,
+			weight: 20,
+			volume: 86,
 			periodDays: 5,
 			startDate: new Date().toISOString(),
 
-			truckType: [],
-			loadingType: [],
+			truckType: ["ANY"],
+			loadingType: ["ANY"],
 
-			paymentMethod: [],
+			paymentMethod: ["CASH"],
 			paymentPeriod: [],
 			paymentOther: [],
 			paymentPrepaymentPercent: undefined,
@@ -170,7 +173,7 @@ export default function CargoFormAdd() {
 					position: 'top-center',
 				})
 
-				form.reset()
+				router.replace('/dashboard/cargo/my')
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при добавлении груза', {
@@ -259,23 +262,32 @@ export default function CargoFormAdd() {
 							)}
 						/>
 
+						<div className=" relative w-full">
+							<Input
+								type='number'
+								required
+								placeholder="Тоннаж"
+								className='text-sm'
+								{...form.register('weight', { valueAsNumber: true })}
+							/>
+							<span className="absolute right-4 top-1/2 -translate-y-1/2 text-(--dark-accent) pointer-events-none">
+								т
+							</span>
+						</div>
 
-						<Input
-							type='number'
-							required
-							placeholder="Тоннаж"
-							className='text-sm'
-							{...form.register('weight', { valueAsNumber: true })}
-						/>
 
-
-						<Input
-							type='number'
-							required
-							placeholder="Объем"
-							className='text-sm'
-							{...form.register('volume', { valueAsNumber: true })}
-						/>
+						<div className=" relative w-full">
+							<Input
+								type='number'
+								required
+								placeholder="Объем"
+								className='text-sm'
+								{...form.register('volume', { valueAsNumber: true })}
+							/>
+							<span className="absolute right-4 top-1/2 -translate-y-1/2 text-(--dark-accent) pointer-events-none">
+								м<sup>3</sup>
+							</span>
+						</div>
 
 						<Controller
 							control={form.control}
@@ -707,7 +719,6 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Whatsapp"
 							className="text-sm"
-
 							{...form.register('whatsapp')}
 						/>
 

@@ -272,10 +272,13 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 							)}
 						</div>
 					</div>
-					<div className=" flex items-center gap-2 max-w-[200px]">
-						<MessageCircleMore size={16} />
-						<span className=' truncate block' >{cargo.note}</span>
-					</div>
+
+					{cargo.note && (
+						<div className=" flex items-center gap-2 max-w-[200px]">
+							<MessageCircleMore size={16} />
+							<span className=' truncate block' >{cargo.note}</span>
+						</div>
+					)}
 				</div>
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div>

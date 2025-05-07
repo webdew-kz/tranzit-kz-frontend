@@ -52,7 +52,7 @@ export enum PaymentOtherEnum {
 }
 
 export enum TruckTypeEnum {
-    ANY = "Любой", // любой
+    ANY = "Любая фура", // любой
     TENT = "Тент", // тент
     ISOTHERM = "Изотерм", // изотерм
     REFRIGERATOR = "Рефрижератор", // рефрижератор
@@ -104,7 +104,7 @@ export enum TruckTypeEnum {
 }
 
 export enum LoadingTypeEnum {
-    ANY = "Любой", // любая
+    ANY = "Любая погр", // любая
     REAR = "Задняя", // задняя
     SIDE = "Боковая", // боковая
     TOP = "Верхняя", // верхняя

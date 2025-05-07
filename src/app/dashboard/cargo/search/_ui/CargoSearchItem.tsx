@@ -282,10 +282,12 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 							)}
 						</div>
 					</div>
-					<div className=" flex items-center gap-2 max-w-[200px]">
-						<MessageCircleMore size={16} />
-						<span className=' truncate block' >{cargo.note}</span>
-					</div>
+					{cargo.note && (
+						<div className=" flex items-center gap-2 max-w-[200px]">
+							<MessageCircleMore size={16} />
+							<span className=' truncate block' >{cargo.note}</span>
+						</div>
+					)}
 				</div>
 				<div className=" flex items-start justify-between w-full">
 					<div>
