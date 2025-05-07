@@ -1,10 +1,10 @@
-import { Box, Menu, SquareUserRound, Truck } from 'lucide-react'
+import { Box, Menu, Route, SquareUserRound, Truck } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 export default function MobileMenu() {
 	return (
-		<div className=" z-1 md:hidden fixed h-15 w-full top-15 right-0 left-0 bg-background border-b border-(--dark-accent) flex justify-between gap-4 items-center px-4">
+		<div className=" z-1 md:hidden fixed h-15 w-full top-15 right-0 left-0 bg-background border-b border-(--dark-accent) grid grid-cols-5 items-center px-4">
 			<Link
 				href='/dashboard/cargo'
 				className='flex flex-col items-center justify-center text-(--dark-accent) text-xs'
@@ -16,8 +16,15 @@ export default function MobileMenu() {
 				href=''
 				className='flex flex-col items-center justify-center text-(--dark-accent) text-xs'
 			>
-				<Truck />
+				<Route />
 				<span>Транспорт</span>
+			</Link>
+			<Link
+				href=''
+				className='flex flex-col items-center justify-center text-(--dark-accent) text-xs'
+			>
+				<Truck />
+				<span>Авторынок</span>
 			</Link>
 			<Link
 				href=''
