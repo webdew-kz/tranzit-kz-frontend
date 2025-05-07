@@ -55,7 +55,6 @@ export enum TruckTypeEnum {
     ANY = "Любой", // любой
     TENT = "Тент", // тент
     ISOTHERM = "Изотерм", // изотерм
-    METAL = "Метал", // цельномет.
     REFRIGERATOR = "Рефрижератор", // рефрижератор
     PASSENGER_BUS = "Автобус грузопас.", // автобус грузопас.
     LUXURY_BUS = "Автобус люкс", // автобус люкс
@@ -99,6 +98,9 @@ export enum TruckTypeEnum {
     WOOD_CHIP_TRUCK = "Щеповоз", // щеповоз
     TOW_TRUCK = "Эвакуатор", // эвакуатор
     EXCAVATOR = "Экскаватор", // экскаватор
+    SQUARE = "Площадка", // площадка
+    GAZELLE = "Газель", // газель
+    FIVE_TON_TRUCK = "5-тонник", // 5-тонник
 }
 
 export enum LoadingTypeEnum {
@@ -121,6 +123,26 @@ export enum DocumentsEnum {
     CUSTOMS_CONTROL = "Тамож. контроль", // Таможенный контроль
     COVID_TEST = "Тест COVID-19", // Тест COVID
     COVID_CERT = "Сертификат COVID-19", // Сертификат COVID
+    DOZVOL = "Дозвол", // Дозвол
+    OVERSIZE_SPECIAL_PERMIT = "Спец. разрешение на негабарит", // спец. разрешение на негабарит
+    CATEGORY_C = "Категория C", // категория C
+    CATEGORY_D = "Категория D", // категория D
+    EORI_CODE = "ЕОРИ код", // ЕОРИ код
+    REGISTRATION_CARD = "Учётный талон", // учётный талон
+    E_QUEUE = "Электронная очередь", // электронная очередь
+    VISA = "Виза", // виза
+    POWER_OF_ATTORNEY = "Доверенность", // доверенность
+    CARRIER_STAMP = "Печать перевозчика", // печать перевозчика
+    // DOZVOL, // дозвол
+    // OVERSIZE_SPECIAL_PERMIT, // спец. разрешение на негабарит
+    // CATEGORY_C, // водительская категория C
+    // CATEGORY_D, // водительская категория D
+    // EORI_CODE, // ЕОРИ код
+    // REGISTRATION_CARD, // учётный талон
+    // E_QUEUE, // электронная очередь
+    // VISA, // виза
+    // POWER_OF_ATTORNEY, // доверенность
+    // CARRIER_STAMP, // печать перевозчика
 }
 
 export enum DocumentsAdrEnum {

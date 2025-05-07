@@ -398,7 +398,7 @@ export default function CargoFormAdd() {
 										</DialogHeader>
 									</div>
 
-									<div className="overflow-y-auto p-6 pt-4 flex-1">
+									<div className="overflow-y-auto p-6 pt-4 flex-1 ">
 										<div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
 
 											<div className=" flex flex-col gap-4">
@@ -524,7 +524,7 @@ export default function CargoFormAdd() {
 														)}
 													/>
 
-													<Input
+													{/* <Input
 														type='text'
 														placeholder="Место погрузки"
 														className='text-sm'
@@ -537,7 +537,7 @@ export default function CargoFormAdd() {
 														className='text-sm'
 														required
 														{...form.register('optionLoadingsPlaceUnloading')}
-													/>
+													/> */}
 
 
 													<Controller
@@ -669,16 +669,14 @@ export default function CargoFormAdd() {
 												</div>
 											</div>
 										</div>
-									</div>
 
-									<div className="z-10 bg-background border-t p-3">
-										<DialogFooter className=" flex sm:justify-center">
+										<div className=" w-full pt-4 flex justify-center">
 											<DialogClose asChild>
-												<Button type="button" variant="secondary">
-													Закрыть
+												<Button type="button" variant="secondary" className=' w-full max-w-[450px]'>
+													Сохранить
 												</Button>
 											</DialogClose>
-										</DialogFooter>
+										</div>
 									</div>
 								</DialogContent>
 							</Dialog>
@@ -745,7 +743,7 @@ export default function CargoFormAdd() {
 
 						<Button
 							type='submit'
-							className=' bg-(--dark-accent) col-start-2'
+							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending}
 						>
 							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
