@@ -129,6 +129,17 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 		return getWishlist().includes(cargoId);
 	}
 
+	const route = places.map((place) => {
+		const [city, country] = place.split(",").map((str) => str.trim());
+		return `${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`;
+	}).join(" → ");
+	console.log(route);
+
+	const truckTypes = cargo.truckType?.map((item) => TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]).join(", ");
+
+	const message = `Здравствуйте. Данная заявка актуальна?\n\nГруз: ${cargo.title}\nМаршрут: ${route}\nЦена: ${cargo.price} ${getCurrencySymbol(cargo.currency)}\nТип фуры: ${truckTypes}\nСсылка на груз: https://itranzit.kz/dashboard/cargo/${cargo.id}`
+	const link = `https://wa.me/${cargo.userPhone}?text=${encodeURIComponent(message)}`
+
 
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>
@@ -500,7 +511,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 										{cargo.userPhone && (
 											<Button variant='link' asChild>
 												<Link
-													href={`https://wa.me/${cargo.userPhone}?text=Здравствуйте. Данная заявка актуальна? https://itranzit.kz/dashboard/cargo/${cargo.id}`}
+													href={link}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
