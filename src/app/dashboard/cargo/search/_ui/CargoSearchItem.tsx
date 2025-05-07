@@ -252,7 +252,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 						</Select>
 					</div>
 				</div>
-				<div className="lg:mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
+				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Truck size={16} />
