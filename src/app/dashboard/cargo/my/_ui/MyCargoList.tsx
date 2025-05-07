@@ -126,6 +126,7 @@ export default function MyCargoList() {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
+					setSelectedIds([])
 				})
 				.catch((error) => {
 					toast.error(error.message, {
@@ -143,6 +144,7 @@ export default function MyCargoList() {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
+					setSelectedIds([])
 				})
 				.catch((error) => {
 					toast.error(error.message, {
