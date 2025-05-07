@@ -672,7 +672,7 @@ export default function CargoFormAdd() {
 
 										<div className=" w-full pt-4 flex justify-center">
 											<DialogClose asChild>
-												<Button type="button" variant="secondary" className=' w-full max-w-[450px]'>
+												<Button type="button" variant="secondary" className=' w-full max-w-[450px] bg-(--dark-accent)'>
 													Сохранить
 												</Button>
 											</DialogClose>

@@ -127,8 +127,11 @@
     }
 }
 
-/* body {
-} */
+html,
+body {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
 
 iframe.skiptranslate {
     display: none !important;

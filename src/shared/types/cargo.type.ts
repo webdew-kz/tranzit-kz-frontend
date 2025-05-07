@@ -131,16 +131,6 @@ export enum DocumentsEnum {
     VISA = "Виза", // виза
     POWER_OF_ATTORNEY = "Доверенность", // доверенность
     CARRIER_STAMP = "Печать перевозчика", // печать перевозчика
-    // DOZVOL, // дозвол
-    // OVERSIZE_SPECIAL_PERMIT, // спец. разрешение на негабарит
-    // CATEGORY_C, // водительская категория C
-    // CATEGORY_D, // водительская категория D
-    // EORI_CODE, // ЕОРИ код
-    // REGISTRATION_CARD, // учётный талон
-    // E_QUEUE, // электронная очередь
-    // VISA, // виза
-    // POWER_OF_ATTORNEY, // доверенность
-    // CARRIER_STAMP, // печать перевозчика
 }
 
 export enum DocumentsAdrEnum {
