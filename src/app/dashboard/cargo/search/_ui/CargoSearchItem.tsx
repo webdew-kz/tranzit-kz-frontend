@@ -62,8 +62,13 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 	}, [rates, cargo.tariff, cargo.price, cargo.currency])
 
 	const handleAddView = async (id: string) => {
-		await addView(id)
-	}
+		const viewedKey = `viewed-${id}`;
+		if (localStorage.getItem(viewedKey)) return;
+
+		await addView(id);
+		localStorage.setItem(viewedKey, "true");
+	};
+
 
 	const handleToggleWishlist = () => {
 		if (isWishlist) {
