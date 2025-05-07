@@ -488,10 +488,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 												</Link>
 											</Button>
 										)}
-										{cargo.user.whatsapp && (
+										{cargo?.user?.whatsapp && (
 											<Button variant='link' asChild>
 												<Link
-													href={`https://wa.me/${cargo.user.whatsapp}`}
+													href={`https://wa.me/${cargo?.user?.whatsapp}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -501,10 +501,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 												</Link>
 											</Button>
 										)}
-										{cargo.user.viber && (
+										{cargo?.user?.viber && (
 											<Button variant='link' asChild>
 												<Link
-													href={`viber://chat?number=%2B${cargo.user.viber}`}
+													href={`viber://chat?number=%2B${cargo?.user?.viber}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -514,10 +514,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 												</Link>
 											</Button>
 										)}
-										{cargo.user.skype && (
+										{cargo?.user?.skype && (
 											<Button variant='link' asChild>
 												<Link
-													href={`skype:live.${cargo.user.skype}?chat`}
+													href={`skype:live.${cargo?.user?.skype}?chat`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
@@ -527,10 +527,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength }: Carg
 												</Link>
 											</Button>
 										)}
-										{cargo.user.telegram && (
+										{cargo?.user?.telegram && (
 											<Button variant='link' asChild>
 												<Link
-													href={`https://t.me/${cargo.user.telegram}`}
+													href={`https://t.me/${cargo?.user?.telegram}`}
 													target='_blank'
 													rel="noopener noreferrer"
 													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'

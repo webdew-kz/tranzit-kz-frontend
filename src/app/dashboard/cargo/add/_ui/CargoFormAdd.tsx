@@ -691,7 +691,7 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Имя"
 							className="text-sm"
-							required
+
 							{...form.register('userName')}
 						/>
 
@@ -699,7 +699,7 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Телефон"
 							className="text-sm"
-							required
+
 							{...form.register('userPhone')}
 						/>
 
@@ -707,7 +707,7 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Whatsapp"
 							className="text-sm"
-							required
+
 							{...form.register('whatsapp')}
 						/>
 
@@ -715,7 +715,7 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Telegram"
 							className="text-sm"
-							required
+
 							{...form.register('telegram')}
 						/>
 
@@ -723,7 +723,7 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Viber"
 							className="text-sm"
-							required
+
 							{...form.register('viber')}
 						/>
 
@@ -731,7 +731,7 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Skype"
 							className="text-sm"
-							required
+
 							{...form.register('skype')}
 						/>
 					</div>
