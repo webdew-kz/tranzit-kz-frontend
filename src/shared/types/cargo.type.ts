@@ -121,8 +121,6 @@ export enum DocumentsEnum {
     SAN_BOOK = "Санкнижка", // Сан книжка
     CUSTOMS_CERT = "Тамож. свид-во", // Таможня
     CUSTOMS_CONTROL = "Тамож. контроль", // Таможенный контроль
-    COVID_TEST = "Тест COVID-19", // Тест COVID
-    COVID_CERT = "Сертификат COVID-19", // Сертификат COVID
     DOZVOL = "Дозвол", // Дозвол
     OVERSIZE_SPECIAL_PERMIT = "Спец. разрешение на негабарит", // спец. разрешение на негабарит
     CATEGORY_C = "Категория C", // категория C
