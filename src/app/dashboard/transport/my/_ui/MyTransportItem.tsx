@@ -76,7 +76,7 @@ const MyTransportItem = memo(({ transportInitial, selected, onToggle, setTranspo
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при обновлении груза', {
+				toast.error('Ошибка при обновлении транспорта', {
 					position: 'top-center',
 				})
 			}
@@ -98,7 +98,7 @@ const MyTransportItem = memo(({ transportInitial, selected, onToggle, setTranspo
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при архивации груза', {
+				toast.error('Ошибка при архивации транспорта', {
 					position: 'top-center',
 				})
 			}

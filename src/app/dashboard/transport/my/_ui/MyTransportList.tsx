@@ -79,7 +79,7 @@ export default function MyTransportList() {
 			const data = await findByUserId(page)
 
 			if (data.length === 0) {
-				toast.error("У вас нет активных грузов", {
+				toast.error("У вас нет активных транспортов", {
 					position: 'top-center',
 				});
 
@@ -122,7 +122,7 @@ export default function MyTransportList() {
 		startTransition(() => {
 			activateMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Грузы повторены", {
+					toast.success("Транспорты повторены", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
@@ -140,7 +140,7 @@ export default function MyTransportList() {
 		startTransition(() => {
 			archivateMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Грузы сняты", {
+					toast.success("Транспорты сняты", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
@@ -243,7 +243,7 @@ export default function MyTransportList() {
 
 				{!transports.length && (
 					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет активных грузов</p>
+						<p className='text-muted-foreground'>У вас нет активных транспортов</p>
 					</div>
 				)}
 				{isLoading &&
