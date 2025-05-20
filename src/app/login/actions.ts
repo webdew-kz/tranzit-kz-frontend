@@ -32,7 +32,7 @@ export async function loginAction(data: ILoginForm) {
             sameSite: "lax",
             domain: `.${process.env.DOMAIN}`,
             path: "/",
-            maxAge: 1000 * 60 * 60 * 24,
+            maxAge: 10 * 365 * 24 * 60 * 60 * 1000,
         });
         cookie.set("userId", user.id, {
             httpOnly: true,
@@ -40,7 +40,7 @@ export async function loginAction(data: ILoginForm) {
             sameSite: "lax",
             domain: `.${process.env.DOMAIN}`,
             path: "/",
-            maxAge: 1000 * 60 * 60 * 24,
+            maxAge: 10 * 365 * 24 * 60 * 60 * 1000,
         });
 
         return { success: true, user, message, accessToken };

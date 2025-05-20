@@ -5,6 +5,19 @@ declare global {
         recaptchaVerifier: import("firebase/auth").RecaptchaVerifier;
         recaptchaWidgetId: number;
         confirmationResult: import("firebase/auth").ConfirmationResult;
+        google: {
+            translate?: {
+                TranslateElement?: new (
+                    options: {
+                        pageLanguage: string;
+                        autoDisplay?: boolean;
+                        includedLanguages?: string;
+                    },
+                    elementId: string
+                ) => void;
+            };
+        };
+        googleTranslateElementInit: () => void;
     }
 }
 

@@ -1,10 +1,11 @@
 
-import { GoogleTranslate } from '@/shared/components/widgets/GoogleTranslate'
+
 import { getPrefLangCookie } from '@/shared/lib/getPrefLangCookie'
 import Logo from '@/shared/components/widgets/logo'
 import { ThemeToggle } from '@/shared/components/widgets/theme-toggle'
 import { isAuth } from '@/shared/lib/isCookies'
 import Logout from './Logout'
+import { GoogleTranslate } from '../../widgets/GoogleTranslate'
 
 export default async function TopBar() {
 

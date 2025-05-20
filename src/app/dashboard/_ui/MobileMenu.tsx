@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function MobileMenu() {
 	return (
-		<div className=" z-1 md:hidden fixed h-15 w-full top-15 right-0 left-0 bg-background border-b border-(--dark-accent) grid grid-cols-5 items-center px-4">
+		<div className=" z-1 md:hidden fixed h-15 w-full top-15 right-0 left-0 bg-background border-b border-(--dark-accent) grid grid-cols-5 items-center px-0">
 			<Link
 				href='/dashboard/cargo'
 				className='flex flex-col items-center justify-center text-(--dark-accent) text-xs'
@@ -13,7 +13,7 @@ export default function MobileMenu() {
 				<span>Грузы</span>
 			</Link>
 			<Link
-				href=''
+				href='/dashboard/transport'
 				className='flex flex-col items-center justify-center text-(--dark-accent) text-xs'
 			>
 				<Route />

@@ -28,7 +28,7 @@ export async function registerAction(data: RegisterFormProps) {
             sameSite: "lax",
             path: "/",
             domain: `.${process.env.DOMAIN}`,
-            maxAge: 1000 * 60 * 60 * 24,
+            maxAge: 10 * 365 * 24 * 60 * 60 * 1000,
         });
         cookie.set("userId", user.id, {
             httpOnly: true,
@@ -36,7 +36,7 @@ export async function registerAction(data: RegisterFormProps) {
             sameSite: "lax",
             path: "/",
             domain: `.${process.env.DOMAIN}`,
-            maxAge: 1000 * 60 * 60 * 24,
+            maxAge: 10 * 365 * 24 * 60 * 60 * 1000,
         });
 
         return { success: true, user, message, accessToken };

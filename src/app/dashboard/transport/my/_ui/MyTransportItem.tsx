@@ -9,27 +9,27 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
+import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ITransport, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/transport.type'
 import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Truck, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { activateCargo, archivateCargo } from '../actions'
+import { activateTransport, archivateTransport } from '../actions'
 import { useRouter } from 'next/navigation'
 
-interface MyCargoItemProps {
-	cargoInitial: ICargo
+interface MyTransportItemProps {
+	transportInitial: ITransport
 	selected: boolean
 	onToggle: () => void
-	setCargos: (value: SetStateAction<ICargo[]>) => void
+	setTransports: (value: SetStateAction<ITransport[]>) => void
 	rates?: any
 	loading?: boolean
 }
 
-const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, loading }: MyCargoItemProps) => {
+const MyTransportItem = memo(({ transportInitial, selected, onToggle, setTransports, rates, loading }: MyTransportItemProps) => {
 
 	const router = useRouter()
 
-	const [cargo, setCargo] = useState<ICargo>(cargoInitial)
+	const [transport, setTransport] = useState<ITransport>(transportInitial)
 
 	const [places, setPlaces] = useState<string[]>([])
 
@@ -46,36 +46,31 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 
 
 	useEffect(() => {
-		setPlaces([...cargo.placesLoading, ...cargo.placesUnloading]);
-	}, [cargo.placesLoading, cargo.placesUnloading]);
+		setPlaces([...transport.placesLoading, ...transport.placesUnloading]);
+	}, [transport.placesLoading, transport.placesUnloading]);
 
-	useEffect(() => {
+	// useEffect(() => {
 
-		if (!loading && rates && cargo && cargo.price && cargo.tariff && cargo.currency) {
-			setAmountPrice(convertToKZT(Number(cargo.price), cargo.currency, rates))
-			setAmountTariff(convertToKZT(Number(cargo.tariff), cargo.currency, rates))
+	// 	if (!loading && rates && transport && transport.price && transport.tariff && transport.currency) {
+	// 		setAmountPrice(convertToKZT(Number(transport.price), transport.currency, rates))
+	// 		setAmountTariff(convertToKZT(Number(transport.tariff), transport.currency, rates))
 
-			setBaseAmountPriceKZT(convertToKZT(Number(cargo.price), cargo.currency, rates))
-			setBaseAmountTariffKZT(convertToKZT(Number(cargo.tariff), cargo.currency, rates))
-		}
+	// 		setBaseAmountPriceKZT(convertToKZT(Number(transport.price), transport.currency, rates))
+	// 		setBaseAmountTariffKZT(convertToKZT(Number(transport.tariff), transport.currency, rates))
+	// 	}
 
-	}, [rates, cargo.tariff, cargo.price, cargo.currency])
+	// }, [rates, transport.tariff, transport.price, transport.currency])
 
-	const handleActivateCargo = async (id: string) => {
+	const handleActivateTransport = async (id: string) => {
 
 		startTransition(async () => {
 
 			try {
-				const res = await activateCargo({ id })
+				const res = await activateTransport({ id })
 
 				toast.success(res.message, {
 					position: 'top-center',
 				})
-
-				setCargo((prev) => ({
-					...prev,
-					...res.updatedCargo,
-				}))
 
 				window.location.reload()
 
@@ -88,18 +83,18 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 		})
 	}
 
-	const handleArchivateCargo = async (id: string) => {
+	const handleArchivateTransport = async (id: string) => {
 
 		startTransition(async () => {
 
 			try {
-				const res = await archivateCargo({ id })
+				const res = await archivateTransport({ id })
 
 				toast.success(res.message, {
 					position: 'top-center',
 				})
 
-				setCargos(prev => prev.filter(cargo => cargo.id !== id))
+				setTransports(prev => prev.filter(transport => transport.id !== id))
 
 			} catch (error) {
 				console.error(error)
@@ -115,23 +110,23 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 	}
 
 	return (
-		<Card className={cn(isEndedDate(cargo.endDate!) && '!text-muted-foreground', 'p-0 border-1 border-(--dark-accent) ')}>
+		<Card className={cn(isEndedDate(transport.endDate!) && '!text-muted-foreground', 'p-0 border-1 border-(--dark-accent) ')}>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex justify-between w-full items-center mb-2">
 					<div className=" font-medium flex gap-2 items-center">
 						<CalendarDays size={16} />
-						<span className='text-nowrap'>{cargo.endDate && checkEndDate(cargo.startDate, cargo.endDate)}</span>
+						<span className='text-nowrap'>{transport.endDate && checkEndDate(transport.startDate, transport.endDate)}</span>
 					</div>
 					<div className=" flex items-center gap-4 justify-end">
 						<div className="flex items-center gap-2">
 							<Checkbox
-								id={cargo.id}
+								id={transport.id}
 								className='border-(--dark-accent)'
 								checked={selected}
 								onCheckedChange={onToggle}
 							/>
 							<label
-								htmlFor={cargo.id}
+								htmlFor={transport.id}
 								className="text-sm text-(--dark-accent) cursor-pointer underline underline-offset-2 "
 							>
 								Выбрать
@@ -157,7 +152,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<ArrowBigUp size={16} />
 						<span className='truncate block text-sm'>
 							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
+							<span className=' font-medium'>{transport.updatedAt && formatRelativeDate(transport.updatedAt)}</span>
 						</span>
 					</span>
 
@@ -165,7 +160,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<ArrowBigDown size={16} />
 						<span className='truncate block text-sm'>
 							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
+							<span className=' font-medium'>{transport.createdAt && formatRelativeDate(transport.createdAt)}</span>
 						</span>
 					</span>
 
@@ -173,7 +168,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<Eye size={16} />
 						<span className='truncate block text-sm'>
 							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{cargo.views.count}</span>
+							<span className=' font-medium'>{transport.views.count}</span>
 						</span>
 					</span>
 				</div>
@@ -193,34 +188,34 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							);
 						})}
 					</div>
-					<a
-						href={cargo.routeLink}
+					{/* <a
+						href={transport.routeLink}
 						target='_blank'
 						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
-					>Посмотреть маршрут</a>
+					>Посмотреть маршрут</a> */}
 				</div>
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
-					<div className=" grid gap-2 lg:flex lg:gap-4">
+					{/* <div className=" grid gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
 							<Box size={16} />
-							<span className=' truncate block'>{cargo.title}</span>
+							<span className=' truncate block'>{transport.title}</span>
 						</div>
 
 						<div className=" flex items-center gap-2 max-w-full">
 							<HandCoins size={16} />
-							{cargo.paymentMethod && cargo.paymentMethod.map((item, index) => (
+							{transport.paymentMethod && transport.paymentMethod.map((item, index) => (
 								<span className=' truncate block' key={index} >{PaymentMethodEnum[item as unknown as keyof typeof PaymentMethodEnum]}</span>
 							))}
 						</div>
-					</div>
+					</div> */}
 
-					<div className=" grid grid-cols-2 lg:flex gap-2 lg:gap-4 items-center flex-wrap justify-center">
+					{/* <div className=" grid grid-cols-2 lg:flex gap-2 lg:gap-4 items-center flex-wrap justify-center">
 						<div className=" flex gap-2 items-center">
-							{Number(cargo.distance) > 0 && (
+							{Number(transport.distance) > 0 && (
 								<>
 									<MoveHorizontal size={16} />
-									<span className='truncate block'>{`${cargo.distance?.toLocaleString('ru-RU')} км`}</span>
+									<span className='truncate block'>{`${transport.distance?.toLocaleString('ru-RU')} км`}</span>
 								</>
 							)}
 						</div>
@@ -254,48 +249,48 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 								))}
 							</SelectContent>
 						</Select>
-					</div>
+					</div> */}
 				</div>
 				<div className="lg:mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Truck size={16} />
-							{cargo.truckType && cargo.truckType.map((item, index) => (
+							{transport.truckType && transport.truckType.map((item, index) => (
 								<span className=' truncate block' key={index} >{TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]}</span>
 							))}
 						</div>
 
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Container size={16} />
-							{cargo.loadingType && cargo.loadingType.map((item, index) => (
+							{transport.loadingType && transport.loadingType.map((item, index) => (
 								<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
 							))}
 						</div>
 
 						<div className=" flex items-center gap-2">
 							<Weight size={16} />
-							{cargo.weight && (
-								<span className='truncate block'>{`${cargo.weight} тонн`}</span>
+							{transport.weight && (
+								<span className='truncate block'>{`${transport.weight} тонн`}</span>
 							)}
 						</div>
 
 						<div className=" flex items-center gap-2">
 							<Move3d size={16} />
-							{cargo.volume && (
-								<span className='truncate block'>{`${cargo.volume} м`}<span className=' align-super text-xs'>3</span></span>
+							{transport.volume && (
+								<span className='truncate block'>{`${transport.volume} м`}<span className=' align-super text-xs'>3</span></span>
 							)}
 						</div>
 					</div>
-					{cargo.note && (
+					{transport.note && (
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<MessageCircleMore size={16} />
-							<span className=' truncate block' >{cargo.note}</span>
+							<span className=' truncate block' >{transport.note}</span>
 						</div>
 					)}
 				</div>
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div>
-						{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (
+						{((transport.optionDocuments && transport.optionDocuments.length > 0) || transport.optionDocumentsAdr) && (
 							<Popover>
 								<PopoverTrigger asChild>
 									<Button variant='link' className=' text-sm underline text-(--dark-accent) !px-0'>
@@ -305,163 +300,163 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 								</PopoverTrigger>
 								<PopoverContent align='start' className=' max-h-[50vh] overflow-y-auto grid gap-3 w-full max-w-[calc(100vw-3.85rem)] bg-accent'>
 
-									{((cargo.paymentPeriod && cargo.paymentPeriod?.length > 0) || (cargo.paymentOther && cargo.paymentOther?.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays) && (
+									{/* {((transport.paymentPeriod && transport.paymentPeriod?.length > 0) || (transport.paymentOther && transport.paymentOther?.length > 0) || transport.paymentPrepaymentPercent || transport.paymentDeferredDays) && (
 										<div >
 											<div className="mb-1 font-medium text-(--dark-accent)">Детали оплаты</div>
-											{cargo.paymentPeriod && cargo.paymentPeriod.length > 0 && (
+											{transport.paymentPeriod && transport.paymentPeriod.length > 0 && (
 												<span className=" font-light text-sm">
-													{cargo.paymentPeriod
+													{transport.paymentPeriod
 														.map((item) => PaymentPeriodEnum[item as unknown as keyof typeof PaymentPeriodEnum].toLowerCase())
 														.join(" | ")}
 												</span>
 											)}
-											{cargo.paymentOther && cargo.paymentOther.length > 0 && (
+											{transport.paymentOther && transport.paymentOther.length > 0 && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Дополнительно:</span>
 													<span className=" font-light">
-														{cargo.paymentOther.map((item) => PaymentOtherEnum[item as unknown as keyof typeof PaymentOtherEnum].toLowerCase())
+														{transport.paymentOther.map((item) => PaymentOtherEnum[item as unknown as keyof typeof PaymentOtherEnum].toLowerCase())
 															.join(" | ")}
 													</span>
 												</div>
 											)}
-											{cargo.paymentPrepaymentPercent && (
+											{transport.paymentPrepaymentPercent && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Предоплата:</span>
-													<span className=" font-light">{`${cargo.paymentPrepaymentPercent}%`}</span>
+													<span className=" font-light">{`${transport.paymentPrepaymentPercent}%`}</span>
 												</div>
 											)}
-											{cargo.paymentDeferredDays && (
+											{transport.paymentDeferredDays && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Отсрочка:</span>
-													<span className=" font-light">{`${cargo.paymentDeferredDays} дней`}</span>
+													<span className=" font-light">{`${transport.paymentDeferredDays} дней`}</span>
 												</div>
 											)}
 										</div>
-									)}
+									)} */}
 
-									{((cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr) && (
+									{((transport.optionDocuments && transport.optionDocuments.length > 0) || transport.optionDocumentsAdr) && (
 										<div>
 											<div className="mb-1 font-medium text-(--dark-accent)">Документы</div>
-											{cargo.optionDocuments && cargo.optionDocuments.length > 0 && (
+											{transport.optionDocuments && transport.optionDocuments.length > 0 && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Тип:</span>
 													<span className=" font-light">
-														{cargo.optionDocuments.map((item) => DocumentsEnum[item as unknown as keyof typeof DocumentsEnum].toUpperCase())
+														{transport.optionDocuments.map((item) => DocumentsEnum[item as unknown as keyof typeof DocumentsEnum].toUpperCase())
 															.join(", ")}
 													</span>
 												</div>
 											)}
-											{cargo.optionDocumentsAdr && (
+											{transport.optionDocumentsAdr && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>ADR:</span>
-													<span className=" font-light">{`${cargo.optionDocumentsAdr.toUpperCase()}`}</span>
+													<span className=" font-light">{`${transport.optionDocumentsAdr.toUpperCase()}`}</span>
 												</div>
 											)}
 										</div>
 									)}
 
 
-									{((cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading) && (
+									{/* {((transport.optionLoadings && transport.optionLoadings.length > 0) || transport.optionLoadingsTimeLoading || transport.optionLoadingsTimeUnloading || transport.optionLoadingsPlaceLoading || transport.optionLoadingsPlaceUnloading || transport.optionLoadingsBigBag || transport.optionLoadingsDateUnloading) && (
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Погрузка</div>
-											{cargo.optionLoadings && cargo.optionLoadings.length > 0 && (
+											{transport.optionLoadings && transport.optionLoadings.length > 0 && (
 												<span className=" font-light text-sm">
-													{cargo.optionLoadings.map((item) => LoadingsEnum[item as unknown as keyof typeof LoadingsEnum].toLowerCase())
+													{transport.optionLoadings.map((item) => LoadingsEnum[item as unknown as keyof typeof LoadingsEnum].toLowerCase())
 														.join(", ")}
 												</span>
 											)}
-											{cargo.optionLoadingsDateUnloading && (
+											{transport.optionLoadingsDateUnloading && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Дата разгрузки:</span>
-													<span className=" font-light">{`${new Date(cargo.optionLoadingsDateUnloading).toLocaleDateString('ru-RU')}`}</span>
+													<span className=" font-light">{`${new Date(transport.optionLoadingsDateUnloading).toLocaleDateString('ru-RU')}`}</span>
 												</div>
 											)}
-											{cargo.optionLoadingsTimeLoading && (
+											{transport.optionLoadingsTimeLoading && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Время погрузки:</span>
-													<span className=" font-light">{`${cargo.optionLoadingsTimeLoading}`}</span>
+													<span className=" font-light">{`${transport.optionLoadingsTimeLoading}`}</span>
 												</div>
 											)}
-											{cargo.optionLoadingsTimeUnloading && (
+											{transport.optionLoadingsTimeUnloading && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Время разгрузки:</span>
-													<span className=" font-light">{`${cargo.optionLoadingsTimeUnloading}`}</span>
+													<span className=" font-light">{`${transport.optionLoadingsTimeUnloading}`}</span>
 												</div>
 											)}
-											{cargo.optionLoadingsPlaceLoading && (
+											{transport.optionLoadingsPlaceLoading && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Место погрузки:</span>
-													<span className=" font-light">{`${cargo.optionLoadingsPlaceLoading}`}</span>
+													<span className=" font-light">{`${transport.optionLoadingsPlaceLoading}`}</span>
 												</div>
 											)}
-											{cargo.optionLoadingsPlaceUnloading && (
+											{transport.optionLoadingsPlaceUnloading && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Место разгрузки:</span>
-													<span className=" font-light">{`${cargo.optionLoadingsPlaceUnloading}`}</span>
+													<span className=" font-light">{`${transport.optionLoadingsPlaceUnloading}`}</span>
 												</div>
 											)}
-											{cargo.optionLoadingsBigBag && (
+											{transport.optionLoadingsBigBag && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Биг-бэг:</span>
-													<span className=" font-light">{`${cargo.optionLoadingsBigBag}`}</span>
+													<span className=" font-light">{`${transport.optionLoadingsBigBag}`}</span>
 												</div>
 											)}
 										</div>
 									)}
 
-									{((cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsTemperature || cargo.optionTermsQtyPallets || cargo.optionTermsCorners || cargo.optionTermsBelts || cargo.optionTermsPalletsType) && (
+									{((transport.optionTerms && transport.optionTerms.length > 0) || transport.optionTermsTemperature || transport.optionTermsQtyPallets || transport.optionTermsCorners || transport.optionTermsBelts || transport.optionTermsPalletsType) && (
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Условия</div>
-											{cargo.optionTerms && cargo.optionTerms.length > 0 && (
+											{transport.optionTerms && transport.optionTerms.length > 0 && (
 												<span className=" font-light text-sm">
-													{cargo.optionTerms.map((item) => TermsEnum[item as unknown as keyof typeof TermsEnum].toLowerCase())
+													{transport.optionTerms.map((item) => TermsEnum[item as unknown as keyof typeof TermsEnum].toLowerCase())
 														.join(", ")}
 												</span>
 											)}
-											{cargo.optionTermsTemperature && (
+											{transport.optionTermsTemperature && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Температура:</span>
-													<span className=" font-light">{`${cargo.optionTermsTemperature}`}</span>
+													<span className=" font-light">{`${transport.optionTermsTemperature}`}</span>
 												</div>
 											)}
-											{cargo.optionTermsQtyPallets && (
+											{transport.optionTermsQtyPallets && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Количество паллет:</span>
-													<span className=" font-light">{`${cargo.optionTermsQtyPallets}`}</span>
+													<span className=" font-light">{`${transport.optionTermsQtyPallets}`}</span>
 												</div>
 											)}
-											{cargo.optionTermsCorners && (
+											{transport.optionTermsCorners && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Уголки:</span>
-													<span className=" font-light">{`${cargo.optionTermsCorners}`}</span>
+													<span className=" font-light">{`${transport.optionTermsCorners}`}</span>
 												</div>
 											)}
-											{cargo.optionTermsBelts && (
+											{transport.optionTermsBelts && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Ремни:</span>
-													<span className=" font-light">{`${cargo.optionTermsBelts}`}</span>
+													<span className=" font-light">{`${transport.optionTermsBelts}`}</span>
 												</div>
 											)}
-											{cargo.optionTermsPalletsType && (
+											{transport.optionTermsPalletsType && (
 												<div className=" flex gap-2 flex-wrap text-sm">
 													<span className=' text-muted-foreground'>Тип паллет:</span>
 													<span className=" font-light">
-														{TermsPalletsTypeEnum[cargo.optionTermsPalletsType as unknown as keyof typeof TermsPalletsTypeEnum]}
+														{TermsPalletsTypeEnum[transport.optionTermsPalletsType as unknown as keyof typeof TermsPalletsTypeEnum]}
 													</span>
 												</div>
 											)}
 										</div>
 									)}
-									{cargo.optionAdditionally && cargo.optionAdditionally.length > 0 && (
+									{transport.optionAdditionally && transport.optionAdditionally.length > 0 && (
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Дополнительно</div>
-											{cargo.optionAdditionally && cargo.optionAdditionally.length > 0 && (
+											{transport.optionAdditionally && transport.optionAdditionally.length > 0 && (
 												<span className=" font-light text-sm">
-													{cargo.optionAdditionally.map((item) => AdditionallyEnum[item as unknown as keyof typeof AdditionallyEnum].toLowerCase()).join(", ")}
+													{transport.optionAdditionally.map((item) => AdditionallyEnum[item as unknown as keyof typeof AdditionallyEnum].toLowerCase()).join(", ")}
 												</span>
 											)}
 										</div>
-									)}
+									)} */}
 
 								</PopoverContent>
 							</Popover>
@@ -471,7 +466,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<Button
 							variant='default'
 							className='group bg-(--dark-accent) text-(--background) hover:bg-transparent hover:text-(--dark-accent) border hover:!border-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleActivateCargo(cargo.id!)}
+							onClick={() => handleActivateTransport(transport.id!)}
 							disabled={pending}
 						>
 							<RefreshCcw
@@ -484,7 +479,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleArchivateCargo(cargo.id!)}
+							onClick={() => handleArchivateTransport(transport.id!)}
 							disabled={pending}
 						>
 							<X size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
@@ -493,7 +488,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => router.push(`/dashboard/cargo/edit/${cargo.id}`)}
+							onClick={() => router.push(`/dashboard/transport/edit/${transport.id}`)}
 						>
 							<SquarePen size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
 							<span className=' hidden lg:block'>Редактировать</span>
@@ -501,7 +496,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => router.push(`/dashboard/cargo/copy/${cargo.id}`)}
+							onClick={() => router.push(`/dashboard/transport/copy/${transport.id}`)}
 						>
 							<Copy size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
 							<span className=' hidden lg:block'>Копировать</span>
@@ -538,4 +533,4 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 // optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
-export default MyCargoItem
+export default MyTransportItem
