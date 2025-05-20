@@ -73,7 +73,7 @@ export default function TransportWishList() {
 			</>
 		) : (
 			<div className="flex flex-col items-center gap-5 justify-center py-5">
-				<span>Избранных грузов не найдено</span>
+				<span>Избранных транспортов не найдено</span>
 				<Link
 					href={'/dashboard/transport/search'}
 					className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
