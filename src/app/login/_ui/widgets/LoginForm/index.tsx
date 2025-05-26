@@ -20,7 +20,6 @@ import { useState, useTransition } from 'react'
 import { Input } from '@/shared/components/ui/input'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
-import { loginAction } from '../../../actions'
 import { ILoginForm } from '../../../types'
 import { useRouter } from 'next/navigation'
 import { useUserStore } from '@/shared/store/useUserStore'
@@ -88,23 +87,25 @@ export default function LoginForm() {
 					password: values.password
 				}
 
-				const res = await loginAction(sendData)
+				const res = await fetch("/api/login", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(sendData),
+					credentials: "include", // обязательно
+				});
 
-				if (!res.success) {
-					toast.error(res.message, {
-						position: 'top-center',
-					})
-					setLoading(false)
-					return
+				const data = await res.json();
+
+				if (data.user) {
+					setUser(data.user); // сохраняем пользователя
+					localStorage.setItem("accessToken", data.token);
+					toast.success(data.message, { position: "top-center" });
+					router.push("/dashboard");
+				} else {
+					toast.error(data.message ?? "Ошибка авторизации", { position: "top-center" });
 				}
-
-				setUser(res.user)
-
-				localStorage.setItem("accessToken", res.accessToken);
-
-				toast.success(res.message, {
-					position: 'top-center',
-				})
 
 				router.push('/dashboard')
 
@@ -127,48 +128,43 @@ export default function LoginForm() {
 	};
 
 	function onSubmitEmail(values: FormEmailValues) {
-
-		setLoading(true)
+		setLoading(true);
 
 		startTransition(async () => {
-
 			try {
-
 				const sendData: ILoginForm = {
 					login: values.email,
-					password: values.password
+					password: values.password,
+				};
+
+				const res = await fetch("/api/login", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(sendData),
+					credentials: "include", // обязательно
+				});
+
+				const data = await res.json();
+
+				if (data.user) {
+					setUser(data.user); // сохраняем пользователя
+					localStorage.setItem("accessToken", data.token);
+					toast.success(data.message, { position: "top-center" });
+					router.push("/dashboard");
+				} else {
+					toast.error(data.message ?? "Ошибка авторизации", { position: "top-center" });
 				}
-
-				const res = await loginAction(sendData)
-
-				if (!res.success) {
-					toast.error(res.message, {
-						position: 'top-center',
-					})
-					setLoading(false)
-					return
-				}
-
-				setUser(res.user)
-
-				localStorage.setItem("accessToken", res.accessToken);
-
-				toast.success(res.message, {
-					position: 'top-center',
-				})
-
-				router.push('/dashboard')
-
 			} catch (error) {
-				console.error(error)
-				toast.error('Ошибка при авторизации', {
-					position: 'top-center',
-				})
+				console.error(error);
+				toast.error("Ошибка при авторизации", { position: "top-center" });
 			} finally {
-				setLoading(false)
+				setLoading(false);
 			}
-		})
+		});
 	}
+
 
 	function onErrorEmail(errors: any) {
 		toast.error(errors.email?.message ?? 'Некорректный email', {

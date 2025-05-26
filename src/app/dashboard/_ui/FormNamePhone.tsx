@@ -46,66 +46,75 @@ export default function FormNamePhone() {
 		},
 	})
 
-	useEffect(() => {
-		if (!window.recaptchaVerifier) {
-			const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-				size: 'invisible',
-				callback: (response: string) => {
-					console.log('reCAPTCHA resolved', response);
-				},
-			});
-			verifier.render().then((widgetId) => {
-				window.recaptchaVerifier = verifier;
-				window.recaptchaWidgetId = widgetId;
-			});
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!window.recaptchaVerifier) {
+	// 		const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+	// 			size: 'invisible',
+	// 			callback: (response: string) => {
+	// 				console.log('reCAPTCHA resolved', response);
+	// 			},
+	// 		});
+	// 		verifier.render().then((widgetId) => {
+	// 			window.recaptchaVerifier = verifier;
+	// 			window.recaptchaWidgetId = widgetId;
+	// 		});
+	// 	}
+	// }, []);
 
+
+	// const onSubmit = async (values: z.infer<typeof schema>) => {
+	// 	if (step === "number") {
+
+	// 		const res = await isExistingUser(values.phone)
+
+	// 		if (res.isExistingUser) {
+	// 			toast.error('Пользователь уже существует', {
+	// 				position: 'top-center',
+	// 			});
+	// 			return
+	// 		}
+
+	// 		let appVerifier = window.recaptchaVerifier;
+
+	// 		signInWithPhoneNumber(auth, '+' + values.phone, appVerifier)
+	// 			.then((confirmationResult) => {
+	// 				window.confirmationResult = confirmationResult
+	// 				toast.success('Введите код из СМС', {
+	// 					position: 'top-center',
+	// 					duration: 5000,
+	// 				})
+	// 				setStep('code')
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error(error)
+	// 				toast.error('Ошибка при отправке кода', {
+	// 					position: 'top-center',
+	// 				})
+	// 			}).finally(() => {
+	// 				form.setValue("otp", "")
+	// 			})
+
+	// 	} else if (step === "code") {
+	// 		// подтверждение кода
+	// 		const { otp, name, phone } = values
+	// 		const result = await window.confirmationResult.confirm(otp!)
+	// 		console.log("Firebase user:", result.user)
+
+	// 		const response = await endRegister({ name, phone })
+	// 		toast.success(response.message, {
+	// 			position: 'top-center',
+	// 		})
+	// 		setUser(response.updatedUser)
+	// 	}
+	// }
 
 	const onSubmit = async (values: z.infer<typeof schema>) => {
-		if (step === "number") {
-
-			const res = await isExistingUser(values.phone)
-
-			if (res.isExistingUser) {
-				toast.error('Пользователь уже существует', {
-					position: 'top-center',
-				});
-				return
-			}
-
-			let appVerifier = window.recaptchaVerifier;
-
-			signInWithPhoneNumber(auth, '+' + values.phone, appVerifier)
-				.then((confirmationResult) => {
-					window.confirmationResult = confirmationResult
-					toast.success('Введите код из СМС', {
-						position: 'top-center',
-						duration: 5000,
-					})
-					setStep('code')
-				})
-				.catch((error) => {
-					console.error(error)
-					toast.error('Ошибка при отправке кода', {
-						position: 'top-center',
-					})
-				}).finally(() => {
-					form.setValue("otp", "")
-				})
-
-		} else if (step === "code") {
-			// подтверждение кода
-			const { otp, name, phone } = values
-			const result = await window.confirmationResult.confirm(otp!)
-			console.log("Firebase user:", result.user)
-
-			const response = await endRegister({ name, phone })
-			toast.success(response.message, {
-				position: 'top-center',
-			})
-			setUser(response.updatedUser)
-		}
+		const { name, phone } = values
+		const response = await endRegister({ name, phone })
+		toast.success(response.message, {
+			position: 'top-center',
+		})
+		setUser(response.updatedUser)
 	}
 
 	function onError(errors: any) {
@@ -136,7 +145,7 @@ export default function FormNamePhone() {
 					className=" w-[calc(100vw - 2rem)] sm:w-[320px] grid gap-5"
 				>
 
-					{step === 'number' && (
+					{/* {step === 'number' && (
 						<>
 							<FormField
 								control={form.control}
@@ -227,7 +236,56 @@ export default function FormNamePhone() {
 								{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Завершить регистрацию</>) : "Завершить регистрацию"}
 							</Button>
 						</>
-					)}
+					)} */}
+
+					<FormField
+						control={form.control}
+						name="name"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Ваше имя</FormLabel>
+								<FormControl>
+									<Input
+										placeholder="Введите ваше имя"
+										value={field.value}
+										onChange={field.onChange}
+									/>
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="phone"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Ваш номер телефона</FormLabel>
+								<FormControl>
+									<PhoneInput
+										localization={ru}
+										country="kz"
+										containerClass="!w-full dark:!bg-background"
+										inputClass="!rounded-lg !h-[36px] !lh-[36px] !overflow-hidden dark:!bg-input/30 !border-input !w-full"
+										enableSearch={true}
+										disableSearchIcon={true}
+										searchPlaceholder='Поиск'
+										searchClass='dark:!bg-background'
+										dropdownClass='dark:!bg-background '
+										buttonClass="dark:!bg-background !border-input"
+										buttonStyle={{ borderRadius: '8px 0 0 8px' }}
+										disableCountryGuess={true}
+										placeholder="Введите номер телефона"
+										value={field.value}
+										onChange={field.onChange}
+									/>
+								</FormControl>
+							</FormItem>
+						)}
+					/>
+					<Button
+						className=' bg-(--dark-accent) hover:bg-(--background) text-(--foreground)  border border-(--dark-accent) hover:border-(--foreground) rounded-lg'
+						type="submit"
+					>Сохранить</Button>
 
 				</form>
 

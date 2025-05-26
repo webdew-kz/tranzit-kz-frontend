@@ -113,25 +113,25 @@ export default function RegisterForm() {
 		},
 	})
 
-	useEffect(() => {
-		if (!window.recaptchaVerifier) {
-			window.recaptchaVerifier = new RecaptchaVerifier(
-				auth,
-				'recaptcha-container', // ✅ строка — ID контейнера
-				{
-					size: 'invisible',
-					callback: (response: string) => {
-						console.log('reCAPTCHA resolved', response);
-					},
-				},
-				// ✅ объект Auth
-			)
+	// useEffect(() => {
+	// 	if (!window.recaptchaVerifier) {
+	// 		window.recaptchaVerifier = new RecaptchaVerifier(
+	// 			auth,
+	// 			'recaptcha-container', // ✅ строка — ID контейнера
+	// 			{
+	// 				size: 'invisible',
+	// 				callback: (response: string) => {
+	// 					console.log('reCAPTCHA resolved', response);
+	// 				},
+	// 			},
+	// 			// ✅ объект Auth
+	// 		)
 
-			window.recaptchaVerifier.render().then((widgetId) => {
-				window.recaptchaWidgetId = widgetId
-			})
-		}
-	}, [])
+	// 		window.recaptchaVerifier.render().then((widgetId) => {
+	// 			window.recaptchaWidgetId = widgetId
+	// 		})
+	// 	}
+	// }, [])
 
 
 
@@ -241,29 +241,49 @@ export default function RegisterForm() {
 		}
 
 		// Собираем данные локально, не полагаясь на setFormData
-		const sendData = {
-			...formdata,
-			password: values.password,
-		};
+
 
 		startTransition(async () => {
-			const res = await registerAction(sendData)
-			if (!res.success) {
-				toast.error(res.error, {
-					position: 'top-center',
-				});
+			const sendData = {
+				...formdata,
+				password: values.password,
+			};
+			const res = await fetch("/api/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(sendData),
+				credentials: "include", // обязательно
+			});
+
+			const data = await res.json();
+
+			if (data.user) {
+				setUser(data.user); // сохраняем пользователя
+				localStorage.setItem("accessToken", data.token);
+				toast.success(data.message, { position: "top-center" });
+				router.push("/dashboard");
 			} else {
-
-				setUser(res.user)
-
-				localStorage.setItem("accessToken", res.accessToken);
-
-				toast.success(res.message, {
-					position: 'top-center',
-				})
-
-				router.push('/dashboard')
+				toast.error(data.message ?? "Ошибка авторизации", { position: "top-center" });
 			}
+			// const res = await registerAction(sendData)
+			// if (!res.success) {
+			// 	toast.error(res.error, {
+			// 		position: 'top-center',
+			// 	});
+			// } else {
+
+			// 	setUser(res.user)
+
+			// 	localStorage.setItem("accessToken", res.accessToken);
+
+			// 	toast.success(res.message, {
+			// 		position: 'top-center',
+			// 	})
+
+			// 	router.push('/dashboard')
+			// }
 		})
 	}
 
@@ -280,7 +300,6 @@ export default function RegisterForm() {
 		try {
 
 			const res = await isExistingUserForEmail(values.email)
-			console.log(res);
 
 			setCode(res)
 
@@ -292,7 +311,7 @@ export default function RegisterForm() {
 			setStepEmailRegister('code')
 		} catch (error) {
 			console.error(error)
-			toast.error('Пользователь уже существует2', {
+			toast.error('Пользователь уже существует', {
 				position: 'top-center',
 			})
 		} finally {
@@ -309,9 +328,6 @@ export default function RegisterForm() {
 
 	function onSubmitOtpEmail(values: FormOtpValues) {
 
-		console.log(code);
-		console.log(values.otp);
-
 
 		if (values.otp.length < 6) {
 			toast.error('Введите 6-ти значный код', {
@@ -320,13 +336,10 @@ export default function RegisterForm() {
 			return
 		}
 
-		setLoading(true)
-
 		if (Number(values.otp) !== Number(code)) {
 			toast.error('Неверный код', {
 				position: 'top-center',
 			})
-			setLoading(false)
 			return
 		}
 

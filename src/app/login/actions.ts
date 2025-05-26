@@ -2,7 +2,7 @@
 
 "use server";
 
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import { ILoginForm } from "./types";
 
 export async function loginAction(data: ILoginForm) {
@@ -14,36 +14,12 @@ export async function loginAction(data: ILoginForm) {
             credentials: "include",
         });
 
-        // if (!res.ok) throw new Error(res.statusText);
-
-        const { accessToken, user, message } = await res.json();
-
-        if (!accessToken) {
-            return {
-                success: false,
-                message,
-            };
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
         }
 
-        const cookie = await cookies();
-        cookie.set("accessToken", accessToken, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "lax",
-            domain: `.${process.env.DOMAIN}`,
-            path: "/",
-            maxAge: 10 * 365 * 24 * 60 * 60 * 1000,
-        });
-        cookie.set("userId", user.id, {
-            httpOnly: true,
-            secure: true,
-            sameSite: "lax",
-            domain: `.${process.env.DOMAIN}`,
-            path: "/",
-            maxAge: 10 * 365 * 24 * 60 * 60 * 1000,
-        });
-
-        return { success: true, user, message, accessToken };
+        return await res.json();
     } catch (error) {
         console.error(error);
         return {

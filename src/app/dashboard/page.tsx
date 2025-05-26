@@ -7,9 +7,14 @@ import Loader from '@/shared/components/widgets/Loader'
 
 export default function DashboardPage() {
 
+
 	const { user } = useUserStore()
 
-
+	if (!user) {
+		return (
+			<Loader />
+		)
+	}
 	if (!user?.name && user?.phone) {
 		return (
 			<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
@@ -27,7 +32,6 @@ export default function DashboardPage() {
 	}
 
 	return (
-
 		<div className='h-full flex justify-center items-center'>
 			Здравствуйте, {user?.name} {user?.surname}
 		</div>

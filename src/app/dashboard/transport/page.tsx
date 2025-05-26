@@ -1,5 +1,5 @@
 import { Button } from '@/shared/components/ui/button';
-import { Box, CirclePlus, Search } from 'lucide-react';
+import { Box, CirclePlus, Search, Star, Truck } from 'lucide-react';
 import Link from 'next/link';
 
 export default function page() {
@@ -38,10 +38,23 @@ export default function page() {
 			>
 
 				<Link
+					href='/dashboard/transport/wishlist'
+					className='flex gap-3 items-center justify-start'
+				>
+					<Star /> Избранные транспорты
+				</Link>
+			</Button>
+			<Button
+				variant={'outline'}
+				className='w-full sm:hidden'
+				asChild
+			>
+
+				<Link
 					href='/dashboard/transport/my'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Box /> Мои транспорты
+					<Truck /> Мои транспорты
 				</Link>
 			</Button>
 		</div>

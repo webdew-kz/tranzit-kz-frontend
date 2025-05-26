@@ -508,7 +508,7 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 												</Link>
 											</Button>
 										)}
-										{transport.userPhone && (
+										{transport.user.whatsapp && (
 											<Button variant='link' asChild>
 												<Link
 													href={link}

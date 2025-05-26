@@ -223,7 +223,7 @@ export default function MyTransportArchiveList() {
 				))}
 				{!transports.length && (
 					<div className='flex justify-center items-center'>
-						<span className='text-muted-foreground'>Нет архивных грузов</span>
+						<span className='text-muted-foreground'>У вас нет архивных транспортов</span>
 					</div>
 				)}
 			</div>

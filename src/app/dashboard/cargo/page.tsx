@@ -1,5 +1,5 @@
 import { Button } from '@/shared/components/ui/button';
-import { Box, CirclePlus, Search } from 'lucide-react';
+import { Box, CirclePlus, Search, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function page() {
@@ -29,6 +29,19 @@ export default function page() {
 					className='flex gap-3 items-center justify-start'
 				>
 					<Search /> Найти груз
+				</Link>
+			</Button>
+			<Button
+				variant={'outline'}
+				className='w-full sm:hidden'
+				asChild
+			>
+
+				<Link
+					href='/dashboard/cargo/wishlist'
+					className='flex gap-3 items-center justify-start'
+				>
+					<Star /> Избранные грузы
 				</Link>
 			</Button>
 			<Button

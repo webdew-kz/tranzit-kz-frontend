@@ -9,7 +9,7 @@ import { GoogleTranslate } from '../../widgets/GoogleTranslate'
 
 export default async function TopBar() {
 
-	const isAuthed = await isAuth()
+	const isAuthUser = await isAuth()
 
 	return (
 		<section className='h-15 flex items-center px-4 w-full border-b border-(--dark-accent) z-1 fixed !top-0 bg-background'>
@@ -23,9 +23,8 @@ export default async function TopBar() {
 				</div>
 				<GoogleTranslate prefLangCookie={await getPrefLangCookie()} />
 				<ThemeToggle />
-				{isAuthed && (
-					<Logout />
-				)}
+				{isAuthUser && <Logout />}
+
 			</div>
 		</section>
 	)

@@ -6,14 +6,21 @@ import { logoutAction } from '@/app/actions'
 import { useRouter } from 'next/navigation'
 import { LogOut } from 'lucide-react'
 import { useUserStore } from '@/shared/store/useUserStore'
+// import { cookies } from 'next/headers'
 
 
 
 export default function Logout() {
+	const [isAuthed, setIsAuthed] = useState(false);
+
+	const { user, clearUser } = useUserStore.getState()
+
+	useEffect(() => {
+		setIsAuthed(!!user);
+	}, []);
 
 	const [loading, setLoading] = useState(false)
 	const router = useRouter()
-	const { clearUser } = useUserStore.getState()
 
 	const handleLogout = () => {
 
@@ -47,6 +54,11 @@ export default function Logout() {
 				setLoading(false)
 			}
 		})
+	}
+
+
+	if (!isAuthed || !user) {
+		return null; // Не отображаем кнопку, если пользователь не авторизован
 	}
 
 	return (
