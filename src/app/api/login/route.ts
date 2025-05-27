@@ -6,6 +6,9 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const SERVER_URL = process.env.SERVER_URL || "https://api.itranzit.kz"; // Замените на ваш серверный URL по умолчанию
+
+    console.log("Server URL:", SERVER_URL);
+
     if (!SERVER_URL) {
         return new Response("Server URL is not defined", {
             status: 500,
