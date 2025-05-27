@@ -5,7 +5,15 @@
 export async function POST(req: Request) {
     const body = await req.json();
 
-    const res = await fetch(`${process.env.SERVER_URL}/auth/login`, {
+    const SERVER_URL = process.env.SERVER_URL;
+    if (!SERVER_URL) {
+        return new Response("Server URL is not defined", {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
+
+    const res = await fetch(`${SERVER_URL}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
