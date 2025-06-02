@@ -2,178 +2,90 @@
 import { Button } from '@/shared/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/components/ui/card';
 import { Input } from '@/shared/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select';
 import { MultiCityInput } from '@/shared/components/widgets/InputCity';
 import { z } from "zod"
-import { useEffect, useTransition } from 'react';
-import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle, DialogFooter, DialogClose } from '@/shared/components/ui/dialog';
-import { AdditionallyEnum, CurrencyEnum, DocumentsAdrEnum, DocumentsEnum, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type';
+import { useTransition } from 'react';
+import { LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type';
 import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
-import MultiCheckbox from '@/shared/components/widgets/MultiCheckbox';
-import { TimePicker } from '@/shared/components/widgets/TimePicker';
 import { DatePicker } from '@/shared/components/widgets/DatePicker';
-import { useUserStore } from '@/shared/store/useUserStore';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { addCargo } from '../actions';
 import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useCargoSearchStore } from '@/shared/store/useCargoSearchStore';
+import { findManyByFilter } from '../actions';
 
+export default function CargoFormSearch() {
 
-export default function CargoFormAdd() {
+	// const { user } = useUserStore()
 
-	const { user } = useUserStore()
+	const { setSearchCargos } = useCargoSearchStore()
+
+	// const { cargos, setCargos } = useCargoStore()
 
 	const [pending, startTransition] = useTransition()
 
-	const router = useRouter()
-
 	const cargoSchema = z.object({
-		title: z.string().min(1),
-		price: z.number().int().nonnegative(),
-		currency: z.enum(Object.keys(CurrencyEnum) as [keyof typeof CurrencyEnum]),
-
-		note: z.string().optional(),
-
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
-		weight: z.number().positive(),
-		volume: z.number().positive(),
-		periodDays: z.number().int().min(1).max(30),
-		startDate: z.string(),
+		weight: z
+			.string()
+			.optional()
+			.transform((val) => val === '' || val === undefined ? undefined : Number(val))
+			.refine((val) => val === undefined || (!isNaN(val) && val > 0), {
+				message: 'Вес должен быть положительным числом',
+			}),
 
-		truckType: z.array(z.enum(Object.keys(TruckTypeEnum) as [keyof typeof TruckTypeEnum])).min(1),
-		loadingType: z.array(z.enum(Object.keys(LoadingTypeEnum) as [keyof typeof LoadingTypeEnum])).min(1),
+		volume: z
+			.string()
+			.optional()
+			.transform((val) => val === '' || val === undefined ? undefined : Number(val))
+			.refine((val) => val === undefined || (!isNaN(val) && val > 0), {
+				message: 'Объем должен быть положительным числом',
+			}),
 
-		paymentMethod: z.array(z.enum(Object.keys(PaymentMethodEnum) as [keyof typeof PaymentMethodEnum])).min(1),
-		paymentPeriod: z.array(z.enum(Object.keys(PaymentPeriodEnum) as [keyof typeof PaymentPeriodEnum])).optional(),
-		paymentOther: z.array(z.enum(Object.keys(PaymentOtherEnum) as [keyof typeof PaymentOtherEnum])).optional(),
-		paymentPrepaymentPercent: z.string().optional(),
-		paymentDeferredDays: z.string().optional(),
+		startDate: z.string().optional(),
+		endDate: z.string().optional(),
 
-		optionDocuments: z.array(z.enum(Object.keys(DocumentsEnum) as [keyof typeof DocumentsEnum])).optional(),
-		optionDocumentsAdr: z.enum(Object.keys(DocumentsAdrEnum) as [keyof typeof DocumentsAdrEnum]).optional(),
-
-		optionLoadings: z.array(z.enum(Object.keys(LoadingsEnum) as [keyof typeof LoadingsEnum])).optional(),
-		optionLoadingsTimeLoading: z.string().optional(),
-		optionLoadingsTimeUnloading: z.string().optional(),
-		optionLoadingsDateUnloading: z.string().optional(),
-		optionLoadingsPlaceLoading: z.string().optional(),
-		optionLoadingsPlaceUnloading: z.string().optional(),
-		optionLoadingsBigBag: z.string().optional(),
-
-		optionTerms: z.array(z.enum(Object.keys(TermsEnum) as [keyof typeof TermsEnum])).optional(),
-		optionTermsTemperature: z.string().optional(),
-		optionTermsQtyPallets: z.string().optional(),
-		optionTermsCorners: z.string().optional(),
-		optionTermsBelts: z.string().optional(),
-		optionTermsPalletsType: z.enum(Object.keys(TermsPalletsTypeEnum) as [keyof typeof TermsPalletsTypeEnum]).optional(),
-
-		optionAdditionally: z.array(z.enum(Object.keys(AdditionallyEnum) as [keyof typeof AdditionallyEnum])).optional(),
-
-		userName: z.string().min(1),
-		userPhone: z.string().min(5),
-
-		skype: z.string().nullable().default(''),
-		telegram: z.string().nullable().default(''),
-		viber: z.string().nullable().default(''),
-		whatsapp: z.string().nullable().default('')
+		truckType: z.array(z.enum(Object.keys(TruckTypeEnum) as [keyof typeof TruckTypeEnum])).optional(),
+		loadingType: z.array(z.enum(Object.keys(LoadingTypeEnum) as [keyof typeof LoadingTypeEnum])).optional(),
 	});
-
 
 	type ICargo = z.infer<typeof cargoSchema>
 
 	const form = useForm({
 		resolver: zodResolver(cargoSchema),
 		defaultValues: {
-			title: "",
-			price: undefined,
-			currency: CurrencyEnum.KZT,
-			note: undefined,
+			// title: "",
+			// price: undefined,
+			// currency: CurrencyEnum.KZT,
+			// note: undefined,
 
 			placesLoading: [""],
 			placesUnloading: [""],
-			weight: 20,
-			volume: 86,
-			periodDays: 5,
-			startDate: new Date().toISOString(),
+			weight: undefined,
+			volume: undefined,
+			startDate: undefined,
+			endDate: undefined,
 
-			truckType: ["ANY"],
-			loadingType: ["ANY"],
-
-			paymentMethod: ["CASH"],
-			paymentPeriod: [],
-			paymentOther: [],
-			paymentPrepaymentPercent: undefined,
-			paymentDeferredDays: undefined,
-
-			optionDocuments: [],
-			optionDocumentsAdr: undefined,
-
-			optionLoadings: [],
-			optionLoadingsTimeLoading: undefined,
-			optionLoadingsTimeUnloading: undefined,
-			optionLoadingsDateUnloading: undefined,
-			optionLoadingsPlaceLoading: "",
-			optionLoadingsPlaceUnloading: "",
-			optionLoadingsBigBag: "",
-
-			optionTerms: [],
-			optionTermsTemperature: "",
-			optionTermsQtyPallets: undefined,
-			optionTermsCorners: "",
-			optionTermsBelts: "",
-			optionTermsPalletsType: undefined,
-
-			optionAdditionally: [],
-
-			userName: user?.name!,
-			userPhone: user?.phone!,
-
-			whatsapp: user?.whatsapp,
-			telegram: user?.telegram,
-			viber: user?.viber,
-			skype: user?.skype,
+			truckType: [],
+			loadingType: [],
 		},
 	})
-
-	useEffect(() => {
-		if (user?.name) {
-			form.setValue('userName', user.name);
-		}
-		if (user?.phone) {
-			form.setValue('userPhone', user.phone);
-		}
-
-		if (user?.whatsapp) {
-			form.setValue('whatsapp', user.whatsapp);
-		}
-		if (user?.telegram) {
-			form.setValue('telegram', user.telegram);
-		}
-		if (user?.viber) {
-			form.setValue('viber', user.viber);
-		}
-		if (user?.skype) {
-			form.setValue('skype', user.skype);
-		}
-	}, [user, form]);
-
-
 
 	const onSubmit = async (data: ICargo) => {
 
 		startTransition(async () => {
 
 			try {
-				const res = await addCargo(data)
+				const res = await findManyByFilter(data)
 
 				toast.success(res.message, {
 					position: 'top-center',
 				})
 
-				router.replace('/dashboard/cargo/my')
+				setSearchCargos(res.cargos)
+				// setCargos([])
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при добавлении груза', {
@@ -197,7 +109,7 @@ export default function CargoFormAdd() {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Добавить груз</CardTitle>
+				<CardTitle className='text-xl text-center'>Поиск грузов</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
@@ -241,7 +153,7 @@ export default function CargoFormAdd() {
 
 								<MultiSelect
 									options={TruckTypeEnum}
-									value={field.value}
+									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Тип фуры"
 								/>
@@ -255,39 +167,27 @@ export default function CargoFormAdd() {
 
 								<MultiSelect
 									options={LoadingTypeEnum}
-									value={field.value}
+									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Тип погрузки"
 								/>
 							)}
 						/>
 
-						<div className=" relative w-full">
-							<Input
-								type='number'
-								required
-								placeholder="Тоннаж"
-								className='text-sm'
-								{...form.register('weight', { valueAsNumber: true })}
-							/>
-							<span className="absolute right-4 top-1/2 -translate-y-1/2 text-(--dark-accent) pointer-events-none">
-								т
-							</span>
-						</div>
+						<Input
+							type="number"
+							placeholder="Тоннаж до"
+							className="text-sm"
+							{...form.register('weight')}
+						/>
 
+						<Input
+							type="number"
+							placeholder="Объем до"
+							className="text-sm"
+							{...form.register('volume')}
+						/>
 
-						<div className=" relative w-full">
-							<Input
-								type='number'
-								required
-								placeholder="Объем"
-								className='text-sm'
-								{...form.register('volume', { valueAsNumber: true })}
-							/>
-							<span className="absolute right-4 top-1/2 -translate-y-1/2 text-(--dark-accent) pointer-events-none">
-								м<sup>3</sup>
-							</span>
-						</div>
 
 						<Controller
 							control={form.control}
@@ -296,41 +196,31 @@ export default function CargoFormAdd() {
 								<DatePicker
 									value={field.value}
 									onChange={field.onChange}
-									placeholder='Дата погрузки'
+									placeholder='Дата начала'
 								/>
 							)}
 						/>
 
 						<Controller
 							control={form.control}
-							name="periodDays"
+							name='endDate'
 							render={({ field }) => (
-								<Select
-									onValueChange={(value) => field.onChange(Number(value))}
-									value={String(field.value)}
-								>
-									<SelectTrigger className="w-full">
-										<SelectValue placeholder='Период' />
-									</SelectTrigger>
-									<SelectContent className="bg-background max-h-60 overflow-y-auto">
-										{Array.from({ length: 30 }, (_, i) => i + 1).map((day) => (
-											<SelectItem key={day} value={day.toString()}>
-												{day} {day === 1 ? "день" : day < 5 ? "дня" : "дней"}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
+								<DatePicker
+									value={field.value}
+									onChange={field.onChange}
+									placeholder='Дата окончания'
+								/>
 							)}
 						/>
 
 					</div>
 
 
-					<div className="grid grid-cols-2 lg:grid-cols-4 w-full gap-3 md:gap-5 items-start">
+					{/* <div className="grid grid-cols-2 lg:grid-cols-4 w-full gap-3 md:gap-5 items-start">
 
 						<Input
 							type='text'
-							placeholder="Название груза"
+							placeholder="Наименование груза"
 							className='text-sm'
 							required
 							{...form.register('title')}
@@ -379,20 +269,20 @@ export default function CargoFormAdd() {
 								/>
 							)}
 						/>
-					</div>
+					</div> */}
 
 
-					<div className="grid w-full">
+					{/* <div className="grid w-full">
 						<Input
 							type='text'
 							placeholder="Примечание (необязательно)"
 							className='text-sm'
 							{...form.register('note')}
 						/>
-					</div>
+					</div> */}
 
 
-					<div className="grid grid-cols-3 w-full">
+					{/* <div className="grid grid-cols-3 w-full">
 						<div className=" col-start-2">
 							<Dialog>
 								<DialogTrigger asChild>
@@ -410,7 +300,7 @@ export default function CargoFormAdd() {
 										</DialogHeader>
 									</div>
 
-									<div className="overflow-y-auto p-6 pt-4 flex-1 ">
+									<div className="overflow-y-auto p-6 pt-4 flex-1">
 										<div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
 
 											<div className=" flex flex-col gap-4">
@@ -536,7 +426,7 @@ export default function CargoFormAdd() {
 														)}
 													/>
 
-													{/* <Input
+													<Input
 														type='text'
 														placeholder="Место погрузки"
 														className='text-sm'
@@ -549,7 +439,7 @@ export default function CargoFormAdd() {
 														className='text-sm'
 														required
 														{...form.register('optionLoadingsPlaceUnloading')}
-													/> */}
+													/>
 
 
 													<Controller
@@ -681,29 +571,31 @@ export default function CargoFormAdd() {
 												</div>
 											</div>
 										</div>
+									</div>
 
-										<div className=" w-full pt-4 flex justify-center pb-8">
+									<div className="z-10 bg-background border-t p-3">
+										<DialogFooter className=" flex sm:justify-center">
 											<DialogClose asChild>
-												<Button type="button" variant="secondary" className=' w-full max-w-[450px] bg-(--dark-accent)'>
-													Сохранить
+												<Button type="button" variant="secondary">
+													Закрыть
 												</Button>
 											</DialogClose>
-										</div>
+										</DialogFooter>
 									</div>
 								</DialogContent>
 							</Dialog>
 
 						</div>
-					</div>
+					</div> */}
 
 
-					<div className="grid md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+					<div className="grid sm:grid-cols-2 md:grid-cols-6  w-full gap-3 md:gap-5 items-start">
 
-						<Input
+						{/* <Input
 							type="text"
 							placeholder="Имя"
 							className="text-sm"
-
+							required
 							{...form.register('userName')}
 						/>
 
@@ -711,50 +603,17 @@ export default function CargoFormAdd() {
 							type="text"
 							placeholder="Телефон"
 							className="text-sm"
-
+							required
 							{...form.register('userPhone')}
-						/>
-
-						<Input
-							type="text"
-							placeholder="Whatsapp (необязательно)"
-							className="text-sm"
-							{...form.register('whatsapp')}
-						/>
-
-						{/* <Input
-							type="text"
-							placeholder="Telegram"
-							className="text-sm"
-
-							{...form.register('telegram')}
-						/>
-
-						<Input
-							type="text"
-							placeholder="Viber"
-							className="text-sm"
-
-							{...form.register('viber')}
-						/>
-
-						<Input
-							type="text"
-							placeholder="Skype"
-							className="text-sm"
-
-							{...form.register('skype')}
 						/> */}
-					</div>
 
-					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
 
 						<Button
 							type='submit'
-							className=' bg-(--dark-accent) md:col-start-2 w-full'
+							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти груз</>) : "Найти груз"}
 						</Button>
 					</div>
 				</form>

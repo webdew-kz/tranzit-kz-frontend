@@ -1,39 +1,32 @@
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent } from '@/shared/components/ui/card'
-import { Checkbox } from '@/shared/components/ui/checkbox'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
-import Loader from '@/shared/components/widgets/Loader'
 import { convertFromKZT, convertToKZT, getCurrencySymbol } from '@/shared/lib/convertToKZT'
 import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
 import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
-import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Truck, Wallet, Weight, X } from 'lucide-react'
-import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
+import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
+import Image from 'next/image'
+import React, { memo, useEffect, useState, useTransition } from 'react'
+import { addToWishlist, addView, removeFromWishlist } from '../actions'
+import Link from 'next/link'
 import { toast } from 'sonner'
-import { activateCargo, archivateCargo } from '../actions'
-import { useRouter } from 'next/navigation'
 
-interface MyCargoItemProps {
-	cargoInitial: ICargo
-	selected: boolean
-	onToggle: () => void
-	setCargos: (value: SetStateAction<ICargo[]>) => void
+interface CargoSearchItemProps {
+	cargo: ICargo
 	rates?: any
 	loading?: boolean
+	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>
+	isContact?: boolean
+	isWishBtn?: boolean
 }
 
-const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, loading }: MyCargoItemProps) => {
-
-	const router = useRouter()
-
-	const [cargo, setCargo] = useState<ICargo>(cargoInitial)
+const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: CargoSearchItemProps) => {
 
 	const [places, setPlaces] = useState<string[]>([])
-
-	const [pending, startTransition] = useTransition()
 
 	const [currency, setCurrency] = useState<CurrencyEnum>(CurrencyEnum.KZT) // валюта по умолчанию - тенге
 
@@ -44,6 +37,15 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 	const [amountTariff, setAmountTariff] = useState(0)
 
 
+	const [pending, startTransition] = useTransition()
+	const [isWishlist, setIsWishlist] = useState(false)
+
+	useEffect(() => {
+		const current = getWishlist();
+		if (current.includes(cargo.id!)) {
+			setIsWishlist(true);
+		}
+	}, [])
 
 	useEffect(() => {
 		setPlaces([...cargo.placesLoading, ...cargo.placesUnloading]);
@@ -61,54 +63,83 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 
 	}, [rates, cargo.tariff, cargo.price, cargo.currency])
 
-	const handleActivateCargo = async (id: string) => {
+	const handleAddView = async (id: string) => {
+		const viewedKey = `viewed-${id}`;
+		if (localStorage.getItem(viewedKey)) return;
 
-		startTransition(async () => {
+		await addView(id);
+		localStorage.setItem(viewedKey, "true");
+	};
 
-			try {
-				const res = await activateCargo({ id })
 
-				toast.success(res.message, {
-					position: 'top-center',
-				})
+	const handleToggleWishlist = () => {
+		if (isWishlist) {
+			startTransition(async () => {
+				try {
+					const res = await removeFromWishlist(cargo.id!);
+					const current = getWishlist().filter((id) => id !== cargo.id!);
+					localStorage.setItem("wishlist", JSON.stringify(current));
+					const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+					if (setWishlistLength) {
+						setWishlistLength(stored.length);
+					}
+					toast.success(res.message, {
+						position: "top-center",
+					});
+				} catch (error: any) {
+					toast.error(error.message, {
+						position: "top-center",
+					});
+				}
+			});
+		} else {
+			startTransition(async () => {
+				try {
+					const res = await addToWishlist(cargo.id!);
+					const current = getWishlist();
+					if (!current.includes(cargo.id!)) {
+						localStorage.setItem("wishlist", JSON.stringify([...current, cargo.id!]));
+					}
+					const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+					if (setWishlistLength) {
+						setWishlistLength(stored.length);
+					}
+					toast.success(res.message, {
+						position: "top-center",
+					});
+				} catch (error: any) {
+					toast.error(error.message, {
+						position: "top-center",
+					});
+				}
+			});
+		}
 
-				setCargo((prev) => ({
-					...prev,
-					...res.updatedCargo,
-				}))
+		setIsWishlist(!isWishlist);
+	};
 
-				window.location.reload()
 
-			} catch (error) {
-				console.error(error)
-				toast.error('Ошибка при обновлении груза', {
-					position: 'top-center',
-				})
-			}
-		})
+	function getWishlist(): string[] {
+		if (typeof window === "undefined") return [];
+		const data = localStorage.getItem("wishlist");
+		return data ? JSON.parse(data) : [];
 	}
 
-	const handleArchivateCargo = async (id: string) => {
-
-		startTransition(async () => {
-
-			try {
-				const res = await archivateCargo({ id })
-
-				toast.success(res.message, {
-					position: 'top-center',
-				})
-
-				setCargos(prev => prev.filter(cargo => cargo.id !== id))
-
-			} catch (error) {
-				console.error(error)
-				toast.error('Ошибка при архивации груза', {
-					position: 'top-center',
-				})
-			}
-		})
+	function isInWishlist(cargoId: string): boolean {
+		return getWishlist().includes(cargoId);
 	}
+
+	const route = places.map((place) => {
+		const [city, country] = place.split(",").map((str) => str.trim());
+		return `${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`;
+	}).join(" → ");
+	console.log(route);
+
+	const truckTypes = cargo.truckType?.map((item) => TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]).join(", ");
+
+	const message = `Здравствуйте. Данная заявка актуальна?\n\nГруз: ${cargo.title}\nМаршрут: ${route}\nЦена: ${cargo.price} ${getCurrencySymbol(cargo.currency)}\nТип фуры: ${truckTypes}\n\nСсылка на груз: https://${process.env.DOMAIN}/dashboard/cargo/${cargo.id}`
+	const link = `https://wa.me/${cargo.userPhone}?text=${encodeURIComponent(message)}`
+
 
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>
@@ -122,21 +153,18 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<CalendarDays size={16} />
 						<span className='text-nowrap'>{cargo.endDate && checkEndDate(cargo.startDate, cargo.endDate)}</span>
 					</div>
-					<div className=" flex items-center gap-4 justify-end">
-						<div className="flex items-center gap-2">
-							<Checkbox
-								id={cargo.id}
-								className='border-(--dark-accent)'
-								checked={selected}
-								onCheckedChange={onToggle}
-							/>
-							<label
-								htmlFor={cargo.id}
-								className="text-sm text-(--dark-accent) cursor-pointer underline underline-offset-2 "
-							>
-								Выбрать
-							</label>
-						</div>
+					<div className=" flex items-center">
+						{isWishBtn && isInWishlist(cargo.id!) ? (
+							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+								<Star size={16} fill='#b4802e' />
+								<span>Убрать из избранного</span>
+							</button>
+						) : isWishBtn && (
+							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+								<Star size={16} />
+								<span>Добавить в избранное</span>
+							</button>
+						)}
 					</div>
 				</div>
 				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
@@ -160,11 +188,10 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						<Eye size={16} />
 						<span className='truncate block text-sm'>
 							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{cargo.views.count}</span>
+							<span className=' font-medium'>{cargo?.views?.count}</span>
 						</span>
 					</span>
 				</div>
-
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
 						{places.length > 0 && places.map((place, index) => {
@@ -243,7 +270,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</Select>
 					</div>
 				</div>
-				<div className="lg:mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
+				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Truck size={16} />
@@ -280,7 +307,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</div>
 					)}
 				</div>
-				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
+				<div className=" flex items-start justify-between w-full">
 					<div>
 						{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (
 							<Popover>
@@ -454,45 +481,89 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							</Popover>
 						)}
 					</div>
-					<div className=" flex gap-2 w-full lg:w-auto">
-						<Button
-							variant='default'
-							className='group bg-(--dark-accent) text-(--background) hover:bg-transparent hover:text-(--dark-accent) border hover:!border-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleActivateCargo(cargo.id!)}
-							disabled={pending}
-						>
-							<RefreshCcw
-								size={16}
-								className='stroke-background group-hover:stroke-(--dark-accent)'
-							/>
-							<span className='hidden lg:block'>Повторить</span>
-						</Button>
-
-						<Button
-							variant='outline'
-							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleArchivateCargo(cargo.id!)}
-							disabled={pending}
-						>
-							<X size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Снять</span>
-						</Button>
-						<Button
-							variant='outline'
-							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => router.push(`/dashboard/cargo/edit/${cargo.id}`)}
-						>
-							<SquarePen size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Редактировать</span>
-						</Button>
-						<Button
-							variant='outline'
-							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => router.push(`/dashboard/cargo/copy/${cargo.id}`)}
-						>
-							<Copy size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Копировать</span>
-						</Button>
+					<div>
+						{(cargo.userPhone && isContact) && (
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										variant='default'
+										className=' group border border-(--dark-accent) bg-(--dark-accent) hover:bg-transparent hover:text-(--dark-accent)'
+										onClick={() => cargo.id && handleAddView(cargo.id)}
+									>
+										<span className=''>Показать контакты</span>
+									</Button>
+								</PopoverTrigger>
+								<PopoverContent align='end' className='p-5 w-auto'>
+									<div className="grid gap-2 justify-start">
+										{cargo.userPhone && (
+											<Button variant='link' asChild>
+												<Link
+													href={`tel:+${cargo.userPhone}`}
+													target='_blank'
+													rel="noopener noreferrer"
+													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+												>
+													<Phone size={16} />
+													<span>{`+${cargo.userPhone}`}</span>
+												</Link>
+											</Button>
+										)}
+										{cargo.user.whatsapp && (
+											<Button variant='link' asChild>
+												<Link
+													href={link}
+													target='_blank'
+													rel="noopener noreferrer"
+													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+												>
+													<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
+													<span>WhatsApp</span>
+												</Link>
+											</Button>
+										)}
+										{cargo?.user?.viber && (
+											<Button variant='link' asChild>
+												<Link
+													href={`viber://chat?number=%2B${cargo?.user?.viber}`}
+													target='_blank'
+													rel="noopener noreferrer"
+													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+												>
+													<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
+													<span>Viber</span>
+												</Link>
+											</Button>
+										)}
+										{cargo?.user?.skype && (
+											<Button variant='link' asChild>
+												<Link
+													href={`skype:live.${cargo?.user?.skype}?chat`}
+													target='_blank'
+													rel="noopener noreferrer"
+													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+												>
+													<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
+													<span>Skype</span>
+												</Link>
+											</Button>
+										)}
+										{cargo?.user?.telegram && (
+											<Button variant='link' asChild>
+												<Link
+													href={`https://t.me/${cargo?.user?.telegram}`}
+													target='_blank'
+													rel="noopener noreferrer"
+													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+												>
+													<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
+													<span>Telegram</span>
+												</Link>
+											</Button>
+										)}
+									</div>
+								</PopoverContent>
+							</Popover>
+						)}
 					</div>
 				</div>
 			</CardContent>
@@ -525,4 +596,8 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 // optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
-export default MyCargoItem
+export default CargoSearchItem
+
+function async(id: string | undefined) {
+	throw new Error('Function not implemented.')
+}

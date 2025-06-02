@@ -26,8 +26,8 @@ export default function MobileMenu() {
 				<span>Транспорт</span>
 			</Link>
 			<Link
-				href='/dashboard/autotrade'
-				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/autotrade') ? 'bg-accent' : ''}`)}
+				href='/dashboard/trade'
+				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/trade') ? 'bg-accent' : ''}`)}
 			>
 				<Truck />
 				<span>Авторынок</span>

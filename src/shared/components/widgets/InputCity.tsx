@@ -40,7 +40,10 @@ const CityInput = ({
 	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value;
 		setValue(val);
+
 		onChangeAt(index, val);
+
+
 	};
 
 	const handleSelect = (description: string) => {
@@ -52,7 +55,7 @@ const CityInput = ({
 	};
 
 	return (
-		<div className="relative mb-2 flex gap-2 items-start">
+		<div className="relative flex gap-2 items-start">
 			<div className="w-full relative">
 				<Input
 					required

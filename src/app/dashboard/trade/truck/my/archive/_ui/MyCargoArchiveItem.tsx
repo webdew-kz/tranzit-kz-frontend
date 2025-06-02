@@ -10,11 +10,12 @@ import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
 import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
-import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Truck, Wallet, Weight, X } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, SquarePen, Trash, Truck, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { activateCargo, archivateCargo } from '../actions'
 import { useRouter } from 'next/navigation'
+import { activateCargo } from '../../actions'
+import { remove } from '../actions'
 
 interface MyCargoItemProps {
 	cargoInitial: ICargo
@@ -23,9 +24,10 @@ interface MyCargoItemProps {
 	setCargos: (value: SetStateAction<ICargo[]>) => void
 	rates?: any
 	loading?: boolean
+
 }
 
-const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, loading }: MyCargoItemProps) => {
+const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, loading }: MyCargoItemProps) => {
 
 	const router = useRouter()
 
@@ -42,8 +44,6 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 
 	const [amountPrice, setAmountPrice] = useState(0)
 	const [amountTariff, setAmountTariff] = useState(0)
-
-
 
 	useEffect(() => {
 		setPlaces([...cargo.placesLoading, ...cargo.placesUnloading]);
@@ -77,8 +77,6 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 					...res.updatedCargo,
 				}))
 
-				window.location.reload()
-
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при обновлении груза', {
@@ -88,12 +86,12 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 		})
 	}
 
-	const handleArchivateCargo = async (id: string) => {
+	const handleRemove = async (id: string) => {
 
 		startTransition(async () => {
 
 			try {
-				const res = await archivateCargo({ id })
+				const res = await remove(id)
 
 				toast.success(res.message, {
 					position: 'top-center',
@@ -111,7 +109,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 	}
 
 	if (loading) {
-		return <p className='text-center py-5'>Загрузка ...</p>
+		return <Loader />
 	}
 
 	return (
@@ -137,6 +135,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 								Выбрать
 							</label>
 						</div>
+
 					</div>
 				</div>
 				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
@@ -273,6 +272,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							)}
 						</div>
 					</div>
+
 					{cargo.note && (
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<MessageCircleMore size={16} />
@@ -461,22 +461,22 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							onClick={() => handleActivateCargo(cargo.id!)}
 							disabled={pending}
 						>
-							<RefreshCcw
+							<Check
 								size={16}
 								className='stroke-background group-hover:stroke-(--dark-accent)'
 							/>
-							<span className='hidden lg:block'>Повторить</span>
+							<span className='hidden lg:block'>Активировать</span>
 						</Button>
 
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleArchivateCargo(cargo.id!)}
-							disabled={pending}
+							onClick={() => handleRemove(cargo.id!)}
 						>
-							<X size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Снять</span>
+							<Trash size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
+							<span className=' hidden lg:block'>Удалить</span>
 						</Button>
+
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
@@ -485,6 +485,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							<SquarePen size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
 							<span className=' hidden lg:block'>Редактировать</span>
 						</Button>
+
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
@@ -525,4 +526,4 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 // optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
-export default MyCargoItem
+export default MyCargoArchiveItem

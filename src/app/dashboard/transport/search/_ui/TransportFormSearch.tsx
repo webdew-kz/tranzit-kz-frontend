@@ -124,8 +124,8 @@ export default function TransportFormSearch() {
 								<MultiCityInput
 									values={field.value}
 									onChange={field.onChange}
-									placeholder="Пункт потранспортки"
-									addBtnText="Добавить пункт потранспортки"
+									placeholder="Пункт погрузки"
+									addBtnText="Добавить пункт погрузки"
 								/>
 							)}
 						/>
@@ -137,8 +137,8 @@ export default function TransportFormSearch() {
 								<MultiCityInput
 									values={field.value}
 									onChange={field.onChange}
-									addBtnText="Добавить пункт разтранспортки"
-									placeholder='Пункт разтранспортки'
+									addBtnText="Добавить пункт разгрузки"
+									placeholder='Пункт разгрузки'
 								/>
 							)}
 						/>
