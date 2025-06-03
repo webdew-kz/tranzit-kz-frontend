@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { Trash } from 'lucide-react';
 
 interface CityInputProps {
-	value: string;
+	value?: string;
 	onChange: (value: string) => void;
 	onRemove?: () => void;
 	canRemove?: boolean;
@@ -47,7 +47,6 @@ export const CityInput = ({
 		<div className="relative flex gap-2 items-start">
 			<div className="w-full relative">
 				<Input
-					required
 					value={value ?? ''}
 					onChange={handleInput}
 					disabled={!ready}

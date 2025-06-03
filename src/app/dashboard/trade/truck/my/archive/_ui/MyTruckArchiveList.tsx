@@ -1,6 +1,6 @@
 'use client'
 import { ITruck } from '@/shared/types/truck.type';
-import { use, useEffect, useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { Card, CardContent } from '@/shared/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
@@ -9,15 +9,17 @@ import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
 import { toast } from 'sonner';
-import { activateMany, archivateMany, findAllActiveByUserId } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
-import MyTruckItem from './MyTruckItem';
+import { activateMany } from '../../actions';
+import { findAllArchivedByUserId, removeMany } from '../actions';
+import MyTruckArchiveItem from './MyTruckArchiveItem';
 
-export default function MyTruckList() {
+export default function MyTruckArchiveList() {
+
+	const [trucks, setTrucks] = useState<ITruck[]>([]);
 
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	const [trucks, setTrucks] = useState<ITruck[]>([]);
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
 
 	const [pending, startTransition] = useTransition()
@@ -27,7 +29,7 @@ export default function MyTruckList() {
 
 		startTransition(async () => {
 			try {
-				const data = await findAllActiveByUserId()
+				const data = await findAllArchivedByUserId()
 
 				if (data.length === 0) {
 					toast.error("У вас нет активных грузов", {
@@ -76,7 +78,6 @@ export default function MyTruckList() {
 
 		startTransition(async () => {
 			try {
-				setTrucks(prev => prev.filter(truck => !selectedIds.includes(truck.id!)))
 
 				const res = await activateMany({ ids: selectedIds });
 
@@ -84,10 +85,7 @@ export default function MyTruckList() {
 					position: 'top-center',
 				});
 
-				setTrucks(prev => {
-					const updatedTrucks = res.trucks;
-					return [...updatedTrucks, ...prev];
-				})
+				setTrucks(prev => prev.filter(truck => !selectedIds.includes(truck.id!)))
 
 				setSelectedIds([])
 
@@ -99,16 +97,18 @@ export default function MyTruckList() {
 		})
 	}
 
-	const handleAchivateMany = () => {
+	const handleRemoveMany = () => {
+
 		startTransition(async () => {
 			try {
-				setTrucks(prev => prev.filter(truck => !selectedIds.includes(truck.id!)))
+				const res = await removeMany({ ids: selectedIds });
 
-				const res = await archivateMany({ ids: selectedIds })
 
 				toast.success(res.message, {
 					position: 'top-center',
 				});
+
+				setTrucks(prev => prev.filter(truck => !selectedIds.includes(truck.id!)))
 
 				setSelectedIds([])
 
@@ -117,7 +117,6 @@ export default function MyTruckList() {
 					position: 'top-center',
 				});
 			}
-
 		})
 	}
 
@@ -127,7 +126,7 @@ export default function MyTruckList() {
 
 	return (
 		<>
-			<Card className='w-full mb-3 lg:mb-5 sticky top-[119px] md:top-[60px] p-0 rounded-t-none z-10'>
+			<Card className='w-full mb-3 lg:mb-5 sticky top-[60px] p-0 rounded-t-none'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
 					<div className=" grid grid-cols-2 w-full lg:flex ">
 						<Button asChild className={cn(path === '/dashboard/trade/truck/my' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-r-none')}>
@@ -178,13 +177,13 @@ export default function MyTruckList() {
 										variant='link'
 										onClick={handleActivateMany}
 									>
-										Повторить
+										Активировать
 									</Button>
 									<Button
 										variant='link'
-										onClick={handleAchivateMany}
+										onClick={handleRemoveMany}
 									>
-										Снять
+										Удалить
 									</Button>
 								</PopoverContent>
 							</Popover>
@@ -194,30 +193,20 @@ export default function MyTruckList() {
 			</Card>
 			<div className=' grid gap-5'>
 				{trucks.length > 0 && trucks.map((truck) => (
-					<MyTruckItem
+					<MyTruckArchiveItem
 						truckInitial={truck}
 						key={truck.id}
 						selected={selectedIds.includes(truck.id!)}
 						onToggle={() => toggleSelect(truck.id!)}
 						setTrucks={setTrucks}
-						loading={pending}
 					/>
 				))}
-
 				{!trucks.length && (
 					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет активных грузов</p>
+						<span className='text-muted-foreground'>Нет архивных грузов</span>
 					</div>
 				)}
-				{/* {isLoading &&
-					<div className="flex justify-center items-center">
-						<Loader2 className="animate-spin" />
-					</div>
-				} */}
 			</div>
-			{/* {hasMore && (
-				<div ref={bottomRef} className="h-10" />
-			)} */}
 		</>
 	)
 }

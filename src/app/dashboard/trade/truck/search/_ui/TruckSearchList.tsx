@@ -1,35 +1,60 @@
 "use client"
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useTransition } from 'react'
 import { findAll } from '../actions'
-import { ICargo } from '@/shared/types/cargo.type'
-import CargoSearchItem from './CargoSearchItem'
-import { useCargoSearchStore } from '@/shared/store/useCargoSearchStore'
+import { ITruck } from '@/shared/types/truck.type'
+import TruckSearchItem from './TruckSearchItem'
+import { useTruckSearchStore } from '@/shared/store/useTruckSearchStore'
 import { Button } from '@/shared/components/ui/button'
 import Loader from '@/shared/components/widgets/Loader'
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
+import { useTruckStore } from '@/shared/store/useTruckStore'
 
 
 
-export default function CargoSearchList() {
+export default function TruckSearchList() {
 
 
-	const { rates, loading } = useCurrencyRates()
-	const { searchCargos, setSearchCargos } = useCargoSearchStore()
-	const [cargos, setCargos] = useState<ICargo[]>([])
+	// const { rates, loading } = useCurrencyRates()
+	const { searchTrucks, setSearchTrucks } = useTruckSearchStore()
+	const { trucks, setTrucks } = useTruckStore()
 	const [total, setTotal] = useState(0)
 
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
-	const [isLoad, setIsLoad] = useState(false);
+	const [isLoad, setIsLoad] = useState(true);
+
+	const [pending, startTransition] = useTransition()
 
 	const [wishlistLength, setWishlistLength] = useState(0)
 
 	useEffect(() => {
-		const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+		const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
 		setWishlistLength(stored.length);
+	}, []);
+
+	const firstLoad = () => {
+
+		startTransition(async () => {
+			try {
+				const res = await findAll(page);
+				setTrucks(res.trucks);
+				setTotal(res.total)
+				setHasMore(res.hasMore);
+				setIsLoad(false);
+			} catch (error) {
+				console.error("Ошибка загрузки:", error);
+			}
+		})
+
+	}
+
+	useEffect(() => {
+
+		firstLoad();
+
 	}, []);
 
 	const loadMore = async () => {
@@ -39,14 +64,10 @@ export default function CargoSearchList() {
 
 		try {
 			const res = await findAll(page);
-			setCargos(prev => {
-				const merged = [...prev, ...res.cargos];
+			const merged = [...useTruckStore.getState().trucks, ...res.trucks];
+			const unique = Array.from(new Map(merged.map(t => [t.id, t])).values());
 
-				// Удаляем дубликаты по `id`
-				const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
-
-				return unique;
-			});
+			useTruckStore.getState().setTrucks(unique);
 
 			setHasMore(res.hasMore);
 
@@ -55,72 +76,51 @@ export default function CargoSearchList() {
 		}
 	};
 
-	const firstLoad = async () => {
-
-		setIsLoad(true)
-		try {
-			const res = await findAll(page);
-			setCargos(res.cargos);
-			setTotal(res.total)
-		} catch (error) {
-			console.error("Ошибка загрузки:", error);
-		} finally {
-			setIsLoad(false)
-		}
-
-	}
-
-	useEffect(() => {
-		firstLoad();
-	}, []);
-
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
-	const handleShowAllCargos = useCallback(async () => {
-		setSearchCargos([])
-		setCargos([])
+	const handleShowAllTrucks = useCallback(async () => {
+		setSearchTrucks([])
+		setTrucks([])
 		firstLoad()
 	}, [])
 
 
 
 
-	if (isLoad || loading) {
+	if (pending || isLoad) {
 		return <Loader />
 	}
 
 	return (
-		searchCargos.length > 0 ? (
+		searchTrucks.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
-					<div className=" flex justify-between items-center">
-						<span>Найдено: {searchCargos.length}</span>
+					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+						<span>Найдено: {searchTrucks.length}</span>
 						<Button
 							variant='link'
-							onClick={handleShowAllCargos}
+							onClick={handleShowAllTrucks}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все грузы</Button>
+						>Показать все грузовики</Button>
 					</div>
-					{searchCargos.map((cargo) => (
-						<CargoSearchItem
-							key={cargo.id}
-							cargo={cargo}
-							loading={loading}
-							rates={rates}
+					{searchTrucks.map((truck) => (
+						<TruckSearchItem
+							key={truck.id}
+							truckInitial={truck}
 						/>
 					))}
 				</div>
 			</>
 		) : (
-			cargos.length > 0 ? (
+			trucks.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5">
-							<span>Всего грузов: {total}</span>
+						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+							<span>Всего грузовиков: {total}</span>
 
 							{wishlistLength > 0 ? (
 								<Link
-									href='/dashboard/cargo/wishlist'
+									href='/dashboard/trade/truck/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -129,7 +129,7 @@ export default function CargoSearchList() {
 								</Link>
 							) : (
 								<Link
-									href='/dashboard/cargo/wishlist'
+									href='/dashboard/trade/truck/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -139,12 +139,10 @@ export default function CargoSearchList() {
 							)}
 
 						</div>
-						{cargos.map((cargo) => (
-							<CargoSearchItem
-								key={cargo.id}
-								cargo={cargo}
-								loading={loading}
-								rates={rates}
+						{trucks.map((truck) => (
+							<TruckSearchItem
+								key={truck.id}
+								truckInitial={truck}
 								setWishlistLength={setWishlistLength}
 							/>
 						))}
@@ -160,12 +158,12 @@ export default function CargoSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Грузы не найдены</span>
+					<span>Грузовики не найдены</span>
 					<Button
 						variant='link'
-						onClick={() => firstLoad()}
+						onClick={handleShowAllTrucks}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все грузы</Button>
+					>Показать все грузовики</Button>
 				</div>
 			)
 		)

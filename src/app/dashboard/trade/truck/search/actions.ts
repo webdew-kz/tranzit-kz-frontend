@@ -3,7 +3,7 @@
 export async function findAll(page: number) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo?page=${page}`,
+            `${process.env.SERVER_URL}/truck/find-all?page=${page}`,
             {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -24,10 +24,10 @@ export async function findAll(page: number) {
     }
 }
 
-export async function findManyByFilter(data: any) {
+export async function findByFilter(data: any) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/find-many-by-filter`,
+            `${process.env.SERVER_URL}/truck/find-by-filter`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -50,33 +50,12 @@ export async function findManyByFilter(data: any) {
 
 export async function addView(id: string) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/add-view`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id }),
-            credentials: "include",
-        });
-
-        if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message);
-        }
-
-        return await res.json();
-    } catch (error) {
-        console.error(error);
-        throw new Error(error instanceof Error ? error.message : String(error));
-    }
-}
-
-export async function addToWishlist(cargoId: string) {
-    try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/add-to-wishlist`,
+            `${process.env.SERVER_URL}/truck/add-view/${id}`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cargoId }),
+                // body: JSON.stringify({ id }),
                 credentials: "include",
             }
         );
@@ -93,14 +72,14 @@ export async function addToWishlist(cargoId: string) {
     }
 }
 
-export async function removeFromWishlist(cargoId: string) {
+export async function addToWishlist(id: string) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/remove-from-wishlist`,
+            `${process.env.SERVER_URL}/truck/add-to-wishlist/${id}`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cargoId }),
+                // body: JSON.stringify({ truckId }),
                 credentials: "include",
             }
         );
@@ -117,13 +96,61 @@ export async function removeFromWishlist(cargoId: string) {
     }
 }
 
-export async function getWishlist() {
+export async function removeFromWishlist(id: string) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/wishlist`, {
-            method: "POST",
+        const res = await fetch(
+            `${process.env.SERVER_URL}/truck/remove-from-wishlist/${id}`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                // body: JSON.stringify({ truckId }),
+                credentials: "include",
+            }
+        );
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}
+
+export async function getWishlistByUserId() {
+    try {
+        const res = await fetch(`${process.env.SERVER_URL}/truck/wishlist`, {
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
         });
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}
+
+export async function getIsInWishlist(truckId: string) {
+    try {
+        const res = await fetch(
+            `${process.env.SERVER_URL}/truck/is-in-wishlist`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ truckId }),
+                credentials: "include",
+            }
+        );
 
         if (!res.ok) {
             const errorData = await res.json();

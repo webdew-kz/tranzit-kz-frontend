@@ -1,12 +1,12 @@
 
-import CargoSearchList from './_ui/CargoSearchList';
-import CargoFormSearch from './_ui/CargoFormSearch';
+import TruckSearchList from './_ui/TruckSearchList';
+import TruckFormSearch from './_ui/TruckFormSearch';
 
 export default function page() {
 	return (
 		<div className='grid gap-5'>
-			<CargoFormSearch />
-			<CargoSearchList />
+			<TruckFormSearch />
+			<TruckSearchList />
 		</div>
 	)
 }

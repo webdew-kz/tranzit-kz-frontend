@@ -1,4 +1,8 @@
 /** @format */
+
+import { User } from "./user.type";
+
+/** @format */
 export interface Views {
     count: number; // количество просмотров
 }
@@ -37,6 +41,8 @@ export interface ITruck {
     telegram?: string;
     viber?: string;
     skype?: string;
+
+    user: User;
 }
 
 export interface ITruckBrand {
