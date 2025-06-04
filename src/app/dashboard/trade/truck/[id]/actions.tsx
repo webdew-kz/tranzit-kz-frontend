@@ -1,6 +1,6 @@
 export async function findById(id: string) {
 	try {
-		const res = await fetch(`${process.env.SERVER_URL}/cargo/${id}`, {
+		const res = await fetch(`${process.env.SERVER_URL}/truck/find-by-id/${id}`, {
 			method: "GET",
 			headers: { "Content-Type": "application/json" },
 			credentials: "include",

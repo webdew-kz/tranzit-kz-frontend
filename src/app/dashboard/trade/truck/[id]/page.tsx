@@ -1,4 +1,4 @@
-import Cargo from './_ui/Cargo'
+import Truck from './_ui/Truck'
 
 
 export default async function Page({
@@ -9,6 +9,6 @@ export default async function Page({
 	const { id } = await params
 
 	return (
-		<Cargo id={id} />
+		<Truck id={id} />
 	)
 }
