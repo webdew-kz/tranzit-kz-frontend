@@ -53,7 +53,7 @@ export default function TruckWishList() {
 						)}
 
 					</div>
-					{trucks?.map((truck) => {
+					{trucks?.filter(t => t && t.id).map((truck) => {
 						// console.log(truck);
 						return (
 							<TruckWishItem

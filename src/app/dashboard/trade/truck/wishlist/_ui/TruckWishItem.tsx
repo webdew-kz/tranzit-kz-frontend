@@ -117,6 +117,8 @@ const TruckWishItem = memo(
 			return <Loader />
 		}
 
+		if (!truck?.id) return null;
+
 		return (
 			<Card className='p-0 border-1 border-(--dark-accent)'>
 				<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
