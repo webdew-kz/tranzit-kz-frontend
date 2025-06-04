@@ -9,7 +9,7 @@ import React, { memo, SetStateAction, useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { activate, remove } from '../actions'
-import { DriveEnum, ExistEnum, ITruck, StatusEnum, SteeringEnum, TransmissionEnum, TruckWheelEnum, TypeEngineEnum, TypeTruckEnum } from '@/shared/types/truck.type'
+import { DriveEnum, ExistEnum, ITruck, StatusEnum, SteeringEnum, TransmissionEnum, TruckBrandEnum, TruckWheelEnum, TypeEngineEnum, TypeTruckEnum } from '@/shared/types/truck.type'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog'
 
 interface MyTruckItemProps {
@@ -79,7 +79,7 @@ const MyTruckArchiveItem = memo(({ truckInitial, selected, onToggle, setTrucks }
 					<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4">
 						<span className=' flex items-center gap-1'>
 							<ArrowBigUp size={16} />
-							<span className='truncate block text-sm'>
+							<span className='truncate block text-[12px]'>
 								<span className=' mr-2 font-light'>Обновлено:</span>
 								<span className=' font-medium'>{truck.updatedAt && formatRelativeDate(truck.updatedAt)}</span>
 							</span>
@@ -87,7 +87,7 @@ const MyTruckArchiveItem = memo(({ truckInitial, selected, onToggle, setTrucks }
 
 						<span className=' flex items-center gap-1'>
 							<ArrowBigDown size={16} />
-							<span className='truncate block text-sm'>
+							<span className='truncate block text-[12px]'>
 								<span className=' mr-2 font-light'>Добавлено:</span>
 								<span className=' font-medium'>{truck.createdAt && formatRelativeDate(truck.createdAt)}</span>
 							</span>
@@ -95,7 +95,7 @@ const MyTruckArchiveItem = memo(({ truckInitial, selected, onToggle, setTrucks }
 
 						<span className=' flex items-center gap-1'>
 							<Eye size={16} />
-							<span className='truncate block text-sm'>
+							<span className='truncate block text-[12px]'>
 								<span className=' mr-2 font-light'>Просмотров:</span>
 								<span className=' font-medium'>{truck.views?.count}</span>
 							</span>
@@ -163,7 +163,7 @@ const MyTruckArchiveItem = memo(({ truckInitial, selected, onToggle, setTrucks }
 						<div className=" flex flex-col text-[18px] gap-1 md:gap-3">
 							<div className=" grid grid-cols-3 items-center gap-2">
 								<span className=' text-muted-foreground col-span-1'>Марка:</span>
-								<span className=' col-span-2'>{String(truck.truckBrand)}</span>
+								<span className=' col-span-2'>{TruckBrandEnum[truck.truckBrand as unknown as keyof typeof TruckBrandEnum]}</span>
 							</div>
 
 							<div className=" grid grid-cols-3  items-center gap-2">

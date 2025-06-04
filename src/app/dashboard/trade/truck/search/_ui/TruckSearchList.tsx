@@ -120,7 +120,7 @@ export default function TruckSearchList() {
 
 							{wishlistLength > 0 ? (
 								<Link
-									href='/dashboard/trade/truck/wishlist'
+									href='/dashboard/trade/	truck/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -129,7 +129,7 @@ export default function TruckSearchList() {
 								</Link>
 							) : (
 								<Link
-									href='/dashboard/trade/truck/wishlist'
+									href='/dashboard/trade/	truck/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
