@@ -47,7 +47,7 @@ export default function TruckWishList() {
 						<span>Избранных: {trucks.length}</span>
 
 						{trucks.length > 0 && (
-							<button onClick={handleClearWishlist} className="cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button type='button' onClick={handleClearWishlist} className="cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								Очистить все
 							</button>
 						)}

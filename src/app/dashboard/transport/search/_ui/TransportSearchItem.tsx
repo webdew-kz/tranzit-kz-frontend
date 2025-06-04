@@ -72,46 +72,30 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 	};
 
 
-	const handleToggleWishlist = () => {
+	const handleToggleWishlist = async () => {
 		if (isWishlist) {
-			startTransition(async () => {
-				try {
-					const res = await removeFromWishlist(transport.id!);
-					const current = getWishlist().filter((id) => id !== transport.id!);
-					localStorage.setItem("wishlistTransport", JSON.stringify(current));
-					const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
-					if (setWishlistLength) {
-						setWishlistLength(stored.length);
-					}
-					toast.success(res.message, {
-						position: "top-center",
-					});
-				} catch (error: any) {
-					toast.error(error.message, {
-						position: "top-center",
-					});
-				}
+			const res = await removeFromWishlist(transport.id!);
+			const current = getWishlist().filter((id) => id !== transport.id!);
+			localStorage.setItem("wishlistTransport", JSON.stringify(current));
+			const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
+			if (setWishlistLength) {
+				setWishlistLength(stored.length);
+			}
+			toast.success(res.message, {
+				position: "top-center",
 			});
 		} else {
-			startTransition(async () => {
-				try {
-					const res = await addToWishlist(transport.id!);
-					const current = getWishlist();
-					if (!current.includes(transport.id!)) {
-						localStorage.setItem("wishlistTransport", JSON.stringify([...current, transport.id!]));
-					}
-					const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
-					if (setWishlistLength) {
-						setWishlistLength(stored.length);
-					}
-					toast.success(res.message, {
-						position: "top-center",
-					});
-				} catch (error: any) {
-					toast.error(error.message, {
-						position: "top-center",
-					});
-				}
+			const res = await addToWishlist(transport.id!);
+			const current = getWishlist();
+			if (!current.includes(transport.id!)) {
+				localStorage.setItem("wishlistTransport", JSON.stringify([...current, transport.id!]));
+			}
+			const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
+			if (setWishlistLength) {
+				setWishlistLength(stored.length);
+			}
+			toast.success(res.message, {
+				position: "top-center",
 			});
 		}
 
@@ -155,12 +139,12 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 					</div>
 					<div className=" flex items-center">
 						{isWishBtn && isInWishlist(transport.id!) ? (
-							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button type='button' onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} fill='#b4802e' />
 								<span>Убрать из избранного</span>
 							</button>
 						) : isWishBtn && (
-							<button onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button type='button' onClick={handleToggleWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} />
 								<span>Добавить в избранное</span>
 							</button>

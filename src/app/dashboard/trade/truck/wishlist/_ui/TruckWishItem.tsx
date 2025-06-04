@@ -75,28 +75,20 @@ const TruckWishItem = memo(
 		};
 
 
-		const handleRemoveFromWishlist = () => {
-			startTransition(async () => {
-				try {
-					const res = await removeFromWishlist(truck.id!);
-					const current = getWishlist().filter((id) => id !== truck.id!);
-					localStorage.setItem("wishlistTrucks", JSON.stringify(current));
-					const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
-					if (setWishlistLength) {
-						setWishlistLength(stored.length);
-					}
-					toast.success(res.message, {
-						position: "top-center",
-					});
-					if (setTrucks) {
-						setTrucks(prevTrucks => prevTrucks.filter(t => t.id !== truck.id));
-					}
-				} catch (error: any) {
-					toast.error(error.message, {
-						position: "top-center",
-					});
-				}
+		const handleRemoveFromWishlist = async () => {
+			const res = await removeFromWishlist(truck.id!);
+			const current = getWishlist().filter((id) => id !== truck.id!);
+			localStorage.setItem("wishlistTrucks", JSON.stringify(current));
+			const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
+			if (setWishlistLength) {
+				setWishlistLength(stored.length);
+			}
+			toast.success(res.message, {
+				position: "top-center",
 			});
+			if (setTrucks) {
+				setTrucks(prevTrucks => prevTrucks.filter(t => t.id !== truck.id));
+			}
 
 			setIsWishlist(!isWishlist);
 		};
@@ -150,7 +142,7 @@ const TruckWishItem = memo(
 							</span>
 						</div>
 						<div className=" flex">
-							<button onClick={handleRemoveFromWishlist} className="flex gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button type='button' onClick={handleRemoveFromWishlist} className="flex gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={24} fill='#b4802e' />
 								{/* <span>Из избранного</span> */}
 							</button>

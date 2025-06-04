@@ -78,46 +78,30 @@ const TruckSearchItem = memo(({ truckInitial, rates, loading, setWishlistLength,
 	};
 
 
-	const handleToggleWishlist = () => {
+	const handleToggleWishlist = async () => {
 		if (isWishlist) {
-			startTransition(async () => {
-				try {
-					const res = await removeFromWishlist(truck.id!);
-					const current = getWishlist().filter((id) => id !== truck.id!);
-					localStorage.setItem("wishlistTrucks", JSON.stringify(current));
-					const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
-					if (setWishlistLength) {
-						setWishlistLength(stored.length);
-					}
-					toast.success(res.message, {
-						position: "top-center",
-					});
-				} catch (error: any) {
-					toast.error(error.message, {
-						position: "top-center",
-					});
-				}
+			const res = await removeFromWishlist(truck.id!);
+			const current = getWishlist().filter((id) => id !== truck.id!);
+			localStorage.setItem("wishlistTrucks", JSON.stringify(current));
+			const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
+			if (setWishlistLength) {
+				setWishlistLength(stored.length);
+			}
+			toast.success(res.message, {
+				position: "top-center",
 			});
 		} else {
-			startTransition(async () => {
-				try {
-					const res = await addToWishlist(truck.id!);
-					const current = getWishlist();
-					if (!current.includes(truck.id!)) {
-						localStorage.setItem("wishlistTrucks", JSON.stringify([...current, truck.id!]));
-					}
-					const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
-					if (setWishlistLength) {
-						setWishlistLength(stored.length);
-					}
-					toast.success(res.message, {
-						position: "top-center",
-					});
-				} catch (error: any) {
-					toast.error(error.message, {
-						position: "top-center",
-					});
-				}
+			const res = await addToWishlist(truck.id!);
+			const current = getWishlist();
+			if (!current.includes(truck.id!)) {
+				localStorage.setItem("wishlistTrucks", JSON.stringify([...current, truck.id!]));
+			}
+			const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
+			if (setWishlistLength) {
+				setWishlistLength(stored.length);
+			}
+			toast.success(res.message, {
+				position: "top-center",
 			});
 		}
 
@@ -173,12 +157,18 @@ const TruckSearchItem = memo(({ truckInitial, rates, loading, setWishlistLength,
 					</div>
 					<div className=" flex">
 						{(isWishBtn && isWishlist) ? (
-							<button onClick={handleToggleWishlist} className="flex gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button
+								type='button'
+								onClick={handleToggleWishlist}
+								className="flex gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={24} fill='#b4802e' />
 								{/* <span>Из избранного</span> */}
 							</button>
 						) : isWishBtn && (
-							<button onClick={handleToggleWishlist} className="flex gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button
+								type='button'
+								onClick={handleToggleWishlist}
+								className="flex gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={24} />
 								{/* <span>В избранное</span> */}
 							</button>

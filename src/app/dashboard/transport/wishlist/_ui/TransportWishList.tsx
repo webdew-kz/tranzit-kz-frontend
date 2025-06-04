@@ -50,7 +50,7 @@ export default function TransportWishList() {
 						<span>Избранных: {transports.length}</span>
 
 						{transports.length > 0 && (
-							<button onClick={handleClearWishlist} className="cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button type='button' onClick={handleClearWishlist} className="cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								Очистить все
 							</button>
 						)}

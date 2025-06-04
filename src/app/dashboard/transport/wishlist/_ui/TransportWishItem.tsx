@@ -64,27 +64,19 @@ const TransportWishItem = memo(
 		}
 
 
-		const handleRemoveFromWishlist = () => {
-			startTransition(async () => {
-				try {
-					const res = await removeFromWishlist(transport.id!);
-					const current = getWishlist().filter((id) => id !== transport.id!);
-					localStorage.setItem("wishlistTransport", JSON.stringify(current));
-					const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
-					if (setTransports) {
-						setTransports(prev => prev.filter(c => c.id !== transport.id!));
-					}
-					if (setWishlistLength) {
-						setWishlistLength(stored.length);
-					}
-					toast.success(res.message, {
-						position: "top-center",
-					});
-				} catch (error: any) {
-					toast.error(error.message, {
-						position: "top-center",
-					});
-				}
+		const handleRemoveFromWishlist = async () => {
+			const res = await removeFromWishlist(transport.id!);
+			const current = getWishlist().filter((id) => id !== transport.id!);
+			localStorage.setItem("wishlistTransport", JSON.stringify(current));
+			const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
+			if (setTransports) {
+				setTransports(prev => prev.filter(c => c.id !== transport.id!));
+			}
+			if (setWishlistLength) {
+				setWishlistLength(stored.length);
+			}
+			toast.success(res.message, {
+				position: "top-center",
 			});
 		};
 
@@ -113,7 +105,7 @@ const TransportWishItem = memo(
 							<span className='text-nowrap'>{transport.endDate && checkEndDate(transport.startDate, transport.endDate)}</span>
 						</div>
 						<div className=" flex items-center">
-							<button onClick={handleRemoveFromWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+							<button type='button' onClick={handleRemoveFromWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} fill='#b4802e' />
 								<span>Убрать из избранного</span>
 							</button>
