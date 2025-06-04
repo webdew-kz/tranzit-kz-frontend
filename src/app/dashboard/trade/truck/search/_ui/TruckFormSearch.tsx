@@ -631,9 +631,10 @@ export default function TruckFormSearch() {
 									</div>
 									<DialogFooter className="pt-4 pb-8  flex !justify-center">
 										<DialogClose asChild>
-											<Button type="button" variant="secondary" className=' w-full max-w-[450px] bg-(--dark-accent)'>
+											<Button type="button" variant="secondary" className=' w-full max-w-[450px] bg-(--dark-accent) text-background'>
 												Сохранить
 											</Button>
+
 										</DialogClose>
 									</DialogFooter>
 								</DialogContent>
