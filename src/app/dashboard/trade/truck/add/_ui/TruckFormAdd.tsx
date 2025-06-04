@@ -32,7 +32,11 @@ export default function TruckFormAdd() {
 		city: z.string(),
 		variant: z.enum(Object.keys(VariantEnum) as [keyof typeof VariantEnum]),
 		truckBrand: z.enum(Object.keys(TruckBrandEnum) as [keyof typeof TruckBrandEnum]),
-		photos: z.array(z.instanceof(File)).min(1, 'Необходимо загрузить хотя бы одно фото'),
+		photos: z.array(
+			z.custom<File>((val) => typeof window !== 'undefined' && val instanceof File, {
+				message: 'Необходимо загрузить хотя бы одно фото',
+			})
+		).min(1, 'Необходимо загрузить хотя бы одно фото'),
 		typeTruck: z.enum(Object.keys(TypeTruckEnum) as [keyof typeof TypeTruckEnum]),
 		price: z.number().positive(),
 		year: z.number().positive().int().min(1900, 'Введите год в 4-значном формате').max(new Date().getFullYear(), `Год не должен превышать ${new Date().getFullYear()}`), // Assuming year is a 4-digit number
@@ -372,8 +376,6 @@ export default function TruckFormAdd() {
 					</div>
 
 					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
-
-
 
 						<div className=" relative w-full">
 							<Input
