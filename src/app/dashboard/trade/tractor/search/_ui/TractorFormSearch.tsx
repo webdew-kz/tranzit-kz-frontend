@@ -618,7 +618,7 @@ export default function TractorFormSearch() {
 							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти тягач</>) : "Найти грузовик"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти тягач</>) : "Найти тягач"}
 						</Button>
 					</div>
 				</form>

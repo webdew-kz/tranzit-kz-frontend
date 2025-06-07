@@ -101,7 +101,7 @@ const TractorWishItem = memo(
 			return data ? JSON.parse(data) : [];
 		}
 
-		const message = `Здравствуйте. Данная заявка актуальна?\n\Марка: ${tractor.tractorBrand}\nЦена: ${tractor.price} тенге\nГод: ${tractor.year}\n\nСсылка на грузовик: https://${process.env.DOMAIN}/dashboard/trade/tractor/${tractor.id}`
+		const message = `Здравствуйте. Данная заявка актуальна?\n\Марка: ${tractor.tractorBrand}\nЦена: ${tractor.price} тенге\nГод: ${tractor.year}\n\nСсылка на тягач: https://${process.env.DOMAIN}/dashboard/trade/tractor/${tractor.id}`
 		const link = `https://wa.me/${tractor.userPhone}?text=${encodeURIComponent(message)}`
 
 
@@ -165,7 +165,7 @@ const TractorWishItem = memo(
 											</span>
 										</DialogTrigger>
 										<DialogContent className="overflow-y-auto max-h-[100vh] pt-12">
-											<DialogTitle className="sr-only">Фотографии грузовика</DialogTitle>
+											<DialogTitle className="sr-only">Фотографии тягача</DialogTitle>
 											<div className="grid gap-1">
 												{tractor.photos.map((photo, index) => (
 													<img

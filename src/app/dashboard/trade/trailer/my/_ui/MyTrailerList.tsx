@@ -30,7 +30,7 @@ export default function MyTrailerList() {
 				const data = await findAllActiveByUserId()
 
 				if (data.length === 0) {
-					toast.error("У вас нет активных грузов", {
+					toast.error("У вас нет активных прицепов", {
 						position: 'top-center',
 					});
 

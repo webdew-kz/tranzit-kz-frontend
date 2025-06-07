@@ -51,8 +51,6 @@ export default function TrailerFormAdd() {
 		),
 		status: z.enum(Object.keys(StatusEnum) as [keyof typeof StatusEnum]).optional(),
 		exist: z.enum(Object.keys(ExistEnum) as [keyof typeof ExistEnum]).optional(),
-		// viewsId: z.string().optional(),
-		// userId: z.string().optional(),
 		userName: z.string().optional(),
 		userPhone: z.string().optional(),
 		whatsapp: z.string().optional().nullable(),
@@ -631,7 +629,7 @@ export default function TrailerFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить (полу-) прицеп"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить прицеп</>) : "Добавить (полу-) прицеп"}
 						</Button>
 					</div>
 

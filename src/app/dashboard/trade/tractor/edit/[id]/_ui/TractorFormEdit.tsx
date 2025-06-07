@@ -194,7 +194,7 @@ export default function TractorFormEdit({ id }: { id: string }) {
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при сохранении груза', {
+				toast.error('Ошибка при сохранении тягача', {
 					position: 'top-center',
 				})
 			}

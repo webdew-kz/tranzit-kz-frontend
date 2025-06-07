@@ -43,7 +43,7 @@ const MyTractorArchiveItem = memo(({ tractorInitial, selected, onToggle, setTrac
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при обновлении груза', {
+				toast.error('Ошибка при обновлении тягача', {
 					position: 'top-center',
 				})
 			}
@@ -65,7 +65,7 @@ const MyTractorArchiveItem = memo(({ tractorInitial, selected, onToggle, setTrac
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при архивации груза', {
+				toast.error('Ошибка при архивации тягача', {
 					position: 'top-center',
 				})
 			}

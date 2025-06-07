@@ -103,7 +103,7 @@ export default function TrailerFormSearch() {
 				// setTrailers([])
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении грузовика', {
+				toast.error('Ошибка при добавлении прицепа', {
 					position: 'top-center',
 				})
 			}
@@ -124,7 +124,7 @@ export default function TrailerFormSearch() {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Поиск грузовиков</CardTitle>
+				<CardTitle className='text-xl text-center'>Поиск прицепов</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
@@ -484,7 +484,7 @@ export default function TrailerFormSearch() {
 							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти грузовик</>) : "Найти грузовик"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти прицеп</>) : "Найти прицеп"}
 						</Button>
 					</div>
 				</form>

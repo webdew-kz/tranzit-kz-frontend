@@ -111,7 +111,7 @@ const TrailerSearchItem = memo(({ trailerInitial, rates, loading, setWishlistLen
 		return data ? JSON.parse(data) : [];
 	}
 
-	const message = `Здравствуйте. Данная заявка актуальна?\n\Марка: ${trailer.trailerBrand}\nЦена: ${trailer.price} тенге\nГод: ${trailer.year}\n\nСсылка на грузовик: https://${process.env.DOMAIN}/dashboard/trade/trailer/${trailer.id}`
+	const message = `Здравствуйте. Данная заявка актуальна?\n\Марка: ${trailer.trailerBrand}\nЦена: ${trailer.price} тенге\nГод: ${trailer.year}\n\nСсылка на прицеп: https://${process.env.DOMAIN}/dashboard/trade/trailer/${trailer.id}`
 	const link = `https://wa.me/${trailer.userPhone}?text=${encodeURIComponent(message)}`
 
 
@@ -187,7 +187,7 @@ const TrailerSearchItem = memo(({ trailerInitial, rates, loading, setWishlistLen
 										</span>
 									</DialogTrigger>
 									<DialogContent className="overflow-y-auto max-h-[100vh] pt-12">
-										<DialogTitle className="sr-only">Фотографии грузовика</DialogTitle>
+										<DialogTitle className="sr-only">Фотографии прицепа</DialogTitle>
 										<div className="grid gap-1">
 											{trailer.photos.map((photo, index) => (
 												<img

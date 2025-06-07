@@ -174,7 +174,7 @@ export default function TrailerFormEdit({ id }: { id: string }) {
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при сохранении груза', {
+				toast.error('Ошибка при сохранении прицепа', {
 					position: 'top-center',
 				})
 			}
@@ -210,7 +210,7 @@ export default function TrailerFormEdit({ id }: { id: string }) {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Редактировать грузовик</CardTitle>
+				<CardTitle className='text-xl text-center'>Редактировать прицеп</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form

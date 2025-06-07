@@ -48,7 +48,7 @@ const MyTractorItem = memo(({ tractorInitial, selected, onToggle, setTractors, l
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при обновлении груза', {
+				toast.error('Ошибка при обновлении тягача', {
 					position: 'top-center',
 				})
 			}
@@ -70,7 +70,7 @@ const MyTractorItem = memo(({ tractorInitial, selected, onToggle, setTractors, l
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при архивации груза', {
+				toast.error('Ошибка при архивации тягача', {
 					position: 'top-center',
 				})
 			}
@@ -359,30 +359,6 @@ const MyTractorItem = memo(({ tractorInitial, selected, onToggle, setTractors, l
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default MyTractorItem

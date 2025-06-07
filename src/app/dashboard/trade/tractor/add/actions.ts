@@ -36,7 +36,7 @@ export async function addTractor(data: any) {
 
         return await res.json();
     } catch (error) {
-        console.error("Ошибка при добавлении грузовика:", error);
+        console.error("Ошибка при добавлении тягача:", error);
         throw new Error(error instanceof Error ? error.message : String(error));
     }
 }

@@ -15,7 +15,7 @@ export default function page() {
 					href='/dashboard/trade/tractor/add'
 					className='flex gap-3 items-center justify-start'
 				>
-					<ArrowBigUp /> Продать грузовик
+					<ArrowBigUp /> Продать тягач
 				</Link>
 			</Button>
 			<Button
@@ -28,7 +28,7 @@ export default function page() {
 					href='/dashboard/trade/tractor/search'
 					className='flex gap-3 items-center justify-start'
 				>
-					<ArrowBigDown /> Купить грузовик
+					<ArrowBigDown /> Купить тягач
 				</Link>
 			</Button>
 			<Button
@@ -41,7 +41,7 @@ export default function page() {
 					href='/dashboard/trade/tractor/wishlist'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Star /> Избранные грузовиковики
+					<Star /> Избранные объявления
 				</Link>
 			</Button>
 			<Button

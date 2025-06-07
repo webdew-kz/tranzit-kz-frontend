@@ -68,7 +68,7 @@ export default function TractorWishList() {
 			</>
 		) : (
 			<div className="flex flex-col items-center gap-5 justify-center py-5">
-				<span>Избранных грузов не найдено</span>
+				<span>Избранных тягачей не найдено</span>
 				<Link
 					href={'/dashboard/trade/tractor/search'}
 					className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'

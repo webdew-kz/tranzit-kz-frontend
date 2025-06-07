@@ -172,7 +172,7 @@ export default function TrailerFormCopy({ id }: ITrailerFormCopyProps) {
 				router.push('/dashboard/trade/trailer/my')
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении груза', {
+				toast.error('Ошибка при добавлении прицепа', {
 					position: 'top-center',
 				})
 			}
@@ -208,7 +208,7 @@ export default function TrailerFormCopy({ id }: ITrailerFormCopyProps) {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Копировать грузовик</CardTitle>
+				<CardTitle className='text-xl text-center'>Копировать прицеп</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
