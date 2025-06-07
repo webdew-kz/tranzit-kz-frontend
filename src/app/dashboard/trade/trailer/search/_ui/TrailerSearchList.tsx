@@ -1,25 +1,21 @@
 "use client"
 import React, { useCallback, useEffect, useState, useTransition } from 'react'
 import { findAll } from '../actions'
-import { ITruck } from '@/shared/types/truck.type'
-import TruckSearchItem from './TruckSearchItem'
-import { useTruckSearchStore } from '@/shared/store/useTruckSearchStore'
 import { Button } from '@/shared/components/ui/button'
 import Loader from '@/shared/components/widgets/Loader'
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
-import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
-import { useTruckStore } from '@/shared/store/useTruckStore'
+import { useTrailerStore } from '@/shared/store/useTrailerStore'
+import { useTrailerSearchStore } from '@/shared/store/useTrailerSearchStore'
+import TrailerSearchItem from './TrailerSearchItem'
 
 
 
-export default function TruckSearchList() {
+export default function TrailerSearchList() {
 
-
-	// const { rates, loading } = useCurrencyRates()
-	const { searchTrucks, setSearchTrucks } = useTruckSearchStore()
-	const { trucks, setTrucks } = useTruckStore()
+	const { searchTrailers, setSearchTrailers } = useTrailerSearchStore()
+	const { trailers, setTrailers } = useTrailerStore()
 	const [total, setTotal] = useState(0)
 
 	const [page, setPage] = useState(1);
@@ -31,7 +27,7 @@ export default function TruckSearchList() {
 	const [wishlistLength, setWishlistLength] = useState(0)
 
 	useEffect(() => {
-		const stored = JSON.parse(localStorage.getItem("wishlistTrucks") || "[]");
+		const stored = JSON.parse(localStorage.getItem("wishlistTrailers") || "[]");
 		setWishlistLength(stored.length);
 	}, []);
 
@@ -40,7 +36,7 @@ export default function TruckSearchList() {
 		startTransition(async () => {
 			try {
 				const res = await findAll(page);
-				setTrucks(res.trucks);
+				setTrailers(res.trailers);
 				setTotal(res.total)
 				setHasMore(res.hasMore);
 				setIsLoad(false);
@@ -64,10 +60,10 @@ export default function TruckSearchList() {
 
 		try {
 			const res = await findAll(page);
-			const merged = [...useTruckStore.getState().trucks, ...res.trucks];
+			const merged = [...useTrailerStore.getState().trailers, ...res.trailers];
 			const unique = Array.from(new Map(merged.map(t => [t.id, t])).values());
 
-			useTruckStore.getState().setTrucks(unique);
+			useTrailerStore.getState().setTrailers(unique);
 
 			setHasMore(res.hasMore);
 
@@ -78,9 +74,9 @@ export default function TruckSearchList() {
 
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
-	const handleShowAllTrucks = useCallback(async () => {
-		setSearchTrucks([])
-		setTrucks([])
+	const handleShowAllTrailers = useCallback(async () => {
+		setSearchTrailers([])
+		setTrailers([])
 		firstLoad()
 	}, [])
 
@@ -92,35 +88,35 @@ export default function TruckSearchList() {
 	}
 
 	return (
-		searchTrucks.length > 0 ? (
+		searchTrailers.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
 					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
-						<span>Найдено: {searchTrucks.length}</span>
+						<span>Найдено: {searchTrailers.length}</span>
 						<Button
 							variant='link'
-							onClick={handleShowAllTrucks}
+							onClick={handleShowAllTrailers}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все грузовики</Button>
+						>Показать все прицепы</Button>
 					</div>
-					{searchTrucks.map((truck) => (
-						<TruckSearchItem
-							key={truck.id}
-							truckInitial={truck}
+					{searchTrailers.map((trailer) => (
+						<TrailerSearchItem
+							key={trailer.id}
+							trailerInitial={trailer}
 						/>
 					))}
 				</div>
 			</>
 		) : (
-			trucks?.length > 0 ? (
+			trailers?.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
-							<span>Всего грузовиков: {total}</span>
+							<span>Всего прицепов: {total}</span>
 
 							{wishlistLength > 0 ? (
 								<Link
-									href='/dashboard/trade/truck/wishlist'
+									href='/dashboard/trade/trailer/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -129,7 +125,7 @@ export default function TruckSearchList() {
 								</Link>
 							) : (
 								<Link
-									href='/dashboard/trade/truck/wishlist'
+									href='/dashboard/trade/trailer/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -139,10 +135,10 @@ export default function TruckSearchList() {
 							)}
 
 						</div>
-						{trucks.map((truck) => (
-							<TruckSearchItem
-								key={truck.id}
-								truckInitial={truck}
+						{trailers.map((trailer) => (
+							<TrailerSearchItem
+								key={trailer.id}
+								trailerInitial={trailer}
 								setWishlistLength={setWishlistLength}
 							/>
 						))}
@@ -158,12 +154,12 @@ export default function TruckSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Грузовики не найдены</span>
+					<span>Прицепы не найдены</span>
 					<Button
 						variant='link'
-						onClick={handleShowAllTrucks}
+						onClick={handleShowAllTrailers}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все грузовики</Button>
+					>Показать все прицепы</Button>
 				</div>
 			)
 		)
