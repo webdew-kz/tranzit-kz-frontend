@@ -20,6 +20,12 @@ export default function PartsWishList() {
 
 			startTransition(async () => {
 				const res = await getWishlist();
+
+				if (!Array.isArray(res.partss) || res.partss.length === 0) {
+					console.log("Empty wishlist → saving to localStorage");
+					localStorage.setItem("wishlistPartss", JSON.stringify([]));
+				}
+
 				setPartss(res.partss);
 			})
 		}
@@ -28,7 +34,7 @@ export default function PartsWishList() {
 
 	const handleClearWishlist = async () => {
 		const res = await removeAllFromWishlist()
-		localStorage.setItem("wishlist", JSON.stringify([]));
+		localStorage.setItem("wishlistPartss", JSON.stringify([]));
 		setPartss([]);
 		toast.success(res.message, {
 			position: 'top-center',
