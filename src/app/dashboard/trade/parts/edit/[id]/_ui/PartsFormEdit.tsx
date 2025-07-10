@@ -63,7 +63,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 			z.custom<File>((val) => typeof window !== 'undefined' && val instanceof File, {
 				message: 'Необходимо загрузить хотя бы одно фото',
 			})
-		).min(1, 'Необходимо загрузить хотя бы одно фото'),
+		).min(1, 'Необходимо загрузить хотя бы одно фото').optional(),
 		price: z.number().positive(),
 		title: z.string().optional(),
 		description: z.string().optional(),
@@ -265,7 +265,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 												accept="image/*"
 												capture="environment"
 												className="hidden"
-												required={photos.length < 1}
+												required={photos.length < 2}
 												onChange={(e) => {
 													const file = e.target.files?.[0];
 													if (file) addPhoto(file);
@@ -283,7 +283,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 												type="file"
 												accept="image/*"
 												className="hidden"
-												required={photos.length < 1}
+												required={photos.length < 2}
 												onChange={(e) => {
 													const file = e.target.files?.[0];
 													if (file) addPhoto(file);

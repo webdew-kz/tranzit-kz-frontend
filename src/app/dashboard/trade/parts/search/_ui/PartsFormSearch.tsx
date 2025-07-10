@@ -11,7 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
-import { usePartsSearchStore } from '@/shared/store/usePartsSearchStore';
+import { usePartsSearchStore } from '@/shared/store/useTruckSearchStore copy';
 import { findByFilter } from '../actions';
 import { useUserStore } from '@/shared/store/useUserStore';
 import { StatusEnum, PartsBrandEnum } from '@/shared/types/parts.type';
