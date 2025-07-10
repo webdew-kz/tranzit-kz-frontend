@@ -101,7 +101,7 @@ export default function PartsSearchList() {
 							variant='link'
 							onClick={handleShowAllPartss}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все грузовики</Button>
+						>Показать все запчасти</Button>
 					</div>
 					{searchPartss.map((parts) => (
 						<PartsSearchItem
@@ -116,7 +116,7 @@ export default function PartsSearchList() {
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
-							<span>Всего грузовиков: {total}</span>
+							<span>Всего запчастей: {total}</span>
 
 							{wishlistLength > 0 ? (
 								<Link
@@ -158,12 +158,12 @@ export default function PartsSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Грузовики не найдены</span>
+					<span>Запчасти не найдены</span>
 					<Button
 						variant='link'
 						onClick={handleShowAllPartss}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все грузовики</Button>
+					>Показать все запчасти</Button>
 				</div>
 			)
 		)

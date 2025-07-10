@@ -43,7 +43,7 @@ const MyPartsArchiveItem = memo(({ partsInitial, selected, onToggle, setPartss }
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при обновлении груза', {
+				toast.error('Ошибка при обновлении объявления', {
 					position: 'top-center',
 				})
 			}
@@ -65,7 +65,7 @@ const MyPartsArchiveItem = memo(({ partsInitial, selected, onToggle, setPartss }
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при архивации груза', {
+				toast.error('Ошибка при архивации объявления', {
 					position: 'top-center',
 				})
 			}
@@ -135,7 +135,7 @@ const MyPartsArchiveItem = memo(({ partsInitial, selected, onToggle, setPartss }
 										</span>
 									</DialogTrigger>
 									<DialogContent className="overflow-y-auto max-h-[100vh] pt-12">
-										<DialogTitle className="sr-only">Фотографии грузовика</DialogTitle>
+										<DialogTitle className="sr-only">Фотографии запчасти</DialogTitle>
 										<div className="grid gap-1">
 											{parts.photos.map((photo, index) => (
 												<img

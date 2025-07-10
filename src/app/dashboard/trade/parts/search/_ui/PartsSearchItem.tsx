@@ -192,7 +192,7 @@ const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength,
 										</span>
 									</DialogTrigger>
 									<DialogContent className="overflow-y-auto max-h-[100vh] pt-12">
-										<DialogTitle className="sr-only">Фотографии грузовика</DialogTitle>
+										<DialogTitle className="sr-only">Фотографии запчасти</DialogTitle>
 										<div className="grid gap-1">
 											{parts.photos.map((photo, index) => (
 												<img

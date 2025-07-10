@@ -417,7 +417,7 @@ export default function PartsFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить запчасть"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить объявление</>) : "Добавить объявление"}
 						</Button>
 					</div>
 

@@ -206,7 +206,7 @@ export default function MyPartsList() {
 
 				{!partss.length && (
 					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет активных грузов</p>
+						<p className='text-muted-foreground'>У вас нет активных объявлений</p>
 					</div>
 				)}
 				{/* {isLoading &&

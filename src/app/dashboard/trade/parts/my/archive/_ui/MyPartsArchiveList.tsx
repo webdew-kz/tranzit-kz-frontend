@@ -32,7 +32,7 @@ export default function MyPartsArchiveList() {
 				const data = await findAllArchivedByUserId()
 
 				if (data.length === 0) {
-					toast.error("У вас нет активных грузов", {
+					toast.error("У вас нет активных обявлений", {
 						position: 'top-center',
 					});
 
