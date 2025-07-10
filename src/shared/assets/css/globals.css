@@ -181,3 +181,11 @@ button {
 .asideLink:hover > a > svg {
     @apply !text-background;
 }
+
+svg.svgPathDark path {
+    fill: #0b0b0b;
+}
+
+svg.svgPathAccent path {
+    fill: #b4802e;
+}
