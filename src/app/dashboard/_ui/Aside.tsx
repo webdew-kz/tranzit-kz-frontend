@@ -81,7 +81,7 @@ export default function Aside() {
 				<ul className=' grid gap-2'>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/trade/truck') ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
-							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/trade/truck') ? 'text-background' : ''}`)}
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200 linkSvgPathDark', `${pathname.startsWith('/dashboard/trade/truck') ? 'text-background' : ''}`)}
 							href={'/dashboard/trade/truck'}
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn('w-4 h-4 transition-all duration-200 hover:svgPathDark', `${pathname.startsWith('/dashboard/trade/truck') ? 'svgPathDark' : 'svgPathAccent'}`)}>
@@ -91,7 +91,7 @@ export default function Aside() {
 					</li>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/trade/tractor') ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
-							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/trade/tractor') ? 'text-background' : ''}`)}
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200 linkSvgPathDark', `${pathname.startsWith('/dashboard/trade/tractor') ? 'text-background' : ''}`)}
 							href={'/dashboard/trade/tractor'}
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn('w-4 h-4 transition-all duration-200 hover:svgPathDark', `${pathname.startsWith('/dashboard/trade/tractor') ? 'svgPathDark' : 'svgPathAccent'}`)}>
@@ -105,7 +105,7 @@ export default function Aside() {
 					</li>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/trade/trailer') ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
-							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/trade/trailer') ? 'text-background' : ''}`)}
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200 linkSvgPathDark', `${pathname.startsWith('/dashboard/trade/trailer') ? 'text-background' : ''}`)}
 							href={'/dashboard/trade/trailer'}
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn('w-4 h-4 transition-all duration-200 hover:svgPathDark', `${pathname.startsWith('/dashboard/trade/trailer') ? 'svgPathDark' : 'svgPathAccent'}`)}>
