@@ -21,7 +21,7 @@ export default function PartsWishList() {
 			startTransition(async () => {
 				const res = await getWishlist();
 
-				if (!Array.isArray(res.partss) || res.partss.length === 0) {
+				if (res.partss.length === 0) {
 					console.log("Empty wishlist → saving to localStorage");
 					localStorage.setItem("wishlistPartss", JSON.stringify([]));
 				}

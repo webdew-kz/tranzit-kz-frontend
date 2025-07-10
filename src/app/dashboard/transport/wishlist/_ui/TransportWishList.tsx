@@ -19,7 +19,9 @@ export default function TransportWishList() {
 		const fetchData = async () => {
 			try {
 				const res = await getWishlist();
-				// Гарантируем, что transports — массив без null
+				if (res.transports.length === 0) {
+					localStorage.setItem("wishlistTransport", JSON.stringify([]));
+				}
 				setTransports(Array.isArray(res.transports) ? res.transports.filter((t: ITransport | null): t is ITransport => t !== null && t.id !== undefined) : []);
 			} catch (error) {
 				console.error("Ошибка загрузки:", error);

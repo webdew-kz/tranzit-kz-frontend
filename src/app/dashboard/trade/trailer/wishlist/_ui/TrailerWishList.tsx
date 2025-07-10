@@ -20,6 +20,10 @@ export default function TrailerWishList() {
 
 			startTransition(async () => {
 				const res = await getWishlist();
+
+				if (res.trailers.length === 0) {
+					localStorage.setItem("wishlistTrailers", JSON.stringify([]));
+				}
 				setTrailers(res.trailers);
 			})
 		}
@@ -28,7 +32,7 @@ export default function TrailerWishList() {
 
 	const handleClearWishlist = async () => {
 		const res = await removeAllFromWishlist()
-		localStorage.setItem("wishlist", JSON.stringify([]));
+		localStorage.setItem("wishlistTrailers", JSON.stringify([]));
 		setTrailers([]);
 		toast.success(res.message, {
 			position: 'top-center',
