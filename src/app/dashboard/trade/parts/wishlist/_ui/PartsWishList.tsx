@@ -1,0 +1,79 @@
+"use client"
+import React, { useEffect, useState, useTransition } from 'react'
+import { getWishlist, removeAllFromWishlist } from '../actions'
+import { IParts } from '@/shared/types/parts.type'
+import Loader from '@/shared/components/widgets/Loader'
+import Link from 'next/link'
+import { toast } from 'sonner'
+import PartsWishItem from './PartsWishItem'
+
+
+
+export default function PartsWishList() {
+
+	// const { rates, loading } = useCurrencyRates()
+	const [partss, setPartss] = useState<IParts[]>([])
+	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		const fetchData = async () => {
+
+			startTransition(async () => {
+				const res = await getWishlist();
+				setPartss(res.partss);
+			})
+		}
+		fetchData()
+	}, [])
+
+	const handleClearWishlist = async () => {
+		const res = await removeAllFromWishlist()
+		localStorage.setItem("wishlist", JSON.stringify([]));
+		setPartss([]);
+		toast.success(res.message, {
+			position: 'top-center',
+		})
+	};
+
+	if (pending) {
+		return <Loader />
+	}
+
+	return (
+		partss.length > 0 ? (
+			<>
+				<div className='grid gap-5'>
+					<div className=" flex justify-between items-center sticky top-15 bg-background py-5">
+						<span>Избранных: {partss.length}</span>
+
+						{partss.length > 0 && (
+							<button type='button' onClick={handleClearWishlist} className="cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
+								Очистить все
+							</button>
+						)}
+
+					</div>
+					{partss?.filter(t => t && t.id).map((parts) => {
+						// console.log(parts);
+						return (
+							<PartsWishItem
+								key={parts.id}
+								partsInitial={parts}
+								setPartss={setPartss}
+							/>
+						)
+
+					})}
+				</div>
+			</>
+		) : (
+			<div className="flex flex-col items-center gap-5 justify-center py-5">
+				<span>Избранных запчастей не найдено</span>
+				<Link
+					href={'/dashboard/trade/parts/search'}
+					className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
+				>Вернуться к поиску</Link>
+			</div>
+		)
+	)
+}
