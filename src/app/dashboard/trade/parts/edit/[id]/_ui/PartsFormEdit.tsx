@@ -111,7 +111,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 				...(parts.title !== null && { title: parts.title }),
 				...(parts.description !== null && { description: parts.description }),
 				...(parts.status !== null && { status: parts.status as unknown as keyof typeof StatusEnum }),
-				...(parts.brand !== null && { exist: parts.brand as unknown as keyof typeof PartsBrandEnum }),
+				...(parts.brand !== null && { brand: parts.brand as unknown as keyof typeof PartsBrandEnum }),
 				...(parts.userName !== null && { userName: parts.userName ?? user?.name ?? '' }),
 				...(parts.userPhone !== null && { userPhone: parts.userPhone ?? user?.phone ?? '' }),
 				...(parts.whatsapp !== null && { whatsapp: parts.whatsapp }),
@@ -385,7 +385,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 						</div>
 					</div>
 
-					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
+					<div className="grid grid-cols-2 w-full gap-3 md:gap-5 items-center">
 
 
 						<div className="relative w-full flex items-center gap-2">

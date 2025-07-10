@@ -190,7 +190,7 @@ export default function PartsFormSearch() {
 						</div>
 					</div>
 
-					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
+					<div className="grid grid-cols-2 w-full gap-3 md:gap-5 items-center">
 
 
 						<div className="relative w-full flex items-center gap-2">
