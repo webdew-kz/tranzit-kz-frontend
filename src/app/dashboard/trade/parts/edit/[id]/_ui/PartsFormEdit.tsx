@@ -283,7 +283,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 												type="file"
 												accept="image/*"
 												className="hidden"
-												required={photos.length < 2}
+												required={photos.length < 1}
 												onChange={(e) => {
 													const file = e.target.files?.[0];
 													if (file) addPhoto(file);
