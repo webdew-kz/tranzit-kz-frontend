@@ -115,7 +115,7 @@ export default function Aside() {
 					</li>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/trade/parts') ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
-							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200 hover:linkSvgPathDark', `${pathname.startsWith('/dashboard/trade/parts') ? 'text-background' : ''}`)}
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200 linkSvgPathDark', `${pathname.startsWith('/dashboard/trade/parts') ? 'text-background' : ''}`)}
 							href={'/dashboard/trade/parts'}
 						>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn('w-4 h-4 transition-all duration-200', `${pathname.startsWith('/dashboard/trade/parts') ? 'svgPathDark' : 'svgPathAccent'}`)}>

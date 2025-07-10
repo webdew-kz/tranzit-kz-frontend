@@ -190,6 +190,6 @@ svg.svgPathAccent path {
     fill: #b4802e;
 }
 
-a.linkSvgPathDark svg path {
+a.linkSvgPathDark:hover svg path {
     fill: #0b0b0b;
 }
