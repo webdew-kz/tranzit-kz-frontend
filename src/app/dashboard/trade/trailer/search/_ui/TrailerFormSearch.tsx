@@ -103,7 +103,7 @@ export default function TrailerFormSearch() {
 				// setTrailers([])
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении прицепа', {
+				toast.error('Ошибка при посике прицепа', {
 					position: 'top-center',
 				})
 			}

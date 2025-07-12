@@ -143,7 +143,7 @@ export default function TruckFormSearch() {
 				// setTrucks([])
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении грузовика', {
+				toast.error('Ошибка при поиске грузовика', {
 					position: 'top-center',
 				})
 			}

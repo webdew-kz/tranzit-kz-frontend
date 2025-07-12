@@ -16,6 +16,8 @@ import { useRouter } from 'next/navigation';
 import { StatusEnum, PartsBrandEnum } from '@/shared/types/parts.type';
 import { CityInput } from '@/shared/components/widgets/CityInput';
 import { cn } from '@/shared/lib/utils';
+import { Checkbox } from '@/shared/components/ui/checkbox';
+import { Label } from '@/shared/components/ui/label';
 
 
 export default function PartsFormAdd() {
@@ -348,7 +350,12 @@ export default function PartsFormAdd() {
 
 
 						<div className="relative w-full flex items-center gap-2">
-							<input
+							<Checkbox
+								id="isDelivery"
+								{...form.register('isDelivery')}
+							/>
+							<Label htmlFor="isDelivery" className='truncate cursor-pointer'>Есть доставка?</Label>
+							{/* <input
 								type="checkbox"
 								id="isDelivery"
 								className="text-sm"
@@ -356,7 +363,7 @@ export default function PartsFormAdd() {
 							/>
 							<label htmlFor="isDelivery" className="text-sm">
 								Есть доставка?
-							</label>
+							</label> */}
 						</div>
 
 						<Controller
