@@ -80,7 +80,7 @@ export default function PartsFormSearch() {
 				// setPartss([])
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении запчасти', {
+				toast.error('Ошибка при поиске запчасти', {
 					position: 'top-center',
 				})
 			}

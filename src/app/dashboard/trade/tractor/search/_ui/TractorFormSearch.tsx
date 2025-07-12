@@ -144,7 +144,7 @@ export default function TractorFormSearch() {
 				// setTractors([])
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении тягача', {
+				toast.error('Ошибка при поиске тягача', {
 					position: 'top-center',
 				})
 			}

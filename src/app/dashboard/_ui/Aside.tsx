@@ -24,12 +24,12 @@ export default function Aside() {
 								size={16}
 							/> Добавить</Link>
 					</li>
-					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/cargo/search' || pathname === '/dashboard/cargo/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/cargo/search' ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
-							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/cargo/search' || pathname === '/dashboard/cargo/wishlist' ? 'text-background' : ''}`)}
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/cargo/search' ? 'text-background' : ''}`)}
 							href={'/dashboard/cargo/search'}
 						><Search
-								className={cn('transition-all duration-200', `${pathname === '/dashboard/cargo/search' || pathname === '/dashboard/cargo/wishlist' ? '!text-background' : ''}`)}
+								className={cn('transition-all duration-200', `${pathname === '/dashboard/cargo/search' ? '!text-background' : ''}`)}
 								size={16}
 							/> Найти</Link>
 					</li>
@@ -65,12 +65,12 @@ export default function Aside() {
 								size={16}
 							/> Добавить</Link>
 					</li>
-					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/transport/search' || pathname === '/dashboard/transport/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/transport/search' ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
-							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/transport/search' || pathname === '/dashboard/transport/wishlist' ? 'text-background' : ''}`)}
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/transport/search' ? 'text-background' : ''}`)}
 							href={'/dashboard/transport/search'}
 						><Search
-								className={cn('transition-all duration-200', `${pathname === '/dashboard/transport/search' || pathname === '/dashboard/transport/wishlist' ? '!text-background' : ''}`)}
+								className={cn('transition-all duration-200', `${pathname === '/dashboard/transport/search' ? '!text-background' : ''}`)}
 								size={16}
 							/> Найти</Link>
 					</li>
