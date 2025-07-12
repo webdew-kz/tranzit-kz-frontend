@@ -1,6 +1,6 @@
 'use client'
 import { cn } from '@/shared/lib/utils';
-import { Box, CirclePlus, Search, SquareUserRound, Truck } from 'lucide-react'
+import { Box, CirclePlus, Search, SquareUserRound, Star, Truck } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -33,6 +33,15 @@ export default function Aside() {
 								size={16}
 							/> Найти</Link>
 					</li>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/cargo/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/cargo/wishlist' ? 'text-background' : ''}`)}
+							href={'/dashboard/cargo/wishlist'}
+						><Star
+								className={cn('transition-all duration-200', `${pathname === '/dashboard/cargo/wishlist' ? '!text-background' : ''}`)}
+								size={16}
+							/> Избранные</Link>
+					</li>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/cargo/my' || pathname === '/dashboard/cargo/my/archive' ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
 							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/cargo/my' || pathname === '/dashboard/cargo/my/archive' ? 'text-background' : ''}`)}
@@ -64,6 +73,15 @@ export default function Aside() {
 								className={cn('transition-all duration-200', `${pathname === '/dashboard/transport/search' || pathname === '/dashboard/transport/wishlist' ? '!text-background' : ''}`)}
 								size={16}
 							/> Найти</Link>
+					</li>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/transport/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/transport/wishlist' ? 'text-background' : ''}`)}
+							href={'/dashboard/transport/wishlist'}
+						><Star
+								className={cn('transition-all duration-200', `${pathname === '/dashboard/transport/wishlist' ? '!text-background' : ''}`)}
+								size={16}
+							/> Избранные</Link>
 					</li>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/transport/my' || pathname === '/dashboard/transport/my/archive' ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
