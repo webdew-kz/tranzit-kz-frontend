@@ -349,21 +349,26 @@ export default function PartsFormAdd() {
 					<div className="grid grid-cols-2 w-full gap-3 md:gap-5 items-center">
 
 
-						<div className="relative w-full flex items-center gap-2">
-							<Checkbox
+						<div className="relative w-full flex items-center gap-2 pl-1">
+							{/* <Checkbox
 								id="isDelivery"
 								{...form.register('isDelivery')}
 							/>
-							<Label htmlFor="isDelivery" className='truncate cursor-pointer'>Есть доставка?</Label>
-							{/* <input
-								type="checkbox"
-								id="isDelivery"
-								className="text-sm"
-								{...form.register('isDelivery')}
+							<Label htmlFor="isDelivery" className='truncate cursor-pointer text-sm'>Есть доставка?</Label> */}
+							<Controller
+								name="isDelivery"
+								control={form.control}
+								render={({ field }) => (
+									<Checkbox
+										id="isDelivery"
+										checked={field.value}
+										onCheckedChange={field.onChange}
+									/>
+								)}
 							/>
-							<label htmlFor="isDelivery" className="text-sm">
+							<Label htmlFor="isDelivery" className="truncate cursor-pointer text-sm">
 								Есть доставка?
-							</label> */}
+							</Label>
 						</div>
 
 						<Controller
