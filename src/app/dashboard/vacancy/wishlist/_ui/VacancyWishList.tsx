@@ -73,7 +73,7 @@ export default function VacancyWishList() {
 			</>
 		) : (
 			<div className="flex flex-col items-center gap-5 justify-center py-5">
-				<span>Избранных грузов не найдено</span>
+				<span>Избранных вакансий не найдено</span>
 				<Link
 					href={'/dashboard/vacancy/search'}
 					className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
