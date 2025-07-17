@@ -42,14 +42,6 @@ export default function VacancyFormSearch() {
 		salary_at: z.number().positive().optional(),
 		salary_to: z.number().positive().optional(),
 		experience_type: z.array(z.enum(Object.keys(ExperienceTypeEnum) as [keyof typeof ExperienceTypeEnum])).optional(),
-
-		userName: z.string().min(1),
-		userPhone: z.string().min(5),
-
-		skype: z.string().nullable().default(''),
-		telegram: z.string().nullable().default(''),
-		viber: z.string().nullable().default(''),
-		whatsapp: z.string().nullable().default('')
 	});
 
 	type IVacancy = z.infer<typeof vacancySchema>
@@ -66,15 +58,7 @@ export default function VacancyFormSearch() {
 			work_schedule_to: undefined,
 			salary_at: undefined,
 			salary_to: undefined,
-			experience_type: undefined,
-
-			userName: user?.name!,
-			userPhone: user?.phone!,
-
-			whatsapp: user?.whatsapp,
-			telegram: user?.telegram,
-			viber: user?.viber,
-			skype: user?.skype,
+			experience_type: undefined
 		},
 	})
 
