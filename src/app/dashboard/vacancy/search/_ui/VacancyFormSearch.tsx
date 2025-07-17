@@ -115,10 +115,10 @@ export default function VacancyFormSearch() {
 							render={({ field }) => (
 								<Select
 									onValueChange={(value) => field.onChange(value)}
-									value={String(field.value)}
+									value={field.value ?? ""}
 								>
 									<SelectTrigger className="w-full">
-										<SelectValue placeholder='Вакансия' />
+										<SelectValue placeholder='Выберите вакансию' />
 									</SelectTrigger>
 									<SelectContent className="bg-background max-h-60 overflow-y-auto">
 										{Object.entries(JobEnum).map(([key, value]) => (
