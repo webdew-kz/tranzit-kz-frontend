@@ -59,7 +59,7 @@ export default function VacancyFormAdd() {
 	const form = useForm({
 		resolver: zodResolver(vacancySchema),
 		defaultValues: {
-			job: 'DRIVER',
+			job: undefined,
 			otherJob: undefined,
 			typeJob: [],
 			city: undefined,
