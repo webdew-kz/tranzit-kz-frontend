@@ -9,7 +9,7 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { ExperienceTypeEnum, IVacancy, TypeJobEnum } from '@/shared/types/vacancy.type'
+import { ExperienceTypeEnum, IVacancy, JobEnum, TypeJobEnum } from '@/shared/types/vacancy.type'
 import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, SquarePen, Trash, Truck, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
@@ -130,6 +130,7 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 
 					</div>
 				</div>
+
 				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
 					<span className=' flex items-center gap-1'>
 						<ArrowBigUp size={16} />
@@ -156,16 +157,27 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 					</span>
 				</div>
 
+				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+					<div className=" w-full flex gap-2 flex-wrap">
+						<span className="font-medium leading-none uppercase">
+							{vacancy.otherJob ? vacancy.otherJob : JobEnum[vacancy.job as unknown as keyof typeof JobEnum]}
+						</span>
+					</div>
+				</div>
+
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
 					<div className=" grid gap-2 lg:gap-4">
 
-						<div className=" flex items-center gap-2">
+						<div className="flex items-center gap-2">
 							<span>Тип занятости:</span>
-							{vacancy.typeJob && vacancy.typeJob.map((item, index) => (
-								<span className=' block' key={index} >{TypeJobEnum[item as unknown as keyof typeof TypeJobEnum]}</span>
-							)).join(", ")}
+							<span className="block">
+								{vacancy.typeJob
+									?.map((item) => TypeJobEnum[item as unknown as keyof typeof TypeJobEnum])
+									.join(', ')}
+							</span>
 						</div>
+
 
 						<div className=" flex items-center gap-2">
 							<span>Город:</span>

@@ -6,7 +6,7 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { ExperienceTypeEnum, IVacancy, TypeJobEnum } from '@/shared/types/vacancy.type'
+import { ExperienceTypeEnum, IVacancy, JobEnum, TypeJobEnum } from '@/shared/types/vacancy.type'
 import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
@@ -111,7 +111,7 @@ const VacancyWishItem = memo(
 					<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 						<div className=" w-full flex gap-2 flex-wrap">
 							<span className="font-medium leading-none uppercase">
-								{vacancy.otherJob ? vacancy.otherJob : vacancy.job}
+								{vacancy.otherJob ? vacancy.otherJob : JobEnum[vacancy.job as unknown as keyof typeof JobEnum]}
 							</span>
 						</div>
 					</div>
@@ -120,12 +120,15 @@ const VacancyWishItem = memo(
 
 						<div className=" grid gap-2 lg:gap-4">
 
-							<div className=" flex items-center gap-2">
+							<div className="flex items-center gap-2">
 								<span>Тип занятости:</span>
-								{vacancy.typeJob && vacancy.typeJob.map((item, index) => (
-									<span className=' block' key={index} >{TypeJobEnum[item as unknown as keyof typeof TypeJobEnum]}</span>
-								)).join(", ")}
+								<span className="block">
+									{vacancy.typeJob
+										?.map((item) => TypeJobEnum[item as unknown as keyof typeof TypeJobEnum])
+										.join(', ')}
+								</span>
 							</div>
+
 
 							<div className=" flex items-center gap-2">
 								<span>Город:</span>

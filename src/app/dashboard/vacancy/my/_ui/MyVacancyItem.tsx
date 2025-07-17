@@ -144,6 +144,7 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 						</span>
 					</div>
 				</div>
+
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
 					<div className=" grid gap-2 lg:gap-4">
