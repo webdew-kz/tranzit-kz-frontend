@@ -32,10 +32,10 @@ export default function VacancyFormSearch() {
 	const [pending, startTransition] = useTransition()
 
 	const vacancySchema = z.object({
-		job: z.enum(Object.keys(JobEnum) as [keyof typeof JobEnum], { message: 'Выберите вакансию' }),
+		job: z.enum(Object.keys(JobEnum) as [keyof typeof JobEnum], { message: 'Выберите вакансию' }).optional(),
 		otherJob: z.string().optional(),
-		typeJob: z.array(z.enum(Object.keys(TypeJobEnum) as [keyof typeof TypeJobEnum])).min(1, { message: 'Выберите хотя бы один тип занятости' }),
-		city: z.string().min(1, { message: 'Укажите город' }),
+		typeJob: z.array(z.enum(Object.keys(TypeJobEnum) as [keyof typeof TypeJobEnum])).optional(),
+		city: z.string().optional(),
 		description: z.string().optional(),
 		work_schedule_at: z.string().optional(),
 		work_schedule_to: z.string().optional(),
@@ -179,7 +179,7 @@ export default function VacancyFormSearch() {
 
 								<MultiSelect
 									options={TypeJobEnum}
-									value={field.value}
+									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Тип занятости"
 								/>
