@@ -39,8 +39,8 @@ export default function VacancyFormSearch() {
 		description: z.string().optional(),
 		work_schedule_at: z.string().optional(),
 		work_schedule_to: z.string().optional(),
-		salary_at: z.number().positive().optional(),
-		salary_to: z.number().positive().optional(),
+		salary_at: z.number().positive().optional().nullable(),
+		salary_to: z.number().positive().optional().nullable(),
 		experience_type: z.array(z.enum(Object.keys(ExperienceTypeEnum) as [keyof typeof ExperienceTypeEnum])).optional(),
 	});
 
@@ -49,7 +49,7 @@ export default function VacancyFormSearch() {
 	const form = useForm({
 		resolver: zodResolver(vacancySchema),
 		defaultValues: {
-			job: 'DRIVER',
+			job: undefined,
 			otherJob: undefined,
 			typeJob: [],
 			city: undefined,
@@ -77,7 +77,7 @@ export default function VacancyFormSearch() {
 				// setVacancys([])
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении вакансии', {
+				toast.error('Ошибка при поиске вакансии', {
 					position: 'top-center',
 				})
 			}
@@ -217,7 +217,6 @@ export default function VacancyFormSearch() {
 														type='number'
 														placeholder="от"
 														className='text-sm'
-														required
 														{...form.register('salary_at', { valueAsNumber: true })}
 													/>
 
@@ -225,7 +224,6 @@ export default function VacancyFormSearch() {
 														type='number'
 														placeholder="до"
 														className='text-sm'
-														required
 														{...form.register('salary_to', { valueAsNumber: true })}
 													/>
 												</div>
