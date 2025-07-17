@@ -104,7 +104,7 @@ const VacancySearchItem = memo(({ vacancy, rates, loading, setWishlistLength, is
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent) '>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
-				<div className=" flex justify-between w-full lg:items-center mb-2">
+				<div className=" flex justify-between w-full items-start lg:items-center mb-2">
 					<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
 						<span className=' flex items-center gap-1'>
 							<ArrowBigUp size={16} />
@@ -137,7 +137,7 @@ const VacancySearchItem = memo(({ vacancy, rates, loading, setWishlistLength, is
 								onClick={handleToggleWishlist}
 								className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} fill='#b4802e' />
-								<span>Из избранного</span>
+								{/* <span>Из избранного</span> */}
 							</button>
 						) : isWishBtn && (
 							<button
@@ -145,7 +145,7 @@ const VacancySearchItem = memo(({ vacancy, rates, loading, setWishlistLength, is
 								onClick={handleToggleWishlist}
 								className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} />
-								<span>В избранное</span>
+								{/* <span>В избранное</span> */}
 							</button>
 						)}
 					</div>
