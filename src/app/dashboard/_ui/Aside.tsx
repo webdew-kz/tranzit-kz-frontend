@@ -161,9 +161,18 @@ export default function Aside() {
 							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/vacancy/search' ? 'text-background' : ''}`)}
 							href={'/dashboard/vacancy/search'}
 						><Search
-								className={cn('transition-all duration-200', `${pathname === '/dashboard/transport/search' ? '!text-background' : ''}`)}
+								className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/search' ? '!text-background' : ''}`)}
 								size={16}
 							/> Найти</Link>
+					</li>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/vacancy/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/vacancy/wishlist' ? 'text-background' : ''}`)}
+							href={'/dashboard/vacancy/wishlist'}
+						><Star
+								className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/wishlist' ? '!text-background' : ''}`)}
+								size={16}
+							/> Избранные</Link>
 					</li>
 					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/vacancy/my' ? 'bg-(--dark-accent)' : ''}`)}>
 						<Link
