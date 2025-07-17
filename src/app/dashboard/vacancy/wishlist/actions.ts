@@ -2,7 +2,7 @@
 
 export async function getWishlist() {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/wishlist`, {
+        const res = await fetch(`${process.env.SERVER_URL}/vacancy/wishlist`, {
             method: "POST",
             credentials: "include",
         });
@@ -22,7 +22,7 @@ export async function getWishlist() {
 export async function removeAllFromWishlist() {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/remove-all-from-wishlist`,
+            `${process.env.SERVER_URL}/vacancy/remove-all-from-wishlist`,
             {
                 method: "POST",
                 credentials: "include",

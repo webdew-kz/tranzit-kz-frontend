@@ -9,12 +9,13 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Truck, User, Wallet, Weight, X } from 'lucide-react'
+import { ExperienceTypeEnum, IVacancy, TypeJobEnum } from '@/shared/types/vacancy.type'
+import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, SquarePen, Trash, Truck, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { activateVacancy, archivateVacancy } from '../actions'
 import { useRouter } from 'next/navigation'
-import { ExperienceTypeEnum, IVacancy, TypeJobEnum } from '@/shared/types/vacancy.type'
+import { activateVacancy } from '../../actions'
+import { remove } from '../actions'
 
 interface MyVacancyItemProps {
 	vacancyInitial: IVacancy
@@ -23,15 +24,34 @@ interface MyVacancyItemProps {
 	setVacancys: (value: SetStateAction<IVacancy[]>) => void
 	rates?: any
 	loading?: boolean
+
 }
 
-const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, rates, loading }: MyVacancyItemProps) => {
+const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, rates, loading }: MyVacancyItemProps) => {
 
 	const router = useRouter()
 
 	const [vacancy, setVacancy] = useState<IVacancy>(vacancyInitial)
 
+	const [places, setPlaces] = useState<string[]>([])
+
 	const [pending, startTransition] = useTransition()
+
+	// useEffect(() => {
+	// 	setPlaces([...vacancy.placesLoading, ...vacancy.placesUnloading]);
+	// }, [vacancy.placesLoading, vacancy.placesUnloading]);
+
+	// useEffect(() => {
+
+	// 	if (!loading && rates && vacancy && vacancy.price && vacancy.tariff && vacancy.currency) {
+	// 		setAmountPrice(convertToKZT(Number(vacancy.price), vacancy.currency, rates))
+	// 		setAmountTariff(convertToKZT(Number(vacancy.tariff), vacancy.currency, rates))
+
+	// 		setBaseAmountPriceKZT(convertToKZT(Number(vacancy.price), vacancy.currency, rates))
+	// 		setBaseAmountTariffKZT(convertToKZT(Number(vacancy.tariff), vacancy.currency, rates))
+	// 	}
+
+	// }, [rates, vacancy.tariff, vacancy.price, vacancy.currency])
 
 	const handleActivateVacancy = async (id: string) => {
 
@@ -49,8 +69,6 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 					...res.updatedVacancy,
 				}))
 
-				window.location.reload()
-
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при обновлении вакансии', {
@@ -60,12 +78,12 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 		})
 	}
 
-	const handleArchivateVacancy = async (id: string) => {
+	const handleRemove = async (id: string) => {
 
 		startTransition(async () => {
 
 			try {
-				const res = await archivateVacancy({ id })
+				const res = await remove(id)
 
 				toast.success(res.message, {
 					position: 'top-center',
@@ -83,16 +101,16 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 	}
 
 	if (loading) {
-		return <p className='text-center py-5'>Загрузка ...</p>
+		return <Loader />
 	}
 
 	return (
-		<Card className='p-0 border-1 border-(--dark-accent) '>
+		<Card className='p-0 border-1 border-(--dark-accent)'>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex justify-between w-full items-center mb-2">
 					<div className=" font-medium flex gap-2 items-center">
-						{/* <User size={16} />
-						<span className='text-nowrap'>{vacancy.}</span> */}
+						{/* <CalendarDays size={16} />
+						<span className='text-nowrap'>{vacancy.endDate && checkEndDate(vacancy.startDate, vacancy.endDate)}</span> */}
 					</div>
 					<div className=" flex items-center gap-4 justify-end">
 						<div className="flex items-center gap-2">
@@ -109,6 +127,7 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 								Выбрать
 							</label>
 						</div>
+
 					</div>
 				</div>
 				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
@@ -137,13 +156,6 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 					</span>
 				</div>
 
-				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
-					<div className=" w-full flex gap-2 flex-wrap">
-						<span className="font-medium leading-none uppercase">
-							{vacancy.otherJob ? vacancy.otherJob : vacancy.job}
-						</span>
-					</div>
-				</div>
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
 					<div className=" grid gap-2 lg:gap-4">
@@ -389,22 +401,22 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 							onClick={() => handleActivateVacancy(vacancy.id!)}
 							disabled={pending}
 						>
-							<RefreshCcw
+							<Check
 								size={16}
 								className='stroke-background group-hover:stroke-(--dark-accent)'
 							/>
-							<span className='hidden lg:block'>Повторить</span>
+							<span className='hidden lg:block'>Активировать</span>
 						</Button>
 
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleArchivateVacancy(vacancy.id!)}
-							disabled={pending}
+							onClick={() => handleRemove(vacancy.id!)}
 						>
-							<X size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Снять</span>
+							<Trash size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
+							<span className=' hidden lg:block'>Удалить</span>
 						</Button>
+
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
@@ -413,6 +425,7 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 							<SquarePen size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
 							<span className=' hidden lg:block'>Редактировать</span>
 						</Button>
+
 						<Button
 							variant='outline'
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
@@ -453,4 +466,4 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 // optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
-export default MyVacancyItem
+export default MyVacancyArchiveItem

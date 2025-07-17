@@ -1,8 +1,8 @@
 
-import CargoWishList from './_ui/CargoWishList';
+import VacancyWishList from './_ui/VacancyWishList';
 
 export default function page() {
 	return (
-		<CargoWishList />
+		<VacancyWishList />
 	)
 }

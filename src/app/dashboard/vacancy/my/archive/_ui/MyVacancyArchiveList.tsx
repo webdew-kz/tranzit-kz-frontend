@@ -1,8 +1,8 @@
 'use client'
 import { useUserStore } from '@/shared/store/useUserStore';
-import { ICargo } from '@/shared/types/cargo.type';
+import { IVacancy } from '@/shared/types/vacancy.type';
 import { useEffect, useState, useTransition } from 'react'
-import MyCargoItem from './MyCargoArchiveItem';
+// import MyVacancyItem from './MyVacancyArchiveItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
@@ -13,15 +13,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/
 import { toast } from 'sonner';
 import Loader from '@/shared/components/widgets/Loader';
 import { activateMany } from '../../actions';
-import MyCargoArchiveItem from './MyCargoArchiveItem';
+import MyVacancyArchiveItem from './MyVacancyArchiveItem';
 import { removeMany } from '../actions';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 
-export default function MyCargoArchiveList() {
+export default function MyVacancyArchiveList() {
 
 	const { rates, loading } = useCurrencyRates()
 
-	const [cargos, setCargos] = useState<ICargo[]>([]);
+	const [vacancys, setVacancys] = useState<IVacancy[]>([]);
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
 
 	const [pending, startTransition] = useTransition()
@@ -37,7 +37,7 @@ export default function MyCargoArchiveList() {
 
 		return () => clearInterval(interval);
 
-	}, [cargos])
+	}, [vacancys])
 
 	const fetchData = async () => {
 
@@ -55,7 +55,7 @@ export default function MyCargoArchiveList() {
 			return;
 		}
 
-		const res = await fetch(`${process.env.SERVER_URL}/cargo/find-archive-by-user-id/${parsedUserStorage.state.user.id}`, {
+		const res = await fetch(`${process.env.SERVER_URL}/vacancy/find-archive-by-user-id/${parsedUserStorage.state.user.id}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -65,10 +65,10 @@ export default function MyCargoArchiveList() {
 		if (!res.ok) {
 			throw new Error("Failed to fetch data");
 		}
-		const data: ICargo[] = await res.json();
+		const data: IVacancy[] = await res.json();
 
 		if (data.length === 0) {
-			toast.error("У вас нет активных грузов", {
+			toast.error("У вас нет активных вакансий", {
 				position: 'top-center',
 			});
 
@@ -76,7 +76,7 @@ export default function MyCargoArchiveList() {
 
 		} else {
 
-			setCargos(data)
+			setVacancys(data)
 		}
 
 	};
@@ -94,10 +94,10 @@ export default function MyCargoArchiveList() {
 	}
 
 	const handleSelectAll = () => {
-		if (selectedIds.length === cargos.length) {
+		if (selectedIds.length === vacancys.length) {
 			clearSelection();
 		} else {
-			const allIds = cargos.map(cargo => cargo.id).filter((id): id is string => id !== undefined);
+			const allIds = vacancys.map(vacancy => vacancy.id).filter((id): id is string => id !== undefined);
 			setSelectedIds(allIds);
 		}
 	}
@@ -106,7 +106,7 @@ export default function MyCargoArchiveList() {
 		startTransition(() => {
 			activateMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Грузы активированы", {
+					toast.success("Вакансии активированы", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
@@ -124,7 +124,7 @@ export default function MyCargoArchiveList() {
 		startTransition(() => {
 			removeMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Грузы удалены", {
+					toast.success("Вакансии удалены", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
@@ -148,23 +148,23 @@ export default function MyCargoArchiveList() {
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[60px] p-0 rounded-t-none'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
 					<div className=" grid grid-cols-2 w-full lg:flex ">
-						<Button asChild className={cn(path === '/dashboard/cargo/my' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-r-none')}>
-							<Link href="/dashboard/cargo/my">
+						<Button asChild className={cn(path === '/dashboard/vacancy/my' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-r-none')}>
+							<Link href="/dashboard/vacancy/my">
 								Активные
 							</Link>
 						</Button>
-						<Button asChild className={cn(path === '/dashboard/cargo/my/archive' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-l-none')}>
-							<Link href="/dashboard/cargo/my/archive">
+						<Button asChild className={cn(path === '/dashboard/vacancy/my/archive' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-l-none')}>
+							<Link href="/dashboard/vacancy/my/archive">
 								Архив
 							</Link>
 						</Button>
 					</div>
 					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
-						{cargos.length > 0 && (
+						{vacancys.length > 0 && (
 							<div className="flex items-center gap-3">
 								<Checkbox
 									id="terms"
-									checked={(selectedIds.length === cargos.length) || (cargos.length > selectedIds.length && selectedIds.length > 0 && 'indeterminate')}
+									checked={(selectedIds.length === vacancys.length) || (vacancys.length > selectedIds.length && selectedIds.length > 0 && 'indeterminate')}
 									onCheckedChange={handleSelectAll}
 									className='border-(--dark-accent)'
 								/>
@@ -173,7 +173,7 @@ export default function MyCargoArchiveList() {
 									className="text-sm cursor-pointer flex"
 								>
 									<span className='text-(--dark-accent) underline underline-offset-2'>
-										{selectedIds.length === cargos.length ? `Отменить` : 'Выбрать все'}
+										{selectedIds.length === vacancys.length ? `Отменить` : 'Выбрать все'}
 									</span>
 								</label>
 								<span>{selectedIds.length > 0 && `Выбрано: ${selectedIds.length}`}</span>
@@ -211,20 +211,20 @@ export default function MyCargoArchiveList() {
 				</CardContent>
 			</Card>
 			<div className=' grid gap-5'>
-				{cargos.length > 0 && cargos.map((cargo) => (
-					<MyCargoArchiveItem
-						cargoInitial={cargo}
-						key={cargo.id}
-						selected={selectedIds.includes(cargo.id!)}
-						onToggle={() => toggleSelect(cargo.id!)}
-						setCargos={setCargos}
+				{vacancys.length > 0 && vacancys.map((vacancy) => (
+					<MyVacancyArchiveItem
+						vacancyInitial={vacancy}
+						key={vacancy.id}
+						selected={selectedIds.includes(vacancy.id!)}
+						onToggle={() => toggleSelect(vacancy.id!)}
+						setVacancys={setVacancys}
 						rates={rates}
 						loading={loading}
 					/>
 				))}
-				{!cargos.length && (
+				{!vacancys.length && (
 					<div className='flex justify-center items-center'>
-						<span className='text-muted-foreground'>Нет архивных грузов</span>
+						<span className='text-muted-foreground'>Нет архивных вакансий</span>
 					</div>
 				)}
 			</div>

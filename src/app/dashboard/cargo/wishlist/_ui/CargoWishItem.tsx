@@ -96,6 +96,17 @@ const CargoWishItem = memo(
 			return <p className='text-center py-5'>Загрузка ...</p>
 		}
 
+		const route = places.map((place) => {
+			const [city, country] = place.split(",").map((str) => str.trim());
+			return `${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`;
+		}).join(" → ");
+		console.log(route);
+
+		const truckTypes = cargo.truckType?.map((item) => TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]).join(", ");
+
+		const message = `Здравствуйте. Данная заявка актуальна?\n\nГруз: ${cargo.title}\nМаршрут: ${route}\nЦена: ${cargo.price} ${getCurrencySymbol(cargo.currency)}\nТип фуры: ${truckTypes}\n\nСсылка на груз: https://${process.env.DOMAIN}/dashboard/cargo/${cargo.id}`
+		const link = `https://wa.me/${cargo.userPhone}?text=${encodeURIComponent(message)}`
+
 		return (
 			<Card className={cn(isEndedDate(cargo.endDate!) && '!text-muted-foreground', 'p-0 border-1 border-(--dark-accent) ')}>
 				<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
@@ -449,7 +460,7 @@ const CargoWishItem = memo(
 											{cargo.user.whatsapp && (
 												<Button variant='link' asChild>
 													<Link
-														href={`https://wa.me/${cargo.user.whatsapp}`}
+														href={link}
 														target='_blank'
 														rel="noopener noreferrer"
 														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'

@@ -1,9 +1,9 @@
 "use client"
 import React, { useCallback, useEffect, useState } from 'react'
 import { findAll } from '../actions'
-import { ICargo } from '@/shared/types/cargo.type'
-import CargoSearchItem from './CargoSearchItem'
-import { useCargoSearchStore } from '@/shared/store/useCargoSearchStore'
+import { IVacancy } from '@/shared/types/vacancy.type'
+import VacancySearchItem from './VacancySearchItem'
+import { useVacancySearchStore } from '@/shared/store/useVacancySearchStore'
 import { Button } from '@/shared/components/ui/button'
 import Loader from '@/shared/components/widgets/Loader'
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
@@ -13,12 +13,12 @@ import Link from 'next/link'
 
 
 
-export default function CargoSearchList() {
+export default function VacancySearchList() {
 
 
 	const { rates, loading } = useCurrencyRates()
-	const { searchCargos, setSearchCargos } = useCargoSearchStore()
-	const [cargos, setCargos] = useState<ICargo[]>([])
+	const { searchVacancys, setSearchVacancys } = useVacancySearchStore()
+	const [vacancys, setVacancys] = useState<IVacancy[]>([])
 	const [total, setTotal] = useState(0)
 
 	const [page, setPage] = useState(1);
@@ -28,7 +28,7 @@ export default function CargoSearchList() {
 	const [wishlistLength, setWishlistLength] = useState(0)
 
 	useEffect(() => {
-		const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
+		const stored = JSON.parse(localStorage.getItem("wishlistVacancy") || "[]");
 		setWishlistLength(stored.length);
 	}, []);
 
@@ -39,8 +39,8 @@ export default function CargoSearchList() {
 
 		try {
 			const res = await findAll(page);
-			setCargos(prev => {
-				const merged = [...prev, ...res.cargos];
+			setVacancys(prev => {
+				const merged = [...prev, ...res.vacancys];
 
 				// Удаляем дубликаты по `id`
 				const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
@@ -60,7 +60,7 @@ export default function CargoSearchList() {
 		setIsLoad(true)
 		try {
 			const res = await findAll(page);
-			setCargos(res.cargos);
+			setVacancys(res.vacancys);
 			setTotal(res.total)
 		} catch (error) {
 			console.error("Ошибка загрузки:", error);
@@ -76,9 +76,9 @@ export default function CargoSearchList() {
 
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
-	const handleShowAllCargos = useCallback(async () => {
-		setSearchCargos([])
-		setCargos([])
+	const handleShowAllVacancys = useCallback(async () => {
+		setSearchVacancys([])
+		setVacancys([])
 		firstLoad()
 	}, [])
 
@@ -90,21 +90,21 @@ export default function CargoSearchList() {
 	}
 
 	return (
-		searchCargos.length > 0 ? (
+		searchVacancys.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
 					<div className=" flex justify-between items-center">
-						<span>Найдено: {searchCargos.length}</span>
+						<span>Найдено: {searchVacancys.length}</span>
 						<Button
 							variant='link'
-							onClick={handleShowAllCargos}
+							onClick={handleShowAllVacancys}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
 						>Показать все грузы</Button>
 					</div>
-					{searchCargos.map((cargo) => (
-						<CargoSearchItem
-							key={cargo.id}
-							cargo={cargo}
+					{searchVacancys.map((vacancy) => (
+						<VacancySearchItem
+							key={vacancy.id}
+							vacancy={vacancy}
 							loading={loading}
 							rates={rates}
 						/>
@@ -112,7 +112,7 @@ export default function CargoSearchList() {
 				</div>
 			</>
 		) : (
-			cargos.length > 0 ? (
+			vacancys.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5">
@@ -120,7 +120,7 @@ export default function CargoSearchList() {
 
 							{wishlistLength > 0 ? (
 								<Link
-									href='/dashboard/cargo/wishlist'
+									href='/dashboard/vacancy/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -129,7 +129,7 @@ export default function CargoSearchList() {
 								</Link>
 							) : (
 								<Link
-									href='/dashboard/cargo/wishlist'
+									href='/dashboard/vacancy/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -139,10 +139,10 @@ export default function CargoSearchList() {
 							)}
 
 						</div>
-						{cargos.map((cargo) => (
-							<CargoSearchItem
-								key={cargo.id}
-								cargo={cargo}
+						{vacancys.map((vacancy) => (
+							<VacancySearchItem
+								key={vacancy.id}
+								vacancy={vacancy}
 								loading={loading}
 								rates={rates}
 								setWishlistLength={setWishlistLength}

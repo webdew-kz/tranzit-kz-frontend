@@ -3,7 +3,7 @@
 export async function findAll(page: number) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo?page=${page}`,
+            `${process.env.SERVER_URL}/vacancy?page=${page}`,
             {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ export async function findAll(page: number) {
 export async function findManyByFilter(data: any) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/find-many-by-filter`,
+            `${process.env.SERVER_URL}/vacancy/find-many-by-filter`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -50,7 +50,7 @@ export async function findManyByFilter(data: any) {
 
 export async function addView(id: string) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/add-view`, {
+        const res = await fetch(`${process.env.SERVER_URL}/vacancy/add-view`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id }),
@@ -69,14 +69,14 @@ export async function addView(id: string) {
     }
 }
 
-export async function addToWishlist(cargoId: string) {
+export async function addToWishlist(vacancyId: string) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/add-to-wishlist`,
+            `${process.env.SERVER_URL}/vacancy/add-to-wishlist`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cargoId }),
+                body: JSON.stringify({ vacancyId }),
                 credentials: "include",
             }
         );
@@ -93,14 +93,14 @@ export async function addToWishlist(cargoId: string) {
     }
 }
 
-export async function removeFromWishlist(cargoId: string) {
+export async function removeFromWishlist(vacancyId: string) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/cargo/remove-from-wishlist`,
+            `${process.env.SERVER_URL}/vacancy/remove-from-wishlist`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ cargoId }),
+                body: JSON.stringify({ vacancyId }),
                 credentials: "include",
             }
         );
@@ -119,7 +119,7 @@ export async function removeFromWishlist(cargoId: string) {
 
 export async function getWishlist() {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/wishlist`, {
+        const res = await fetch(`${process.env.SERVER_URL}/vacancy/wishlist`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",

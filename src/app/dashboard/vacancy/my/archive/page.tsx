@@ -1,9 +1,9 @@
 import React from 'react'
-import MyCargoArchiveList from './_ui/MyCargoArchiveList'
+import MyVacancyArchiveList from './_ui/MyVacancyArchiveList'
 
 export default async function page() {
 
 	return (
-		<MyCargoArchiveList />
+		<MyVacancyArchiveList />
 	)
 }

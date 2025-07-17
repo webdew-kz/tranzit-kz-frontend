@@ -2,7 +2,7 @@
 
 export async function remove(id: string) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/${id}`, {
+        const res = await fetch(`${process.env.SERVER_URL}/vacancy/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -21,12 +21,15 @@ export async function remove(id: string) {
 
 export async function removeMany({ ids }: { ids: string[] }) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/cargo/remove-many`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ids }),
-            credentials: "include",
-        });
+        const res = await fetch(
+            `${process.env.SERVER_URL}/vacancy/remove-many`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ids }),
+                credentials: "include",
+            }
+        );
 
         if (!res.ok) {
             console.error(res.statusText);

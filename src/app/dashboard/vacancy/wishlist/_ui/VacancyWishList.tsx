@@ -1,27 +1,26 @@
 "use client"
 import React, { useCallback, useEffect, useState } from 'react'
 import { getWishlist, removeAllFromWishlist } from '../actions'
-import { ICargo } from '@/shared/types/cargo.type'
-import CargoSearchItem from './CargoWishItem'
+import { IVacancy } from '@/shared/types/vacancy.type'
 import Loader from '@/shared/components/widgets/Loader'
-import CargoWishItem from './CargoWishItem'
+import VacancyWishItem from './VacancyWishItem'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import Link from 'next/link'
 import { toast } from 'sonner'
 
 
 
-export default function CargoWishList() {
+export default function VacancyWishList() {
 
 	const { rates, loading } = useCurrencyRates()
-	const [cargos, setCargos] = useState<ICargo[]>([])
+	const [vacancys, setVacancys] = useState<IVacancy[]>([])
 
 	useEffect(() => {
 		const fetchData = async () => {
 
 			try {
 				const res = await getWishlist();
-				setCargos(Array.isArray(res.cargos) ? res.cargos.filter((c: ICargo | null | undefined): c is ICargo => c !== null && c !== undefined && c.id !== undefined) : []);
+				setVacancys(Array.isArray(res.vacancys) ? res.vacancys.filter((c: IVacancy | null | undefined): c is IVacancy => c !== null && c !== undefined && c.id !== undefined) : []);
 
 			} catch (error) {
 				console.error("Ошибка загрузки:", error);
@@ -32,8 +31,8 @@ export default function CargoWishList() {
 
 	const handleClearWishlist = async () => {
 		const res = await removeAllFromWishlist()
-		localStorage.setItem("wishlist", JSON.stringify([]));
-		setCargos([]);
+		localStorage.setItem("wishlistVacancy", JSON.stringify([]));
+		setVacancys([]);
 		toast.success(res.message, {
 			position: 'top-center',
 		})
@@ -44,28 +43,28 @@ export default function CargoWishList() {
 	}
 
 	return (
-		cargos.length > 0 ? (
+		vacancys.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
 					<div className=" flex justify-between items-center sticky top-15 bg-background py-5">
-						<span>Избранных: {cargos.length}</span>
+						<span>Избранных: {vacancys.length}</span>
 
-						{cargos.length > 0 && (
+						{vacancys.length > 0 && (
 							<button type='button' onClick={handleClearWishlist} className="cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								Очистить все
 							</button>
 						)}
 
 					</div>
-					{cargos?.map((cargo) => {
-						// console.log(cargo);
+					{vacancys?.map((vacancy) => {
+						// console.log(vacancy);
 						return (
-							<CargoWishItem
-								key={cargo.id}
-								cargo={cargo}
+							<VacancyWishItem
+								key={vacancy.id}
+								vacancy={vacancy}
 								loading={loading}
 								rates={rates}
-								setCargos={setCargos}
+								setVacancys={setVacancys}
 							/>
 						)
 
@@ -76,7 +75,7 @@ export default function CargoWishList() {
 			<div className="flex flex-col items-center gap-5 justify-center py-5">
 				<span>Избранных грузов не найдено</span>
 				<Link
-					href={'/dashboard/cargo/search'}
+					href={'/dashboard/vacancy/search'}
 					className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
 				>Вернуться к поиску</Link>
 			</div>
