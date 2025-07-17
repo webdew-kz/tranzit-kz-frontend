@@ -89,7 +89,7 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent) '>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
-				<div className=" flex flex-col lg:flex-row justify-between w-full items-center mb-2">
+				<div className=" flex flex-col lg:flex-row justify-between w-full items-start lg:items-center mb-2">
 
 					<div className=" flex flex-col order-2 lg:order-1 gap-1 lg:flex-row lg:gap-4 mb-3">
 						<span className=' flex items-center gap-1'>

@@ -107,12 +107,35 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent)'>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
-				<div className=" flex justify-between w-full items-center mb-2">
-					<div className=" font-medium flex gap-2 items-center">
-						{/* <CalendarDays size={16} />
-						<span className='text-nowrap'>{vacancy.endDate && checkEndDate(vacancy.startDate, vacancy.endDate)}</span> */}
+				<div className=" flex flex-col lg:flex-row justify-between w-full items-start lg:items-center mb-2">
+
+					<div className=" flex flex-col order-2 lg:order-1 gap-1 lg:flex-row lg:gap-4 mb-3">
+						<span className=' flex items-center gap-1'>
+							<ArrowBigUp size={16} />
+							<span className='truncate block text-sm'>
+								<span className=' mr-2 font-light'>Обновлено:</span>
+								<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
+							</span>
+						</span>
+
+						<span className=' flex items-center gap-1'>
+							<ArrowBigDown size={16} />
+							<span className='truncate block text-sm'>
+								<span className=' mr-2 font-light'>Добавлено:</span>
+								<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
+							</span>
+						</span>
+
+						<span className=' flex items-center gap-1'>
+							<Eye size={16} />
+							<span className='truncate block text-sm'>
+								<span className=' mr-2 font-light'>Просмотров:</span>
+								<span className=' font-medium'>{vacancy.views.count}</span>
+							</span>
+						</span>
 					</div>
-					<div className=" flex items-center gap-4 justify-end">
+
+					<div className=" flex items-center order-1 lg:order-2 gap-4 justify-end">
 						<div className="flex items-center gap-2">
 							<Checkbox
 								id={vacancy.id}
@@ -127,34 +150,7 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 								Выбрать
 							</label>
 						</div>
-
 					</div>
-				</div>
-
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-					<span className=' flex items-center gap-1'>
-						<ArrowBigUp size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<ArrowBigDown size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<Eye size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{vacancy.views.count}</span>
-						</span>
-					</span>
 				</div>
 
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
