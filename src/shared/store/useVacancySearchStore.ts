@@ -1,21 +1,21 @@
 /** @format */
 
-// src/shared/store/cargoSearchStore.ts
+// src/shared/store/vacancySearchStore.ts
 import { create } from "zustand";
-import { ICargo } from "../types/cargo.type";
+import { IVacancy } from "../types/vacancy.type";
 
 // Тип состояния стора
-interface CargoSearchState {
-    searchCargos: ICargo[];
-    setSearchCargos: (cargos: ICargo[]) => void;
-    clearSearchCargos: () => void;
+interface VacancySearchState {
+    searchVacancys: IVacancy[];
+    setSearchVacancys: (vacancys: IVacancy[]) => void;
+    clearSearchVacancys: () => void;
 }
 
 // Создание стора
-export const useCargoSearchStore = create<CargoSearchState>((set) => ({
-    searchCargos: [],
+export const useVacancySearchStore = create<VacancySearchState>((set) => ({
+    searchVacancys: [],
 
-    setSearchCargos: (cargos) => set({ searchCargos: cargos }),
+    setSearchVacancys: (vacancys) => set({ searchVacancys: vacancys }),
 
-    clearSearchCargos: () => set({ searchCargos: [] }),
+    clearSearchVacancys: () => set({ searchVacancys: [] }),
 }));

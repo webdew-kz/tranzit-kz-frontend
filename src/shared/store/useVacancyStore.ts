@@ -1,37 +1,37 @@
 /** @format */
 
-// src/shared/store/cargoSearchStore.ts
+// src/shared/store/vacancySearchStore.ts
 import { create } from "zustand";
-import { ICargo } from "../types/cargo.type";
+import { IVacancy } from "../types/vacancy.type";
 
 // Тип состояния стора
-interface CargoState {
-    cargos: ICargo[];
-    setCargos: (cargos: ICargo[]) => void;
-    clearCargos: () => void;
-    appendCargos: (cargos: ICargo[]) => void;
+interface VacancyState {
+    vacancys: IVacancy[];
+    setVacancys: (vacancys: IVacancy[]) => void;
+    clearVacancys: () => void;
+    appendVacancys: (vacancys: IVacancy[]) => void;
 }
 
 // Создание стора
-interface SetCargosAction {
-    (cargos: ICargo[]): void;
+interface SetVacancysAction {
+    (vacancys: IVacancy[]): void;
 }
 
-interface ClearCargosAction {
+interface ClearVacancysAction {
     (): void;
 }
 
-interface AppendCargosAction {
-    (cargos: ICargo[]): void;
+interface AppendVacancysAction {
+    (vacancys: IVacancy[]): void;
 }
 
-export const useCargoStore = create<CargoState>((set) => ({
-    cargos: [],
+export const useVacancyStore = create<VacancyState>((set) => ({
+    vacancys: [],
 
-    setCargos: (cargos: ICargo[]) => set({ cargos: cargos }),
+    setVacancys: (vacancys: IVacancy[]) => set({ vacancys: vacancys }),
 
-    clearCargos: () => set({ cargos: [] }),
+    clearVacancys: () => set({ vacancys: [] }),
 
-    appendCargos: (cargos: ICargo[]) =>
-        set((state) => ({ cargos: [...state.cargos, ...cargos] })), // Добавление новых грузов в существующий массив
+    appendVacancys: (vacancys: IVacancy[]) =>
+        set((state) => ({ vacancys: [...state.vacancys, ...vacancys] })), // Добавление новых грузов в существующий массив
 }));
