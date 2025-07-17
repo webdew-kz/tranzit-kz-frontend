@@ -27,7 +27,11 @@ const VacancyWishItem = memo(
 	({ vacancy, rates, loading, setWishlistLength, setVacancys }: VacancySearchItemProps) => {
 
 		const handleAddView = async (id: string) => {
-			await addView(id)
+			const viewedKey = `viewed-${id}`;
+			if (localStorage.getItem(viewedKey)) return;
+
+			await addView(id);
+			localStorage.setItem(viewedKey, "true");
 		}
 
 
@@ -54,10 +58,6 @@ const VacancyWishItem = memo(
 			return data ? JSON.parse(data) : [];
 		}
 
-		function isInWishlist(vacancyId: string): boolean {
-			return getWishlist().includes(vacancyId);
-		}
-
 
 		if (loading) {
 			return <p className='text-center py-5'>Загрузка ...</p>
@@ -69,7 +69,7 @@ const VacancyWishItem = memo(
 		return (
 			<Card className='p-0 border-1 border-(--dark-accent) '>
 				<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
-					<div className=" flex justify-between w-full items-start lg:items-center mb-2">
+					<div className=" flex justify-between w-full lg:items-center mb-2">
 						<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
 							<span className=' flex items-center gap-1'>
 								<ArrowBigUp size={16} />
