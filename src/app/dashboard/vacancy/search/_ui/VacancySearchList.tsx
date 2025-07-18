@@ -160,12 +160,12 @@ export default function VacancySearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Грузы не найдены</span>
+					<span>Вакансии не найдены</span>
 					<Button
 						variant='link'
 						onClick={() => firstLoad()}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все грузы</Button>
+					>Показать все вакансии</Button>
 				</div>
 			)
 		)

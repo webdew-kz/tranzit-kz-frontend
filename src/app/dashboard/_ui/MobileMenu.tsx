@@ -40,8 +40,8 @@ export default function MobileMenu() {
 				<span>Вакансии</span>
 			</Link>
 			<Link
-				href=''
-				className='flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full'
+				href='/dashboard/menu'
+				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/menu') ? 'bg-accent' : ''}`)}
 			>
 				<Menu />
 				<span>Меню</span>
