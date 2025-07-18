@@ -111,7 +111,7 @@ export const MultiCityInput = ({ values, onChange, addBtnText, placeholder }: Pr
 	};
 
 	return (
-		<div>
+		<div className='flex flex-col gap-2'>
 			{values.map((val, i) => (
 				<CityInput
 					key={i}
