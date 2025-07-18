@@ -170,7 +170,7 @@ export default function VacancySearchList() {
 					<span>Вакансии не найдены</span>
 					<Button
 						variant='link'
-						onClick={() => firstLoad()}
+						onClick={handleShowAllVacancys}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
 					>Показать все вакансии</Button>
 				</div>
