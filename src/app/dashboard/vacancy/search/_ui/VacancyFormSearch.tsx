@@ -20,6 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { CityInput } from '@/shared/components/widgets/CityInput';
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog';
 import MultiCheckbox from '@/shared/components/widgets/MultiCheckbox';
+import { useVacancyStore } from '@/shared/store/useVacancyStore';
 
 export default function VacancyFormSearch() {
 
@@ -27,7 +28,7 @@ export default function VacancyFormSearch() {
 
 	const { setSearchVacancys } = useVacancySearchStore()
 
-	// const { vacancys, setVacancys } = useVacancyStore()
+	const { vacancys, setVacancys } = useVacancyStore()
 
 	const [pending, startTransition] = useTransition()
 
@@ -74,7 +75,7 @@ export default function VacancyFormSearch() {
 				})
 
 				setSearchVacancys(res.vacancys)
-				// setVacancys([])
+				setVacancys([])
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при поиске вакансии', {

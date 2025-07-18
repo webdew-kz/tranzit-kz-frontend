@@ -10,6 +10,7 @@ import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
+import { useVacancyStore } from '@/shared/store/useVacancyStore'
 
 
 
@@ -18,7 +19,8 @@ export default function VacancySearchList() {
 
 	const { rates, loading } = useCurrencyRates()
 	const { searchVacancys, setSearchVacancys } = useVacancySearchStore()
-	const [vacancys, setVacancys] = useState<IVacancy[]>([])
+	// const [vacancys, setVacancys] = useState<IVacancy[]>([])
+	const { vacancys, setVacancys } = useVacancyStore()
 	const [total, setTotal] = useState(0)
 
 	const [page, setPage] = useState(1);
@@ -39,14 +41,19 @@ export default function VacancySearchList() {
 
 		try {
 			const res = await findAll(page);
-			setVacancys(prev => {
-				const merged = [...prev, ...res.vacancys];
+			// setVacancys(prev => {
+			// 	const merged = [...prev, ...res.vacancys];
 
-				// Удаляем дубликаты по `id`
-				const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
+			// 	// Удаляем дубликаты по `id`
+			// 	const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
 
-				return unique;
-			});
+			// 	return unique;
+			// });
+			const existing = useVacancyStore.getState().vacancys;
+			const merged = [...existing, ...res.vacancys];
+			const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
+
+			setVacancys(unique);
 
 			setHasMore(res.hasMore);
 
