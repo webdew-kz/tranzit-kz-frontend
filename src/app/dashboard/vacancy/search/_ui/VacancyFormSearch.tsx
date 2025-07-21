@@ -218,14 +218,14 @@ export default function VacancyFormSearch() {
 														type='number'
 														placeholder="от"
 														className='text-sm'
-														{...form.register('salary_at', { valueAsNumber: true })}
+														{...form.register('salary_at')}
 													/>
 
 													<Input
 														type='number'
 														placeholder="до"
 														className='text-sm'
-														{...form.register('salary_to', { valueAsNumber: true })}
+														{...form.register('salary_to')}
 													/>
 												</div>
 											</div>
