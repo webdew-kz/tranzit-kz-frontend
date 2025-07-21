@@ -40,8 +40,8 @@ export default function VacancyFormSearch() {
 		description: z.string().optional(),
 		work_schedule_at: z.string().optional(),
 		work_schedule_to: z.string().optional(),
-		salary_at: z.number().positive().optional().nullable(),
-		salary_to: z.number().positive().optional().nullable(),
+		salary_at: z.preprocess((val) => (val === '' || val === undefined ? undefined : Number(val)), z.number().positive().optional()),
+		salary_to: z.preprocess((val) => (val === '' || val === undefined ? undefined : Number(val)), z.number().positive().optional()),
 		experience_type: z.array(z.enum(Object.keys(ExperienceTypeEnum) as [keyof typeof ExperienceTypeEnum])).optional(),
 	});
 
