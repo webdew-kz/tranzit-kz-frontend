@@ -186,7 +186,7 @@ export default function ReviewFormAdd() {
 
 					</div>
 
-					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 justify-center items-start '>
+					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start '>
 						<Controller
 							control={form.control}
 							name="tags"
@@ -212,7 +212,7 @@ export default function ReviewFormAdd() {
 											size={24}
 											onClick={() => field.onChange(star)}
 											fill={star <= field.value ? '#b4802e' : 'none'}
-											stroke={star <= field.value ? '#b4802e' : '#d1d5db'}
+											stroke={star <= field.value ? '#b4802e' : '#b4802e'}
 											className="cursor-pointer transition-transform hover:scale-110"
 										/>
 									))}
