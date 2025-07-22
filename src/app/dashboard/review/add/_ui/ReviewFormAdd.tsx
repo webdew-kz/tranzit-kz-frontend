@@ -57,7 +57,8 @@ export default function ReviewFormAdd() {
 		title: z.string().optional(),
 		description: z.string().optional(),
 		tags: z.array(z.string()).optional(),
-		value: z.number()
+		value: z.coerce.number()
+
 	});
 
 
