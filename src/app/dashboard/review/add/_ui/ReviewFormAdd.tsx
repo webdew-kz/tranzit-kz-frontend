@@ -230,15 +230,14 @@ export default function ReviewFormAdd() {
 						<Button
 							type='submit'
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
-							disabled={pending}
+							disabled={pending || (user?.balance ?? 0) < 500}
 						>
 							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Отправить за 500 ₸</>) : "Отправить за 500 ₸"}
 						</Button>
 					</div>
 
-					{(user?.balance && user?.balance < 500) && (
+					{(user?.balance ?? 0) < 500 && (
 						<div className="grid w-full gap-3 md:gap-5 items-start">
-
 							<Link
 								href='/dashboard/cabinet'
 								className='flex gap-3 items-center justify-start'
@@ -247,6 +246,7 @@ export default function ReviewFormAdd() {
 							</Link>
 						</div>
 					)}
+
 				</form>
 			</CardContent>
 		</Card>
