@@ -110,10 +110,10 @@ export default function PaymentFormAdd() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid gap-3 md:gap-5'
 				>
-					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start'>
+					<div className='grid w-full gap-3 md:gap-5 items-start'>
 						<Input
 							type='number'
-							placeholder="Введите сумму (минимум 500 ₸)"
+							placeholder="Выберите сумму (минимум 500 ₸)"
 							className='text-sm'
 							required
 							{...form.register('amount', { valueAsNumber: true })}
@@ -137,14 +137,9 @@ export default function PaymentFormAdd() {
 						<Button
 							type='submit'
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
-							disabled={pending || (user?.balance ?? 0) < 500}
+							disabled={pending}
 						>
-							{pending ? (
-								<>
-									<Loader2 className="animate-spin stroke-accent" />
-									Пополняю ...
-								</>
-							) : ("Пополнить")}
+							Пополнить
 						</Button>
 					</div>
 

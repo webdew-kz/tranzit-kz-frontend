@@ -27,82 +27,7 @@ interface MyPaymentItemProps {
 
 const MyPaymentItem = memo(({ paymentInitial, selected, onToggle, setPayments, rates, loading }: MyPaymentItemProps) => {
 
-	const router = useRouter()
-
 	const [payment, setPayment] = useState<IPayment>(paymentInitial)
-
-	const [pending, startTransition] = useTransition()
-
-	// const handleActivatePayment = async (id: string) => {
-
-	// 	startTransition(async () => {
-
-	// 		try {
-	// 			const res = await activatePayment({ id })
-
-	// 			toast.success(res.message, {
-	// 				position: 'top-center',
-	// 			})
-
-	// 			setPayment((prev) => ({
-	// 				...prev,
-	// 				...res.updatedPayment,
-	// 			}))
-
-	// 			window.location.reload()
-
-	// 		} catch (error) {
-	// 			console.error(error)
-	// 			toast.error('Ошибка при обновлении вакансии', {
-	// 				position: 'top-center',
-	// 			})
-	// 		}
-	// 	})
-	// }
-
-	// const handleArchivatePayment = async (id: string) => {
-
-	// 	startTransition(async () => {
-
-	// 		try {
-	// 			const res = await archivatePayment({ id })
-
-	// 			toast.success(res.message, {
-	// 				position: 'top-center',
-	// 			})
-
-	// 			setPayments(prev => prev.filter(payment => payment.id !== id))
-
-	// 		} catch (error) {
-	// 			console.error(error)
-	// 			toast.error('Ошибка при архивации вакансии', {
-	// 				position: 'top-center',
-	// 			})
-	// 		}
-	// 	})
-	// }
-
-	const handleRemove = async (id: string) => {
-
-		startTransition(async () => {
-
-			try {
-				const res = await remove(id)
-
-				toast.success(res.message, {
-					position: 'top-center',
-				})
-
-				setPayments(prev => prev.filter(payment => payment.id !== id))
-
-			} catch (error) {
-				console.error(error)
-				toast.error('Ошибка при архивации вакансии', {
-					position: 'top-center',
-				})
-			}
-		})
-	}
 
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>
@@ -144,30 +69,5 @@ const MyPaymentItem = memo(({ paymentInitial, selected, onToggle, setPayments, r
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
-
 
 export default MyPaymentItem

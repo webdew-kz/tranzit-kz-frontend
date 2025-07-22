@@ -78,7 +78,7 @@ export default function MyPaymentList() {
 			const data = await getByUserId(page)
 
 			if (data.length === 0) {
-				toast.error("У вас нет активных вакансий", {
+				toast.error("У вас нет платежей", {
 					position: 'top-center',
 				});
 
@@ -139,7 +139,7 @@ export default function MyPaymentList() {
 
 				{!payments.length && (
 					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет активных отзывов</p>
+						<p className='text-muted-foreground'>У вас нет платежей</p>
 					</div>
 				)}
 				{isLoading &&
