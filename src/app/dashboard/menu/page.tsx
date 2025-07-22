@@ -1,5 +1,5 @@
 import { Button } from '@/shared/components/ui/button'
-import { Box, CirclePlus, PhoneOff, Search, Star } from 'lucide-react'
+import { Box, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, PhoneOff, Search, ShieldUser, Star } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -13,10 +13,10 @@ export default function page() {
 			>
 
 				<Link
-					href='/dashboard/blacklist'
+					href='/dashboard/cabinet'
 					className='flex gap-3 items-center justify-start'
 				>
-					<PhoneOff /> Черный список
+					<CircleUserRound /> Личный кабинет
 				</Link>
 			</Button>
 			<Button
@@ -26,10 +26,10 @@ export default function page() {
 			>
 
 				<Link
-					href='/dashboard/cargo/search'
+					href='/dashboard/payment'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Search /> Найти груз
+					<CreditCard /> Пополнение баланса
 				</Link>
 			</Button>
 			<Button
@@ -39,10 +39,10 @@ export default function page() {
 			>
 
 				<Link
-					href='/dashboard/cargo/wishlist'
+					href='/dashboard/review'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Star /> Избранные грузы
+					<MessageCircleMore /> Отзывы
 				</Link>
 			</Button>
 			<Button
@@ -52,10 +52,10 @@ export default function page() {
 			>
 
 				<Link
-					href='/dashboard/cargo/my'
+					href='/dashboard/support'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Box /> Мои грузы
+					<ShieldUser /> Техподдержка
 				</Link>
 			</Button>
 		</div>

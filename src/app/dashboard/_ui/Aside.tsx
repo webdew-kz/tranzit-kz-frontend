@@ -1,6 +1,6 @@
 'use client'
 import { cn } from '@/shared/lib/utils';
-import { Box, CirclePlus, Search, SquareUserRound, Star, Truck } from 'lucide-react'
+import { Box, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, Search, ShieldUser, SquareUserRound, Star, Truck } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -144,6 +144,7 @@ export default function Aside() {
 					</li>
 				</ul>
 			</div>
+
 			<div className="grid gap-2">
 				<p className=' font-bold'>Вакансии</p>
 				<ul className=' grid gap-2'>
@@ -182,6 +183,48 @@ export default function Aside() {
 								className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/my' ? '!text-background' : ''}`)}
 								size={16}
 							/> Мои заявки</Link>
+					</li>
+				</ul>
+			</div>
+
+			<div className="grid gap-2">
+				<p className=' font-bold'>Меню</p>
+				<ul className=' grid gap-2'>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/cabinet') ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/cabinet') ? 'text-background' : ''}`)}
+							href={'/dashboard/cabinet'}
+						><CircleUserRound
+								className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/cabinet') ? '!text-background' : ''}`)}
+								size={16}
+							/> Личный кабинет</Link>
+					</li>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? 'text-background' : ''}`)}
+							href={'/dashboard/payment'}
+						><CreditCard
+								className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? '!text-background' : ''}`)}
+								size={16}
+							/> Пополнение баланса</Link>
+					</li>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'text-background' : ''}`)}
+							href={'/dashboard/review'}
+						><MessageCircleMore
+								className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? '!text-background' : ''}`)}
+								size={16}
+							/> Отзывы</Link>
+					</li>
+					<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'bg-(--dark-accent)' : ''}`)}>
+						<Link
+							className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'text-background' : ''}`)}
+							href={'/dashboard/support'}
+						><ShieldUser
+								className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? '!text-background' : ''}`)}
+								size={16}
+							/> Техподдержка</Link>
 					</li>
 				</ul>
 			</div>
