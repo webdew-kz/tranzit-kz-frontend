@@ -89,7 +89,7 @@ export default function ReviewFormAdd() {
 				router.replace('/dashboard/review/my')
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении вакансии', {
+				toast.error('Ошибка при добавлении отзыва', {
 					position: 'top-center',
 				})
 			}
