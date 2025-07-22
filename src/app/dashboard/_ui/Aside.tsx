@@ -1,6 +1,7 @@
 'use client'
 import { cn } from '@/shared/lib/utils';
-import { Box, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, Search, ShieldUser, SquareUserRound, Star, Truck } from 'lucide-react'
+import { useUserStore } from '@/shared/store/useUserStore';
+import { Box, ChartNoAxesCombined, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, Search, ShieldUser, SquareUserRound, Star, Truck } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -9,6 +10,7 @@ export default function Aside() {
 
 	const pathname = usePathname();
 
+	const { user } = useUserStore()
 
 	return (
 		<aside className="hidden md:flex flex-col gap-4 md:col-span-2 p-4 border-r border-(--dark-accent) h-[calc(100vh-62px)] sticky top-[60px]">
@@ -226,6 +228,19 @@ export default function Aside() {
 								size={16}
 							/> Техподдержка</Link>
 					</li>
+					{user?.role === 'ADMIN' && (
+						<>
+							<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/statistic') ? 'bg-(--dark-accent)' : ''}`)}>
+								<Link
+									className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/statistic') ? 'text-background' : ''}`)}
+									href={'/dashboard/statistic'}
+								><ChartNoAxesCombined
+										className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/statistic') ? '!text-background' : ''}`)}
+										size={16}
+									/> Статистика</Link>
+							</li>
+						</>
+					)}
 				</ul>
 			</div>
 		</aside>
