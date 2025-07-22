@@ -11,7 +11,7 @@ import { cn } from '@/shared/lib/utils'
 import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, LockKeyhole, LockKeyholeOpen, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
-import { addToWishlist, addView, lock, removeFromWishlist, unlock } from '../actions'
+import { lock, unlock } from '../actions'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { IReview } from '@/shared/types/review.type'
@@ -39,14 +39,6 @@ const ReviewSearchItem = memo(({ review, rates, loading, setWishlistLength, isCo
 	const [open, setOpen] = useState(false);
 
 	const { user } = useUserStore()
-
-	const handleAddView = async (id: string) => {
-		const viewedKey = `viewed-${id}`;
-		if (localStorage.getItem(viewedKey)) return;
-
-		await addView(id);
-		localStorage.setItem(viewedKey, "true");
-	};
 
 	const handleToggleBlock = async (reviewId: string) => {
 		if (isBlocked) {
@@ -219,7 +211,7 @@ const ReviewSearchItem = memo(({ review, rates, loading, setWishlistLength, isCo
 									<Button
 										variant='default'
 										className=' group border border-(--dark-accent) bg-(--dark-accent) hover:bg-transparent hover:text-(--dark-accent)'
-										onClick={() => review.id && handleAddView(review.id)}
+
 									>
 										<span className=''>Показать контакты</span>
 									</Button>
