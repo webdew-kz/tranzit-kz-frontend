@@ -118,7 +118,7 @@ export async function findByUserId(page: number) {
 
 export async function remove(id: string) {
     try {
-        const res = await fetch(`${process.env.SERVER_URL}/vacancy/${id}`, {
+        const res = await fetch(`${process.env.SERVER_URL}/review/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -138,7 +138,7 @@ export async function remove(id: string) {
 export async function removeMany({ ids }: { ids: string[] }) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/vacancy/remove-many`,
+            `${process.env.SERVER_URL}/review/remove-many`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

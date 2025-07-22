@@ -157,7 +157,7 @@ export default function MyReviewList() {
 		startTransition(() => {
 			removeMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Вакансии удалены", {
+					toast.success("Отзывы удалены", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
@@ -252,7 +252,7 @@ export default function MyReviewList() {
 
 				{!reviews.length && (
 					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет активных отзывов</p>
+						<p className='text-muted-foreground'>У вас нет отзывов</p>
 					</div>
 				)}
 				{isLoading &&
