@@ -246,11 +246,11 @@ export default function ReviewFormAdd() {
 						<div className="grid w-full gap-3 md:gap-5 items-start">
 							<Button
 								variant={'outline'}
-								className='w-full sm:hidden'
+								className='w-full'
 								asChild
 							>
 								<Link
-									href='/dashboard/cabinet'
+									href='/dashboard/payment/add'
 									className='flex gap-3 items-center justify-center text-(--dark-accent)'
 								>
 									Пополнить баланс
