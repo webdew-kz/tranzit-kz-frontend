@@ -1,6 +1,6 @@
 "use client"
 import React, { useCallback, useEffect, useState } from 'react'
-import { findAll } from '../actions'
+import { findByIin } from '../actions'
 import { IReview } from '@/shared/types/review.type'
 import ReviewSearchItem from './ReviewSearchItem'
 import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore'
@@ -29,65 +29,65 @@ export default function ReviewSearchList() {
 
 	const [wishlistLength, setWishlistLength] = useState(0)
 
-	useEffect(() => {
-		const stored = JSON.parse(localStorage.getItem("wishlistReview") || "[]");
-		setWishlistLength(stored.length);
-	}, []);
+	// useEffect(() => {
+	// 	const stored = JSON.parse(localStorage.getItem("wishlistReview") || "[]");
+	// 	setWishlistLength(stored.length);
+	// }, []);
 
-	const loadMore = async () => {
-		if (!hasMore) return;
+	// const loadMore = async () => {
+	// 	if (!hasMore) return;
 
-		setPage(prev => prev + 1); // сразу увеличиваем
+	// 	setPage(prev => prev + 1); // сразу увеличиваем
 
-		try {
-			const res = await findAll(page);
-			// setReviews(prev => {
-			// 	const merged = [...prev, ...res.reviews];
+	// 	try {
+	// 		const res = await findByIin(page);
+	// 		// setReviews(prev => {
+	// 		// 	const merged = [...prev, ...res.reviews];
 
-			// 	// Удаляем дубликаты по `id`
-			// 	const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
+	// 		// 	// Удаляем дубликаты по `id`
+	// 		// 	const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
 
-			// 	return unique;
-			// });
-			const existing = useReviewStore.getState().reviews;
-			const merged = [...existing, ...res.reviews];
-			const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
+	// 		// 	return unique;
+	// 		// });
+	// 		const existing = useReviewStore.getState().reviews;
+	// 		const merged = [...existing, ...res.reviews];
+	// 		const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
 
-			setReviews(unique);
+	// 		setReviews(unique);
 
-			setHasMore(res.hasMore);
+	// 		setHasMore(res.hasMore);
 
-		} catch (err) {
-			console.error("Ошибка загрузки:", err);
-		}
-	};
+	// 	} catch (err) {
+	// 		console.error("Ошибка загрузки:", err);
+	// 	}
+	// };
 
-	const firstLoad = async () => {
+	// const firstLoad = async () => {
 
-		setIsLoad(true)
-		try {
-			const res = await findAll(page);
-			setReviews(res.reviews);
-			setTotal(res.total)
-		} catch (error) {
-			console.error("Ошибка загрузки:", error);
-		} finally {
-			setIsLoad(false)
-		}
+	// 	setIsLoad(true)
+	// 	try {
+	// 		const res = await findByIin(page);
+	// 		setReviews(res.reviews);
+	// 		setTotal(res.total)
+	// 	} catch (error) {
+	// 		console.error("Ошибка загрузки:", error);
+	// 	} finally {
+	// 		setIsLoad(false)
+	// 	}
 
-	}
+	// }
 
-	useEffect(() => {
-		firstLoad();
-	}, []);
+	// useEffect(() => {
+	// 	firstLoad();
+	// }, []);
 
-	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
+	// const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
-	const handleShowAllReviews = useCallback(async () => {
-		setSearchReviews([])
-		setReviews([])
-		firstLoad()
-	}, [])
+	// const handleShowAllReviews = useCallback(async () => {
+	// 	setSearchReviews([])
+	// 	setReviews([])
+	// 	firstLoad()
+	// }, [])
 
 
 
@@ -97,84 +97,17 @@ export default function ReviewSearchList() {
 	}
 
 	return (
-		searchReviews.length > 0 ? (
-			<>
-				<div className='grid gap-5'>
-					<div className=" flex justify-between items-center">
-						<span>Найдено: {searchReviews.length}</span>
-						<Button
-							variant='link'
-							onClick={handleShowAllReviews}
-							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все отзывы</Button>
-					</div>
-					{searchReviews.map((review) => (
-						<ReviewSearchItem
-							key={review.id}
-							review={review}
-							loading={loading}
-							rates={rates}
-						/>
-					))}
-				</div>
-			</>
-		) : (
-			reviews.length > 0 ? (
-				<>
-					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5">
-							<span>Всего отзывов: {total}</span>
-
-							{/* {wishlistLength > 0 ? (
-								<Link
-									href='/dashboard/review/wishlist'
-									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
-
-								>
-									<Star size={16} fill='#b4802e' />
-									<span>{`В избранном (${wishlistLength})`}</span>
-								</Link>
-							) : (
-								<Link
-									href='/dashboard/review/wishlist'
-									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
-
-								>
-									<Star size={16} />
-									<span>Избранное</span>
-								</Link>
-							)} */}
-							<div className=""></div>
-						</div>
-						{reviews.map((review) => (
-							<ReviewSearchItem
-								key={review.id}
-								review={review}
-								loading={loading}
-								rates={rates}
-								setWishlistLength={setWishlistLength}
-							/>
-						))}
-						{isLoading &&
-							<div className="flex justify-center items-center">
-								<Loader2 className="animate-spin" />
-							</div>
-						}
-					</div>
-					{hasMore && (
-						<div ref={bottomRef} className="h-10" />
-					)}
-				</>
-			) : (
-				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Отзывы не найдены</span>
-					<Button
-						variant='link'
-						onClick={handleShowAllReviews}
-						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все отзывы</Button>
-				</div>
-			)
+		searchReviews.length && (
+			<div className='grid gap-5'>
+				{searchReviews.map((review) => (
+					<ReviewSearchItem
+						key={review.id}
+						review={review}
+						loading={loading}
+						rates={rates}
+					/>
+				))}
+			</div>
 		)
 	)
 }
