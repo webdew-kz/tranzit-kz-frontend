@@ -22,6 +22,7 @@ import { useRouter } from 'next/navigation';
 import { CityInput } from '@/shared/components/widgets/CityInput';
 import { cn } from '@/shared/lib/utils';
 import { Textarea } from '@/shared/components/ui/textarea';
+import Link from 'next/link';
 
 
 export default function ReviewFormAdd() {
@@ -49,13 +50,6 @@ export default function ReviewFormAdd() {
 		'Опаздывает 👎': 'Опаздывает 👎',
 		'Не выходит на связь 👎': 'Не выходит на связь 👎',
 		'Нарушает договорённости 👎': 'Нарушает договорённости 👎',
-	}
-
-	const tagsBadValue = {
-		'Порядочный': 'Порядочный',
-		'Надёжный': 'Надёжный',
-		'Ответственный': 'Ответственный',
-		'Рекомендую': 'Рекомендую'
 	}
 
 	const reviewSchema = z.object({
@@ -238,9 +232,21 @@ export default function ReviewFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Отправить отзыв</>) : "Отправить отзыв"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Отправить за 500 ₸</>) : "Отправить за 500 ₸"}
 						</Button>
 					</div>
+
+					{(user?.balance && user?.balance < 500) && (
+						<div className="grid w-full gap-3 md:gap-5 items-start">
+
+							<Link
+								href='/dashboard/cabinet'
+								className='flex gap-3 items-center justify-start'
+							>
+								Пополнить баланс
+							</Link>
+						</div>
+					)}
 				</form>
 			</CardContent>
 		</Card>
