@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore';
-import { findManyByFilter } from '../actions';
+import { findByIin } from '../actions';
 import { useUserStore } from '@/shared/store/useUserStore';
 import { cn } from '@/shared/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select';
@@ -25,22 +25,11 @@ import { useRouter } from 'next/navigation';
 
 export default function ReviewFormSearch() {
 
-	const { user } = useUserStore()
-
 	const { setSearchReviews } = useReviewSearchStore()
 
 	const { reviews, setReviews } = useReviewStore()
 
 	const [pending, startTransition] = useTransition()
-
-	// const router = useRouter();
-
-	// useEffect(() => {
-	// 	if (user?.balance !== undefined && user.balance < 500) {
-	// 		router.push('/dashboard'); // замените на нужный путь
-	// 	}
-
-	// }, [user, router]);
 
 	const reviewSchema = z.object({
 		iin: z.string()
@@ -60,7 +49,7 @@ export default function ReviewFormSearch() {
 		startTransition(async () => {
 
 			try {
-				const res = await findManyByFilter(data)
+				const res = await findByIin(data)
 
 				toast.success(res.message, {
 					position: 'top-center',
