@@ -211,7 +211,7 @@ export default function Aside() {
 							><CreditCard
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? '!text-background' : ''}`)}
 									size={16}
-								/> Баланс</Link>
+								/> Пополнение</Link>
 						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link

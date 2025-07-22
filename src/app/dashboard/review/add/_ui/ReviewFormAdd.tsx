@@ -149,7 +149,7 @@ export default function ReviewFormAdd() {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Добавить вакансию</CardTitle>
+				<CardTitle className='text-xl text-center'>Добавить отзыв</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
@@ -186,7 +186,7 @@ export default function ReviewFormAdd() {
 
 					</div>
 
-					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start '>
+					<div className='grid w-full gap-3 md:gap-5 items-start '>
 						<Controller
 							control={form.control}
 							name="tags"

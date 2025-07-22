@@ -33,7 +33,7 @@ export default function page() {
 					href='/dashboard/payment'
 					className='flex gap-3 items-center justify-start'
 				>
-					<CreditCard /> Пополнение баланса
+					<CreditCard /> Пополнение
 				</Link>
 			</Button>
 			<Button
