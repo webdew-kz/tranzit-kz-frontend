@@ -13,8 +13,8 @@ export default function Aside() {
 	const { user } = useUserStore()
 
 	return (
-		<aside className="hidden md:block overflow-y-auto p-4 border-r border-(--dark-accent) h-[calc(100vh-62px)] sticky top-[60px]">
-			<div className="flex flex-col gap-4 md:col-span-2">
+		<aside className="hidden md:block overflow-y-auto p-4 border-r border-(--dark-accent) h-[calc(100vh-62px)] sticky top-[60px] col-span-2">
+			<div className="flex flex-col gap-4">
 				<div className="grid gap-2">
 					<p className=' font-bold'>Груз</p>
 					<ul className=' grid gap-2'>
@@ -202,7 +202,7 @@ export default function Aside() {
 							><CircleUserRound
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/cabinet') ? '!text-background' : ''}`)}
 									size={16}
-								/> Личный кабинет</Link>
+								/> Кабинет</Link>
 						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
@@ -211,7 +211,7 @@ export default function Aside() {
 							><CreditCard
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? '!text-background' : ''}`)}
 									size={16}
-								/> Пополнение баланса</Link>
+								/> Баланс</Link>
 						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
@@ -240,7 +240,7 @@ export default function Aside() {
 									><ShieldCheck
 											className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/admin') ? '!text-background' : ''}`)}
 											size={16}
-										/> Статистика</Link>
+										/> Администратор</Link>
 								</li>
 							</>
 						)}
