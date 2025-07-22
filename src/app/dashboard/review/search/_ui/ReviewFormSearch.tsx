@@ -113,7 +113,7 @@ export default function ReviewFormSearch() {
 							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти отзывы</>) : "Найти вакансию"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти отзывы</>) : "Найти отзывы"}
 						</Button>
 					</div>
 				</form>

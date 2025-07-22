@@ -123,9 +123,9 @@ export default function ReviewSearchList() {
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5">
-							<span>Всего грузов: {total}</span>
+							<span>Всего отзывов: {total}</span>
 
-							{wishlistLength > 0 ? (
+							{/* {wishlistLength > 0 ? (
 								<Link
 									href='/dashboard/review/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
@@ -143,8 +143,8 @@ export default function ReviewSearchList() {
 									<Star size={16} />
 									<span>Избранное</span>
 								</Link>
-							)}
-
+							)} */}
+							<div className=""></div>
 						</div>
 						{reviews.map((review) => (
 							<ReviewSearchItem
@@ -167,12 +167,12 @@ export default function ReviewSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Вакансии не найдены</span>
+					<span>Отзывы не найдены</span>
 					<Button
 						variant='link'
 						onClick={handleShowAllReviews}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все вакансии</Button>
+					>Показать все отзывы</Button>
 				</div>
 			)
 		)
