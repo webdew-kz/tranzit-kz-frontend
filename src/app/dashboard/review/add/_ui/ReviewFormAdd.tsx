@@ -57,15 +57,7 @@ export default function ReviewFormAdd() {
 		title: z.string().optional(),
 		description: z.string().optional(),
 		tags: z.array(z.string()).optional(),
-		value: z.number(),
-
-		userName: z.string().min(1),
-		userPhone: z.string().min(5),
-
-		skype: z.string().nullable().default(''),
-		telegram: z.string().nullable().default(''),
-		viber: z.string().nullable().default(''),
-		whatsapp: z.string().nullable().default('')
+		value: z.number()
 	});
 
 
