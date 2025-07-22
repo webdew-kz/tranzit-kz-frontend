@@ -1,26 +1,26 @@
 "use client"
 import React, { useCallback, useEffect, useState } from 'react'
 import { findAll } from '../actions'
-import { IVacancy } from '@/shared/types/vacancy.type'
-import VacancySearchItem from './VacancySearchItem'
-import { useVacancySearchStore } from '@/shared/store/useVacancySearchStore'
+import { IReview } from '@/shared/types/review.type'
+import ReviewSearchItem from './ReviewSearchItem'
+import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore'
 import { Button } from '@/shared/components/ui/button'
 import Loader from '@/shared/components/widgets/Loader'
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
-import { useVacancyStore } from '@/shared/store/useVacancyStore'
+import { useReviewStore } from '@/shared/store/useReviewStore'
 
 
 
-export default function VacancySearchList() {
+export default function ReviewSearchList() {
 
 
 	const { rates, loading } = useCurrencyRates()
-	const { searchVacancys, setSearchVacancys } = useVacancySearchStore()
-	// const [vacancys, setVacancys] = useState<IVacancy[]>([])
-	const { vacancys, setVacancys } = useVacancyStore()
+	const { searchReviews, setSearchReviews } = useReviewSearchStore()
+	// const [reviews, setReviews] = useState<IReview[]>([])
+	const { reviews, setReviews } = useReviewStore()
 	const [total, setTotal] = useState(0)
 
 	const [page, setPage] = useState(1);
@@ -30,7 +30,7 @@ export default function VacancySearchList() {
 	const [wishlistLength, setWishlistLength] = useState(0)
 
 	useEffect(() => {
-		const stored = JSON.parse(localStorage.getItem("wishlistVacancy") || "[]");
+		const stored = JSON.parse(localStorage.getItem("wishlistReview") || "[]");
 		setWishlistLength(stored.length);
 	}, []);
 
@@ -41,19 +41,19 @@ export default function VacancySearchList() {
 
 		try {
 			const res = await findAll(page);
-			// setVacancys(prev => {
-			// 	const merged = [...prev, ...res.vacancys];
+			// setReviews(prev => {
+			// 	const merged = [...prev, ...res.reviews];
 
 			// 	// Удаляем дубликаты по `id`
 			// 	const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
 
 			// 	return unique;
 			// });
-			const existing = useVacancyStore.getState().vacancys;
-			const merged = [...existing, ...res.vacancys];
+			const existing = useReviewStore.getState().reviews;
+			const merged = [...existing, ...res.reviews];
 			const unique = Array.from(new Map(merged.map(c => [c.id, c])).values());
 
-			setVacancys(unique);
+			setReviews(unique);
 
 			setHasMore(res.hasMore);
 
@@ -67,7 +67,7 @@ export default function VacancySearchList() {
 		setIsLoad(true)
 		try {
 			const res = await findAll(page);
-			setVacancys(res.vacancys);
+			setReviews(res.reviews);
 			setTotal(res.total)
 		} catch (error) {
 			console.error("Ошибка загрузки:", error);
@@ -83,9 +83,9 @@ export default function VacancySearchList() {
 
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
-	const handleShowAllVacancys = useCallback(async () => {
-		setSearchVacancys([])
-		setVacancys([])
+	const handleShowAllReviews = useCallback(async () => {
+		setSearchReviews([])
+		setReviews([])
 		firstLoad()
 	}, [])
 
@@ -97,21 +97,21 @@ export default function VacancySearchList() {
 	}
 
 	return (
-		searchVacancys.length > 0 ? (
+		searchReviews.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
 					<div className=" flex justify-between items-center">
-						<span>Найдено: {searchVacancys.length}</span>
+						<span>Найдено: {searchReviews.length}</span>
 						<Button
 							variant='link'
-							onClick={handleShowAllVacancys}
+							onClick={handleShowAllReviews}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все вакансии</Button>
+						>Показать все отзывы</Button>
 					</div>
-					{searchVacancys.map((vacancy) => (
-						<VacancySearchItem
-							key={vacancy.id}
-							vacancy={vacancy}
+					{searchReviews.map((review) => (
+						<ReviewSearchItem
+							key={review.id}
+							review={review}
 							loading={loading}
 							rates={rates}
 						/>
@@ -119,15 +119,15 @@ export default function VacancySearchList() {
 				</div>
 			</>
 		) : (
-			vacancys.length > 0 ? (
+			reviews.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5">
-							<span>Всего вакансий: {total}</span>
+							<span>Всего грузов: {total}</span>
 
 							{wishlistLength > 0 ? (
 								<Link
-									href='/dashboard/vacancy/wishlist'
+									href='/dashboard/review/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -136,7 +136,7 @@ export default function VacancySearchList() {
 								</Link>
 							) : (
 								<Link
-									href='/dashboard/vacancy/wishlist'
+									href='/dashboard/review/wishlist'
 									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
 								>
@@ -146,10 +146,10 @@ export default function VacancySearchList() {
 							)}
 
 						</div>
-						{vacancys.map((vacancy) => (
-							<VacancySearchItem
-								key={vacancy.id}
-								vacancy={vacancy}
+						{reviews.map((review) => (
+							<ReviewSearchItem
+								key={review.id}
+								review={review}
 								loading={loading}
 								rates={rates}
 								setWishlistLength={setWishlistLength}
@@ -170,7 +170,7 @@ export default function VacancySearchList() {
 					<span>Вакансии не найдены</span>
 					<Button
 						variant='link'
-						onClick={handleShowAllVacancys}
+						onClick={handleShowAllReviews}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
 					>Показать все вакансии</Button>
 				</div>
