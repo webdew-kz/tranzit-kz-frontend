@@ -186,10 +186,7 @@ export default function ReviewFormAdd() {
 
 					</div>
 
-					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start'>
-
-
-
+					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start '>
 						<Controller
 							control={form.control}
 							name="tags"
@@ -232,18 +229,24 @@ export default function ReviewFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending || (user?.balance ?? 0) < 500}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Отправить за 500 ₸</>) : "Отправить за 500 ₸"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Отправляю ...</>) : (user?.balance ?? 0) < 500 ? "Недостаточно средств" : "Отправить за 500 ₸"}
 						</Button>
 					</div>
 
 					{(user?.balance ?? 0) < 500 && (
 						<div className="grid w-full gap-3 md:gap-5 items-start">
-							<Link
-								href='/dashboard/cabinet'
-								className='flex gap-3 items-center justify-start'
+							<Button
+								variant={'outline'}
+								className='w-full sm:hidden'
+								asChild
 							>
-								Пополнить баланс
-							</Link>
+								<Link
+									href='/dashboard/cabinet'
+									className='flex gap-3 items-center justify-center text-(--dark-accent)'
+								>
+									Пополнить баланс
+								</Link>
+							</Button>
 						</div>
 					)}
 

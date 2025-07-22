@@ -45,7 +45,7 @@ export function MultiSelect<T extends string>({
 			<PopoverTrigger asChild>
 				<Button
 					variant="outline"
-					className="w-full justify-between"
+					className="w-full justify-between truncate"
 					ref={triggerRef}
 				>
 					<span
