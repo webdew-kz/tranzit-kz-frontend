@@ -229,7 +229,16 @@ export default function ReviewFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending || (user?.balance ?? 0) < 500}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Отправляю ...</>) : (user?.balance ?? 0) < 500 ? "Недостаточно средств" : "Отправить за 500 ₸"}
+							{pending ? (
+								<>
+									<Loader2 className="animate-spin stroke-accent" />
+									Отправляю ...
+								</>
+							) : (user?.balance ?? 0) < 500 ? (
+								"Недостаточно средств"
+							) : (
+								"Отправить за 500 ₸"
+							)}
 						</Button>
 					</div>
 
