@@ -41,7 +41,7 @@ export default function MobileMenu() {
 			</Link>
 			<Link
 				href='/dashboard/menu'
-				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/menu') ? 'bg-accent' : ''}`)}
+				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/menu') || pathname.startsWith('/dashboard/review') || pathname.startsWith('/dashboard/cabinet') || pathname.startsWith('/dashboard/payment') || pathname.startsWith('/dashboard/support') || pathname.startsWith('/dashboard/admin') ? 'bg-accent' : ''}`)}
 			>
 				<Menu />
 				<span>Меню</span>
