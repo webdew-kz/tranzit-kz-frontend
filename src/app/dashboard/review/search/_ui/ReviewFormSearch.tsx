@@ -27,8 +27,6 @@ export default function ReviewFormSearch() {
 
 	const { setSearchReviews } = useReviewSearchStore()
 
-	const { reviews, setReviews } = useReviewStore()
-
 	const [pending, startTransition] = useTransition()
 
 	const reviewSchema = z.object({
@@ -56,7 +54,6 @@ export default function ReviewFormSearch() {
 				})
 
 				setSearchReviews(res.reviews)
-				setReviews([])
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при поиске ИИН/БИН', {
