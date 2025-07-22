@@ -79,40 +79,8 @@ export default function ReviewFormAdd() {
 			description: undefined,
 			tags: [],
 			value: 0,
-
-			userName: user?.name!,
-			userPhone: user?.phone!,
-
-			whatsapp: user?.whatsapp,
-			telegram: user?.telegram,
-			viber: user?.viber,
-			skype: user?.skype,
 		},
 	})
-
-	useEffect(() => {
-		if (user?.name) {
-			form.setValue('userName', user.name);
-		}
-		if (user?.phone) {
-			form.setValue('userPhone', user.phone);
-		}
-
-		if (user?.whatsapp) {
-			form.setValue('whatsapp', user.whatsapp);
-		}
-		if (user?.telegram) {
-			form.setValue('telegram', user.telegram);
-		}
-		if (user?.viber) {
-			form.setValue('viber', user.viber);
-		}
-		if (user?.skype) {
-			form.setValue('skype', user.skype);
-		}
-	}, [user, form]);
-
-
 
 	const onSubmit = async (data: IReview) => {
 
