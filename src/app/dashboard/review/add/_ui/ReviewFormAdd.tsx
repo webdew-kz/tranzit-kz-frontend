@@ -186,7 +186,7 @@ export default function ReviewFormAdd() {
 
 					</div>
 
-					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start '>
+					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 justify-center items-start '>
 						<Controller
 							control={form.control}
 							name="tags"
@@ -205,7 +205,7 @@ export default function ReviewFormAdd() {
 							name="value"
 							control={form.control}
 							render={({ field }) => (
-								<div className="flex items-center gap-1">
+								<div className="flex items-center gap-1 justify-center pt-2 pb-4">
 									{[1, 2, 3, 4, 5].map((star) => (
 										<Star
 											key={star}
