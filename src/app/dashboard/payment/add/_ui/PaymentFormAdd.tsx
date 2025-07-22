@@ -18,7 +18,7 @@ export default function PaymentFormAdd() {
 
 	useCloudPayments()
 
-	const { user } = useUserStore()
+	const { updateBalance } = useUserStore.getState();
 
 	const [pending, startTransition] = useTransition()
 
@@ -62,6 +62,8 @@ export default function PaymentFormAdd() {
 						{
 							onSuccess: async function () {
 								const res = await create(data)
+
+								updateBalance(res.balance)
 
 								toast.success(res.message, {
 									position: 'top-center',
