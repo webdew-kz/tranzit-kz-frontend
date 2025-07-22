@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/shared/components/ui/button'
 import { useUserStore } from '@/shared/store/useUserStore'
-import { Box, ChartNoAxesCombined, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, PhoneOff, Search, ShieldUser, Star } from 'lucide-react'
+import { Box, ChartNoAxesCombined, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, PhoneOff, Search, ShieldCheck, ShieldUser, Star } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -72,10 +72,10 @@ export default function page() {
 					>
 
 						<Link
-							href='/dashboard/statistic'
+							href='/dashboard/admin'
 							className='flex gap-3 items-center justify-start'
 						>
-							<ChartNoAxesCombined /> Статистика
+							<ShieldCheck /> Администратор
 						</Link>
 					</Button>
 				</>
