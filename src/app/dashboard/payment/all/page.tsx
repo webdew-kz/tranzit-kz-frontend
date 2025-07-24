@@ -1,12 +1,10 @@
-'use client'
-
 import { useUserStore } from '@/shared/store/useUserStore';
-import ReviewFormSearch from './_ui/ReviewFormSearch';
-import ReviewSearchList from './_ui/ReviewSearchList';
+import MyPaymentList from './_ui/MyPaymentList'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function Page() {
+export default async function page() {
+
 	const { user } = useUserStore();
 	const router = useRouter();
 	const [isAllowed, setIsAllowed] = useState<boolean | null>(null);
@@ -25,9 +23,6 @@ export default function Page() {
 	if (!isAllowed) return null; // безопасное завершение
 
 	return (
-		<div className='grid gap-5'>
-			<ReviewFormSearch />
-			<ReviewSearchList />
-		</div>
-	);
+		<MyPaymentList />
+	)
 }

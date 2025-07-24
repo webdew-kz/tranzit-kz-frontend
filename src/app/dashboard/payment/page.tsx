@@ -1,7 +1,7 @@
 "use client"
 import { Button } from '@/shared/components/ui/button';
 import { useUserStore } from '@/shared/store/useUserStore';
-import { Box, CirclePlus, Search, Star } from 'lucide-react';
+import { Box, CirclePlus, Search, ShieldCheck, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function page() {
@@ -38,6 +38,24 @@ export default function page() {
 					<Box /> Мои платежи
 				</Link>
 			</Button>
+
+
+
+			{user?.role === 'ADMIN' && (
+				<Button
+					variant={'outline'}
+					className='w-full '
+					asChild
+				>
+
+					<Link
+						href='/dashboard/payment/all'
+						className='flex gap-3 items-center justify-start'
+					>
+						<ShieldCheck /> Все платежи
+					</Link>
+				</Button>
+			)}
 		</div>
 	)
 }
