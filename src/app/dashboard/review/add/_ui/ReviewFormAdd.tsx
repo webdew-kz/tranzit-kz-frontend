@@ -216,13 +216,13 @@ export default function ReviewFormAdd() {
 					{(user?.balance ?? 0) < 500 && (
 						<>
 							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
-								<div>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
+								<div className='md:col-start-2 text-center'>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
 							</div>
 
 							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
 								<Button
 									variant={'outline'}
-									className='w-full'
+									className='w-full md:col-start-2'
 									asChild
 								>
 									<Link

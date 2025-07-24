@@ -10,7 +10,7 @@ export default function page() {
 	const { user } = useUserStore()
 	return (
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
-			<Button
+			{/* <Button
 				variant={'outline'}
 				className='w-full sm:hidden'
 				asChild
@@ -22,7 +22,7 @@ export default function page() {
 				>
 					<CircleUserRound /> Личный кабинет
 				</Link>
-			</Button>
+			</Button> */}
 			<Button
 				variant={'outline'}
 				className='w-full sm:hidden'
@@ -46,10 +46,10 @@ export default function page() {
 					href='/dashboard/review'
 					className='flex gap-3 items-center justify-start'
 				>
-					<MessageCircleMore /> Отзывы
+					<MessageCircleMore /> Отзывы по ИИН/БИН
 				</Link>
 			</Button>
-			<Button
+			{/* <Button
 				variant={'outline'}
 				className='w-full sm:hidden'
 				asChild
@@ -79,7 +79,7 @@ export default function page() {
 						</Link>
 					</Button>
 				</>
-			)}
+			)} */}
 		</div>
 	)
 }
