@@ -18,7 +18,7 @@ import { Loader2 } from 'lucide-react';
 
 export default function MyReviewList() {
 
-	const { rates, loading } = useCurrencyRates()
+	// const { rates, loading } = useCurrencyRates()
 
 	const [reviews, setReviews] = useState<IReview[]>([]);
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
@@ -54,8 +54,6 @@ export default function MyReviewList() {
 		}
 
 	};
-
-
 
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
@@ -116,42 +114,6 @@ export default function MyReviewList() {
 		}
 	}
 
-	// const handleActivateMany = () => {
-	// 	startTransition(() => {
-	// 		activateMany({ ids: selectedIds })
-	// 			.then(() => {
-	// 				toast.success("Вакансии повторены", {
-	// 					position: 'top-center',
-	// 				});
-	// 				fetchData().catch((error) => console.error(error));
-	// 				setSelectedIds([])
-	// 			})
-	// 			.catch((error) => {
-	// 				toast.error(error.message, {
-	// 					position: 'top-center',
-	// 				});
-	// 			});
-	// 	})
-	// }
-
-	// const handleAchivateMany = () => {
-	// 	startTransition(() => {
-	// 		archivateMany({ ids: selectedIds })
-	// 			.then(() => {
-	// 				toast.success("Вакансии сняты", {
-	// 					position: 'top-center',
-	// 				});
-	// 				fetchData().catch((error) => console.error(error));
-	// 				setSelectedIds([])
-	// 			})
-	// 			.catch((error) => {
-	// 				toast.error(error.message, {
-	// 					position: 'top-center',
-	// 				});
-	// 			});
-	// 	})
-	// }
-
 	const handleRemoveMany = () => {
 		startTransition(() => {
 			removeMany({ ids: selectedIds })
@@ -171,7 +133,7 @@ export default function MyReviewList() {
 		})
 	}
 
-	if (loading || pending) {
+	if (pending) {
 		return <Loader />
 	}
 
@@ -244,7 +206,6 @@ export default function MyReviewList() {
 						selected={selectedIds.includes(review.id!)}
 						onToggle={() => toggleSelect(review.id!)}
 						setReviews={setReviews}
-						rates={rates}
 						loading={pending}
 					/>
 				))}

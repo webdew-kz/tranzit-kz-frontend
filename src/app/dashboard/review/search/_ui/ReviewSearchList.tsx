@@ -6,6 +6,8 @@ export default function ReviewSearchList() {
 
 	const { searchReviews } = useReviewSearchStore()
 
+	const setSearchReviews = useReviewSearchStore((state) => state.setSearchReviews);
+
 	if (!Array.isArray(searchReviews) || searchReviews.length === 0) {
 		return null
 	}
@@ -13,7 +15,7 @@ export default function ReviewSearchList() {
 	return (
 		<div className='grid gap-5'>
 			{searchReviews.map((review) => (
-				<ReviewSearchItem key={review.id} review={review} />
+				<ReviewSearchItem key={review.id} review={review} setSearchReviews={setSearchReviews} />
 			))}
 		</div>
 	)
