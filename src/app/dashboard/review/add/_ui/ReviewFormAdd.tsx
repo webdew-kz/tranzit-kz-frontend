@@ -27,7 +27,7 @@ import Link from 'next/link';
 
 export default function ReviewFormAdd() {
 
-	const { user } = useUserStore()
+	const { user, updateBalance } = useUserStore()
 
 	const [pending, startTransition] = useTransition()
 
@@ -235,8 +235,5 @@ export default function ReviewFormAdd() {
 			</CardContent>
 		</Card>
 	)
-}
-function updateBalance(arg0: number) {
-	throw new Error('Function not implemented.');
 }
 
