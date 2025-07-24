@@ -52,7 +52,7 @@ export default function PaymentFormAdd() {
 					widget.pay('charge',
 						{
 							publicId: 'test_api_00000000000000000000002',
-							description: 'Пополнение баоанса tranzit.kz',
+							description: 'Пополнение баланса tranzit.kz',
 							amount: data.amount,
 							currency: 'KZT',
 							skin: "modern",
@@ -93,7 +93,7 @@ export default function PaymentFormAdd() {
 	}
 
 	const onError = (errors: any) => {
-		toast.error(errors.message ?? 'Некорректные данные', {
+		toast.error(errors.message ?? 'Минимум 500 ₸', {
 			position: 'top-center',
 		})
 		console.error(errors);
@@ -115,7 +115,7 @@ export default function PaymentFormAdd() {
 					<div className='grid w-full gap-3 md:gap-5 items-start'>
 						<Input
 							type='number'
-							placeholder="Выберите сумму (минимум 500 ₸)"
+							placeholder="Введите сумму (минимум 500 ₸)"
 							className='text-sm'
 							required
 							{...form.register('amount', { valueAsNumber: true })}
