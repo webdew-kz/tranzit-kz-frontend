@@ -21,10 +21,10 @@ export async function findAll(page: number) {
     }
 }
 
-export async function findByIin(data: any) {
+export async function findByIinAdmin(data: any) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/review/find-by-iin`,
+            `${process.env.SERVER_URL}/review/find-by-iin-admin`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
