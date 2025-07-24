@@ -148,14 +148,14 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 
 				{(review.adminComment && review.adminComment.length) ? (
 					<>
-						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3 text-(--dark-accent)">
 							<div className=" w-full flex gap-2 flex-wrap">
-								<span className="font-medium leading-none uppercase">
+								<span className="font-medium leading-none text-center uppercase">
 									Отзыв заблокирован администратором
 								</span>
 							</div>
 							<div className=" w-full flex gap-2 flex-wrap">
-								<span className=" leading-none uppercase">
+								<span className=" leading-none ">
 									Причина блокировки: {review.adminComment}
 								</span>
 							</div>
