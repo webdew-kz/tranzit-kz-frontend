@@ -10,7 +10,7 @@ export default function page() {
 
 	return (
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
-			<div className="font-semibold text-xl text-center">Ваш баланс: {user?.balance ?? 0}</div>
+			<div className="font-semibold text-xl text-center">Ваш баланс: {user?.balance ?? 0} ₸</div>
 			<Button
 				variant={'outline'}
 				className='w-full '

@@ -86,6 +86,10 @@ export default function ReviewFormAdd() {
 					position: 'top-center',
 				})
 
+				if ((user?.balance ?? 0) >= 500) {
+					updateBalance((user?.balance ?? 0) - 500);
+				}
+
 				router.replace('/dashboard/review/my')
 			} catch (error) {
 				console.error(error)
@@ -234,3 +238,7 @@ export default function ReviewFormAdd() {
 		</Card>
 	)
 }
+function updateBalance(arg0: number) {
+	throw new Error('Function not implemented.');
+}
+

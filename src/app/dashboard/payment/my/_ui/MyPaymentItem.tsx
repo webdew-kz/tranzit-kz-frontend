@@ -44,7 +44,7 @@ const MyPaymentItem = memo(({ paymentInitial, selected, onToggle, setPayments, r
 							<ArrowBigDown size={16} />
 							<span className='truncate block text-sm'>
 								<span className=' mr-2 font-light'>Оплачено:</span>
-								<span className=' font-medium'>{payment.createdAt && formatRelativeDate(payment.createdAt)}</span>
+								<span className=' font-medium'>{payment.createdAt?.toLocaleString()}</span>
 							</span>
 						</span>
 					</div>
