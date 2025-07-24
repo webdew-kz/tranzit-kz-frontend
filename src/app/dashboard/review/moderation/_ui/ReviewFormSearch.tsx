@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore';
-import { findByIin } from '../actions';
+import { findByIinAdmin } from '../actions';
 import { cn } from '@/shared/lib/utils';
 
 export default function ReviewFormSearch() {
@@ -42,7 +42,7 @@ export default function ReviewFormSearch() {
 				setSearchReviews([])
 				setAverageRating('')
 
-				const res = await findByIin(data)
+				const res = await findByIinAdmin(data)
 
 				toast.success(res.message, {
 					position: 'top-center',
