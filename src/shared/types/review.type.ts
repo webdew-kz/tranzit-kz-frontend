@@ -10,6 +10,7 @@ export interface IReview {
 
     value?: number;
     isBlocked?: boolean;
+    adminComment?: string;
 
     iin?: string;
     phoneNumber?: string;
