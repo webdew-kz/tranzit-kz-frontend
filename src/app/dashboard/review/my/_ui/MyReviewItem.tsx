@@ -9,12 +9,13 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Star, Trash, Truck, User, Wallet, Weight, X } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, SquarePen, Star, Trash, Truck, User, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { IReview } from '@/shared/types/review.type'
 import { remove } from '../actions'
+import Link from 'next/link'
 
 interface MyReviewItemProps {
 	reviewInitial: IReview
@@ -142,67 +143,68 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
-					<div className=" w-full flex gap-2 flex-wrap">
-						<span className="font-medium leading-none uppercase">
-							ИИН/БИН: {review.iin}
-						</span>
+				{(review.adminComment && review.adminComment.length) ? (
+					<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+						<div className=" w-full flex gap-2 flex-wrap">
+							<span className="font-medium leading-none uppercase">
+								Отзыв заблокирован администратором
+							</span>
+						</div>
+						<div className=" w-full flex gap-2 flex-wrap">
+							<span className=" leading-none uppercase">
+								Причина блокировки: {review.adminComment}
+							</span>
+						</div>
 					</div>
-				</div>
-
-				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
-
-					<div className=" grid gap-2 lg:gap-4">
-
-						<div className="flex gap-2">
-							<span>ФИО/Компания:</span>
-							<span className="block">
-								{review.title}
-							</span>
+				) : (
+					<>
+						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+							<div className=" w-full flex gap-2 flex-wrap">
+								<span className="font-medium leading-none uppercase">
+									ИИН/БИН: {review.iin}
+								</span>
+							</div>
 						</div>
 
-						<div className=" flex gap-2">
-							<span>Отзыв:</span>
-							<span className='block'>{review.description}</span>
-						</div>
+						<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
-						<div className=" flex items-center gap-2">
-							<span>Рейтинг:</span>
-							<span className='flex items-center gap-1'>
-								<Star size={16} fill='#b4802e' />
-								{review.value}
-							</span>
-						</div>
+							<div className=" grid gap-2 lg:gap-4">
 
-						<div className=" flex gap-2">
-							<span>Теги:</span>
-							<span className="flex flex-wrap gap-2">
-								{review.tags?.map((tag, index) => (
-									<span key={index} className="p-2 border rounded-2xl text-xs">
-										{tag}
+								<div className="flex gap-2">
+									<span>ФИО/Компания:</span>
+									<span className="block">
+										{review.title}
 									</span>
-								))}
-							</span>
+								</div>
 
+								<div className=" flex gap-2">
+									<span>Отзыв:</span>
+									<span className='block'>{review.description}</span>
+								</div>
+
+								<div className=" flex items-center gap-2">
+									<span>Рейтинг:</span>
+									<span className='flex items-center gap-1'>
+										<Star size={16} fill='#b4802e' />
+										{review.value}
+									</span>
+								</div>
+
+								<div className=" flex gap-2">
+									<span>Теги:</span>
+									<span className="flex flex-wrap gap-2">
+										{review.tags?.map((tag, index) => (
+											<span key={index} className="p-2 border rounded-2xl text-xs">
+												{tag}
+											</span>
+										))}
+									</span>
+
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-
-				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
-					<div>
-
-					</div>
-					<div className=" flex justify-end gap-2 w-full lg:w-auto">
-						<Button
-							variant='outline'
-							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => handleRemove(review.id!)}
-						>
-							<Trash size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Удалить</span>
-						</Button>
-					</div>
-				</div>
+					</>
+				)}
 			</CardContent>
 		</Card>
 	)
