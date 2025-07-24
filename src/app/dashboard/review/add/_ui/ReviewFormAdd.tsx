@@ -215,7 +215,7 @@ export default function ReviewFormAdd() {
 
 					{(user?.balance ?? 0) < 500 && (
 						<div className="grid w-full gap-3 md:gap-5 items-center">
-							<div>Ваш баланс: {user?.balance ?? 0}</div>
+							<div>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0}</div>
 							<Button
 								variant={'outline'}
 								className='w-full'
