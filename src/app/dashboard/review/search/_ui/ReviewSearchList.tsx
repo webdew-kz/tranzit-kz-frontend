@@ -8,12 +8,15 @@ export default function ReviewSearchList() {
 
 	const setSearchReviews = useReviewSearchStore((state) => state.setSearchReviews);
 
+	const averageRating = useReviewSearchStore(state => state.averageRating);
+
 	if (!Array.isArray(searchReviews) || searchReviews.length === 0) {
 		return null
 	}
 
 	return (
 		<div className='grid gap-5'>
+			<h2>Средний рейтинг: {averageRating}</h2>
 			{searchReviews.map((review) => (
 				<ReviewSearchItem key={review.id} review={review} setSearchReviews={setSearchReviews} />
 			))}

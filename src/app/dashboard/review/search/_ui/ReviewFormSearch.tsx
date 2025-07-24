@@ -16,6 +16,8 @@ export default function ReviewFormSearch() {
 
 	const { setSearchReviews } = useReviewSearchStore()
 
+	const setAverageRating = useReviewSearchStore(state => state.setAverageRating);
+
 	const [pending, startTransition] = useTransition()
 
 	const reviewSchema = z.object({
@@ -43,6 +45,7 @@ export default function ReviewFormSearch() {
 				})
 
 				setSearchReviews(res.reviews)
+				setAverageRating(res.averageRating)
 			} catch (error) {
 				console.error(error)
 				toast.error('Ошибка при поиске ИИН/БИН', {

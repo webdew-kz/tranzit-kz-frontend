@@ -88,27 +88,12 @@ const ReviewSearchItem = memo(({ review, setReviews, rates, loading, setWishlist
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex justify-between w-full items-start lg:items-center mb-2">
 					<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-						<span className=' flex items-center gap-1'>
-							<ArrowBigUp size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Обновлено:</span>
-								<span className=' font-medium'>{review.updatedAt && formatRelativeDate(review.updatedAt)}</span>
-							</span>
-						</span>
 
 						<span className=' flex items-center gap-1'>
 							<ArrowBigDown size={16} />
 							<span className='truncate block text-sm'>
 								<span className=' mr-2 font-light'>Добавлено:</span>
 								<span className=' font-medium'>{review.createdAt && formatRelativeDate(review.createdAt)}</span>
-							</span>
-						</span>
-
-						<span className=' flex items-center gap-1'>
-							<Eye size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Просмотров:</span>
-								<span className=' font-medium'>{review?.views?.count}</span>
 							</span>
 						</span>
 					</div>
@@ -167,7 +152,7 @@ const ReviewSearchItem = memo(({ review, setReviews, rates, loading, setWishlist
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
 						<span className="font-medium leading-none uppercase">
-							{review.iin}
+							ИИН/БИН: {review.iin}
 						</span>
 					</div>
 				</div>

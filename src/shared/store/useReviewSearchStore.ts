@@ -11,6 +11,9 @@ interface ReviewSearchState {
         reviews: IReview[] | ((prev: IReview[]) => IReview[])
     ) => void;
     clearSearchReviews: () => void;
+
+    averageRating: string;
+    setAverageRating: (value: string) => void;
 }
 
 // Создание стора
@@ -28,4 +31,8 @@ export const useReviewSearchStore = create<ReviewSearchState>((set) => ({
         })),
 
     clearSearchReviews: () => set({ searchReviews: [] }),
+
+    averageRating: "",
+
+    setAverageRating: (value: string) => set({ averageRating: value }),
 }));

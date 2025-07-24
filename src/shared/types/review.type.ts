@@ -21,7 +21,9 @@ export interface IReview {
 
     user?: User;
 
-    rating: IRating;
+    rating?: IRating;
+
+    averageRating?: string;
 }
 
 export interface Views {
