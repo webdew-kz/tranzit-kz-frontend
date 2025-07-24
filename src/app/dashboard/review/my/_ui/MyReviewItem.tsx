@@ -144,18 +144,36 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 				</div>
 
 				{(review.adminComment && review.adminComment.length) ? (
-					<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3 text-(--dark-accent)">
-						<div className=" w-full flex gap-2 flex-wrap">
-							<span className="font-medium leading-none text-center uppercase">
-								Отзыв заблокирован администратором
-							</span>
+					<>
+						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3 text-(--dark-accent)">
+							<div className=" w-full flex gap-2 flex-wrap">
+								<span className="font-medium leading-none text-center uppercase">
+									Отзыв заблокирован администратором
+								</span>
+							</div>
+							<div className=" w-full flex gap-2 flex-wrap">
+								<span className=" leading-none ">
+									Причина блокировки: {review.adminComment}
+								</span>
+							</div>
 						</div>
-						<div className=" w-full flex gap-2 flex-wrap">
-							<span className=" leading-none ">
-								Причина блокировки: {review.adminComment}
-							</span>
+
+						<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
+							<div>
+
+							</div>
+							<div className=" flex justify-end gap-2 w-full lg:w-auto">
+								<Button
+									variant='outline'
+									className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
+									onClick={() => handleRemove(review.id!)}
+								>
+									<Trash size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
+									<span className=' hidden lg:block'>Удалить</span>
+								</Button>
+							</div>
 						</div>
-					</div>
+					</>
 				) : (
 					<>
 						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
