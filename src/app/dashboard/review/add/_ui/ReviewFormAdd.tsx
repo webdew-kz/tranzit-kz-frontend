@@ -137,13 +137,13 @@ export default function ReviewFormAdd() {
 					</div>
 
 					<div className='grid w-full gap-2 md:gap-3 items-start'>
-						<span className='grid w-full gap-2'>
+						<span className='grid w-full gap-1'>
 							<span className=' text-xs text-(--dark-accent)'>
 								ВНИМАНИЕ!
 							</span>
 							<span className=' text-xs text-(--dark-accent)'>
-								Убедительно просим воздержаться от оскорблений и нецензурной лексики.
-								В случае нарушения — ваш отзыв будет заблокирован.
+								Запрещены оскорбления и нецензурная лексика.
+								В случае нарушения ваш отзыв будет заблокирован без возврата денежных средств.
 							</span>
 						</span>
 						<Textarea
