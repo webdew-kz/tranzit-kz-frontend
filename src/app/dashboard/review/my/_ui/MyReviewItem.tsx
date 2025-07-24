@@ -154,27 +154,27 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 
 					<div className=" grid gap-2 lg:gap-4">
 
-						<div className="flex items-center gap-2">
+						<div className="flex gap-2">
 							<span>ФИО/Компания:</span>
 							<span className="block">
 								{review.title}
 							</span>
 						</div>
 
-						<div className=" flex items-center gap-2">
+						<div className=" flex gap-2">
 							<span>Отзыв:</span>
 							<span className='block'>{review.description}</span>
 						</div>
 
 						<div className=" flex items-center gap-2">
 							<span>Рейтинг:</span>
-							<span className='flex items-center gap-2'>
+							<span className='flex items-center gap-1'>
 								<Star size={16} fill='#b4802e' />
 								{review.value}
 							</span>
 						</div>
 
-						<div className=" flex items-center gap-2">
+						<div className=" flex gap-2">
 							<span>Теги:</span>
 							<span className="flex flex-wrap gap-2">
 								{review.tags?.map((tag, index) => (
