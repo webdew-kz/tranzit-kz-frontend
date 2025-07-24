@@ -203,6 +203,22 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 								</div>
 							</div>
 						</div>
+
+						<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
+							<div>
+
+							</div>
+							<div className=" flex justify-end gap-2 w-full lg:w-auto">
+								<Button
+									variant='outline'
+									className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
+									onClick={() => handleRemove(review.id!)}
+								>
+									<Trash size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
+									<span className=' hidden lg:block'>Удалить</span>
+								</Button>
+							</div>
+						</div>
 					</>
 				)}
 			</CardContent>
