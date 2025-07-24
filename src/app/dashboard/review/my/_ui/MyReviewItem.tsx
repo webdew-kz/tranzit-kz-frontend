@@ -114,27 +114,12 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 				<div className=" flex flex-col lg:flex-row justify-between w-full lg:items-center mb-2">
 
 					<div className=" flex flex-col order-2 lg:order-1 gap-1 lg:flex-row lg:gap-4 mb-3">
-						<span className=' flex items-center gap-1'>
-							<ArrowBigUp size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Обновлено:</span>
-								<span className=' font-medium'>{review.updatedAt && formatRelativeDate(review.updatedAt)}</span>
-							</span>
-						</span>
 
 						<span className=' flex items-center gap-1'>
 							<ArrowBigDown size={16} />
 							<span className='truncate block text-sm'>
 								<span className=' mr-2 font-light'>Добавлено:</span>
 								<span className=' font-medium'>{review.createdAt && formatRelativeDate(review.createdAt)}</span>
-							</span>
-						</span>
-
-						<span className=' flex items-center gap-1'>
-							<Eye size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Просмотров:</span>
-								<span className=' font-medium'>{review.views.count}</span>
 							</span>
 						</span>
 					</div>
@@ -160,7 +145,7 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
 						<span className="font-medium leading-none uppercase">
-							{review.iin}
+							ИИН/БИН: {review.iin}
 						</span>
 					</div>
 				</div>
@@ -222,30 +207,5 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
-
 
 export default MyReviewItem

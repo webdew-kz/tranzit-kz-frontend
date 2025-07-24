@@ -42,13 +42,13 @@ const ReviewSearchItem = memo(({ review, setReviews, rates, loading, setWishlist
 	const { user } = useUserStore()
 
 	const handleToggleBlock = async (reviewId: string) => {
-		if (isBlocked) {
+		if (review.isBlocked) {
 			const res = await unlock(reviewId);
 
 			setIsBlocked(false)
 
 			setReviews((prev) =>
-				prev.map((r) => (r.id === review.id ? { ...r, isBlocked: true } : r))
+				prev.map((r) => (r.id === review.id ? { ...r, isBlocked: false } : r))
 			);
 
 			toast.success(res.message, {
