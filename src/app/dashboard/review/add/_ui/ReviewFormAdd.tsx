@@ -214,21 +214,26 @@ export default function ReviewFormAdd() {
 					</div>
 
 					{(user?.balance ?? 0) < 500 && (
-						<div className="grid w-full gap-3 md:gap-5 items-center">
-							<div>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
-							<Button
-								variant={'outline'}
-								className='w-full'
-								asChild
-							>
-								<Link
-									href='/dashboard/payment/add'
-									className='flex gap-3 items-center justify-center text-(--dark-accent)'
+						<>
+							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
+								<div>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
+							</div>
+
+							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
+								<Button
+									variant={'outline'}
+									className='w-full'
+									asChild
 								>
-									Пополнить баланс
-								</Link>
-							</Button>
-						</div>
+									<Link
+										href='/dashboard/payment/add'
+										className='flex gap-3 items-center justify-center text-(--dark-accent)'
+									>
+										Пополнить баланс
+									</Link>
+								</Button>
+							</div>
+						</>
 					)}
 
 				</form>
