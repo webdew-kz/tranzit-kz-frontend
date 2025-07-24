@@ -16,10 +16,16 @@ export default function ReviewSearchList() {
 
 	return (
 		<div className='grid gap-5'>
-			<h2>Средний рейтинг: {averageRating}</h2>
-			{searchReviews.map((review) => (
-				<ReviewSearchItem key={review.id} review={review} setSearchReviews={setSearchReviews} />
-			))}
+			<h2 className=' text-xl text-(--dark-accent) text-center font-bold'>Средний рейтинг: {averageRating}</h2>
+			{searchReviews
+				.filter((review) => !review.isBlocked) // оставляем только не заблокированные
+				.map((review) => (
+					<ReviewSearchItem
+						key={review.id}
+						review={review}
+						setSearchReviews={setSearchReviews}
+					/>
+				))}
 		</div>
 	)
 }
