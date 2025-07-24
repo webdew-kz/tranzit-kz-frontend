@@ -7,7 +7,9 @@ import { IReview } from "../types/review.type";
 // Тип состояния стора
 interface ReviewSearchState {
     searchReviews: IReview[];
-    setSearchReviews: (reviews: IReview[]) => void;
+    setSearchReviews: (
+        reviews: IReview[] | ((prev: IReview[]) => IReview[])
+    ) => void;
     clearSearchReviews: () => void;
 }
 
@@ -15,7 +17,15 @@ interface ReviewSearchState {
 export const useReviewSearchStore = create<ReviewSearchState>((set) => ({
     searchReviews: [],
 
-    setSearchReviews: (reviews) => set({ searchReviews: reviews }),
+    setSearchReviews: (reviewsOrUpdater) =>
+        set((state) => ({
+            searchReviews:
+                typeof reviewsOrUpdater === "function"
+                    ? (reviewsOrUpdater as (prev: IReview[]) => IReview[])(
+                          state.searchReviews
+                      )
+                    : reviewsOrUpdater,
+        })),
 
     clearSearchReviews: () => set({ searchReviews: [] }),
 }));

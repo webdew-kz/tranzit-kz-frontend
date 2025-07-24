@@ -21,6 +21,7 @@ import { Textarea } from '@/shared/components/ui/textarea'
 
 interface ReviewSearchItemProps {
 	review: IReview
+	setSearchReviews: (reviews: IReview[] | ((prev: IReview[]) => IReview[])) => void;
 	rates?: any
 	loading?: boolean
 	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>
@@ -28,7 +29,7 @@ interface ReviewSearchItemProps {
 	isWishBtn?: boolean
 }
 
-const ReviewSearchItem = memo(({ review, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: ReviewSearchItemProps) => {
+const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: ReviewSearchItemProps) => {
 
 	const [isWishlist, setIsWishlist] = useState(false)
 
@@ -46,6 +47,10 @@ const ReviewSearchItem = memo(({ review, rates, loading, setWishlistLength, isCo
 
 			setIsBlocked(false)
 
+			setSearchReviews((prev: IReview[]) =>
+				prev.map((r) => r.id === reviewId ? { ...r, isBlocked: false } : r)
+			);
+
 			toast.success(res.message, {
 				position: "top-center",
 			});
@@ -60,6 +65,11 @@ const ReviewSearchItem = memo(({ review, rates, loading, setWishlistLength, isCo
 		const res = await lock(reviewId, adminComment);
 
 		setIsBlocked(true)
+
+		setSearchReviews((prev: IReview[]) =>
+			prev.map((r) => r.id === reviewId ? { ...r, isBlocked: true } : r)
+		);
+
 
 		toast.success(res.message, {
 			position: "top-center",

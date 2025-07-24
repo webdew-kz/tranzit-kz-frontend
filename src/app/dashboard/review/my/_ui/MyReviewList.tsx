@@ -10,7 +10,7 @@ import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
 import { toast } from 'sonner';
-import { findByUserId, removeMany } from '../actions';
+import { findAllByUserId, removeMany } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
@@ -24,7 +24,6 @@ export default function MyReviewList() {
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
 
 	const [pending, startTransition] = useTransition()
-	const path = usePathname();
 
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
@@ -37,7 +36,7 @@ export default function MyReviewList() {
 
 		try {
 
-			const res = await findByUserId(page);
+			const res = await findAllByUserId(page);
 
 			setReviews(prev => {
 				const merged = [...prev, ...res.reviews];
@@ -75,10 +74,10 @@ export default function MyReviewList() {
 	const fetchData = async () => {
 
 		try {
-			const data = await findByUserId(page)
+			const data = await findAllByUserId(page)
 
 			if (data.length === 0) {
-				toast.error("У вас нет активных вакансий", {
+				toast.error("У вас нет отзывов", {
 					position: 'top-center',
 				});
 

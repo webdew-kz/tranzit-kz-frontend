@@ -86,7 +86,7 @@
 //     }
 // }
 
-export async function findByUserId(page: number) {
+export async function findAllByUserId(page: number) {
     try {
         const res = await fetch(
             `${process.env.SERVER_URL}/review/find-by-user-id`,
