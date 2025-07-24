@@ -21,6 +21,30 @@ export async function findAll(page: number) {
     }
 }
 
+export async function findByIin(data: any) {
+    try {
+        const res = await fetch(
+            `${process.env.SERVER_URL}/review/find-by-iin`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+                credentials: "include",
+            }
+        );
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}
+
 export async function lock(reviewId: string, adminComment: string) {
     try {
         const res = await fetch(`${process.env.SERVER_URL}/review/lock`, {

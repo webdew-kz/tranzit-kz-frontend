@@ -38,6 +38,7 @@ export default function ReviewFormSearch() {
 		startTransition(async () => {
 
 			try {
+
 				setSearchReviews([])
 				setAverageRating('')
 

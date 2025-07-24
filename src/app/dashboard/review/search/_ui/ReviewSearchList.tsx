@@ -1,4 +1,5 @@
 "use client"
+import { useEffect } from 'react';
 import ReviewSearchItem from './ReviewSearchItem'
 import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore'
 
@@ -7,6 +8,10 @@ export default function ReviewSearchList() {
 	const { searchReviews } = useReviewSearchStore()
 
 	const setSearchReviews = useReviewSearchStore((state) => state.setSearchReviews);
+
+	useEffect(() => {
+		setSearchReviews([])
+	}, [])
 
 	const averageRating = useReviewSearchStore(state => state.averageRating);
 

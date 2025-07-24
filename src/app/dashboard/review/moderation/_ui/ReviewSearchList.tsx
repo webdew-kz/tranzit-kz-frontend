@@ -1,15 +1,25 @@
 "use client"
 import { useEffect, useState, useTransition } from 'react';
-import ReviewSearchItem from './ReviewSearchItem'
 import { IReview } from '@/shared/types/review.type';
 import { findAll } from '../actions';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { toast } from 'sonner';
 import { Loader, Loader2 } from 'lucide-react';
+import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore';
+import ReviewItem from './ReviewItem';
+import ReviewSearchItem from './ReviewSearchItem';
 
 export default function ReviewSearchList() {
 
 	const [reviews, setReviews] = useState<IReview[]>([]);
+
+	const { searchReviews } = useReviewSearchStore()
+
+	const setSearchReviews = useReviewSearchStore((state) => state.setSearchReviews);
+
+	useEffect(() => {
+		setSearchReviews([])
+	}, [])
 
 	const [pending, startTransition] = useTransition()
 
@@ -94,27 +104,41 @@ export default function ReviewSearchList() {
 
 	return (
 		<>
-			<div className='grid gap-5'>
-				{reviews.map((review) => (
-					<ReviewSearchItem key={review.id} review={review} setReviews={setReviews} />
-				))}
+			{(searchReviews && searchReviews.length) ? (
+				searchReviews
+					.map((review) => (
+						<ReviewSearchItem
+							key={review.id}
+							review={review}
+							setSearchReviews={setSearchReviews}
+						/>
+					))
+			) : (
+				<>
+					<div className='grid gap-5'>
+						{reviews.map((review) => (
+							<ReviewItem key={review.id} review={review} setReviews={setReviews} />
+						))}
 
-				{!reviews.length && (
-					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет отзывов</p>
+						{!reviews.length && (
+							<div className='flex justify-center items-center'>
+								<p className='text-muted-foreground'>У вас нет отзывов</p>
+							</div>
+						)}
+						{isLoading &&
+							<div className="flex justify-center items-center">
+								<Loader2 className="animate-spin" />
+							</div>
+						}
 					</div>
-				)}
-				{isLoading &&
-					<div className="flex justify-center items-center">
-						<Loader2 className="animate-spin" />
-					</div>
-				}
-			</div>
-			{
-				hasMore && (
-					<div ref={bottomRef} className="h-10" />
-				)
-			}
+					{
+						hasMore && (
+							<div ref={bottomRef} className="h-10" />
+						)
+					}
+				</>
+			)}
+
 		</>
 	)
 }

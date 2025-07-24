@@ -21,7 +21,7 @@ import { Textarea } from '@/shared/components/ui/textarea'
 
 interface ReviewSearchItemProps {
 	review: IReview
-	setSearchReviews: (reviews: IReview[] | ((prev: IReview[]) => IReview[])) => void;
+	setReviews: (reviews: IReview[] | ((prev: IReview[]) => IReview[])) => void;
 	rates?: any
 	loading?: boolean
 	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>
@@ -29,7 +29,7 @@ interface ReviewSearchItemProps {
 	isWishBtn?: boolean
 }
 
-const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: ReviewSearchItemProps) => {
+const ReviewItem = memo(({ review, setReviews, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: ReviewSearchItemProps) => {
 
 	const [isWishlist, setIsWishlist] = useState(false)
 
@@ -42,13 +42,13 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 	const { user } = useUserStore()
 
 	const handleToggleBlock = async (reviewId: string) => {
-		if (isBlocked) {
+		if (review.isBlocked) {
 			const res = await unlock(reviewId);
 
 			setIsBlocked(false)
 
-			setSearchReviews((prev: IReview[]) =>
-				prev.map((r) => r.id === reviewId ? { ...r, isBlocked: false } : r)
+			setReviews((prev) =>
+				prev.map((r) => (r.id === review.id ? { ...r, isBlocked: false } : r))
 			);
 
 			toast.success(res.message, {
@@ -66,8 +66,8 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 
 		setIsBlocked(true)
 
-		setSearchReviews((prev: IReview[]) =>
-			prev.map((r) => r.id === reviewId ? { ...r, isBlocked: true } : r)
+		setReviews((prev) =>
+			prev.map((r) => (r.id === review.id ? { ...r, isBlocked: true } : r))
 		);
 
 
@@ -290,4 +290,4 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 })
 
 
-export default ReviewSearchItem
+export default ReviewItem
