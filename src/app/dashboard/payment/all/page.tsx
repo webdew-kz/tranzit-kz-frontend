@@ -1,3 +1,4 @@
+'use client'
 import { useUserStore } from '@/shared/store/useUserStore';
 import MyPaymentList from './_ui/MyPaymentList'
 import { useRouter } from 'next/navigation';
