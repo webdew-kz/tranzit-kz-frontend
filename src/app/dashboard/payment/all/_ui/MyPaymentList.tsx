@@ -127,7 +127,7 @@ export default function MyPaymentList() {
 				</CardContent>
 			</Card>
 			<div className=' grid gap-5'>
-				{payments.length > 0 && payments.map((payment) => (
+				{payments.length && payments.length > 0 && payments.map((payment) => (
 					<MyPaymentItem
 						paymentInitial={payment}
 						key={payment.id}
