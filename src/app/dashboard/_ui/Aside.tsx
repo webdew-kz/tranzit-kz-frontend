@@ -211,7 +211,7 @@ export default function Aside() {
 							><CreditCard
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? '!text-background' : ''}`)}
 									size={16}
-								/> Пополнение</Link>
+								/> Баланс личного кабинета</Link>
 						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
@@ -220,7 +220,7 @@ export default function Aside() {
 							><MessageCircleMore
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? '!text-background' : ''}`)}
 									size={16}
-								/> Отзывы по ИИН/БИН</Link>
+								/> Черный список/Отзывы по ИИН/БИН</Link>
 						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link

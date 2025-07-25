@@ -33,7 +33,7 @@ export default function page() {
 					href='/dashboard/payment'
 					className='flex gap-3 items-center justify-start'
 				>
-					<CreditCard /> Пополнение
+					<CreditCard /> Баланс личного кабинета
 				</Link>
 			</Button>
 			<Button
@@ -46,7 +46,7 @@ export default function page() {
 					href='/dashboard/review'
 					className='flex gap-3 items-center justify-start'
 				>
-					<MessageCircleMore /> Отзывы по ИИН/БИН
+					<MessageCircleMore /> Черный список/Отзывы по ИИН/БИН
 				</Link>
 			</Button>
 			{/* <Button
