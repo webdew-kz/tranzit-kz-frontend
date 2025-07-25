@@ -46,7 +46,7 @@ export default function page() {
 					href='/dashboard/review'
 					className='flex gap-3 items-center justify-start'
 				>
-					<MessageCircleMore /> Черный список/Отзывы по ИИН/БИН
+					<MessageCircleMore /> Черный список / Отзывы
 				</Link>
 			</Button>
 			{/* <Button

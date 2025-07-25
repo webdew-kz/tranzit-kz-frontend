@@ -220,7 +220,7 @@ export default function Aside() {
 							><MessageCircleMore
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? '!text-background' : ''}`)}
 									size={16}
-								/> Черный список/Отзывы по ИИН/БИН</Link>
+								/> Черный список / Отзывы</Link>
 						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link

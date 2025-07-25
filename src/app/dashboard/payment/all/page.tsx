@@ -4,8 +4,7 @@ import MyPaymentList from './_ui/MyPaymentList'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default async function page() {
-
+export default function Page() {
 	const { user } = useUserStore();
 	const router = useRouter();
 	const [isAllowed, setIsAllowed] = useState<boolean | null>(null);
@@ -19,11 +18,9 @@ export default async function page() {
 		}
 	}, [user, router]);
 
-	if (isAllowed === null) return null; // предотвращает рендер до проверки
+	if (isAllowed === null) return null;
 
-	if (!isAllowed) return null; // безопасное завершение
+	if (!isAllowed) return null;
 
-	return (
-		<MyPaymentList />
-	)
+	return <MyPaymentList />;
 }
