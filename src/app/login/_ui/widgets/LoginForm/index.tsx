@@ -229,7 +229,7 @@ export default function LoginForm() {
 													<Input
 														type={showPassword ? 'text' : 'password'}
 														value={formPhone.watch('password')}
-														placeholder='Не менее 6 символов'
+														placeholder='Введите пароль'
 														onChange={(event) => formPhone.setValue('password', event.target.value)}
 														className='!rounded-md !h-[36px] !lh-[36px] !overflow-hidden leading-[36px]'
 														disabled={pending}

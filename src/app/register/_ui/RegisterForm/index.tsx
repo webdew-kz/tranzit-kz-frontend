@@ -464,7 +464,7 @@ export default function RegisterForm() {
 													<FormControl className='justify-center'>
 														<div className=' flex flex-row gap-2'>
 															<Input
-																placeholder='Не менее 6 символов'
+																placeholder='Не менее 4 символов'
 																type={showPassword ? 'text' : 'password'}
 																value={formPass.watch('password')}
 																onChange={(event) => formPass.setValue('password', event.target.value)}
