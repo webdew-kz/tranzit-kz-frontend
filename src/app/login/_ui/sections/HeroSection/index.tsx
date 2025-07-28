@@ -12,15 +12,15 @@ export default function HeroSection() {
 
 				<LoginForm />
 
-				<div className=" flex justify-between w-full">
+				<div className=" flex justify-center w-full">
 					<Link
 						href={'/register'}
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
 					>Нет аккаунта?</Link>
-					<Link
+					{/* <Link
 						href={'/reset'}
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
-					>Забыли пароль?</Link>
+					>Забыли пароль?</Link> */}
 				</div>
 			</div>
 		</div>
