@@ -37,7 +37,7 @@ const schemaPhone = z.object({
 type FormPhoneValues = z.infer<typeof schemaPhone>
 
 const schemaOtp = z.object({
-	otp: z.string().min(6, {
+	otp: z.string().min(4, {
 		message: "Введите 6-ти значный код",
 	}),
 })
@@ -275,7 +275,7 @@ export default function RegisterForm() {
 	}
 
 	function onErrorPass(errors: any) {
-		toast.error(errors.password?.message ?? 'Пароль должен быть не менее 6 символов', {
+		toast.error(errors.password?.message ?? 'Пароль должен быть не менее 4 символов', {
 			position: 'top-center',
 		})
 	}
