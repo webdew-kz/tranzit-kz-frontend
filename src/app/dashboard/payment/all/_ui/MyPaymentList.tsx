@@ -148,7 +148,7 @@ export default function MyPaymentList() {
 				</CardContent>
 			</Card>
 			<div className=' grid gap-5'>
-				{payments.length && payments.length > 0 && payments.map((payment) => (
+				{(payments.length && payments.length > 0) ? payments.map((payment) => (
 					<MyPaymentItem
 						paymentInitial={payment}
 						key={payment.id}
@@ -157,9 +157,7 @@ export default function MyPaymentList() {
 						rates={rates}
 						loading={pending}
 					/>
-				))}
-
-				{!payments.length && (
+				)) : (
 					<div className='flex justify-center items-center'>
 						<p className='text-muted-foreground'>Нет платежей</p>
 					</div>
