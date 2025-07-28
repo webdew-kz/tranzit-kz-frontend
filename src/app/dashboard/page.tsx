@@ -15,13 +15,13 @@ export default function DashboardPage() {
 			<Loader />
 		)
 	}
-	if (!user?.name && user?.phone) {
-		return (
-			<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
-				<FormName />
-			</div>
-		)
-	}
+	// if (!user?.name && user?.phone) {
+	// 	return (
+	// 		<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
+	// 			<FormName />
+	// 		</div>
+	// 	)
+	// }
 
 	if (!user?.name && !user?.email) {
 		return (
