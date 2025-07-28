@@ -10,7 +10,7 @@ import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
 import { toast } from 'sonner';
-import { getAll } from '../actions';
+import { deleteAll, getAll } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
@@ -49,8 +49,6 @@ export default function MyPaymentList() {
 
 				return unique;
 			});
-
-			setTotalAmount(res.totalAmount)
 
 			setHasMore(res.hasMore);
 
@@ -92,6 +90,8 @@ export default function MyPaymentList() {
 
 				// const sortedData = data.sort((a, b) => (b.updatedAt ?? '').localeCompare(a.updatedAt ?? ''));
 
+
+				setTotalAmount(data.totalAmount)
 				setPayments(data.payments)
 			}
 		} catch (error) {
@@ -99,6 +99,22 @@ export default function MyPaymentList() {
 		}
 
 	};
+
+	const handleDeleteAll = async () => {
+		try {
+			const confirmed = window.confirm("Вы уверены, что хотите удалить все платежи?");
+
+			if (!confirmed) return;
+
+			await deleteAll();
+
+			alert("Все платежи успешно удалены.");
+		} catch (error) {
+			console.error("Ошибка удаления:", error);
+			alert("Произошла ошибка при удалении.");
+		}
+	};
+
 
 
 	if (loading || pending) {
@@ -110,19 +126,21 @@ export default function MyPaymentList() {
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
 					<div className=" grid w-full lg:flex ">
-						<Button asChild className='bg-background text-muted-foreground hover:text-background rounded-r-none'>
+						<Button asChild className='bg-background text-white hover:text-background rounded-r-none'>
 							<span>
 								Всего: {(totalAmount as number)?.toLocaleString('ru-RU')} ₸
 							</span>
 						</Button>
-						{/* <Button asChild className={cn(path === '/dashboard/cargo/my/archive' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-l-none')}>
-							<Link href="/dashboard/cargo/my/archive">
-								Архив
-							</Link>
-						</Button> */}
+
 					</div>
 					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
-
+						<Button
+							type='button'
+							className=' bg-(--dark-accent) md:col-start-2 w-full'
+							onClick={handleDeleteAll}
+						>
+							Пополнить
+						</Button>
 					</div>
 				</CardContent>
 			</Card>
