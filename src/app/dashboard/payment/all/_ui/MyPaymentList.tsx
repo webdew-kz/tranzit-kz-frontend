@@ -127,13 +127,13 @@ export default function MyPaymentList() {
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
 					<div className=" grid w-full lg:flex ">
-						{(totalAmount && totalAmount > 0) && (
+						{(totalAmount && totalAmount > 0) ? (
 							<Button asChild className='bg-background text-white hover:text-background rounded-r-none'>
 								<span>
 									Всего: {(totalAmount as number)?.toLocaleString('ru-RU')} ₸
 								</span>
 							</Button>
-						)}
+						) : null}
 
 					</div>
 					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
