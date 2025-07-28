@@ -30,10 +30,7 @@ export default function FormNameEmail() {
 
 	const schema = z.object({
 		name: z.string().min(1).max(50),
-		email: z.string().refine(
-			(val) => isValidPhoneNumber("+" + val),
-			{ message: "Некорректный номер" }
-		),
+		email: z.string().email({ message: 'Неверный формат email' }),
 		otp: z.string().optional(),
 	})
 
