@@ -153,6 +153,11 @@ export default function RegisterForm() {
 					return
 				}
 
+				setFormData((prev) => ({
+					...prev,
+					login: values.phone,
+				}))
+
 				setStepPhoneRegister('password')
 
 
@@ -216,7 +221,7 @@ export default function RegisterForm() {
 
 	async function onSubmitPass(values: FormPassValues) {
 		if (values.password.length < 4) {
-			toast.error('Пароль должен быть не менее 6 символов', {
+			toast.error('Пароль должен быть не менее 4 символов', {
 				position: 'top-center',
 			});
 			return;
