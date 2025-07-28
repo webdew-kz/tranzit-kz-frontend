@@ -45,8 +45,8 @@ const schemaOtp = z.object({
 type FormOtpValues = z.infer<typeof schemaOtp>
 
 const schemaPass = z.object({
-	password: z.string().min(6, {
-		message: "Пароль должен быть не менее 6 символов",
+	password: z.string().min(4, {
+		message: "Пароль должен быть не менее 4 символов",
 	})
 })
 

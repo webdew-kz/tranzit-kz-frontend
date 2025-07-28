@@ -29,8 +29,8 @@ const schemaPhone = z.object({
 		(val) => isValidPhoneNumber("+" + val),
 		{ message: 'Некорректный номер' }
 	),
-	password: z.string().min(6, {
-		message: "Пароль должен быть не менее 6 символов",
+	password: z.string().min(4, {
+		message: "Пароль должен быть не менее 4 символов",
 	})
 })
 
@@ -40,8 +40,8 @@ const schemaEmail = z.object({
 	email: z.string().email({
 		message: "Некорректный email",
 	}),
-	password: z.string().min(6, {
-		message: "Пароль должен быть не менее 6 символов",
+	password: z.string().min(4, {
+		message: "Пароль должен быть не менее 4 символов",
 	})
 })
 
