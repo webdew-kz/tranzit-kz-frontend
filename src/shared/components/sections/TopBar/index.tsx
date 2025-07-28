@@ -1,4 +1,4 @@
-'use client'
+
 
 import { getPrefLangCookie } from '@/shared/lib/getPrefLangCookie'
 import Logo from '@/shared/components/widgets/logo'
@@ -6,15 +6,10 @@ import { ThemeToggle } from '@/shared/components/widgets/theme-toggle'
 import { isAuth } from '@/shared/lib/isCookies'
 import Logout from './Logout'
 import { GoogleTranslate } from '../../widgets/GoogleTranslate'
-import { useEffect, useState } from 'react'
 
 export default async function TopBar() {
 
-	const [isAuthUser, setIsAuthUser] = useState<boolean | null>(null)
-
-	useEffect(() => {
-		isAuth().then(setIsAuthUser)
-	}, [])
+	const isAuthUser = await isAuth()
 
 	return (
 		<section className='h-15 flex items-center px-4 w-full border-b border-(--dark-accent) z-1 fixed !top-0 bg-background'>
@@ -28,7 +23,7 @@ export default async function TopBar() {
 				</a>
 				<GoogleTranslate prefLangCookie={await getPrefLangCookie()} />
 				<ThemeToggle />
-				{isAuthUser ? <Logout /> : null}
+				<Logout isAuthUser={isAuthUser} />
 			</div>
 		</section>
 	)
