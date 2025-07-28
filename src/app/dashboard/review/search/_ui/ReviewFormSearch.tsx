@@ -70,7 +70,7 @@ export default function ReviewFormSearch() {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Поиск по ИИН/БИН</CardTitle>
+				<CardTitle className='text-xl text-center'>Поиск отзыва</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
@@ -80,7 +80,7 @@ export default function ReviewFormSearch() {
 					<div className={cn('grid w-full gap-3 md:gap-5 items-start')}>
 						<Input
 							type='text'
-							placeholder="Укажите ИИН/БИН"
+							placeholder="Укажите номер телефона или ИИН/БИН"
 							className='text-sm'
 							required
 							{...form.register('iin')}

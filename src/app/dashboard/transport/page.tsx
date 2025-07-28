@@ -41,7 +41,7 @@ export default function page() {
 					href='/dashboard/transport/wishlist'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Star /> Избранные транспорты
+					<Star /> Избранный транспорт
 				</Link>
 			</Button>
 			<Button
@@ -54,7 +54,7 @@ export default function page() {
 					href='/dashboard/transport/my'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Truck /> Мои транспорты
+					<Truck /> Мой автопарк
 				</Link>
 			</Button>
 		</div>

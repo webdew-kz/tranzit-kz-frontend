@@ -122,7 +122,7 @@ export default function ReviewFormAdd() {
 					<div className='grid w-full gap-3 md:gap-5 md:grid-cols-2 items-start'>
 						<Input
 							type='text'
-							placeholder="Укажите ИИН/БИН"
+							placeholder="Укажите номер телефона или ИИН/БИН"
 							className='text-sm'
 							required
 							{...form.register('iin')}
