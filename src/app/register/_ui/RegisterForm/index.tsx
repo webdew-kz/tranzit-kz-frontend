@@ -398,7 +398,7 @@ export default function RegisterForm() {
 										className='w-full bg-(--dark-accent)'
 										disabled={loading}
 									>
-										{loading ? (<><Loader2 className="animate-spin stroke-accent" /> Отправить код</>) : "Отправить код"}
+										{loading ? (<><Loader2 className="animate-spin stroke-accent" /> Далее</>) : "Далее"}
 									</Button>
 								</form>
 							</Form>
