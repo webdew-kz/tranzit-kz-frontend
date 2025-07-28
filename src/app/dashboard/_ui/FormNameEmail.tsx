@@ -20,7 +20,7 @@ import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/shar
 import { Loader2 } from 'lucide-react'
 
 
-export default function FormNamePhone() {
+export default function FormNameEmail() {
 
 	const [step, setStep] = useState<'number' | 'code'>('number')
 
@@ -30,7 +30,7 @@ export default function FormNamePhone() {
 
 	const schema = z.object({
 		name: z.string().min(1).max(50),
-		phone: z.string().refine(
+		email: z.string().refine(
 			(val) => isValidPhoneNumber("+" + val),
 			{ message: "Некорректный номер" }
 		),
@@ -41,76 +41,14 @@ export default function FormNamePhone() {
 		resolver: zodResolver(schema),
 		defaultValues: {
 			name: "",
-			phone: "",
+			email: "",
 			otp: "",
 		},
 	})
 
-	// useEffect(() => {
-	// 	if (!window.recaptchaVerifier) {
-	// 		const verifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-	// 			size: 'invisible',
-	// 			callback: (response: string) => {
-	// 				console.log('reCAPTCHA resolved', response);
-	// 			},
-	// 		});
-	// 		verifier.render().then((widgetId) => {
-	// 			window.recaptchaVerifier = verifier;
-	// 			window.recaptchaWidgetId = widgetId;
-	// 		});
-	// 	}
-	// }, []);
-
-
-	// const onSubmit = async (values: z.infer<typeof schema>) => {
-	// 	if (step === "number") {
-
-	// 		const res = await isExistingUser(values.phone)
-
-	// 		if (res.isExistingUser) {
-	// 			toast.error('Пользователь уже существует', {
-	// 				position: 'top-center',
-	// 			});
-	// 			return
-	// 		}
-
-	// 		let appVerifier = window.recaptchaVerifier;
-
-	// 		signInWithPhoneNumber(auth, '+' + values.phone, appVerifier)
-	// 			.then((confirmationResult) => {
-	// 				window.confirmationResult = confirmationResult
-	// 				toast.success('Введите код из СМС', {
-	// 					position: 'top-center',
-	// 					duration: 5000,
-	// 				})
-	// 				setStep('code')
-	// 			})
-	// 			.catch((error) => {
-	// 				console.error(error)
-	// 				toast.error('Ошибка при отправке кода', {
-	// 					position: 'top-center',
-	// 				})
-	// 			}).finally(() => {
-	// 				form.setValue("otp", "")
-	// 			})
-
-	// 	} else if (step === "code") {
-	// 		// подтверждение кода
-	// 		const { otp, name, phone } = values
-	// 		const result = await window.confirmationResult.confirm(otp!)
-	// 		console.log("Firebase user:", result.user)
-
-	// 		const response = await endRegister({ name, phone })
-	// 		toast.success(response.message, {
-	// 			position: 'top-center',
-	// 		})
-	// 		setUser(response.updatedUser)
-	// 	}
-	// }
-
 	const onSubmit = async (values: z.infer<typeof schema>) => {
-		const { name, phone } = values
-		const response = await endRegister({ name, phone })
+		const { name, email } = values
+		const response = await endRegister({ name, email })
 		toast.success(response.message, {
 			position: 'top-center',
 		})
@@ -256,25 +194,13 @@ export default function FormNamePhone() {
 					/>
 					<FormField
 						control={form.control}
-						name="phone"
+						name="email"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Ваш номер телефона</FormLabel>
+								<FormLabel>Ваш e-mail</FormLabel>
 								<FormControl>
-									<PhoneInput
-										localization={ru}
-										country="kz"
-										containerClass="!w-full dark:!bg-background"
-										inputClass="!rounded-lg !h-[36px] !lh-[36px] !overflow-hidden dark:!bg-input/30 !border-input !w-full"
-										enableSearch={true}
-										disableSearchIcon={true}
-										searchPlaceholder='Поиск'
-										searchClass='dark:!bg-background'
-										dropdownClass='dark:!bg-background '
-										buttonClass="dark:!bg-background !border-input"
-										buttonStyle={{ borderRadius: '8px 0 0 8px' }}
-										disableCountryGuess={true}
-										placeholder="Введите номер телефона"
+									<Input
+										placeholder="Введите ваш e-mail"
 										value={field.value}
 										onChange={field.onChange}
 									/>

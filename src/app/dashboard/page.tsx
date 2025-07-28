@@ -2,7 +2,7 @@
 import { useUserStore } from '@/shared/store/useUserStore'
 import React from 'react'
 import FormName from './_ui/FormName'
-import FormNamePhone from './_ui/FormNamePhone'
+import FormNameEmail from './_ui/FormNameEmail'
 import Loader from '@/shared/components/widgets/Loader'
 
 export default function DashboardPage() {
@@ -23,10 +23,10 @@ export default function DashboardPage() {
 		)
 	}
 
-	if (!user?.name && !user?.phone) {
+	if (!user?.name && !user?.email) {
 		return (
 			<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
-				<FormNamePhone />
+				<FormNameEmail />
 			</div>
 		)
 	}

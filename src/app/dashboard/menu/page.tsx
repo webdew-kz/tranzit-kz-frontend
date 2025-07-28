@@ -59,7 +59,7 @@ export default function page() {
 					href='/dashboard/support'
 					className='flex gap-3 items-center justify-start'
 				>
-					<ShieldUser /> Написать техподдержке
+					<ShieldUser /> Техподдержка сайта
 				</Link>
 			</Button>
 			<Button
