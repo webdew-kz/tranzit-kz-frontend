@@ -21,7 +21,13 @@ export default function ReviewFormSearch() {
 	const [pending, startTransition] = useTransition()
 
 	const reviewSchema = z.object({
-		iin: z.string()
+		iin: z.preprocess((val) => {
+			if (typeof val === 'string') {
+				// Удаляем все символы кроме цифр
+				return val.replace(/[^\d]/g, '')
+			}
+			return val
+		}, z.string().length(11, { message: 'минимум 11 цифр если номер телефона, 12 цифр если ИИН' })),
 	});
 
 	type IReview = z.infer<typeof reviewSchema>
