@@ -143,5 +143,5 @@ export enum PartsBrandEnum {
 
 export enum StatusEnum {
     NEW = "Новый", // новый
-    USED = "С пробегом", // б/у
+    USED = "Б/у", // б/у
 }
