@@ -175,7 +175,7 @@ export default function LoginForm() {
 	return (
 		<>
 			<Tabs defaultValue="phone" className="w-full">
-				<TabsList className='grid w-full grid-cols-2 mb-4'>
+				{/* <TabsList className='grid w-full grid-cols-2 mb-4'>
 					<TabsTrigger
 						value="phone"
 						className='dark:data-[state=active]:bg-background border-0 text-[10px]'
@@ -184,7 +184,7 @@ export default function LoginForm() {
 						value="email"
 						className='dark:data-[state=active]:bg-background border-0 text-[10px]'
 					>Email</TabsTrigger>
-				</TabsList>
+				</TabsList> */}
 				<TabsContent value="phone">
 					<div className="w-full flex flex-col gap-6 justify-center">
 						<Form {...formPhone}>
@@ -258,7 +258,7 @@ export default function LoginForm() {
 						</Form>
 					</div>
 				</TabsContent>
-				<TabsContent value="email">
+				{/* <TabsContent value="email">
 					<div className="w-full flex flex-col gap-6 justify-center">
 						<Form {...formEmail}>
 							<form onSubmit={formEmail.handleSubmit(onSubmitEmail, onErrorEmail)} className="w-full flex flex-col gap-2">
@@ -318,7 +318,7 @@ export default function LoginForm() {
 							</form>
 						</Form>
 					</div>
-				</TabsContent>
+				</TabsContent> */}
 			</Tabs>
 		</>
 	)
