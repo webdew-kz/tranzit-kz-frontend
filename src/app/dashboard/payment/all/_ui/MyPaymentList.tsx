@@ -142,7 +142,7 @@ export default function MyPaymentList() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							onClick={handleDeleteAll}
 						>
-							Пополнить
+							Очистить платежи
 						</Button>
 					</div>
 				</CardContent>
