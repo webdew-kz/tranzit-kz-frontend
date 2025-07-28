@@ -193,3 +193,10 @@ svg.svgPathAccent path {
 a.linkSvgPathDark:hover svg path {
     fill: #0b0b0b;
 }
+
+.skiptranslate {
+    display: none !important;
+    visibility: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+}
