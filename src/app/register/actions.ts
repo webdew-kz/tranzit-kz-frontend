@@ -90,3 +90,27 @@ export async function isExistingUserForEmail(email: string) {
         throw new Error("Ошибка при проверке существования пользователя");
     }
 }
+
+// export async function register() {
+//     try {
+//         const res = await fetch(`${process.env.SERVER_URL}/auth/register`, {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             credentials: "include",
+//         });
+
+//         if (!res.ok) {
+//             const errorData = await res.json();
+//             return { data: null, error: errorData.message || "Ошибка запроса" };
+//         }
+
+//         return await res.json();
+//     } catch (error) {
+//         console.error(error);
+//         return {
+//             data: null,
+//             error:
+//                 error instanceof Error ? error.message : "Неизвестная ошибка",
+//         };
+//     }
+// }

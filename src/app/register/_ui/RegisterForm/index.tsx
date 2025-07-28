@@ -153,25 +153,7 @@ export default function RegisterForm() {
 					return
 				}
 
-				let appVerifier = window.recaptchaVerifier;
-
-				signInWithPhoneNumber(auth, '+' + values.phone, appVerifier)
-					.then((confirmationResult) => {
-						window.confirmationResult = confirmationResult
-						toast.success('Введите код из СМС', {
-							position: 'top-center',
-							duration: 5000,
-						})
-						setStepPhoneRegister('code')
-					})
-					.catch((error) => {
-						console.error(error)
-						toast.error('Ошибка при отправке кода', {
-							position: 'top-center',
-						})
-					}).finally(() => {
-						formPhone.reset({ phone: '+7' })
-					})
+				setStepPhoneRegister('password')
 
 
 			} catch (error) {
@@ -192,39 +174,39 @@ export default function RegisterForm() {
 		});
 	};
 
-	function onSubmitOtp(values: FormOtpValues) {
+	// function onSubmitOtp(values: FormOtpValues) {
 
-		if (values.otp.length < 6) {
-			toast.error('Введите 6-ти значный код', {
-				position: 'top-center',
-			})
-			return
-		}
+	// 	if (values.otp.length < 6) {
+	// 		toast.error('Введите 6-ти значный код', {
+	// 			position: 'top-center',
+	// 		})
+	// 		return
+	// 	}
 
-		setLoading(true)
+	// 	setLoading(true)
 
-		window.confirmationResult.confirm(values.otp)
-			.then((result: any) => {
-				const user = result.user
-				toast.success(`Придумайте пароль`, {
-					position: 'top-center',
-				})
-				setFormData((prev) => ({
-					...prev,
-					login: user.phoneNumber.replace(/\D/g, ''),
-				}))
-				setStepPhoneRegister('password')
+	// 	window.confirmationResult.confirm(values.otp)
+	// 		.then((result: any) => {
+	// 			const user = result.user
+	// 			toast.success(`Придумайте пароль`, {
+	// 				position: 'top-center',
+	// 			})
+	// 			setFormData((prev) => ({
+	// 				...prev,
+	// 				login: user.phoneNumber.replace(/\D/g, ''),
+	// 			}))
+	// 			setStepPhoneRegister('password')
 
-			}).catch((error: any) => {
-				console.error(error)
-				toast.error('Неверный код', {
-					position: 'top-center',
-				})
-			}).finally(() => {
-				formOtp.reset({ otp: "" })
-				setLoading(false)
-			})
-	}
+	// 		}).catch((error: any) => {
+	// 			console.error(error)
+	// 			toast.error('Неверный код', {
+	// 				position: 'top-center',
+	// 			})
+	// 		}).finally(() => {
+	// 			formOtp.reset({ otp: "" })
+	// 			setLoading(false)
+	// 		})
+	// }
 
 	function onErrorOtp(errors: any) {
 		toast.error(errors.otp?.message ?? 'Введите 6-ти значный код', {
@@ -233,7 +215,7 @@ export default function RegisterForm() {
 	}
 
 	async function onSubmitPass(values: FormPassValues) {
-		if (values.password.length < 6) {
+		if (values.password.length < 4) {
 			toast.error('Пароль должен быть не менее 6 символов', {
 				position: 'top-center',
 			});
@@ -360,7 +342,7 @@ export default function RegisterForm() {
 		<>
 			<div id="recaptcha-container" className=' hidden'></div>
 			<Tabs defaultValue="phone" className="w-full">
-				<TabsList className='grid w-full grid-cols-2 mb-4'>
+				{/* <TabsList className='grid w-full grid-cols-2 mb-4'>
 					<TabsTrigger
 						value="phone"
 						className='dark:data-[state=active]:bg-background border-0 text-[10px]'
@@ -377,7 +359,7 @@ export default function RegisterForm() {
 							formEmail.reset({ email: '' })
 						}}
 					>Email</TabsTrigger>
-				</TabsList>
+				</TabsList> */}
 				<TabsContent value="phone">
 					<div className="w-full flex flex-col gap-6 justify-center">
 						{stepPhoneRegister === 'phone' ? (
@@ -420,92 +402,94 @@ export default function RegisterForm() {
 									</Button>
 								</form>
 							</Form>
-						) : stepPhoneRegister === 'code' ? (
-							<Form {...formOtp}>
-								<form
-									onSubmit={formOtp.handleSubmit(onSubmitOtp, onErrorOtp)}
-									className="w-full flex flex-col gap-6"
-								>
-									<FormField
-										control={formOtp.control}
-										name="otp"
-										render={() => (
-											<FormItem>
-												<FormDescription>Введите 6-ти значный код из СМС</FormDescription>
-												<FormControl className='justify-center'>
-													<InputOTP
-														maxLength={6}
-														value={formOtp.watch('otp')}
-														onChange={(otp) => formOtp.setValue('otp', otp)}
-													>
-														<InputOTPGroup className=' w-full justify-between !rounded-sm'>
-															<InputOTPSlot index={0} className=' !rounded-sm' />
-															<InputOTPSlot index={1} className=' !rounded-sm' />
-															<InputOTPSlot index={2} className=' !rounded-sm' />
-														</InputOTPGroup>
-														<InputOTPSeparator />
-														<InputOTPGroup className=' w-full justify-between !rounded-sm'>
-															<InputOTPSlot index={3} className=' !rounded-sm' />
-															<InputOTPSlot index={4} className=' !rounded-sm' />
-															<InputOTPSlot index={5} className=' !rounded-sm' />
-														</InputOTPGroup>
-													</InputOTP>
-												</FormControl>
-											</FormItem>
-										)}
-									/>
-									<Button
-										type='submit'
-										className='w-full bg-(--dark-accent)'
-										disabled={loading}
-									>
-										{loading ? (<><Loader2 className="animate-spin stroke-accent" /> Проверить код</>) : "Проверить код"}
-									</Button>
-								</form>
-							</Form>
-						) : (
-							<Form {...formPass}>
-								<form onSubmit={formPass.handleSubmit(onSubmitPass, onErrorPass)} className="w-full flex flex-col gap-6">
-									<FormField
-										control={formPass.control}
-										name="password"
-										render={() => (
-											<FormItem>
-												<FormDescription>Придумайте пароль</FormDescription>
-												<FormControl className='justify-center'>
-													<div className=' flex flex-row gap-2'>
-														<Input
-															placeholder='Не менее 6 символов'
-															type={showPassword ? 'text' : 'password'}
-															value={formPass.watch('password')}
-															onChange={(event) => formPass.setValue('password', event.target.value)}
-														/>
-														<Button
-															type='button'
-															variant="outline"
-															size="icon"
-															onClick={() => setShowPassword(!showPassword)}
-														>
-															{showPassword ? <Eye /> : <EyeOff />}
-														</Button>
-													</div>
-												</FormControl>
-											</FormItem>
-										)}
-									/>
-									<Button
-										type='submit'
-										className='w-full bg-(--dark-accent)'
-										disabled={pending}
-									>
-										{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Зарегистрироваться</>) : "Зарегистрироваться"}
-									</Button>
-								</form>
-							</Form>
-						)}
+						)
+							// : stepPhoneRegister === 'code' ? (
+							// 	<Form {...formOtp}>
+							// 		<form
+							// 			onSubmit={formOtp.handleSubmit(onSubmitOtp, onErrorOtp)}
+							// 			className="w-full flex flex-col gap-6"
+							// 		>
+							// 			<FormField
+							// 				control={formOtp.control}
+							// 				name="otp"
+							// 				render={() => (
+							// 					<FormItem>
+							// 						<FormDescription>Введите 6-ти значный код из СМС</FormDescription>
+							// 						<FormControl className='justify-center'>
+							// 							<InputOTP
+							// 								maxLength={6}
+							// 								value={formOtp.watch('otp')}
+							// 								onChange={(otp) => formOtp.setValue('otp', otp)}
+							// 							>
+							// 								<InputOTPGroup className=' w-full justify-between !rounded-sm'>
+							// 									<InputOTPSlot index={0} className=' !rounded-sm' />
+							// 									<InputOTPSlot index={1} className=' !rounded-sm' />
+							// 									<InputOTPSlot index={2} className=' !rounded-sm' />
+							// 								</InputOTPGroup>
+							// 								<InputOTPSeparator />
+							// 								<InputOTPGroup className=' w-full justify-between !rounded-sm'>
+							// 									<InputOTPSlot index={3} className=' !rounded-sm' />
+							// 									<InputOTPSlot index={4} className=' !rounded-sm' />
+							// 									<InputOTPSlot index={5} className=' !rounded-sm' />
+							// 								</InputOTPGroup>
+							// 							</InputOTP>
+							// 						</FormControl>
+							// 					</FormItem>
+							// 				)}
+							// 			/>
+							// 			<Button
+							// 				type='submit'
+							// 				className='w-full bg-(--dark-accent)'
+							// 				disabled={loading}
+							// 			>
+							// 				{loading ? (<><Loader2 className="animate-spin stroke-accent" /> Проверить код</>) : "Проверить код"}
+							// 			</Button>
+							// 		</form>
+							// 	</Form>
+							// )
+							: (
+								<Form {...formPass}>
+									<form onSubmit={formPass.handleSubmit(onSubmitPass, onErrorPass)} className="w-full flex flex-col gap-6">
+										<FormField
+											control={formPass.control}
+											name="password"
+											render={() => (
+												<FormItem>
+													<FormDescription>Придумайте пароль</FormDescription>
+													<FormControl className='justify-center'>
+														<div className=' flex flex-row gap-2'>
+															<Input
+																placeholder='Не менее 6 символов'
+																type={showPassword ? 'text' : 'password'}
+																value={formPass.watch('password')}
+																onChange={(event) => formPass.setValue('password', event.target.value)}
+															/>
+															<Button
+																type='button'
+																variant="outline"
+																size="icon"
+																onClick={() => setShowPassword(!showPassword)}
+															>
+																{showPassword ? <Eye /> : <EyeOff />}
+															</Button>
+														</div>
+													</FormControl>
+												</FormItem>
+											)}
+										/>
+										<Button
+											type='submit'
+											className='w-full bg-(--dark-accent)'
+											disabled={pending}
+										>
+											{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Зарегистрироваться</>) : "Зарегистрироваться"}
+										</Button>
+									</form>
+								</Form>
+							)}
 					</div>
 				</TabsContent>
-				<TabsContent value="email">
+				{/* <TabsContent value="email">
 					<div className="w-full flex flex-col gap-6 justify-center">
 						{stepEmailRegister === 'email' ? (
 							<Form {...formEmail}>
@@ -619,7 +603,7 @@ export default function RegisterForm() {
 							</Form>
 						)}
 					</div>
-				</TabsContent>
+				</TabsContent> */}
 			</Tabs>
 		</>
 	)
