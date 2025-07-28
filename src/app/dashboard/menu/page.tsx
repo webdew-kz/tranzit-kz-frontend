@@ -49,7 +49,7 @@ export default function page() {
 					<MessageCircleMore /> Черный список / Отзывы
 				</Link>
 			</Button>
-			{/* <Button
+			<Button
 				variant={'outline'}
 				className='w-full sm:hidden'
 				asChild
@@ -59,11 +59,24 @@ export default function page() {
 					href='/dashboard/support'
 					className='flex gap-3 items-center justify-start'
 				>
-					<ShieldUser /> Техподдержка
+					<ShieldUser /> Написать техподдержке
+				</Link>
+			</Button>
+			<Button
+				variant={'outline'}
+				className='w-full sm:hidden'
+				asChild
+			>
+
+				<Link
+					href='/dashboard/support'
+					className='flex gap-3 items-center justify-start'
+				>
+					<ShieldUser /> Написать Администрации
 				</Link>
 			</Button>
 
-			{user?.role === 'ADMIN' && (
+			{/* {user?.role === 'ADMIN' && (
 				<>
 					<Button
 						variant={'outline'}
