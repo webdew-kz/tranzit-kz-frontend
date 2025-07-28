@@ -197,7 +197,7 @@ export default function FormNameEmail() {
 								<FormLabel>Ваш e-mail</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="Введите ваш e-mail"
+										placeholder="Введите e-mail для восстановления пароля"
 										value={field.value}
 										onChange={field.onChange}
 									/>
