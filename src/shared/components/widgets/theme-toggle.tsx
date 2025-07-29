@@ -16,14 +16,14 @@ export function ThemeToggle() {
 
 	if (!mounted) return null;
 
-	const isLight = theme === "light";
+	const isDark = theme === "dark";
 
 	return (
 		<div className="flex items-center space-x-2 cursor-pointer">
 			<Switch
 				id="airplane-mode"
-				checked={isLight}
-				onCheckedChange={(checked) => setTheme(checked ? "light" : "dark")}
+				checked={isDark}
+				onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
 				className="cursor-pointer"
 			/>
 			<Label

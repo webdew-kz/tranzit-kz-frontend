@@ -161,7 +161,7 @@ const MyReviewItem = memo(({ reviewInitial, selected, onToggle, setReviews, rate
 						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 							<div className=" w-full flex gap-2 flex-wrap">
 								<span className="font-medium leading-none uppercase">
-									ИИН/БИН: {review.iin}
+									Телефон или ИИН/БИН: {review.iin}
 								</span>
 							</div>
 						</div>
