@@ -107,6 +107,7 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
+		whatsapp: z.string().nullable().default('')
 	});
 
 
@@ -158,6 +159,7 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 
 			userName: '',
 			userPhone: '',
+			whatsapp: ''
 		},
 	})
 
@@ -200,6 +202,7 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 				// ...(transport.optionAdditionally != null && { optionAdditionally: transport.optionAdditionally }),
 				...(transport.userName != null && { userName: transport.userName }),
 				...(transport.userPhone != null && { userPhone: transport.userPhone }),
+				...(transport.whatsapp != null && { whatsapp: transport.whatsapp }),
 			},)
 		}
 	}, [transport, form])
@@ -210,6 +213,9 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 		}
 		if (user?.phone) {
 			form.setValue('userPhone', user.phone);
+		}
+		if (user?.whatsapp) {
+			form.setValue('whatsapp', user.whatsapp);
 		}
 	}, [user, form]);
 

@@ -103,6 +103,7 @@ export default function TransportFormEdit({ id }: { id?: string }) {
 
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
+		whatsapp: z.string().nullable().default('')
 	});
 
 
@@ -154,6 +155,7 @@ export default function TransportFormEdit({ id }: { id?: string }) {
 
 			userName: '',
 			userPhone: '',
+			whatsapp: ''
 		},
 	})
 
@@ -196,6 +198,7 @@ export default function TransportFormEdit({ id }: { id?: string }) {
 				// ...(transport.optionAdditionally != null && { optionAdditionally: transport.optionAdditionally }),
 				...(transport.userName != null && { userName: transport.userName }),
 				...(transport.userPhone != null && { userPhone: transport.userPhone }),
+				...(transport.whatsapp != null && { whatsapp: transport.whatsapp }),
 			},)
 		}
 	}, [transport, form])

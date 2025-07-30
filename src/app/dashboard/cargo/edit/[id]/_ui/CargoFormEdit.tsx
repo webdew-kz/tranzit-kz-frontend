@@ -103,6 +103,7 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
+		whatsapp: z.string().nullable().default('')
 	});
 
 
@@ -154,6 +155,7 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 
 			userName: '',
 			userPhone: '',
+			whatsapp: '',
 		},
 	})
 
@@ -196,6 +198,7 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 				...(cargo.optionAdditionally != null && { optionAdditionally: cargo.optionAdditionally }),
 				...(cargo.userName != null && { userName: cargo.userName }),
 				...(cargo.userPhone != null && { userPhone: cargo.userPhone }),
+				...(cargo.whatsapp != null && { whatsapp: cargo.whatsapp }),
 			},)
 		}
 	}, [cargo, form])

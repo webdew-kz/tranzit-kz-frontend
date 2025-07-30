@@ -107,6 +107,7 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
+		whatsapp: z.string().nullable().default('')
 	});
 
 
@@ -158,6 +159,7 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 
 			userName: '',
 			userPhone: '',
+			whatsapp: '',
 		},
 	})
 
@@ -200,6 +202,7 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 				...(cargo.optionAdditionally != null && { optionAdditionally: cargo.optionAdditionally }),
 				...(cargo.userName != null && { userName: cargo.userName }),
 				...(cargo.userPhone != null && { userPhone: cargo.userPhone }),
+				...(cargo.whatsapp != null && { whatsapp: cargo.whatsapp }),
 			},)
 		}
 	}, [cargo, form])
@@ -210,6 +213,9 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 		}
 		if (user?.phone) {
 			form.setValue('userPhone', user.phone);
+		}
+		if (user?.whatsapp) {
+			form.setValue('whatsapp', user.whatsapp);
 		}
 	}, [user, form]);
 
@@ -761,6 +767,15 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 							className="text-sm"
 							required
 							{...form.register('userPhone')}
+						/>
+
+
+
+						<Input
+							type="text"
+							placeholder="Whatsapp (необязательно)"
+							className="text-sm"
+							{...form.register('whatsapp')}
 						/>
 
 
