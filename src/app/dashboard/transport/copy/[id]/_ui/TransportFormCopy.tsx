@@ -769,6 +769,12 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 							{...form.register('userPhone')}
 						/>
 
+						<Input
+							type="text"
+							placeholder="Whatsapp (необязательно)"
+							className="text-sm"
+							{...form.register('whatsapp')}
+						/>
 
 						<Button
 							type='submit'
