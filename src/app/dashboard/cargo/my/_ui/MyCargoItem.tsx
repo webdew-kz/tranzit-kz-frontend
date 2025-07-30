@@ -139,31 +139,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</div>
 					</div>
 				</div>
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-					<span className=' flex items-center gap-1'>
-						<ArrowBigUp size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
-						</span>
-					</span>
 
-					<span className=' flex items-center gap-1'>
-						<ArrowBigDown size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<Eye size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{cargo.views.count}</span>
-						</span>
-					</span>
-				</div>
 
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
@@ -172,7 +148,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 
 							return (
 								<span key={`${city}-${country}-${index}`} className="flex items-center gap-3 ">
-									<span className="font-medium leading-none uppercase">
+									<span className="font-medium text-xl leading-none uppercase">
 										{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
 									</span>
 									{index < places.length - 1 && <MoveRight size={16} />}
@@ -494,6 +470,32 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							<span className=' hidden lg:block'>Копировать</span>
 						</Button>
 					</div>
+				</div>
+
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{cargo.views.count}</span>
+						</span>
+					</span>
 				</div>
 			</CardContent>
 		</Card>
