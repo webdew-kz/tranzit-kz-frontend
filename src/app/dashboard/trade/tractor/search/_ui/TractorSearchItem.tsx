@@ -131,29 +131,7 @@ const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLen
 
 				<div className=" flex justify-between w-full md:items-center mb-3">
 					<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4">
-						<span className=' flex items-center gap-1'>
-							<ArrowBigUp size={16} />
-							<span className='truncate block text-[12px]'>
-								<span className=' mr-2 font-light'>Обновлено:</span>
-								<span className=' font-medium'>{tractor.updatedAt && formatRelativeDate(tractor.updatedAt)}</span>
-							</span>
-						</span>
 
-						<span className=' flex items-center gap-1'>
-							<ArrowBigDown size={16} />
-							<span className='truncate block text-[12px]'>
-								<span className=' mr-2 font-light'>Добавлено:</span>
-								<span className=' font-medium'>{tractor.createdAt && formatRelativeDate(tractor.createdAt)}</span>
-							</span>
-						</span>
-
-						<span className=' flex items-center gap-1'>
-							<Eye size={16} />
-							<span className='truncate block text-[12px]'>
-								<span className=' mr-2 font-light'>Просмотров:</span>
-								<span className=' font-medium'>{tractor.views?.count}</span>
-							</span>
-						</span>
 					</div>
 					<div className=" flex">
 						{(isWishBtn && isWishlist) ? (
@@ -246,6 +224,32 @@ const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLen
 							)}
 						</div>
 					</div>
+				</div>
+
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-[12px]'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{tractor.updatedAt && formatRelativeDate(tractor.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-[12px]'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{tractor.createdAt && formatRelativeDate(tractor.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-[12px]'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{tractor.views?.count}</span>
+						</span>
+					</span>
 				</div>
 
 				<div className=" flex items-center justify-between">

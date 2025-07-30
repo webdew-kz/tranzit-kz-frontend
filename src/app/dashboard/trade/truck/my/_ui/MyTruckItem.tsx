@@ -94,29 +94,7 @@ const MyTruckItem = memo(({ truckInitial, selected, onToggle, setTrucks, loading
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex justify-between w-full md:items-center mb-3">
 					<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4">
-						<span className=' flex items-center gap-1'>
-							<ArrowBigUp size={16} />
-							<span className='truncate block text-[12px]'>
-								<span className=' mr-2 font-light'>Обновлено:</span>
-								<span className=' font-medium'>{truck.updatedAt && formatRelativeDate(truck.updatedAt)}</span>
-							</span>
-						</span>
 
-						<span className=' flex items-center gap-1'>
-							<ArrowBigDown size={16} />
-							<span className='truncate block text-[12px]'>
-								<span className=' mr-2 font-light'>Добавлено:</span>
-								<span className=' font-medium'>{truck.createdAt && formatRelativeDate(truck.createdAt)}</span>
-							</span>
-						</span>
-
-						<span className=' flex items-center gap-1'>
-							<Eye size={16} />
-							<span className='truncate block text-[12px]'>
-								<span className=' mr-2 font-light'>Просмотров:</span>
-								<span className=' font-medium'>{truck.views?.count}</span>
-							</span>
-						</span>
 					</div>
 					<div>
 						<div className="flex items-center gap-2">
@@ -211,6 +189,32 @@ const MyTruckItem = memo(({ truckInitial, selected, onToggle, setTrucks, loading
 							)}
 						</div>
 					</div>
+				</div>
+
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-[12px]'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{truck.updatedAt && formatRelativeDate(truck.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-[12px]'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{truck.createdAt && formatRelativeDate(truck.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-[12px]'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{truck.views?.count}</span>
+						</span>
+					</span>
 				</div>
 
 				<div className=" flex flex-col md:flex-row md:items-center justify-between">
@@ -365,30 +369,6 @@ const MyTruckItem = memo(({ truckInitial, selected, onToggle, setTrucks, loading
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default MyTruckItem
