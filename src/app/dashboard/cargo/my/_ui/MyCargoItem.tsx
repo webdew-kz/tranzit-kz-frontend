@@ -140,7 +140,6 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 					</div>
 				</div>
 
-
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
 						{places.length > 0 && places.map((place, index) => {
@@ -221,7 +220,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 					</div>
 				</div>
 
-				<div className="lg:mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
+				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Truck size={16} />
@@ -259,7 +258,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 					)}
 				</div>
 
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 pt-4 mb-3">
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
 					<span className=' flex items-center gap-1'>
 						<ArrowBigUp size={16} />
 						<span className='truncate block text-sm'>

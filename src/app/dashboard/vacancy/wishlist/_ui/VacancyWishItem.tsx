@@ -71,29 +71,7 @@ const VacancyWishItem = memo(
 				<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 					<div className=" flex justify-between w-full items-start lg:items-center mb-2">
 						<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-							<span className=' flex items-center gap-1'>
-								<ArrowBigUp size={16} />
-								<span className='truncate block text-sm'>
-									<span className=' mr-2 font-light'>Обновлено:</span>
-									<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
-								</span>
-							</span>
 
-							<span className=' flex items-center gap-1'>
-								<ArrowBigDown size={16} />
-								<span className='truncate block text-sm'>
-									<span className=' mr-2 font-light'>Добавлено:</span>
-									<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
-								</span>
-							</span>
-
-							<span className=' flex items-center gap-1'>
-								<Eye size={16} />
-								<span className='truncate block text-sm'>
-									<span className=' mr-2 font-light'>Просмотров:</span>
-									<span className=' font-medium'>{vacancy?.views?.count}</span>
-								</span>
-							</span>
 						</div>
 						<div className=" flex items-center">
 							<button type='button' onClick={handleRemoveFromWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
@@ -134,6 +112,32 @@ const VacancyWishItem = memo(
 						</div>
 					</div>
 
+					<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+						<span className=' flex items-center gap-1'>
+							<ArrowBigUp size={16} />
+							<span className='truncate block text-sm'>
+								<span className=' mr-2 font-light'>Обновлено:</span>
+								<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
+							</span>
+						</span>
+
+						<span className=' flex items-center gap-1'>
+							<ArrowBigDown size={16} />
+							<span className='truncate block text-sm'>
+								<span className=' mr-2 font-light'>Добавлено:</span>
+								<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
+							</span>
+						</span>
+
+						<span className=' flex items-center gap-1'>
+							<Eye size={16} />
+							<span className='truncate block text-sm'>
+								<span className=' mr-2 font-light'>Просмотров:</span>
+								<span className=' font-medium'>{vacancy.views.count}</span>
+							</span>
+						</span>
+					</div>
+
 					<div className=" flex items-start justify-between w-full">
 						<div>
 							{(vacancy.description || vacancy.work_schedule_at || vacancy.work_schedule_to || vacancy.salary_at || vacancy.salary_to || (vacancy.experience_type && vacancy.experience_type.length > 0)) && (
@@ -152,10 +156,7 @@ const VacancyWishItem = memo(
 											<div>
 												<div className=" font-medium text-(--dark-accent)">Требования</div>
 												<span className=" font-light text-sm">{vacancy.description}</span>
-												{/* <div className=" flex gap-2 flex-wrap text-sm">
-												<span className=' text-muted-foreground'>Требования:</span>
-												<span className=" font-light">{vacancy.description}</span>
-											</div> */}
+
 											</div>
 										)}
 
@@ -169,11 +170,7 @@ const VacancyWishItem = memo(
 										{(vacancy.salary_at || vacancy.salary_to) && (
 											<div>
 												<div className=" font-medium text-(--dark-accent)">Заработная плата</div>
-												{/* {(vacancy.salary_at && vacancy.salary_to) && <span className=" font-light text-sm">{`${vacancy.salary_at} - ${vacancy.salary_to}`}</span>}
 
-											{(vacancy.salary_at && !vacancy.salary_to) && <span className=" font-light text-sm">{`от ${vacancy.salary_at}`}</span>}
-
-											{(!vacancy.salary_at && vacancy.salary_to) && <span className=" font-light text-sm">{`до ${vacancy.salary_to}`}</span>} */}
 
 												<span className="font-light text-sm">
 													{vacancy.salary_at && vacancy.salary_to

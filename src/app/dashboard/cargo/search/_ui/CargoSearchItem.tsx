@@ -157,31 +157,6 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 						)}
 					</div>
 				</div>
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-					<span className=' flex items-center gap-1'>
-						<ArrowBigUp size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<ArrowBigDown size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<Eye size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{cargo?.views?.count}</span>
-						</span>
-					</span>
-				</div>
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
 						{places.length > 0 && places.map((place, index) => {
@@ -296,6 +271,31 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 							<span className=' truncate block' >{cargo.note}</span>
 						</div>
 					)}
+				</div>
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{cargo?.views?.count}</span>
+						</span>
+					</span>
 				</div>
 				<div className=" flex items-start justify-between w-full">
 					<div>

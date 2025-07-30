@@ -91,33 +91,9 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex flex-col lg:flex-row justify-between w-full lg:items-center mb-2">
 
-					<div className=" flex flex-col order-2 lg:order-1 gap-1 lg:flex-row lg:gap-4 mb-3">
-						<span className=' flex items-center gap-1'>
-							<ArrowBigUp size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Обновлено:</span>
-								<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
-							</span>
-						</span>
+					<div className=""></div>
 
-						<span className=' flex items-center gap-1'>
-							<ArrowBigDown size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Добавлено:</span>
-								<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
-							</span>
-						</span>
-
-						<span className=' flex items-center gap-1'>
-							<Eye size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Просмотров:</span>
-								<span className=' font-medium'>{vacancy.views.count}</span>
-							</span>
-						</span>
-					</div>
-
-					<div className=" flex items-center order-1 lg:order-2 gap-4 justify-end">
+					<div className=" flex items-center gap-4 justify-end">
 						<div className="flex items-center gap-2">
 							<Checkbox
 								id={vacancy.id}
@@ -164,6 +140,32 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 					</div>
 				</div>
 
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{vacancy.views.count}</span>
+						</span>
+					</span>
+				</div>
+
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div>
 						{(vacancy.description || vacancy.work_schedule_at || vacancy.work_schedule_to || vacancy.salary_at || vacancy.salary_to || (vacancy.experience_type && vacancy.experience_type.length > 0)) && (
@@ -181,10 +183,6 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Требования</div>
 											<span className=" font-light text-sm">{vacancy.description}</span>
-											{/* <div className=" flex gap-2 flex-wrap text-sm">
-												<span className=' text-muted-foreground'>Требования:</span>
-												<span className=" font-light">{vacancy.description}</span>
-											</div> */}
 										</div>
 									)}
 
@@ -198,11 +196,7 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 									{(vacancy.salary_at || vacancy.salary_to) && (
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Заработная плата</div>
-											{/* {(vacancy.salary_at && vacancy.salary_to) && <span className=" font-light text-sm">{`${vacancy.salary_at} - ${vacancy.salary_to}`}</span>}
 
-											{(vacancy.salary_at && !vacancy.salary_to) && <span className=" font-light text-sm">{`от ${vacancy.salary_at}`}</span>}
-
-											{(!vacancy.salary_at && vacancy.salary_to) && <span className=" font-light text-sm">{`до ${vacancy.salary_to}`}</span>} */}
 
 											<span className="font-light text-sm">
 												{vacancy.salary_at && vacancy.salary_to
@@ -272,30 +266,6 @@ const MyVacancyItem = memo(({ vacancyInitial, selected, onToggle, setVacancys, r
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default MyVacancyItem

@@ -109,33 +109,9 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex flex-col lg:flex-row justify-between w-full lg:items-center mb-2">
 
-					<div className=" flex flex-col order-2 lg:order-1 gap-1 lg:flex-row lg:gap-4 mb-3">
-						<span className=' flex items-center gap-1'>
-							<ArrowBigUp size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Обновлено:</span>
-								<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
-							</span>
-						</span>
+					<div className=""></div>
 
-						<span className=' flex items-center gap-1'>
-							<ArrowBigDown size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Добавлено:</span>
-								<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
-							</span>
-						</span>
-
-						<span className=' flex items-center gap-1'>
-							<Eye size={16} />
-							<span className='truncate block text-sm'>
-								<span className=' mr-2 font-light'>Просмотров:</span>
-								<span className=' font-medium'>{vacancy.views.count}</span>
-							</span>
-						</span>
-					</div>
-
-					<div className=" flex items-center order-1 lg:order-2 gap-4 justify-end">
+					<div className=" flex items-center  gap-4 justify-end">
 						<div className="flex items-center gap-2">
 							<Checkbox
 								id={vacancy.id}
@@ -182,6 +158,32 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 					</div>
 				</div>
 
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{vacancy.updatedAt && formatRelativeDate(vacancy.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{vacancy.createdAt && formatRelativeDate(vacancy.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{vacancy.views.count}</span>
+						</span>
+					</span>
+				</div>
+
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div>
 						{(vacancy.description || vacancy.work_schedule_at || vacancy.work_schedule_to || vacancy.salary_at || vacancy.salary_to || (vacancy.experience_type && vacancy.experience_type.length > 0)) && (
@@ -194,172 +196,13 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 								</PopoverTrigger>
 								<PopoverContent align='start' className=' max-h-[50vh] overflow-y-auto grid gap-3 w-full max-w-[calc(100vw-3.85rem)] lg:max-w-[calc(30vw-3.85rem)] bg-accent'>
 
-									{/* {((vacancy.paymentPeriod && vacancy.paymentPeriod?.length > 0) || (vacancy.paymentOther && vacancy.paymentOther?.length > 0) || vacancy.paymentPrepaymentPercent || vacancy.paymentDeferredDays) && (
-										<div >
-											<div className="mb-1 font-medium text-(--dark-accent)">Детали оплаты</div>
-											{vacancy.paymentPeriod && vacancy.paymentPeriod.length > 0 && (
-												<span className=" font-light text-sm">
-													{vacancy.paymentPeriod
-														.map((item) => PaymentPeriodEnum[item as unknown as keyof typeof PaymentPeriodEnum].toLowerCase())
-														.join(" | ")}
-												</span>
-											)}
-											{vacancy.paymentOther && vacancy.paymentOther.length > 0 && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Дополнительно:</span>
-													<span className=" font-light">
-														{vacancy.paymentOther.map((item) => PaymentOtherEnum[item as unknown as keyof typeof PaymentOtherEnum].toLowerCase())
-															.join(" | ")}
-													</span>
-												</div>
-											)}
-											{vacancy.paymentPrepaymentPercent && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Предоплата:</span>
-													<span className=" font-light">{`${vacancy.paymentPrepaymentPercent}%`}</span>
-												</div>
-											)}
-											{vacancy.paymentDeferredDays && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Отсрочка:</span>
-													<span className=" font-light">{`${vacancy.paymentDeferredDays} дней`}</span>
-												</div>
-											)}
-										</div>
-									)}
 
-									{((vacancy.optionDocuments && vacancy.optionDocuments.length > 0) || vacancy.optionDocumentsAdr) && (
-										<div>
-											<div className="mb-1 font-medium text-(--dark-accent)">Документы</div>
-											{vacancy.optionDocuments && vacancy.optionDocuments.length > 0 && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Тип:</span>
-													<span className=" font-light">
-														{vacancy.optionDocuments.map((item) => DocumentsEnum[item as unknown as keyof typeof DocumentsEnum].toUpperCase())
-															.join(", ")}
-													</span>
-												</div>
-											)}
-											{vacancy.optionDocumentsAdr && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>ADR:</span>
-													<span className=" font-light">{`${vacancy.optionDocumentsAdr.toUpperCase()}`}</span>
-												</div>
-											)}
-										</div>
-									)}
-
-
-									{((vacancy.optionLoadings && vacancy.optionLoadings.length > 0) || vacancy.optionLoadingsTimeLoading || vacancy.optionLoadingsTimeUnloading || vacancy.optionLoadingsPlaceLoading || vacancy.optionLoadingsPlaceUnloading || vacancy.optionLoadingsBigBag || vacancy.optionLoadingsDateUnloading) && (
-										<div>
-											<div className=" font-medium text-(--dark-accent)">Погрузка</div>
-											{vacancy.optionLoadings && vacancy.optionLoadings.length > 0 && (
-												<span className=" font-light text-sm">
-													{vacancy.optionLoadings.map((item) => LoadingsEnum[item as unknown as keyof typeof LoadingsEnum].toLowerCase())
-														.join(", ")}
-												</span>
-											)}
-											{vacancy.optionLoadingsDateUnloading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Дата разгрузки:</span>
-													<span className=" font-light">{`${new Date(vacancy.optionLoadingsDateUnloading).toLocaleDateString('ru-RU')}`}</span>
-												</div>
-											)}
-											{vacancy.optionLoadingsTimeLoading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Время погрузки:</span>
-													<span className=" font-light">{`${vacancy.optionLoadingsTimeLoading}`}</span>
-												</div>
-											)}
-											{vacancy.optionLoadingsTimeUnloading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Время разгрузки:</span>
-													<span className=" font-light">{`${vacancy.optionLoadingsTimeUnloading}`}</span>
-												</div>
-											)}
-											{vacancy.optionLoadingsPlaceLoading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Место погрузки:</span>
-													<span className=" font-light">{`${vacancy.optionLoadingsPlaceLoading}`}</span>
-												</div>
-											)}
-											{vacancy.optionLoadingsPlaceUnloading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Место разгрузки:</span>
-													<span className=" font-light">{`${vacancy.optionLoadingsPlaceUnloading}`}</span>
-												</div>
-											)}
-											{vacancy.optionLoadingsBigBag && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Биг-бэг:</span>
-													<span className=" font-light">{`${vacancy.optionLoadingsBigBag}`}</span>
-												</div>
-											)}
-										</div>
-									)}
-
-									{((vacancy.optionTerms && vacancy.optionTerms.length > 0) || vacancy.optionTermsTemperature || vacancy.optionTermsQtyPallets || vacancy.optionTermsCorners || vacancy.optionTermsBelts || vacancy.optionTermsPalletsType) && (
-										<div>
-											<div className=" font-medium text-(--dark-accent)">Условия</div>
-											{vacancy.optionTerms && vacancy.optionTerms.length > 0 && (
-												<span className=" font-light text-sm">
-													{vacancy.optionTerms.map((item) => TermsEnum[item as unknown as keyof typeof TermsEnum].toLowerCase())
-														.join(", ")}
-												</span>
-											)}
-											{vacancy.optionTermsTemperature && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Температура:</span>
-													<span className=" font-light">{`${vacancy.optionTermsTemperature}`}</span>
-												</div>
-											)}
-											{vacancy.optionTermsQtyPallets && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Количество паллет:</span>
-													<span className=" font-light">{`${vacancy.optionTermsQtyPallets}`}</span>
-												</div>
-											)}
-											{vacancy.optionTermsCorners && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Уголки:</span>
-													<span className=" font-light">{`${vacancy.optionTermsCorners}`}</span>
-												</div>
-											)}
-											{vacancy.optionTermsBelts && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Ремни:</span>
-													<span className=" font-light">{`${vacancy.optionTermsBelts}`}</span>
-												</div>
-											)}
-											{vacancy.optionTermsPalletsType && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Тип паллет:</span>
-													<span className=" font-light">
-														{TermsPalletsTypeEnum[vacancy.optionTermsPalletsType as unknown as keyof typeof TermsPalletsTypeEnum]}
-													</span>
-												</div>
-											)}
-										</div>
-									)}
-									{vacancy.optionAdditionally && vacancy.optionAdditionally.length > 0 && (
-										<div>
-											<div className=" font-medium text-(--dark-accent)">Дополнительно</div>
-											{vacancy.optionAdditionally && vacancy.optionAdditionally.length > 0 && (
-												<span className=" font-light text-sm">
-													{vacancy.optionAdditionally.map((item) => AdditionallyEnum[item as unknown as keyof typeof AdditionallyEnum].toLowerCase()).join(", ")}
-												</span>
-											)}
-										</div>
-									)} */}
 
 									{vacancy.description && (
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Требования</div>
 											<span className=" font-light text-sm">{vacancy.description}</span>
-											{/* <div className=" flex gap-2 flex-wrap text-sm">
-												<span className=' text-muted-foreground'>Требования:</span>
-												<span className=" font-light">{vacancy.description}</span>
-											</div> */}
+
 										</div>
 									)}
 
@@ -373,11 +216,7 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 									{(vacancy.salary_at || vacancy.salary_to) && (
 										<div>
 											<div className=" font-medium text-(--dark-accent)">Заработная плата</div>
-											{/* {(vacancy.salary_at && vacancy.salary_to) && <span className=" font-light text-sm">{`${vacancy.salary_at} - ${vacancy.salary_to}`}</span>}
 
-											{(vacancy.salary_at && !vacancy.salary_to) && <span className=" font-light text-sm">{`от ${vacancy.salary_at}`}</span>}
-
-											{(!vacancy.salary_at && vacancy.salary_to) && <span className=" font-light text-sm">{`до ${vacancy.salary_to}`}</span>} */}
 
 											<span className="font-light text-sm">
 												{vacancy.salary_at && vacancy.salary_to
@@ -448,30 +287,6 @@ const MyVacancyArchiveItem = memo(({ vacancyInitial, selected, onToggle, setVaca
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default MyVacancyArchiveItem

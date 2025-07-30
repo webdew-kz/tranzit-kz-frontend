@@ -138,31 +138,7 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 
 					</div>
 				</div>
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-					<span className=' flex items-center gap-1'>
-						<ArrowBigUp size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
-						</span>
-					</span>
 
-					<span className=' flex items-center gap-1'>
-						<ArrowBigDown size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<Eye size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{cargo.views.count}</span>
-						</span>
-					</span>
-				</div>
 
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
@@ -185,6 +161,7 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
 					>Посмотреть маршрут</a>
 				</div>
+
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
 					<div className=" grid gap-2 lg:flex lg:gap-4">
@@ -242,7 +219,8 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 						</Select>
 					</div>
 				</div>
-				<div className="lg:mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
+
+				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Truck size={16} />
@@ -280,6 +258,33 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 						</div>
 					)}
 				</div>
+
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{cargo.views.count}</span>
+						</span>
+					</span>
+				</div>
+
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div>
 						{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (

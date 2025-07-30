@@ -151,31 +151,6 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 						)}
 					</div>
 				</div>
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-					<span className=' flex items-center gap-1'>
-						<ArrowBigUp size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{transport.updatedAt && formatRelativeDate(transport.updatedAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<ArrowBigDown size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{transport.createdAt && formatRelativeDate(transport.createdAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<Eye size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{transport?.views?.count}</span>
-						</span>
-					</span>
-				</div>
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 					<div className=" w-full flex gap-2 flex-wrap">
 						{places.length > 0 && places.map((place, index) => {
@@ -191,69 +166,8 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 							);
 						})}
 					</div>
-					{/* <a
-						href={transport.routeLink}
-						target='_blank'
-						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
-					>Посмотреть маршрут</a> */}
 				</div>
-				{/* <div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
-					<div className=" grid gap-2 lg:flex lg:gap-4">
-						<div className=" flex items-center gap-2">
-							<Box size={16} />
-							<span className=' truncate block'>{transport.title}</span>
-						</div>
-
-						<div className=" flex items-center gap-2 max-w-full">
-							<HandCoins size={16} />
-							{transport.paymentMethod && transport.paymentMethod.map((item, index) => (
-								<span className=' truncate block' key={index} >{PaymentMethodEnum[item as unknown as keyof typeof PaymentMethodEnum]}</span>
-							))}
-						</div>
-					</div>
-
-					<div className=" grid grid-cols-2 lg:flex gap-2 lg:gap-4 items-center flex-wrap justify-center">
-						<div className=" flex gap-2 items-center">
-							{Number(transport.distance) > 0 && (
-								<>
-									<MoveHorizontal size={16} />
-									<span className='truncate block'>{`${transport.distance?.toLocaleString('ru-RU')} км`}</span>
-								</>
-							)}
-						</div>
-						<div className=" flex gap-2 items-center">
-							{Number(amountTariff) > 0 && (
-								<>
-									<BanknoteArrowUp size={16} />
-									<span className='truncate block'>{`${Number(amountTariff?.toFixed(2))?.toLocaleString('ru-RU')} ${getCurrencySymbol(currency)}/км`}</span>
-								</>
-							)}
-						</div>
-						<div className=" flex gap-2 items-center">
-							{Number(amountPrice) > 0 && (
-								<>
-									<Wallet size={16} />
-									<span className='truncate block'>{`${Number(amountPrice?.toFixed(2)).toLocaleString('ru-RU')} ${getCurrencySymbol(currency)}`}</span>
-								</>
-							)}
-						</div>
-						<Select
-							onValueChange={(currency) => convertFromKZT(baseAmountPriceKZT, setAmountPrice, baseAmountTariffKZT, setAmountTariff, currency, rates, (value) => setCurrency(value as CurrencyEnum))}
-						>
-							<SelectTrigger className=" w-full lg:w-auto">
-								<SelectValue placeholder="Изменить валюту" />
-							</SelectTrigger>
-							<SelectContent align='end'>
-								{Object.entries(CurrencyEnum).map(([key, currency]) => (
-									<SelectItem key={key} value={currency}>
-										{currency}
-									</SelectItem>
-								))}
-							</SelectContent>
-						</Select>
-					</div>
-				</div> */}
 				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
@@ -291,6 +205,31 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 						</div>
 					)}
 				</div>
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{transport.updatedAt && formatRelativeDate(transport.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{transport.createdAt && formatRelativeDate(transport.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{transport?.views?.count}</span>
+						</span>
+					</span>
+				</div>
 				<div className=" flex items-start justify-between w-full">
 					<div>
 						{((transport.optionDocuments && transport.optionDocuments.length > 0) || transport.optionDocumentsAdr) && (
@@ -303,39 +242,7 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 								</PopoverTrigger>
 								<PopoverContent align='start' className=' max-h-[50vh] overflow-y-auto grid gap-3 w-full max-w-[calc(100vw-3.85rem)] bg-accent'>
 
-									{/* {((transport.paymentPeriod && transport.paymentPeriod?.length > 0) || (transport.paymentOther && transport.paymentOther?.length > 0) || transport.paymentPrepaymentPercent || transport.paymentDeferredDays) && (
-										<div >
-											<div className="mb-1 font-medium text-(--dark-accent)">Детали оплаты</div>
-											{transport.paymentPeriod && transport.paymentPeriod.length > 0 && (
-												<span className=" font-light text-sm">
-													{transport.paymentPeriod
-														.map((item) => PaymentPeriodEnum[item as unknown as keyof typeof PaymentPeriodEnum].toLowerCase())
-														.join(" | ")}
-												</span>
-											)}
-											{transport.paymentOther && transport.paymentOther.length > 0 && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Дополнительно:</span>
-													<span className=" font-light">
-														{transport.paymentOther.map((item) => PaymentOtherEnum[item as unknown as keyof typeof PaymentOtherEnum].toLowerCase())
-															.join(" | ")}
-													</span>
-												</div>
-											)}
-											{transport.paymentPrepaymentPercent && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Предоплата:</span>
-													<span className=" font-light">{`${transport.paymentPrepaymentPercent}%`}</span>
-												</div>
-											)}
-											{transport.paymentDeferredDays && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Отсрочка:</span>
-													<span className=" font-light">{`${transport.paymentDeferredDays} дней`}</span>
-												</div>
-											)}
-										</div>
-									)} */}
+
 
 									{((transport.optionDocuments && transport.optionDocuments.length > 0) || transport.optionDocumentsAdr) && (
 										<div>
@@ -358,108 +265,6 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 										</div>
 									)}
 
-
-									{/* {((transport.optionLoadings && transport.optionLoadings.length > 0) || transport.optionLoadingsTimeLoading || transport.optionLoadingsTimeUnloading || transport.optionLoadingsPlaceLoading || transport.optionLoadingsPlaceUnloading || transport.optionLoadingsBigBag || transport.optionLoadingsDateUnloading) && (
-										<div>
-											<div className=" font-medium text-(--dark-accent)">Потранспортка</div>
-											{transport.optionLoadings && transport.optionLoadings.length > 0 && (
-												<span className=" font-light text-sm">
-													{transport.optionLoadings.map((item) => LoadingsEnum[item as unknown as keyof typeof LoadingsEnum].toLowerCase())
-														.join(", ")}
-												</span>
-											)}
-											{transport.optionLoadingsDateUnloading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Дата разтранспортки:</span>
-													<span className=" font-light">{`${new Date(transport.optionLoadingsDateUnloading).toLocaleDateString('ru-RU')}`}</span>
-												</div>
-											)}
-											{transport.optionLoadingsTimeLoading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Время потранспортки:</span>
-													<span className=" font-light">{`${transport.optionLoadingsTimeLoading}`}</span>
-												</div>
-											)}
-											{transport.optionLoadingsTimeUnloading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Время разтранспортки:</span>
-													<span className=" font-light">{`${transport.optionLoadingsTimeUnloading}`}</span>
-												</div>
-											)}
-											{transport.optionLoadingsPlaceLoading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Место потранспортки:</span>
-													<span className=" font-light">{`${transport.optionLoadingsPlaceLoading}`}</span>
-												</div>
-											)}
-											{transport.optionLoadingsPlaceUnloading && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Место разтранспортки:</span>
-													<span className=" font-light">{`${transport.optionLoadingsPlaceUnloading}`}</span>
-												</div>
-											)}
-											{transport.optionLoadingsBigBag && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Биг-бэг:</span>
-													<span className=" font-light">{`${transport.optionLoadingsBigBag}`}</span>
-												</div>
-											)}
-										</div>
-									)}
-
-									{((transport.optionTerms && transport.optionTerms.length > 0) || transport.optionTermsTemperature || transport.optionTermsQtyPallets || transport.optionTermsCorners || transport.optionTermsBelts || transport.optionTermsPalletsType) && (
-										<div>
-											<div className=" font-medium text-(--dark-accent)">Условия</div>
-											{transport.optionTerms && transport.optionTerms.length > 0 && (
-												<span className=" font-light text-sm">
-													{transport.optionTerms.map((item) => TermsEnum[item as unknown as keyof typeof TermsEnum].toLowerCase())
-														.join(", ")}
-												</span>
-											)}
-											{transport.optionTermsTemperature && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Температура:</span>
-													<span className=" font-light">{`${transport.optionTermsTemperature}`}</span>
-												</div>
-											)}
-											{transport.optionTermsQtyPallets && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Количество паллет:</span>
-													<span className=" font-light">{`${transport.optionTermsQtyPallets}`}</span>
-												</div>
-											)}
-											{transport.optionTermsCorners && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Уголки:</span>
-													<span className=" font-light">{`${transport.optionTermsCorners}`}</span>
-												</div>
-											)}
-											{transport.optionTermsBelts && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Ремни:</span>
-													<span className=" font-light">{`${transport.optionTermsBelts}`}</span>
-												</div>
-											)}
-											{transport.optionTermsPalletsType && (
-												<div className=" flex gap-2 flex-wrap text-sm">
-													<span className=' text-muted-foreground'>Тип паллет:</span>
-													<span className=" font-light">
-														{TermsPalletsTypeEnum[transport.optionTermsPalletsType as unknown as keyof typeof TermsPalletsTypeEnum]}
-													</span>
-												</div>
-											)}
-										</div>
-									)}
-									{transport.optionAdditionally && transport.optionAdditionally.length > 0 && (
-										<div>
-											<div className=" font-medium text-(--dark-accent)">Дополнительно</div>
-											{transport.optionAdditionally && transport.optionAdditionally.length > 0 && (
-												<span className=" font-light text-sm">
-													{transport.optionAdditionally.map((item) => AdditionallyEnum[item as unknown as keyof typeof AdditionallyEnum].toLowerCase()).join(", ")}
-												</span>
-											)}
-										</div>
-									)} */}
 
 								</PopoverContent>
 							</Popover>
@@ -554,34 +359,6 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // потранспортка
-// optionLoadingsTimeLoading ?: string; // время потранспортки
-// optionLoadingsTimeUnloading ?: string; // время разтранспортки
-// optionLoadingsDateUnloading ?: string; // дата разтранспортки
-// optionLoadingsPlaceLoading ?: string; // место потранспортки
-// optionLoadingsPlaceUnloading ?: string; // место разтранспортки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default TransportSearchItem
-
-function async(id: string | undefined) {
-	throw new Error('Function not implemented.')
-}
