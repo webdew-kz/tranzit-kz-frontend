@@ -116,15 +116,15 @@ export enum DocumentsEnum {
     TIR = "TIR", // TIR
     T1 = "T1", // T1
     T2 = "T2", // T2
-    EKMT = "EKMT", // EKMT
+    // EKMT = "EKMT", // EKMT
     SAN_PASSPORT = "Санпаспорт", // Сан паспорт
     SAN_BOOK = "Санкнижка", // Сан книжка
     CUSTOMS_CERT = "Тамож. свид-во", // Таможня
     CUSTOMS_CONTROL = "Тамож. контроль", // Таможенный контроль
     DOZVOL = "Дозвол", // Дозвол
     OVERSIZE_SPECIAL_PERMIT = "Спец. разрешение на негабарит", // спец. разрешение на негабарит
-    CATEGORY_C = "Категория C", // категория C
-    CATEGORY_D = "Категория D", // категория D
+    CATEGORY_C = "КАТ C", // категория C
+    CATEGORY_D = "КАТ D", // категория D
     EORI_CODE = "ЕОРИ код", // ЕОРИ код
     REGISTRATION_CARD = "Учётный талон", // учётный талон
     E_QUEUE = "Электронная очередь", // электронная очередь
@@ -172,6 +172,7 @@ export enum TermsEnum {
     MEGA = "МЕГА", // МЕГА
     JUMBO = "ДЖАМБО", // ДЖАМБО
     HATCHES = "Люки", // люки
+    HOURSE = "Коники", // люки
     FAST_UNLOAD = "Быстрая разгрузка", // быстрая разгрузка
 }
 
