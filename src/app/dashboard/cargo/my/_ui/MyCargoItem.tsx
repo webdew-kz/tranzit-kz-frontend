@@ -148,7 +148,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 
 							return (
 								<span key={`${city}-${country}-${index}`} className="flex items-center gap-3 ">
-									<span className="font-medium text-xl leading-none uppercase">
+									<span className="font-medium leading-none uppercase">
 										{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
 									</span>
 									{index < places.length - 1 && <MoveRight size={16} />}
@@ -162,6 +162,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
 					>Посмотреть маршрут</a>
 				</div>
+
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
 
 					<div className=" grid gap-2 lg:flex lg:gap-4">
@@ -219,6 +220,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</Select>
 					</div>
 				</div>
+
 				<div className="lg:mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
@@ -256,6 +258,33 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</div>
 					)}
 				</div>
+
+				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 pt-4 mb-3">
+					<span className=' flex items-center gap-1'>
+						<ArrowBigUp size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Обновлено:</span>
+							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<ArrowBigDown size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Добавлено:</span>
+							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
+						</span>
+					</span>
+
+					<span className=' flex items-center gap-1'>
+						<Eye size={16} />
+						<span className='truncate block text-sm'>
+							<span className=' mr-2 font-light'>Просмотров:</span>
+							<span className=' font-medium'>{cargo.views.count}</span>
+						</span>
+					</span>
+				</div>
+
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div>
 						{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (
@@ -471,60 +500,10 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</Button>
 					</div>
 				</div>
-
-				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
-					<span className=' flex items-center gap-1'>
-						<ArrowBigUp size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Обновлено:</span>
-							<span className=' font-medium'>{cargo.updatedAt && formatRelativeDate(cargo.updatedAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<ArrowBigDown size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Добавлено:</span>
-							<span className=' font-medium'>{cargo.createdAt && formatRelativeDate(cargo.createdAt)}</span>
-						</span>
-					</span>
-
-					<span className=' flex items-center gap-1'>
-						<Eye size={16} />
-						<span className='truncate block text-sm'>
-							<span className=' mr-2 font-light'>Просмотров:</span>
-							<span className=' font-medium'>{cargo.views.count}</span>
-						</span>
-					</span>
-				</div>
 			</CardContent>
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default MyCargoItem
