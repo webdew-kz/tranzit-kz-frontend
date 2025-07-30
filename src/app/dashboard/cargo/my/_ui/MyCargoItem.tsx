@@ -177,7 +177,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 							))}
 						</div>
 					</div>
-					{(cargo.distance && amountTariff && amountPrice) && (
+					{(cargo.distance && amountTariff && amountPrice) ? (
 
 						<div className=" grid grid-cols-2 lg:flex gap-2 lg:gap-4 items-center flex-wrap justify-center">
 							<div className=" flex gap-2 items-center">
@@ -219,7 +219,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 								</SelectContent>
 							</Select>
 						</div>
-					)}
+					) : null}
 
 				</div>
 
