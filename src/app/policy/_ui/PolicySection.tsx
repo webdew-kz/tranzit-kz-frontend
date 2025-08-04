@@ -3,8 +3,10 @@ import React from 'react'
 
 export default function PolicySection() {
 	return (
-		<div className="h-[100vh] bg-[url(/images/bg-home.jpg)] md:bg-[url(/images/bg-home-full.jpg)] bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center overflow-y-auto">
-			<div className="flex flex-col gap-5 items-center justify-center p-5 bg-background w-[calc(100vw-32px)] max-w-full -translate-y-6 rounded-lg opacity-95 border-(--dark-accent) border">
+		<div className="h-[100%] bg-[url(/images/bg-home.jpg)] md:bg-[url(/images/bg-home-full.jpg)] bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center overflow-y-auto" style={{
+			paddingTop: '100px'
+		}}>
+			<div className="flex flex-col gap-5 items-center justify-center p-5 bg-background w-[calc(100vw-32px)] max-w-full md:w-[calc(80vw-32px)] -translate-y-6 rounded-lg opacity-95 border-(--dark-accent) border">
 				<h2
 					className='text-2xl font-semibold text-center'
 				>Политика конфиденциальности</h2>
@@ -13,14 +15,14 @@ export default function PolicySection() {
 					<p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей, предоставляемых при использовании сайта ИП "Транзит" (далее — "Сайт").</p>
 
 					<h2>1. Общие положения</h2>
-					<ul>
+					<ul style={{ marginLeft: '20px' }}>
 						<li>1.1. Индивидуальный предприниматель "Транзит", ИИН/БИН 900123400905, зарегистрированный по адресу: Казахстан, Абайская область, с. Урджар, ул. Жумадилова д. 8, уважает право пользователей на конфиденциальность и обязуется защищать их персональные данные.</li>
 						<li>1.2. Пользуясь сайтом, вы соглашаетесь с условиями настоящей Политики конфиденциальности.</li>
 					</ul>
 
 					<h2>2. Персональные данные, которые мы собираем</h2>
 					<p>Мы собираем и обрабатываем следующие данные пользователей:</p>
-					<ul>
+					<ul style={{ marginLeft: '20px' }}>
 						<li>ФИО</li>
 						<li>Адрес электронной почты (email)</li>
 						<li>Номер телефона</li>
@@ -30,21 +32,21 @@ export default function PolicySection() {
 
 					<h2>3. Цели сбора персональных данных</h2>
 					<p>Ваши данные используются исключительно для следующих целей:</p>
-					<ul>
+					<ul style={{ marginLeft: '20px' }}>
 						<li>Обратная связь с пользователем</li>
 						<li>Обработка заявок и обращений</li>
 						<li>Платёжные операции через CloudPayments.kz</li>
 					</ul>
 
 					<h2>4. Хранение и защита персональных данных</h2>
-					<ul>
+					<ul style={{ marginLeft: '20px' }}>
 						<li>4.1. Все предоставленные данные хранятся в безопасной среде и не передаются третьим лицам.</li>
 						<li>4.2. Передача данных допускается только в рамках законодательства Республики Казахстан и исключительно в рамках взаимодействия с платёжной системой CloudPayments.kz.</li>
 					</ul>
 
 					<h2>5. Права пользователя</h2>
 					<p>Пользователь имеет право:</p>
-					<ul>
+					<ul style={{ marginLeft: '20px' }}>
 						<li>Запросить удаление своих персональных данных</li>
 						<li>Отозвать согласие на обработку данных</li>
 						<li>Получить информацию о наличии и составе обрабатываемых персональных данных</li>
@@ -69,6 +71,6 @@ export default function PolicySection() {
 					>На главную</Link>
 				</div>
 			</div>
-		</div>
+		</div >
 	)
 }
