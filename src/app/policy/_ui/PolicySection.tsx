@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function PolicySection() {
 	return (
-		<div className="h-[100%] bg-[url(/images/bg-home.jpg)] md:bg-[url(/images/bg-home-full.jpg)] bg-no-repeat bg-cover bg-center flex flex-col items-center justify-center overflow-y-auto" style={{
+		<div className="h-[100%] bg-[url(/images/bg-home.jpg)] md:bg-[url(/images/bg-home-full.jpg)] bg-no-repeat bg-cover bg-center flex flex-col items-center overflow-y-auto" style={{
 			paddingTop: '100px'
 		}}>
 			<div className="flex flex-col gap-5 items-center justify-center p-5 bg-background w-[calc(100vw-32px)] max-w-full md:w-[calc(80vw-32px)] -translate-y-6 rounded-lg opacity-95 border-(--dark-accent) border">
