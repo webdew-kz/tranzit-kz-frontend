@@ -16,8 +16,7 @@ export default function HeroSection() {
 			</div>
 			<div className="flex flex-col gap-3 text-center">
 				<Link href='/policy' className='text-white hover:text-(--foreground)'>Политика конфиденциальности</Link>
-				<Link href='/aferta' className='text-white hover:text-(--foreground)'>Договор аферты</Link>
-				<Link href='/rekvizit' className='text-white hover:text-(--foreground)'>Реквизиты</Link>
+				<Link href='/oferta' className='text-white hover:text-(--foreground)'>Договор оферты</Link>
 			</div>
 		</div>
 	)
