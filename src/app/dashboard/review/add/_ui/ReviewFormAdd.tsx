@@ -31,6 +31,8 @@ export default function ReviewFormAdd() {
 
 	const [pending, startTransition] = useTransition()
 
+	const price = 500
+
 	const router = useRouter()
 
 	const tagsValue = {
@@ -92,7 +94,7 @@ export default function ReviewFormAdd() {
 					position: 'top-center',
 				})
 
-				updateBalance((user?.balance ?? 0) - 500)
+				updateBalance((user?.balance ?? 0) - price)
 
 				router.replace('/dashboard/review/my')
 			} catch (error) {
@@ -204,22 +206,22 @@ export default function ReviewFormAdd() {
 						<Button
 							type='submit'
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
-							disabled={pending || (user?.balance ?? 0) < 500}
+							disabled={pending || (user?.balance ?? 0) < price}
 						>
 							{pending ? (
 								<>
 									<Loader2 className="animate-spin stroke-accent" />
 									Отправляю ...
 								</>
-							) : (user?.balance ?? 0) < 500 ? (
+							) : (user?.balance ?? 0) < price ? (
 								"Недостаточно средств"
 							) : (
-								"Отправить за 500 ₸"
+								`Отправить за ${price} ₸`
 							)}
 						</Button>
 					</div>
 
-					{(user?.balance ?? 0) < 500 && (
+					{(user?.balance ?? 0) < price && (
 						<>
 							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
 								<div className='md:col-start-2 text-center'>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
