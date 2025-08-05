@@ -9,7 +9,7 @@ export default function DashboardLayout({
 	return (
 		<>
 			<MobileMenu />
-			<div className="grid grid-cols-12 pt-[120px] md:pt-[60px]">
+			<div className="grid grid-cols-12 pt-[120px] md:pt-[60px] pb-[60px]">
 				<Aside />
 				<main className="col-span-12 md:col-span-10 p-4">
 					{children}

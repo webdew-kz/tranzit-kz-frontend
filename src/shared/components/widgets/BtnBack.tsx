@@ -34,12 +34,12 @@ export default function BtnBack() {
 
 		<Button
 			type='button'
-			variant='outline'
+			variant='default'
 			onClick={() => router.back()}
-			className=' fixed left-[16px] bottom-[16px] z-50 bg-accent'
+			className=' fixed left-[16px] bottom-[16px] z-50 bg-accent md:hidden'
 		>
 			<Undo2 />
-			<span className='block md:hidden'>Назад</span>
+			<span className='block '>Назад</span>
 		</Button>
 	)
 }
