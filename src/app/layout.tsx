@@ -6,6 +6,7 @@ import { ThemeProvider } from './provider';
 import Script from 'next/script';
 import { Toaster } from '@/shared/components/ui/sonner';
 import TopBar from '@/shared/components/sections/TopBar';
+import BtnBack from '@/shared/components/widgets/BtnBack';
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({
 				>
 					<TopBar />
 					{children}
+					<BtnBack />
 					<Toaster />
 				</ThemeProvider>
 			</body>
