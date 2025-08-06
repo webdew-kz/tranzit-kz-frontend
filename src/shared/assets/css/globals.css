@@ -215,6 +215,8 @@ a.linkSvgPathDark:hover svg path {
     z-index: 9999;
     width: fit-content;
     text-align: center;
+    font-size: 14px !important;
+    text-align: left !important;
     color: #b4802e !important;
     border-color: #b4802e !important;
 }
