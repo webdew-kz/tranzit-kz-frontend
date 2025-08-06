@@ -12,7 +12,8 @@ const EXCLUDED_PATHS = [
 	'/login',
 	'/policy',
 	'/oferta',
-	'/reset'
+	'/reset',
+	'/tariff'
 ]
 
 export default function BtnBack() {
