@@ -31,7 +31,7 @@ export default function ReviewFormAdd() {
 
 	const [pending, startTransition] = useTransition()
 
-	const price = 500
+	const price = 1000
 
 	const router = useRouter()
 

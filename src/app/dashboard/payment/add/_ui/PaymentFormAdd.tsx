@@ -24,10 +24,10 @@ export default function PaymentFormAdd() {
 
 	const router = useRouter()
 
-	const tagsValue = [500, 1000, 2000, 5000]
+	const tagsValue = [1000, 2000, 5000, 10000]
 
 	const paymentSchema = z.object({
-		amount: z.number().min(500)
+		amount: z.number().min(1000)
 	});
 
 
@@ -93,7 +93,7 @@ export default function PaymentFormAdd() {
 	}
 
 	const onError = (errors: any) => {
-		toast.error(errors.message ?? 'Минимум 500 ₸', {
+		toast.error(errors.message ?? 'Минимум 1 000 ₸', {
 			position: 'top-center',
 		})
 		console.error(errors);
@@ -115,7 +115,7 @@ export default function PaymentFormAdd() {
 					<div className='grid w-full gap-3 md:gap-5 items-start'>
 						<Input
 							type='number'
-							placeholder="Введите сумму (минимум 500 ₸)"
+							placeholder="Введите сумму (минимум 1000 ₸)"
 							className='text-sm'
 							required
 							{...form.register('amount', { valueAsNumber: true })}
