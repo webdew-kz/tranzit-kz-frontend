@@ -205,6 +205,8 @@ export default function TruckFormCopy({ id }: ITruckFormCopyProps) {
 	const onError = (errors: any) => {
 		toast.error(errors.message ?? 'Некорректные данные', {
 			position: 'top-center',
+			className: "center-toast",
+			duration: 10000
 		})
 		console.error(errors);
 

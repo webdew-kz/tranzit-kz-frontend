@@ -166,6 +166,8 @@ export default function TrailerFormAdd() {
 
 		toast.error(message, {
 			position: "top-center",
+			className: "center-toast",
+			duration: 10000
 		});
 
 		console.error("Form validation errors:", errors);
