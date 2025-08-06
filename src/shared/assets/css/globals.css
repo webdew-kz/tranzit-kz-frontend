@@ -205,3 +205,14 @@ a.linkSvgPathDark:hover svg path {
     background-color: transparent !important;
     box-shadow: none !important;
 }
+
+.center-toast {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 auto;
+    z-index: 9999;
+    width: fit-content;
+    text-align: center;
+}

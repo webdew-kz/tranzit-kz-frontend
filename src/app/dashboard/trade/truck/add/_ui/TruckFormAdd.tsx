@@ -185,6 +185,7 @@ export default function TruckFormAdd() {
 
 		toast.error(message, {
 			position: "top-center",
+			className: "center-toast",
 		});
 
 		console.error("Form validation errors:", errors);
