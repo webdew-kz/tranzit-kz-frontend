@@ -3,7 +3,6 @@ import { useUserStore } from '@/shared/store/useUserStore'
 import React from 'react'
 import FormNameEmail from './_ui/FormNameEmail'
 import Loader from '@/shared/components/widgets/Loader'
-import { redirect } from 'next/navigation'
 import PayRegister from './_ui/PayRegister'
 
 export default function DashboardPage() {
@@ -27,9 +26,11 @@ export default function DashboardPage() {
 	}
 
 	if (!user?.isRegistered) {
-		<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
-			<PayRegister />
-		</div>
+		return (
+			<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
+				<PayRegister />
+			</div>
+		)
 	}
 
 	return (

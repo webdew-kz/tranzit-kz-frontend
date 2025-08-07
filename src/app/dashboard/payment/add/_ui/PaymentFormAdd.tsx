@@ -18,6 +18,8 @@ export default function PaymentFormAdd() {
 
 	useCloudPayments()
 
+	const paymentPublicId = 'test_api_00000000000000000000002'
+
 	const { updateBalance } = useUserStore.getState();
 
 	const [pending, startTransition] = useTransition()
@@ -51,7 +53,7 @@ export default function PaymentFormAdd() {
 					const widget = new (window as any).tiptop.Widget(); // <--- Кастомный тип `any`
 					widget.pay('charge',
 						{
-							publicId: 'test_api_00000000000000000000002',
+							publicId: paymentPublicId,
 							description: 'Пополнение баланса tranzit.kz',
 							amount: data.amount,
 							currency: 'KZT',
