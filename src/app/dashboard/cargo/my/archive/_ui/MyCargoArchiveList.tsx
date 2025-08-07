@@ -6,7 +6,7 @@ import MyCargoItem from './MyCargoArchiveItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
@@ -18,6 +18,12 @@ import { removeMany } from '../actions';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 
 export default function MyCargoArchiveList() {
+
+	const router = useRouter()
+	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	const { rates, loading } = useCurrencyRates()
 

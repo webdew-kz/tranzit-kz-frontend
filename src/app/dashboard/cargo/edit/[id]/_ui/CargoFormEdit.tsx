@@ -18,6 +18,7 @@ import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { editCargo } from '../actions';
 import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/shared/store/useUserStore';
 
 
 
@@ -26,6 +27,10 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 	const [cargo, setCargo] = useState<Cargo>({} as Cargo)
 
 	const router = useRouter()
+	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	useEffect(() => {
 		const fetchData = async () => {

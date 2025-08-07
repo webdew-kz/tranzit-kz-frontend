@@ -10,11 +10,18 @@ import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 
 
 export default function CargoSearchList() {
 
+	const router = useRouter()
+	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	const { rates, loading } = useCurrencyRates()
 	const { searchCargos, setSearchCargos } = useCargoSearchStore()

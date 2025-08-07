@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { create } from '../actions';
-import { Loader2, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import useCloudPayments from '@/shared/hooks/useCloudPayments';
 
@@ -25,6 +24,10 @@ export default function PaymentFormAdd() {
 	const [pending, startTransition] = useTransition()
 
 	const router = useRouter()
+	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	const tagsValue = [1000, 2000, 5000, 10000]
 

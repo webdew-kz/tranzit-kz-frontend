@@ -5,7 +5,7 @@ import MyCargoItem from './MyCargoItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
@@ -15,9 +15,14 @@ import Loader from '@/shared/components/widgets/Loader';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { Loader2 } from 'lucide-react';
+import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyCargoList() {
-
+	const router = useRouter()
+	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 	const { rates, loading } = useCurrencyRates()
 
 	const [cargos, setCargos] = useState<ICargo[]>([]);
@@ -56,8 +61,6 @@ export default function MyCargoList() {
 		}
 
 	};
-
-
 
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 

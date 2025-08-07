@@ -59,6 +59,9 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 	}, [])
 
 	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	const [pending, startTransition] = useTransition()
 

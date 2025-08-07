@@ -8,10 +8,18 @@ import CargoWishItem from './CargoWishItem'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 
 
 export default function CargoWishList() {
+
+	const router = useRouter()
+	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	const { rates, loading } = useCurrencyRates()
 	const [cargos, setCargos] = useState<ICargo[]>([])
