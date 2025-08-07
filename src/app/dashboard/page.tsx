@@ -10,9 +10,7 @@ export default function DashboardPage() {
 
 
 	const { user } = useUserStore()
-	if (!user?.isRegistered) {
-		redirect('/dashboard')
-	}
+
 
 	if (!user) {
 		return (

@@ -25,13 +25,13 @@ export default function CargoFormAdd() {
 
 	const { user } = useUserStore()
 
-	if (!user?.isRegistered) {
-		redirect('/dashboard')
-	}
-
 	const [pending, startTransition] = useTransition()
 
 	const router = useRouter()
+
+	if (!user?.isRegistered) {
+		router.replace('/dashboard')
+	}
 
 	const cargoSchema = z.object({
 		title: z.string().min(1),
