@@ -17,7 +17,7 @@ export default function PayRegister() {
 
 	const paymentPublicId = 'test_api_00000000000000000000002'
 
-	const { setUser } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [pending, startTransition] = useTransition()
 
@@ -60,7 +60,12 @@ export default function PayRegister() {
 							onSuccess: async function () {
 								const res = await payRegister(data)
 
-								setUser(res.user);
+								if (user) {
+									setUser({
+										...user,
+										isRegistered: true,
+									});
+								}
 
 								toast.success(res.message, {
 									position: 'top-center',
