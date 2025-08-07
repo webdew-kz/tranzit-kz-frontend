@@ -18,12 +18,16 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { addCargo } from '../actions';
 import { Loader2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 
 export default function CargoFormAdd() {
 
 	const { user } = useUserStore()
+
+	if (!user?.isRegistered) {
+		redirect('/dashboard')
+	}
 
 	const [pending, startTransition] = useTransition()
 

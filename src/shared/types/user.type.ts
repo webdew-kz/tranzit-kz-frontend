@@ -21,5 +21,6 @@ export interface User {
     subscriptionStatus: boolean | null;
     isVerified: boolean | null;
     isBlocked: boolean | null;
+    isRegistered: boolean | null;
     documents: string[];
 }

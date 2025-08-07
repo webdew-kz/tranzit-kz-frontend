@@ -22,10 +22,6 @@ import { Loader2 } from 'lucide-react'
 
 export default function FormNameEmail() {
 
-	const [step, setStep] = useState<'number' | 'code'>('number')
-
-	const [pending, startTransition] = useTransition()
-
 	const { setUser } = useUserStore()
 
 	const schema = z.object({
@@ -80,98 +76,7 @@ export default function FormNameEmail() {
 					className=" w-[calc(100vw - 2rem)] sm:w-[320px] grid gap-5"
 				>
 
-					{/* {step === 'number' && (
-						<>
-							<FormField
-								control={form.control}
-								name="name"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Ваше имя</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="Введите ваше имя"
-												value={field.value}
-												onChange={field.onChange}
-											/>
-										</FormControl>
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="phone"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Ваш номер телефона</FormLabel>
-										<FormControl>
-											<PhoneInput
-												localization={ru}
-												country="kz"
-												containerClass="!w-full dark:!bg-background"
-												inputClass="!rounded-lg !h-[36px] !lh-[36px] !overflow-hidden dark:!bg-input/30 !border-input !w-full"
-												enableSearch={true}
-												disableSearchIcon={true}
-												searchPlaceholder='Поиск'
-												searchClass='dark:!bg-background'
-												dropdownClass='dark:!bg-background '
-												buttonClass="dark:!bg-background !border-input"
-												buttonStyle={{ borderRadius: '8px 0 0 8px' }}
-												disableCountryGuess={true}
-												placeholder="Введите номер телефона"
-												value={field.value}
-												onChange={field.onChange}
-											/>
-										</FormControl>
-									</FormItem>
-								)}
-							/>
-							<Button
-								className=' bg-(--dark-accent) hover:bg-(--background) text-(--foreground)  border border-(--dark-accent) hover:border-(--foreground) rounded-lg'
-								type="submit"
-							>Подтвердить номер</Button>
-						</>
-					)}
 
-					{step === 'code' && (
-						<>
-							<FormField
-								control={form.control}
-								name="otp"
-								render={({ field }) => (
-									<FormItem>
-										<FormDescription>Введите 6-ти значный код из СМС</FormDescription>
-										<FormControl className='justify-center'>
-											<InputOTP
-												maxLength={6}
-												value={field.value}
-												onChange={field.onChange}
-											>
-												<InputOTPGroup className=' w-full justify-between !rounded-sm'>
-													<InputOTPSlot index={0} className=' !rounded-sm' />
-													<InputOTPSlot index={1} className=' !rounded-sm' />
-													<InputOTPSlot index={2} className=' !rounded-sm' />
-												</InputOTPGroup>
-												<InputOTPSeparator />
-												<InputOTPGroup className=' w-full justify-between !rounded-sm'>
-													<InputOTPSlot index={3} className=' !rounded-sm' />
-													<InputOTPSlot index={4} className=' !rounded-sm' />
-													<InputOTPSlot index={5} className=' !rounded-sm' />
-												</InputOTPGroup>
-											</InputOTP>
-										</FormControl>
-									</FormItem>
-								)}
-							/>
-							<Button
-								type='submit'
-								className='w-full bg-(--dark-accent)'
-								disabled={pending}
-							>
-								{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Завершить регистрацию</>) : "Завершить регистрацию"}
-							</Button>
-						</>
-					)} */}
 
 					<FormField
 						control={form.control}
@@ -213,109 +118,7 @@ export default function FormNameEmail() {
 				</form>
 
 			</Form>
-			{/* {step === 'code' ? (
 
-				<Form {...formCode}>
-					<form
-						onSubmit={formCode.handleSubmit(handleSubmit, onError)}
-						className=" w-[calc(100vw - 2rem)] sm:w-[320px] grid gap-5"
-					>
-						<FormField
-							control={formCode.control}
-							name="otp"
-							render={({ field }) => (
-								<FormItem>
-									<FormDescription>Введите 6-ти значный код из СМС</FormDescription>
-									<FormControl className='justify-center'>
-										<InputOTP
-											maxLength={6}
-											value={field.value}
-											onChange={field.onChange}
-										>
-											<InputOTPGroup className=' w-full justify-between !rounded-sm'>
-												<InputOTPSlot index={0} className=' !rounded-sm' />
-												<InputOTPSlot index={1} className=' !rounded-sm' />
-												<InputOTPSlot index={2} className=' !rounded-sm' />
-											</InputOTPGroup>
-											<InputOTPSeparator />
-											<InputOTPGroup className=' w-full justify-between !rounded-sm'>
-												<InputOTPSlot index={3} className=' !rounded-sm' />
-												<InputOTPSlot index={4} className=' !rounded-sm' />
-												<InputOTPSlot index={5} className=' !rounded-sm' />
-											</InputOTPGroup>
-										</InputOTP>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						<Button
-							type='submit'
-							className='w-full bg-(--dark-accent)'
-							disabled={pending}
-						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Завершить регистрацию</>) : "Завершить регистрацию"}
-						</Button>
-					</form>
-				</Form>
-
-			) : (
-
-				<Form {...formBase}>
-					<form
-						onSubmit={formBase.handleSubmit(handleValidPhone)}
-						className=" w-[calc(100vw - 2rem)] sm:w-[320px] grid gap-5"
-					>
-						<FormField
-							control={formBase.control}
-							name="name"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Ваше имя</FormLabel>
-									<FormControl>
-										<Input
-											placeholder="Введите ваше имя"
-											value={field.value}
-											onChange={field.onChange}
-										/>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						<FormField
-							control={formBase.control}
-							name="phone"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Ваш номер телефона</FormLabel>
-									<FormControl>
-										<PhoneInput
-											localization={ru}
-											country="kz"
-											containerClass="!w-full dark:!bg-background"
-											inputClass="!rounded-lg !h-[36px] !lh-[36px] !overflow-hidden dark:!bg-input/30 !border-input !w-full"
-											enableSearch={true}
-											disableSearchIcon={true}
-											searchPlaceholder='Поиск'
-											searchClass='dark:!bg-background'
-											dropdownClass='dark:!bg-background '
-											buttonClass="dark:!bg-background !border-input"
-											buttonStyle={{ borderRadius: '8px 0 0 8px' }}
-											disableCountryGuess={true}
-											placeholder="Введите номер телефона"
-											value={field.value}
-											onChange={field.onChange}
-										/>
-									</FormControl>
-								</FormItem>
-							)}
-						/>
-						<Button
-							className=' bg-(--dark-accent) hover:bg-(--background) text-(--foreground)  border border-(--dark-accent) hover:border-(--foreground) rounded-lg'
-							type="submit"
-						>Подтвердить номер</Button>
-					</form>
-				</Form>
-			)} */}
 
 		</>
 	)

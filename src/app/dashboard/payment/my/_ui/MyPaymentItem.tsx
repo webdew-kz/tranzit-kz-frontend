@@ -60,7 +60,14 @@ const MyPaymentItem = memo(({ paymentInitial, selected, onToggle, setPayments, r
 					<div className=" grid gap-2 lg:gap-4">
 
 						<div className="flex items-center gap-2">
-							<span>Платеж на сумму:</span>
+							<span>Название платежа</span>
+							<span className="block">
+								{payment.descr}
+							</span>
+						</div>
+
+						<div className="flex items-center gap-2">
+							<span>Сумма:</span>
 							<span className="block">
 								{payment.amount} ₸
 							</span>

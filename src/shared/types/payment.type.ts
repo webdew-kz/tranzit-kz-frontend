@@ -8,6 +8,7 @@ export interface IPayment {
     updatedAt?: string; // дата обновления
 
     amount?: number;
+    descr?: string;
 
     user?: User;
 }

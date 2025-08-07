@@ -1,5 +1,6 @@
 'use client'
 import { cn } from '@/shared/lib/utils';
+import { useUserStore } from '@/shared/store/useUserStore';
 import { Box, Menu, Route, SquareUserRound, Truck } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
@@ -8,6 +9,12 @@ import React from 'react'
 export default function MobileMenu() {
 
 	const pathname = usePathname();
+
+	const { user } = useUserStore()
+
+	if (!user?.name || !user?.email || !user?.isRegistered) {
+		return null
+	}
 
 	return (
 		<div className=" z-1 md:hidden fixed h-15 w-full top-15 right-0 left-0 bg-background border-b border-(--dark-accent) grid grid-cols-5 items-center px-0">

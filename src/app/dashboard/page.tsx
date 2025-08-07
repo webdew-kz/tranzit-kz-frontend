@@ -1,27 +1,24 @@
 'use client'
 import { useUserStore } from '@/shared/store/useUserStore'
 import React from 'react'
-import FormName from './_ui/FormName'
 import FormNameEmail from './_ui/FormNameEmail'
 import Loader from '@/shared/components/widgets/Loader'
+import { redirect } from 'next/navigation'
+import PayRegister from './_ui/PayRegister'
 
 export default function DashboardPage() {
 
 
 	const { user } = useUserStore()
+	if (!user?.isRegistered) {
+		redirect('/dashboard')
+	}
 
 	if (!user) {
 		return (
 			<Loader />
 		)
 	}
-	// if (!user?.name && user?.phone) {
-	// 	return (
-	// 		<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
-	// 			<FormName />
-	// 		</div>
-	// 	)
-	// }
 
 	if (!user?.name && !user?.email) {
 		return (
@@ -29,6 +26,12 @@ export default function DashboardPage() {
 				<FormNameEmail />
 			</div>
 		)
+	}
+
+	if (!user?.isRegistered) {
+		<div className=' fixed left-0 bottom-0 right-0 top-[60px] bg-background z-100 flex justify-center items-center'>
+			<PayRegister />
+		</div>
 	}
 
 	return (

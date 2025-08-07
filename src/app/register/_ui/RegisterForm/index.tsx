@@ -113,26 +113,6 @@ export default function RegisterForm() {
 		},
 	})
 
-	// useEffect(() => {
-	// 	if (!window.recaptchaVerifier) {
-	// 		window.recaptchaVerifier = new RecaptchaVerifier(
-	// 			auth,
-	// 			'recaptcha-container', // ✅ строка — ID контейнера
-	// 			{
-	// 				size: 'invisible',
-	// 				callback: (response: string) => {
-	// 					console.log('reCAPTCHA resolved', response);
-	// 				},
-	// 			},
-	// 			// ✅ объект Auth
-	// 		)
-
-	// 		window.recaptchaVerifier.render().then((widgetId) => {
-	// 			window.recaptchaWidgetId = widgetId
-	// 		})
-	// 	}
-	// }, [])
-
 
 
 	function onSubmitPhone(values: FormPhoneValues) {
@@ -178,46 +158,6 @@ export default function RegisterForm() {
 			position: 'top-center',
 		});
 	};
-
-	// function onSubmitOtp(values: FormOtpValues) {
-
-	// 	if (values.otp.length < 6) {
-	// 		toast.error('Введите 6-ти значный код', {
-	// 			position: 'top-center',
-	// 		})
-	// 		return
-	// 	}
-
-	// 	setLoading(true)
-
-	// 	window.confirmationResult.confirm(values.otp)
-	// 		.then((result: any) => {
-	// 			const user = result.user
-	// 			toast.success(`Придумайте пароль`, {
-	// 				position: 'top-center',
-	// 			})
-	// 			setFormData((prev) => ({
-	// 				...prev,
-	// 				login: user.phoneNumber.replace(/\D/g, ''),
-	// 			}))
-	// 			setStepPhoneRegister('password')
-
-	// 		}).catch((error: any) => {
-	// 			console.error(error)
-	// 			toast.error('Неверный код', {
-	// 				position: 'top-center',
-	// 			})
-	// 		}).finally(() => {
-	// 			formOtp.reset({ otp: "" })
-	// 			setLoading(false)
-	// 		})
-	// }
-
-	function onErrorOtp(errors: any) {
-		toast.error(errors.otp?.message ?? 'Введите 6-ти значный код', {
-			position: 'top-center',
-		})
-	}
 
 	async function onSubmitPass(values: FormPassValues) {
 		if (values.password.length < 4) {
