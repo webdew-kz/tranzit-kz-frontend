@@ -8,10 +8,10 @@ import PayRegister from './_ui/PayRegister'
 export default function DashboardPage() {
 
 
-	const { user } = useUserStore()
+	const { user, isInitialized } = useUserStore()
 
 
-	if (!user) {
+	if (!isInitialized) {
 		return (
 			<Loader />
 		)

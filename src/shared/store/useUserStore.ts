@@ -6,6 +6,7 @@ import { User } from "../types/user.type";
 
 interface UserState {
     user: User | null;
+    isInitialized: boolean;
     setUser: (user: User) => void;
     clearUser: () => void;
     updateBalance: (newBalance: number) => void;
@@ -15,8 +16,9 @@ export const useUserStore = create<UserState>()(
     persist(
         (set, get) => ({
             user: null,
-            setUser: (user) => set({ user }),
-            clearUser: () => set({ user: null }),
+            isInitialized: false, // 👈 добавлено
+            setUser: (user) => set({ user, isInitialized: true }),
+            clearUser: () => set({ user: null, isInitialized: true }),
             updateBalance: (newBalance: number) => {
                 const { user } = get();
                 if (user) {
@@ -26,6 +28,10 @@ export const useUserStore = create<UserState>()(
         }),
         {
             name: "user-storage",
+            onRehydrateStorage: () => (state) => {
+                // Когда Zustand инициализирует данные из localStorage
+                state?.setUser(state.user!); // Это вызовет isInitialized: true
+            },
         }
     )
 );
