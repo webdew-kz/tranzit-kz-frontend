@@ -134,7 +134,7 @@ export default function PayRegister() {
 						</div>
 					</div> */}
 
-					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full max-w-[calc(100vw - 2rem)] sm:max-w-[320px]  gap-3 md:gap-5 items-start">
 
 						<Button
 							type='submit'
