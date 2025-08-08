@@ -103,48 +103,24 @@ export default function PayRegister() {
 	const amount = form.watch('amount')
 
 	return (
-		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5">
+		<Card className="w-[calc(100vw-32px)] max-w-full sm:max-w-xs  p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Оплата регистрации</CardTitle>
+				<CardTitle className='text-xl text-center'>Ежемесячная абонплата</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid gap-3 md:gap-5'
 				>
-					{/* <div className='grid w-full gap-3 md:gap-5 items-start'>
-						<Input
-							type='number'
-							placeholder="Введите сумму (минимум 1000 ₸)"
-							className='text-sm'
-							required
-							{...form.register('amount', { valueAsNumber: true })}
-						/>
-						<div className="grid grid-cols-2 gap-2 items-center">
-							{tagsValue.map(value => (
-								<Button
-									key={value}
-									variant={value === amount ? 'default' : 'outline'}
-									className='w-full border border-(--dark-accent) rounded-2xl'
-									onClick={() => form.setValue('amount', value, { shouldValidate: true })}
-								>
-									{value}
-								</Button>
-							))}
-						</div>
-					</div> */}
-
-					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full max-w-[calc(100vw - 2rem)] sm:max-w-[320px]  gap-3 md:gap-5 items-start">
-
+					<div className="grid items-start justify-center w-full">
 						<Button
 							type='submit'
-							className=' bg-(--dark-accent) md:col-start-2 w-full'
+							className='bg-(--dark-accent) w-[320px]'
 							disabled={pending}
 						>
 							Оплатить 1 000 ₸
 						</Button>
 					</div>
-
 				</form>
 			</CardContent>
 		</Card>
