@@ -8,11 +8,11 @@ import React from 'react'
 
 export default function page() {
 
-	const router = useRouter()
-	const { user } = useUserStore()
-	if (!user?.isRegistered) {
-		router.replace('/dashboard')
-	}
+	// const router = useRouter()
+	// const { user } = useUserStore()
+	// if (!user?.isRegistered) {
+	// 	router.replace('/dashboard')
+	// }
 	return (
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
 			{/* <Button
