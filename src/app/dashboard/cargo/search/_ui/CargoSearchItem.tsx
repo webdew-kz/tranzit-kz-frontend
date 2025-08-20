@@ -248,18 +248,20 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 							))}
 						</div>
 
-						<div className=" flex items-center gap-2">
-							<Weight size={16} />
-							{cargo.weight && (
-								<span className='truncate block'>{`${cargo.weight} тонн`}</span>
-							)}
-						</div>
+						<div className="grid grid-cols-2 lg:flex items-center gap-2">
+							<div className=" flex items-center gap-2">
+								<Weight size={16} />
+								{cargo.weight && (
+									<span className='truncate block'>{`${cargo.weight} тонн`}</span>
+								)}
+							</div>
 
-						<div className=" flex items-center gap-2">
-							<Move3d size={16} />
-							{cargo.volume && (
-								<span className='truncate block'>{`${cargo.volume} м`}<span className=' align-super text-xs'>3</span></span>
-							)}
+							<div className=" flex items-center gap-2">
+								<Move3d size={16} />
+								{cargo.volume && (
+									<span className='truncate block'>{`${cargo.volume} м`}<span className=' align-super text-xs'>3</span></span>
+								)}
+							</div>
 						</div>
 
 						<div className=" flex items-center gap-2 flex-wrap">
