@@ -19,19 +19,19 @@ import { toast } from 'sonner';
 import { addCargo } from '../actions';
 import { Loader2 } from 'lucide-react';
 import { redirect, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Loader from '@/shared/components/widgets/Loader';
 
 
 export default function CargoFormAdd() {
 
-	const { user } = useUserStore()
 
 	const [pending, startTransition] = useTransition()
 
 	const router = useRouter()
 
-	if (!user?.isRegistered) {
-		router.replace('/dashboard')
-	}
+	const { user, isInitialized } = useUserStore()
+
 
 	const cargoSchema = z.object({
 		title: z.string().min(1),
@@ -195,6 +195,12 @@ export default function CargoFormAdd() {
 		console.error(errors);
 
 	};
+
+	if (!isInitialized) {
+		return (
+			<Loader />
+		)
+	}
 
 
 
@@ -753,14 +759,26 @@ export default function CargoFormAdd() {
 					</div>
 
 					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+						{user?.isRegistered ? (
+							<Button
+								type='submit'
+								className=' bg-(--dark-accent) md:col-start-2 w-full'
+								disabled={pending}
+							>
+								{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
+							</Button>
+						) : (
+							<div className="grid md:flex w-full gap-3 md:gap-5 items-start">
+								<div className="">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+								<Button
+									className=' bg-(--dark-accent) md:col-start-2 w-full'
+									asChild
+								>
+									<Link href='/'>Оплатить </Link>
+								</Button>
+							</div>
+						)}
 
-						<Button
-							type='submit'
-							className=' bg-(--dark-accent) md:col-start-2 w-full'
-							disabled={pending}
-						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
-						</Button>
 					</div>
 				</form>
 			</CardContent>
