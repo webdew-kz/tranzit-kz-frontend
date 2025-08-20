@@ -238,16 +238,10 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 						</div>
 					) : null}
 				</div>
-				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
-					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
-						<div className=" flex items-center gap-2 max-w-[200px]">
-							<Truck size={16} />
-							{cargo.truckType && cargo.truckType.map((item, index) => (
-								<span className=' truncate block' key={index} >{TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]}</span>
-							))}
-						</div>
 
-						<div className=" flex items-center gap-2 max-w-[200px]">
+				<div className="mb-3 flex flex-col gap-2 ">
+					<div className="grid gap-2 lg:flex lg:gap-4">
+						<div className=" flex items-center gap-2 ">
 							<Container size={16} />
 							{cargo.loadingType && cargo.loadingType.map((item, index) => (
 								<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
@@ -267,14 +261,24 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								<span className='truncate block'>{`${cargo.volume} м`}<span className=' align-super text-xs'>3</span></span>
 							)}
 						</div>
+
+						<div className=" flex items-center gap-2 flex-wrap">
+							<Truck size={16} />
+							{cargo.truckType && cargo.truckType.map((item, index) => (
+								<span className=' truncate block' key={index} >{TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]}</span>
+							))}
+						</div>
+
+
 					</div>
 					{cargo.note && (
-						<div className=" flex items-center gap-2 max-w-[200px]">
-							<MessageCircleMore size={16} />
-							<span className=' truncate block' >{cargo.note}</span>
+						<div className=" flex items-center gap-2">
+							<MessageCircleMore size={16} className=' shrink-0' />
+							<span className=' ' >{cargo.note}</span>
 						</div>
 					)}
 				</div>
+
 				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
 					<span className=' flex items-center gap-1'>
 						<ArrowBigUp size={16} />
