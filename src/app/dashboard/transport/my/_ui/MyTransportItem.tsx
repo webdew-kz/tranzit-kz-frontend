@@ -151,7 +151,7 @@ const MyTransportItem = memo(({ transportInitial, selected, onToggle, setTranspo
 						})}
 					</div>
 				</div>
-				<div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
+				{/* <div className="mb-3 flex flex-col gap-2 lg:flex-row lg:justify-between">
 					<div className="grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<Truck size={16} />
@@ -185,6 +185,48 @@ const MyTransportItem = memo(({ transportInitial, selected, onToggle, setTranspo
 						<div className=" flex items-center gap-2 max-w-[200px]">
 							<MessageCircleMore size={16} />
 							<span className=' truncate block' >{transport.note}</span>
+						</div>
+					)}
+				</div> */}
+
+				<div className="mb-3 flex flex-col gap-2 ">
+					<div className="grid gap-2 lg:flex lg:gap-4">
+						<div className=" flex items-center gap-2 ">
+							<Container size={16} />
+							{transport.loadingType && transport.loadingType.map((item, index) => (
+								<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
+							))}
+						</div>
+
+						<div className="grid grid-cols-2 lg:flex items-center gap-2">
+							<div className=" flex items-center gap-2">
+								<Weight size={16} />
+								{transport.weight && (
+									<span className='truncate block'>{`${transport.weight} тонн`}</span>
+								)}
+							</div>
+
+							<div className=" flex items-center gap-2">
+								<Move3d size={16} />
+								{transport.volume && (
+									<span className='truncate block'>{`${transport.volume} м`}<span className=' align-super text-xs'>3</span></span>
+								)}
+							</div>
+						</div>
+
+						<div className=" flex items-center gap-2 flex-wrap">
+							<Truck size={16} />
+							{transport.truckType && transport.truckType.map((item, index) => (
+								<span className=' truncate block' key={index} >{TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]}</span>
+							))}
+						</div>
+
+
+					</div>
+					{transport.note && (
+						<div className=" flex items-center gap-2">
+							<MessageCircleMore size={16} className=' shrink-0' />
+							<span className=' ' >{transport.note}</span>
 						</div>
 					)}
 				</div>
