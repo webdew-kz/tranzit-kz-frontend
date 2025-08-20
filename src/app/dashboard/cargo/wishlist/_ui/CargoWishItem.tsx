@@ -198,12 +198,6 @@ const CargoWishItem = memo(
 					</div>
 					<div className="mb-3 flex flex-col gap-2 ">
 						<div className="grid gap-2 lg:flex lg:gap-4">
-							<div className=" flex items-center gap-2 ">
-								<Container size={16} />
-								{cargo.loadingType && cargo.loadingType.map((item, index) => (
-									<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
-								))}
-							</div>
 
 							<div className="grid grid-cols-2 lg:flex items-center gap-2">
 								<div className=" flex items-center gap-2">
@@ -219,6 +213,12 @@ const CargoWishItem = memo(
 										<span className='truncate block'>{`${cargo.volume} м`}<span className=' align-super text-xs'>3</span></span>
 									)}
 								</div>
+							</div>
+							<div className=" flex items-center gap-2 ">
+								<Container size={16} />
+								{cargo.loadingType && cargo.loadingType.map((item, index) => (
+									<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
+								))}
 							</div>
 
 							<div className=" flex items-center gap-2 flex-wrap">

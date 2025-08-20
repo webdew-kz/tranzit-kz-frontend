@@ -241,12 +241,6 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 
 				<div className="mb-3 flex flex-col gap-2 ">
 					<div className="grid gap-2 lg:flex lg:gap-4">
-						<div className=" flex items-center gap-2 ">
-							<Container size={16} />
-							{cargo.loadingType && cargo.loadingType.map((item, index) => (
-								<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
-							))}
-						</div>
 
 						<div className="grid grid-cols-2 lg:flex items-center gap-2">
 							<div className=" flex items-center gap-2">
@@ -262,6 +256,12 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									<span className='truncate block'>{`${cargo.volume} м`}<span className=' align-super text-xs'>3</span></span>
 								)}
 							</div>
+						</div>
+						<div className=" flex items-center gap-2 ">
+							<Container size={16} />
+							{cargo.loadingType && cargo.loadingType.map((item, index) => (
+								<span className=' truncate block' key={index} >{LoadingTypeEnum[item as unknown as keyof typeof LoadingTypeEnum]}</span>
+							))}
 						</div>
 
 						<div className=" flex items-center gap-2 flex-wrap">
@@ -569,34 +569,6 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 		</Card>
 	)
 })
-// paymentPeriod ?: PaymentPeriodEnum[]; // период оплаты
-// paymentOther ?: PaymentOtherEnum[]; // другие детали оплаты
-// paymentPrepaymentPercent ?: string; // предоплата %
-// paymentDeferredDays ?: string; // отсрочка дней
-
-// optionDocuments ?: DocumentsEnum[]; // документы
-// optionDocumentsAdr ?: DocumentsAdrEnum; // документы ADR
-
-// optionLoadings ?: LoadingsEnum[]; // погрузка
-// optionLoadingsTimeLoading ?: string; // время погрузки
-// optionLoadingsTimeUnloading ?: string; // время разгрузки
-// optionLoadingsDateUnloading ?: string; // дата разгрузки
-// optionLoadingsPlaceLoading ?: string; // место погрузки
-// optionLoadingsPlaceUnloading ?: string; // место разгрузки
-// optionLoadingsBigBag ?: string; // биг-бэг
-
-// optionTerms ?: TermsEnum[]; // условия
-// optionTermsTemperature ?: string; // температура
-// optionTermsQtyPallets ?: string; // количество паллет
-// optionTermsCorners ?: string; // Уголки
-// optionTermsBelts ?: string; // ремни
-// optionTermsPalletsType ?: TermsPalletsTypeEnum; // тип паллет
-
-// optionAdditionally ?: AdditionallyEnum[]; // дополнительно
 
 
 export default CargoSearchItem
-
-function async(id: string | undefined) {
-	throw new Error('Function not implemented.')
-}
