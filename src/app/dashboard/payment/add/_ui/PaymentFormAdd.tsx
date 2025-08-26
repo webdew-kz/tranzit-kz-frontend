@@ -17,7 +17,7 @@ export default function PaymentFormAdd() {
 
 	useCloudPayments()
 
-	const paymentPublicId = 'test_api_00000000000000000000002'
+	const paymentPublicId = 'pk_9cba1fd1be39c1e60da521409a1c9'
 
 	const { updateBalance } = useUserStore.getState();
 
@@ -29,10 +29,10 @@ export default function PaymentFormAdd() {
 		router.replace('/dashboard')
 	}
 
-	const tagsValue = [1000, 2000, 5000, 10000]
+	const tagsValue = [100, 2000, 5000, 10000]
 
 	const paymentSchema = z.object({
-		amount: z.number().min(1000)
+		amount: z.number().min(100)
 	});
 
 
