@@ -12,7 +12,7 @@ export default function MobileMenu() {
 
 	const { user } = useUserStore()
 
-	if (!user?.isRegistered) {
+	if (user?.role === 'USER' && !user?.isRegistered) {
 		return null
 	}
 
