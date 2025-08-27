@@ -12,7 +12,7 @@ interface MyPaymentItemProps {
 	loading?: boolean
 }
 
-const MyPaymentItem = memo(({ paymentInitial, loading }: MyPaymentItemProps) => {
+const MyPaymentItem = ({ paymentInitial, loading }: MyPaymentItemProps) => {
 
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>
@@ -55,6 +55,6 @@ const MyPaymentItem = memo(({ paymentInitial, loading }: MyPaymentItemProps) => 
 			</CardContent>
 		</Card>
 	)
-})
+}
 
 export default MyPaymentItem
