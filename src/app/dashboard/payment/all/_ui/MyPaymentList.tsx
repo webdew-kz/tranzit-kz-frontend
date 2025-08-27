@@ -130,7 +130,7 @@ export default function MyPaymentList() {
 							</Button>
 
 						</div>
-						{user.login === '77070199595' && (
+						{(user.phone === '77070199595' && user.role === 'ADMIN') && (
 							<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
 								<Button
 									type='button'
