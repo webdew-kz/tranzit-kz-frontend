@@ -201,7 +201,7 @@ export default function MyUserList() {
 
 	return (
 		<div className='pb-[60px]'>
-			<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
+			{/* <Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
 
 					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
@@ -260,7 +260,7 @@ export default function MyUserList() {
 						)}
 					</div>
 				</CardContent>
-			</Card>
+			</Card> */}
 
 			<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 				<span className="font-medium leading-none">
@@ -268,11 +268,11 @@ export default function MyUserList() {
 				</span>
 
 				<span className="font-medium leading-none">
-					Зарегистрировались сегодня: {todayCount}
+					Зарегистрировано сегодня: {todayCount}
 				</span>
 			</div>
 
-			<div className=' grid gap-5'>
+			{/* <div className=' grid gap-5'>
 				{users && users.length > 0 && users.map((user) => (
 					<MyUserItem
 						userInitial={user}
@@ -295,10 +295,10 @@ export default function MyUserList() {
 						<Loader2 className="animate-spin" />
 					</div>
 				}
-			</div>
-			{hasMore && (
+			</div> */}
+			{/* {hasMore && (
 				<div ref={bottomRef} className="h-10" />
-			)}
+			)} */}
 		</div>
 	)
 
