@@ -139,7 +139,7 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 					</span>
 
 					<span className="font-medium leading-none">
-						Абонплата: {user.isRegistered ? 'Оплачено' : 'Неоплачено'}
+						Абонплата: {user?.isRegistered ? 'Оплачено' : 'Неоплачено'}
 					</span>
 
 					<span className="font-medium leading-none">
