@@ -10,8 +10,6 @@ import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useUserStore } from '@/shared/store/useUserStore'
 
 
 

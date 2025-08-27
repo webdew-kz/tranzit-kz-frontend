@@ -128,6 +128,7 @@ const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLen
 		return <Loader />
 	}
 
+	if (user?.isBlocked) return null
 
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent)'>

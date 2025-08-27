@@ -87,14 +87,6 @@ const VacancySearchItem = memo(({ vacancy, rates, loading, setWishlistLength, is
 		return getWishlist().includes(vacancyId);
 	}
 
-	// const route = places.map((place) => {
-	// 	const [city, country] = place.split(",").map((str) => str.trim());
-	// 	return `${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`;
-	// }).join(" → ");
-	// console.log(route);
-
-	// const truckTypes = vacancy.truckType?.map((item) => TruckTypeEnum[item as unknown as keyof typeof TruckTypeEnum]).join(", ");
-
 	const message = `Здравствуйте. Данная заявка актуальна?\n\nВакансия: ${vacancy.otherJob ? vacancy.otherJob : vacancy.job}\nГород: ${vacancy.city}\nЗ/П: ${vacancy.salary_at} - ${vacancy.salary_to} \n\nСсылка на вакансию: https://${process.env.DOMAIN}/dashboard/vacancy/${vacancy.id}`
 	const link = `https://wa.me/${vacancy.userPhone}?text=${encodeURIComponent(message)}`
 
@@ -102,6 +94,8 @@ const VacancySearchItem = memo(({ vacancy, rates, loading, setWishlistLength, is
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>
 	}
+
+	if (user?.isBlocked) return null
 
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent) '>

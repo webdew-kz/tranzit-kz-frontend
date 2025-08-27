@@ -126,6 +126,7 @@ const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength,
 		return <Loader />
 	}
 
+	if (user?.isBlocked) return null
 
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent)'>

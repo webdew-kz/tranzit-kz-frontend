@@ -131,6 +131,8 @@ const TransportSearchItem = memo(({ transport, rates, loading, setWishlistLength
 		return <p className='text-center py-5'>Затранспортка ...</p>
 	}
 
+	if (user?.isBlocked) return null
+
 	return (
 		<Card className={cn(isEndedDate(transport.endDate!) && '!text-muted-foreground', 'p-0 border-1 border-(--dark-accent) ')}>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>

@@ -125,7 +125,7 @@ const TruckSearchItem = memo(({ truckInitial, rates, loading, setWishlistLength,
 	if (pending || !user) {
 		return <Loader />
 	}
-
+	if (user?.isBlocked) return null
 
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent)'>
