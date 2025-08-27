@@ -14,6 +14,8 @@ import { Button } from '@/shared/components/ui/button'
 
 export default function TransportWishList() {
 
+
+	const { user } = useUserStore()
 	const { rates, loading } = useCurrencyRates()
 	const [transports, setTransports] = useState<ITransport[]>([])
 
@@ -46,9 +48,7 @@ export default function TransportWishList() {
 		return <Loader />
 	}
 
-	const { user } = useUserStore()
-
-	if (!user?.isRegistered) {
+	if (!user?.isRegistered && user?.role === 'USER') {
 		return (
 			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
 				<div className="text-center">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>

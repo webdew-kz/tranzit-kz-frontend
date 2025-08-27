@@ -59,7 +59,7 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 	}, [])
 
 	const { user } = useUserStore()
-	if (!user?.isRegistered) {
+	if (!user?.isRegistered && user?.role === 'USER') {
 		router.replace('/dashboard')
 	}
 

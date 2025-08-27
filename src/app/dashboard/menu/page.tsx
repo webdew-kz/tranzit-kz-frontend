@@ -10,7 +10,7 @@ export default function page() {
 
 	// const router = useRouter()
 	// const { user } = useUserStore()
-	// if (!user?.isRegistered) {
+	// if (!user?.isRegistered && user?.role === 'USER') {
 	// 	router.replace('/dashboard')
 	// }
 	return (
