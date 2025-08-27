@@ -21,10 +21,10 @@ export default function PayRegister() {
 
 	const [pending, startTransition] = useTransition()
 
-	const price = 1000;
+	const price = 100;
 
 	const paymentSchema = z.object({
-		amount: z.number().min(1000)
+		amount: z.number().min(100)
 	});
 
 
