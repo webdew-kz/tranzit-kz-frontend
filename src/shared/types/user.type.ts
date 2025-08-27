@@ -5,6 +5,7 @@ export interface User {
     createdAt: string;
     updatedAt: string;
     balance?: number;
+    login: string;
     email: string | null;
     phone: string | null;
     name: string;
