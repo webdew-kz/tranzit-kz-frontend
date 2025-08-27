@@ -1,3 +1,4 @@
+"use client"
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
