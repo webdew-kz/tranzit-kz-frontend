@@ -40,9 +40,6 @@ export default function MyPaymentList() {
 	const [totalAmount, setTotalAmount] = useState<number | null>(null);
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
 
-	const [pending, startTransition] = useTransition()
-	const path = usePathname();
-
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 
@@ -125,6 +122,7 @@ export default function MyPaymentList() {
 
 			setPayments([])
 			setTotalAmount(null)
+			setSelectedIds([])
 
 			alert("Все платежи успешно удалены.");
 		} catch (error) {
@@ -133,7 +131,7 @@ export default function MyPaymentList() {
 		}
 	};
 
-	if (loading || pending || !user) {
+	if (loading || !user) {
 		return <Loader />
 	}
 
@@ -172,7 +170,6 @@ export default function MyPaymentList() {
 						selected={selectedIds.includes(payment.id!)}
 						setPayments={setPayments}
 						rates={rates}
-						loading={pending}
 					/>
 				)) : (
 					<div className='flex justify-center items-center'>
