@@ -13,7 +13,7 @@ export default function page() {
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
 			<Button
 				variant={'outline'}
-				className='w-full sm:hidden'
+				className='w-full'
 				asChild
 			>
 
