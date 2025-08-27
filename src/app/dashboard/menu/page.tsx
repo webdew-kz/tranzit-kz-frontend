@@ -9,7 +9,7 @@ import React from 'react'
 export default function page() {
 
 	// const router = useRouter()
-	// const { user } = useUserStore()
+	const { user } = useUserStore()
 	// if (!user?.isRegistered && user?.role === 'USER') {
 	// 	router.replace('/dashboard')
 	// }
@@ -81,7 +81,7 @@ export default function page() {
 				</Link>
 			</Button>
 
-			{/* {user?.role === 'ADMIN' && (
+			{user?.role === 'ADMIN' && (
 				<>
 					<Button
 						variant={'outline'}
@@ -97,7 +97,7 @@ export default function page() {
 						</Link>
 					</Button>
 				</>
-			)} */}
+			)}
 		</div>
 	)
 }

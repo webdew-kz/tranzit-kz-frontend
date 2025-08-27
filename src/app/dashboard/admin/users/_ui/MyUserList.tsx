@@ -21,8 +21,6 @@ import { User } from '@/shared/types/user.type';
 export default function MyUserList() {
 	const { user } = useUserStore()
 
-	if (user?.role !== 'ADMIN') return null
-
 	const { rates, loading } = useCurrencyRates()
 
 	const [users, setUsers] = useState<User[]>([]);
@@ -199,6 +197,8 @@ export default function MyUserList() {
 		return <Loader />
 	}
 
+	if (user?.role !== 'ADMIN') return null
+
 	return (
 		<div className='pb-[60px]'>
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
@@ -216,7 +216,7 @@ export default function MyUserList() {
 						</Button>
 					</div> */}
 					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
-						{users.length > 0 && (
+						{users && users.length > 0 && (
 							<div className="flex items-center gap-3">
 								<Checkbox
 									id="terms"
@@ -235,7 +235,7 @@ export default function MyUserList() {
 								<span>{selectedIds.length > 0 && `Выбрано: ${selectedIds.length}`}</span>
 							</div>
 						)}
-						{selectedIds.length > 0 && (
+						{selectedIds && selectedIds.length > 0 && (
 							<Popover>
 								<PopoverTrigger asChild>
 									<Button
@@ -273,7 +273,7 @@ export default function MyUserList() {
 				</CardContent>
 			</Card>
 			<div className=' grid gap-5'>
-				{users.length > 0 && users.map((user) => (
+				{users && users.length > 0 && users.map((user) => (
 					<MyUserItem
 						userInitial={user}
 						key={user.id}

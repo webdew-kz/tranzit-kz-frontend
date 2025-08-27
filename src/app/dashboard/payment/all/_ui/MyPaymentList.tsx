@@ -3,12 +3,8 @@ import { IPayment } from '@/shared/types/payment.type';
 import { useEffect, useState, useTransition } from 'react'
 import MyPaymentItem from './MyPaymentItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
-import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
 import { usePathname, useRouter } from 'next/navigation';
-import { cn } from '@/shared/lib/utils';
-import { Checkbox } from '@/shared/components/ui/checkbox';
-import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
 import { toast } from 'sonner';
 import { deleteAll, getAll } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
@@ -19,9 +15,8 @@ import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyPaymentList() {
 
-
-
 	const { user } = useUserStore();
+
 	const router = useRouter();
 	const [isAllowed, setIsAllowed] = useState<boolean | null>(null);
 
