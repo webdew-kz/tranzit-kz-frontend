@@ -217,7 +217,7 @@ const ReviewItem = memo(({ review, setReviews, rates, loading, setWishlistLength
 												<span className=''>Показать контакты</span>
 											</Button>
 										</PopoverTrigger>
-										<PopoverContent align='end' className='p-5 w-auto'>
+										<PopoverContent align='end' className='p-5 break-words max-w-xs'>
 											<div className="grid gap-2 justify-start">
 												{review.user?.phone && (
 													<Button variant='link' asChild>
@@ -355,7 +355,7 @@ const ReviewItem = memo(({ review, setReviews, rates, loading, setWishlistLength
 												<span className=''>Показать контакты</span>
 											</Button>
 										</PopoverTrigger>
-										<PopoverContent align='end' className='p-5 w-auto'>
+										<PopoverContent align='end' className='p-5 break-words max-w-xs'>
 											<div className="grid gap-2 justify-start">
 												{review.user?.phone && (
 													<Button variant='link' asChild>

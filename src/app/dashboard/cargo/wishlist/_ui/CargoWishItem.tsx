@@ -449,7 +449,7 @@ const CargoWishItem = memo(
 											<span className=''>Показать контакты</span>
 										</Button>
 									</PopoverTrigger>
-									<PopoverContent align='end' className='p-5 w-auto'>
+									<PopoverContent align='end' className='p-5 break-words max-w-xs'>
 										<div className="grid gap-2 justify-start">
 											{cargo.userPhone && (
 												<Button variant='link' asChild>
