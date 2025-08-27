@@ -3,10 +3,9 @@ import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { Checkbox } from '@/shared/components/ui/checkbox'
 import { cn } from '@/shared/lib/utils'
-import { Delete, Lock, Unlock, } from 'lucide-react'
+import { Lock, Trash, Unlock, } from 'lucide-react'
 import React, { memo, SetStateAction, useState, useTransition } from 'react'
 import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
 import { User } from '@/shared/types/user.type'
 import { lock, remove, unlock } from '../actions'
 
@@ -21,7 +20,6 @@ interface MyUserItemProps {
 
 const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }: MyUserItemProps) => {
 
-	const router = useRouter()
 
 	const [user, setUser] = useState<User>(userInitial)
 
@@ -42,8 +40,6 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 					...prev,
 					...res.updatedUser,
 				}))
-
-				window.location.reload()
 
 			} catch (error) {
 				console.error(error)
@@ -110,10 +106,14 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
 				<div className=" flex justify-between w-full items-center mb-2">
 					<div className=" font-medium flex gap-2 items-center">
-						<Lock size={16} />
-						<span className='text-nowrap text-xs'>
-							{user.isBlocked ? 'Заблокирован' : ''}
-						</span>
+						{user.isBlocked ?
+							<>
+								<Lock size={16} />
+								<span className='text-nowrap text-xs'>
+									Заблокирован
+								</span>
+							</> : ''}
+
 					</div>
 					<div className=" flex items-center gap-4 justify-end">
 						<div className="flex items-center gap-2">
@@ -134,15 +134,15 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 				</div>
 
 				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
-					<span className="font-medium leading-none uppercase">
+					<span className="font-medium leading-none">
 						Логин: {user.login}
 					</span>
 
-					<span className="font-medium leading-none uppercase">
+					<span className="font-medium leading-none">
 						Абонплата: {user.isRegistered ? 'Оплачено' : 'Неоплачено'}
 					</span>
 
-					<span className="font-medium leading-none uppercase">
+					<span className="font-medium leading-none">
 						Дата регистрации: {new Date(user.createdAt).toLocaleDateString("ru-RU")}
 					</span>
 				</div>
@@ -176,17 +176,9 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/3)] lg:max-w-auto'
 							onClick={() => handleRemove(user.id!)}
 						>
-							<Delete size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
+							<Trash size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
 							<span className=' hidden lg:block'>Удалить</span>
 						</Button>
-						{/* <Button
-							variant='outline'
-							className='group text-(--dark-accent) !border-(--dark-accent) hover:text-background hover:!bg-(--dark-accent) w-full lg:w-auto max-w-[calc((100vw-5rem)/4)] lg:max-w-auto'
-							onClick={() => router.push(`/dashboard/user/copy/${user.id}`)}
-						>
-							<Copy size={16} className=' stroke-(--dark-accent) group-hover:stroke-background' />
-							<span className=' hidden lg:block'>Копировать</span>
-						</Button> */}
 					</div>
 				</div>
 			</CardContent>

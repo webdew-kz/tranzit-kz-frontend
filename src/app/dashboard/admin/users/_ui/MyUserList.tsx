@@ -2,14 +2,10 @@
 import { useEffect, useState, useTransition } from 'react'
 import MyUserItem from './MyUserItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
-import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
-import { usePathname, useRouter } from 'next/navigation';
-import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
 import { toast } from 'sonner';
-// import { activateMany, archivateMany, findByUserId } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
@@ -38,7 +34,6 @@ export default function MyUserList() {
 		setPage(prev => prev + 1);
 
 		try {
-			// console.log("page", page);
 
 			const res = await findAllUsersByPage(page);
 
@@ -86,8 +81,6 @@ export default function MyUserList() {
 				return
 
 			} else {
-
-				// const sortedData = data.sort((a, b) => (b.updatedAt ?? '').localeCompare(a.updatedAt ?? ''));
 
 				setUsers(res.users)
 			}
@@ -161,7 +154,7 @@ export default function MyUserList() {
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при разблокировки', {
+				toast.error('Ошибка при блокировки', {
 					position: 'top-center',
 				})
 			}
@@ -203,18 +196,7 @@ export default function MyUserList() {
 		<div className='pb-[60px]'>
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
-					{/* <div className=" grid grid-cols-2 w-full lg:flex ">
-						<Button asChild className={cn(path === '/dashboard/user/my' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-r-none')}>
-							<Link href="/dashboard/user/my">
-								Активные
-							</Link>
-						</Button>
-						<Button asChild className={cn(path === '/dashboard/user/my/archive' ? 'bg-(--dark-accent)' : 'bg-background text-muted-foreground hover:text-background', 'rounded-l-none')}>
-							<Link href="/dashboard/user/my/archive">
-								Архив
-							</Link>
-						</Button>
-					</div> */}
+
 					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
 						{users && users.length > 0 && (
 							<div className="flex items-center gap-3">
