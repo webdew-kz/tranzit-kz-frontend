@@ -12,7 +12,13 @@ interface MyPaymentItemProps {
 	loading?: boolean
 }
 
-const MyPaymentItem = ({ paymentInitial, loading }: MyPaymentItemProps) => {
+const MyPaymentItem = ({
+	paymentInitial,
+	selected,
+	setPayments,
+	rates,
+	loading,
+}: MyPaymentItemProps) => {
 
 	if (loading) {
 		return <p className='text-center py-5'>Загрузка ...</p>

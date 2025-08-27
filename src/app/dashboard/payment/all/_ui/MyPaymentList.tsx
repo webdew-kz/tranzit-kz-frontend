@@ -70,8 +70,6 @@ export default function MyPaymentList() {
 
 	};
 
-
-
 	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
 	useEffect(() => {
@@ -149,15 +147,18 @@ export default function MyPaymentList() {
 							</Button>
 
 						</div>
-						<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
-							<Button
-								type='button'
-								className=' bg-(--dark-accent) md:col-start-2 w-full'
-								onClick={handleDeleteAll}
-							>
-								Очистить платежи
-							</Button>
-						</div>
+						{user.login === '7070199595' && (
+							<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
+								<Button
+									type='button'
+									className=' bg-(--dark-accent) md:col-start-2 w-full'
+									onClick={handleDeleteAll}
+								>
+									Очистить платежи
+								</Button>
+							</div>
+						)}
+
 
 					</CardContent>
 				</Card>
