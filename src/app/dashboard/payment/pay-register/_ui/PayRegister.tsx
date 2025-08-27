@@ -13,6 +13,8 @@ import useCloudPayments from '@/shared/hooks/useCloudPayments';
 
 export default function PayRegister() {
 
+	const price = 100;
+
 	useCloudPayments()
 
 	const paymentPublicId = 'pk_9cba1fd1be39c1e60da521409a1c9'
@@ -21,10 +23,8 @@ export default function PayRegister() {
 
 	const [pending, startTransition] = useTransition()
 
-	const price = 100;
-
 	const paymentSchema = z.object({
-		amount: z.number().min(100)
+		amount: z.number().min(price)
 	});
 
 
@@ -93,7 +93,7 @@ export default function PayRegister() {
 	}
 
 	const onError = (errors: any) => {
-		toast.error(errors.message ?? 'Минимум 1 000 ₸', {
+		toast.error(errors.message ?? `Минимум ${price} ₸`, {
 			position: 'top-center',
 		})
 		console.error(errors);
@@ -119,7 +119,7 @@ export default function PayRegister() {
 							className='bg-(--dark-accent) w-full sm:w-auto'
 							disabled={pending}
 						>
-							Оплатить 1 000 ₸
+							Оплатить {price} ₸
 						</Button>
 					</div>
 				</form>
