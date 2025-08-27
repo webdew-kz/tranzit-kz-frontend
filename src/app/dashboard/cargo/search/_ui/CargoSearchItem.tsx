@@ -499,15 +499,13 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								<PopoverContent align='end' className='p-5 w-auto'>
 									{!user?.isRegistered ? (
 										<div className="grid gap-2 justify-start">
-											<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-												<div className="text-center">Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</div>
-												<Button
-													className=' bg-(--dark-accent)'
-													asChild
-												>
-													<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
-												</Button>
-											</div>
+											<span >Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</span>
+											<Button
+												className=' bg-(--dark-accent)'
+												asChild
+											>
+												<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
+											</Button>
 										</div>
 									) : (
 										<div className="grid gap-2 justify-start">
