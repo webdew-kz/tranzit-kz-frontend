@@ -769,10 +769,10 @@ export default function CargoFormAdd() {
 							</Button>
 						</div>
 					) : (
-						<div className="flex w-full gap-3 md:gap-5 items-center">
+						<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
 							<div className="text-center md:text-start">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
 							<Button
-								className=' bg-(--dark-accent) '
+								className=' bg-(--dark-accent)'
 								asChild
 							>
 								<Link href='dashboard/payment/pay-register'>Оплатить </Link>
