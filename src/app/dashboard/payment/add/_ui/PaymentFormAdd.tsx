@@ -24,10 +24,6 @@ export default function PaymentFormAdd() {
 	const [pending, startTransition] = useTransition()
 
 	const router = useRouter()
-	const { user } = useUserStore()
-	if (!user?.isRegistered) {
-		router.replace('/dashboard')
-	}
 
 	const tagsValue = [1000, 2000, 5000, 10000]
 

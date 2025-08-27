@@ -5,7 +5,7 @@ import MyPaymentItem from './MyPaymentItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
 import Link from 'next/link';
 import { Button } from '@/shared/components/ui/button';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover';
@@ -15,8 +15,28 @@ import Loader from '@/shared/components/widgets/Loader';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { Loader2 } from 'lucide-react';
+import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyPaymentList() {
+
+
+
+	const { user } = useUserStore();
+	const router = useRouter();
+	const [isAllowed, setIsAllowed] = useState<boolean | null>(null);
+
+	useEffect(() => {
+		if (user?.role !== 'ADMIN') {
+			router.replace('/dashboard');
+			setIsAllowed(false);
+		} else {
+			setIsAllowed(true);
+		}
+	}, [user, router]);
+
+	if (isAllowed === null) return null;
+
+	if (!isAllowed) return null;
 
 	const { rates, loading } = useCurrencyRates()
 
