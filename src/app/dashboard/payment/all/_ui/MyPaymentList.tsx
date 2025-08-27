@@ -1,10 +1,9 @@
 'use client'
 import { IPayment } from '@/shared/types/payment.type';
-import { useEffect, useState, useTransition } from 'react'
+import { useEffect, useState } from 'react'
 import MyPaymentItem from './MyPaymentItem';
 import { Card, CardContent } from '@/shared/components/ui/card';
 import { Button } from '@/shared/components/ui/button';
-import { usePathname, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { deleteAll, getAll } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
@@ -131,7 +130,7 @@ export default function MyPaymentList() {
 							</Button>
 
 						</div>
-						{user.login === '7070199595' && (
+						{user.login === '77070199595' && (
 							<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
 								<Button
 									type='button'
