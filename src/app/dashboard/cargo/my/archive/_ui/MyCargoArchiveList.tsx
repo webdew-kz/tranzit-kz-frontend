@@ -19,11 +19,7 @@ import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 
 export default function MyCargoArchiveList() {
 
-	const router = useRouter()
 	const { user } = useUserStore()
-	if (!user?.isRegistered) {
-		router.replace('/dashboard')
-	}
 
 	const { rates, loading } = useCurrencyRates()
 
@@ -147,6 +143,22 @@ export default function MyCargoArchiveList() {
 
 	if (pending || loading) {
 		return <Loader />
+	}
+
+	if (!user?.isRegistered) {
+		return (
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='dashboard/payment/pay-register'>Оплатить </Link>
+				</Button>
+			</div>
+
+
+		)
 	}
 
 	return (

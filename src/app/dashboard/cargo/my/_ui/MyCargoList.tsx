@@ -160,17 +160,17 @@ export default function MyCargoList() {
 
 	if (!user?.isRegistered) {
 		return (
-			<div className="grid w-full gap-3 md:gap-5 items-center">
-				<div className="grid md:flex w-full gap-3 md:gap-5 items-start">
-					<div className="text-center md:text-start">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>
-					<Button
-						className=' bg-(--dark-accent) md:col-start-2 w-full'
-						asChild
-					>
-						<Link href='dashboard/payment/pay-register'>Оплатить </Link>
-					</Button>
-				</div>
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='dashboard/payment/pay-register'>Оплатить </Link>
+				</Button>
 			</div>
+
+
 		)
 	}
 

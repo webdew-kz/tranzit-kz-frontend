@@ -14,6 +14,7 @@ import React, { memo, useEffect, useState, useTransition } from 'react'
 import { addToWishlist, addView, removeFromWishlist } from '../actions'
 import Link from 'next/link'
 import { toast } from 'sonner'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 interface CargoSearchItemProps {
 	cargo: ICargo
@@ -26,7 +27,10 @@ interface CargoSearchItemProps {
 
 const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: CargoSearchItemProps) => {
 
+
+	const { user } = useUserStore()
 	const [places, setPlaces] = useState<string[]>([])
+
 
 	const [currency, setCurrency] = useState<CurrencyEnum>(CurrencyEnum.KZT) // валюта по умолчанию - тенге
 
@@ -493,73 +497,87 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									</Button>
 								</PopoverTrigger>
 								<PopoverContent align='end' className='p-5 w-auto'>
-									<div className="grid gap-2 justify-start">
-										{cargo.userPhone && (
-											<Button variant='link' asChild>
-												<Link
-													href={`tel:+${cargo.userPhone}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+									{!user?.isRegistered ? (
+										<div className="grid gap-2 justify-start">
+											<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+												<div className="text-center">Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</div>
+												<Button
+													className=' bg-(--dark-accent)'
+													asChild
 												>
-													<Phone size={16} />
-													<span>{`+${cargo.userPhone}`}</span>
-												</Link>
-											</Button>
-										)}
-										{cargo.user.whatsapp && (
-											<Button variant='link' asChild>
-												<Link
-													href={link}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
-													<span>WhatsApp</span>
-												</Link>
-											</Button>
-										)}
-										{cargo?.user?.viber && (
-											<Button variant='link' asChild>
-												<Link
-													href={`viber://chat?number=%2B${cargo?.user?.viber}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
-													<span>Viber</span>
-												</Link>
-											</Button>
-										)}
-										{cargo?.user?.skype && (
-											<Button variant='link' asChild>
-												<Link
-													href={`skype:live.${cargo?.user?.skype}?chat`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
-													<span>Skype</span>
-												</Link>
-											</Button>
-										)}
-										{cargo?.user?.telegram && (
-											<Button variant='link' asChild>
-												<Link
-													href={`https://t.me/${cargo?.user?.telegram}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
-													<span>Telegram</span>
-												</Link>
-											</Button>
-										)}
-									</div>
+													<Link href='dashboard/payment/pay-register'>Оплатить </Link>
+												</Button>
+											</div>
+										</div>
+									) : (
+										<div className="grid gap-2 justify-start">
+											{cargo.userPhone && (
+												<Button variant='link' asChild>
+													<Link
+														href={`tel:+${cargo.userPhone}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Phone size={16} />
+														<span>{`+${cargo.userPhone}`}</span>
+													</Link>
+												</Button>
+											)}
+											{cargo.user.whatsapp && (
+												<Button variant='link' asChild>
+													<Link
+														href={link}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
+														<span>WhatsApp</span>
+													</Link>
+												</Button>
+											)}
+											{cargo?.user?.viber && (
+												<Button variant='link' asChild>
+													<Link
+														href={`viber://chat?number=%2B${cargo?.user?.viber}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
+														<span>Viber</span>
+													</Link>
+												</Button>
+											)}
+											{cargo?.user?.skype && (
+												<Button variant='link' asChild>
+													<Link
+														href={`skype:live.${cargo?.user?.skype}?chat`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
+														<span>Skype</span>
+													</Link>
+												</Button>
+											)}
+											{cargo?.user?.telegram && (
+												<Button variant='link' asChild>
+													<Link
+														href={`https://t.me/${cargo?.user?.telegram}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
+														<span>Telegram</span>
+													</Link>
+												</Button>
+											)}
+										</div>
+									)}
 								</PopoverContent>
 							</Popover>
 						)}
