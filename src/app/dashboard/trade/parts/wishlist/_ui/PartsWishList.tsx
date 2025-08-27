@@ -13,7 +13,7 @@ import { Button } from '@/shared/components/ui/button'
 
 export default function PartsWishList() {
 
-	// const { rates, loading } = useCurrencyRates()
+	const { user } = useUserStore()
 	const [partss, setPartss] = useState<IParts[]>([])
 	const [pending, startTransition] = useTransition()
 
@@ -43,11 +43,9 @@ export default function PartsWishList() {
 		})
 	};
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

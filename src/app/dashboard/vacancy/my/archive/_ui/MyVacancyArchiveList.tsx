@@ -18,7 +18,7 @@ import { removeMany } from '../actions';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 
 export default function MyVacancyArchiveList() {
-
+	const { user } = useUserStore()
 	const { rates, loading } = useCurrencyRates()
 
 	const [vacancys, setVacancys] = useState<IVacancy[]>([]);
@@ -139,11 +139,9 @@ export default function MyVacancyArchiveList() {
 		})
 	}
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

@@ -119,7 +119,7 @@ const TrailerSearchItem = memo(({ trailerInitial, rates, loading, setWishlistLen
 	const link = `https://wa.me/${trailer.userPhone}?text=${encodeURIComponent(message)}`
 
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
 

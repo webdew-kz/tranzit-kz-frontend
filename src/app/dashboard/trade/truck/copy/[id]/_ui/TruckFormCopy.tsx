@@ -225,7 +225,7 @@ export default function TruckFormCopy({ id }: ITruckFormCopyProps) {
 		form.setValue("photos", newPhotos, { shouldValidate: true });
 	};
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
 

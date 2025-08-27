@@ -16,6 +16,8 @@ import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyTruckList() {
 
+	const { user } = useUserStore()
+
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
 	const [trucks, setTrucks] = useState<ITruck[]>([]);
@@ -122,11 +124,9 @@ export default function MyTruckList() {
 		})
 	}
 
-	if (pending || isLoading) {
+	if (pending || isLoading || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

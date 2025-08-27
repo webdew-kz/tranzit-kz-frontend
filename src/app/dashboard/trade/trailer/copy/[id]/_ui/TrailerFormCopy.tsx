@@ -203,7 +203,7 @@ export default function TrailerFormCopy({ id }: ITrailerFormCopyProps) {
 		form.setValue("photos", newPhotos, { shouldValidate: true });
 	};
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
 

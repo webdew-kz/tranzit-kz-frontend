@@ -13,6 +13,8 @@ import { Button } from '@/shared/components/ui/button'
 
 export default function TractorWishList() {
 
+	const { user } = useUserStore()
+
 	// const { rates, loading } = useCurrencyRates()
 	const [tractors, setTractors] = useState<ITractor[]>([])
 	const [pending, startTransition] = useTransition()
@@ -37,11 +39,9 @@ export default function TractorWishList() {
 		})
 	};
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

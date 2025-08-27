@@ -17,6 +17,8 @@ import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyTrailerArchiveList() {
 
+	const { user } = useUserStore()
+
 	const [trailers, setTrailers] = useState<ITrailer[]>([]);
 
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -121,11 +123,9 @@ export default function MyTrailerArchiveList() {
 		})
 	}
 
-	if (pending || isLoading) {
+	if (pending || isLoading || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

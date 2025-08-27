@@ -122,7 +122,7 @@ const TruckSearchItem = memo(({ truckInitial, rates, loading, setWishlistLength,
 	const link = `https://wa.me/${truck.userPhone}?text=${encodeURIComponent(message)}`
 
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
 

@@ -13,6 +13,8 @@ import { useUserStore } from '@/shared/store/useUserStore'
 
 export default function TruckWishList() {
 
+	const { user } = useUserStore()
+
 	// const { rates, loading } = useCurrencyRates()
 	const [trucks, setTrucks] = useState<ITruck[]>([])
 	const [pending, startTransition] = useTransition()
@@ -40,11 +42,9 @@ export default function TruckWishList() {
 		})
 	};
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

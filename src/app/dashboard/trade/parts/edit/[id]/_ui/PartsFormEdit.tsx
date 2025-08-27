@@ -182,7 +182,7 @@ export default function PartsFormEdit({ id }: { id: string }) {
 		form.setValue("photos", newPhotos, { shouldValidate: true });
 	};
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
 

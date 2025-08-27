@@ -180,7 +180,7 @@ export default function PartsFormCopy({ id }: IPartsFormCopyProps) {
 		form.setValue("photos", newPhotos, { shouldValidate: true });
 	};
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
 

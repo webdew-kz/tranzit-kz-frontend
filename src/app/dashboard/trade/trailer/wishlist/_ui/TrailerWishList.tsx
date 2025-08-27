@@ -13,6 +13,8 @@ import { Button } from '@/shared/components/ui/button'
 
 export default function TrailerWishList() {
 
+	const { user } = useUserStore()
+
 	// const { rates, loading } = useCurrencyRates()
 	const [trailers, setTrailers] = useState<ITrailer[]>([])
 	const [pending, startTransition] = useTransition()
@@ -41,11 +43,9 @@ export default function TrailerWishList() {
 		})
 	};
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

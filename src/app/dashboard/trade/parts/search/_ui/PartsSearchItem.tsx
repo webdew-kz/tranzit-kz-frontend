@@ -122,7 +122,7 @@ const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength,
 	const link = `https://wa.me/${parts.userPhone}?text=${encodeURIComponent(message)}`
 
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
 

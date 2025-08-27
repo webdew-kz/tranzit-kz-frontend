@@ -15,9 +15,11 @@ import Loader from '@/shared/components/widgets/Loader';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { Loader2 } from 'lucide-react';
+import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyPaymentList() {
 
+	const { user } = useUserStore();
 	const { rates, loading } = useCurrencyRates()
 
 	const [payments, setPayments] = useState<IPayment[]>([]);
@@ -118,7 +120,7 @@ export default function MyPaymentList() {
 	}
 
 
-	if (loading || pending) {
+	if (loading || pending || !user) {
 		return <Loader />
 	}
 

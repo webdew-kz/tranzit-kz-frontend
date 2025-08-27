@@ -141,7 +141,7 @@ export default function MyCargoArchiveList() {
 		})
 	}
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
 

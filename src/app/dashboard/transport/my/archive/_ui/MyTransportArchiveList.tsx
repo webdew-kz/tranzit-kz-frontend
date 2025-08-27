@@ -18,6 +18,8 @@ import MyTransportArchiveItem from './MyTransportArchiveItem';
 
 export default function MyTransportArchiveList() {
 
+	const { user } = useUserStore()
+
 	const { rates, loading } = useCurrencyRates()
 
 	const [transports, setTransports] = useState<ITransport[]>([]);
@@ -138,11 +140,9 @@ export default function MyTransportArchiveList() {
 		})
 	}
 
-	if (pending || loading) {
+	if (loading || loading || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

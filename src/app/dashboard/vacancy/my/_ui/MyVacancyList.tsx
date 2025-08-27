@@ -18,7 +18,7 @@ import { Loader2 } from 'lucide-react';
 import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyVacancyList() {
-
+	const { user } = useUserStore()
 	const { rates, loading } = useCurrencyRates()
 
 	const [vacancys, setVacancys] = useState<IVacancy[]>([]);
@@ -155,11 +155,11 @@ export default function MyVacancyList() {
 		})
 	}
 
-	if (loading || pending) {
+	if (loading || pending || !user) {
 		return <Loader />
 	}
 
-	const { user } = useUserStore()
+
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

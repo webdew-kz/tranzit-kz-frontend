@@ -19,6 +19,8 @@ import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyTransportList() {
 
+	const { user } = useUserStore()
+
 	const { rates, loading } = useCurrencyRates()
 
 	const [transports, setTransports] = useState<ITransport[]>([]);
@@ -155,11 +157,9 @@ export default function MyTransportList() {
 		})
 	}
 
-	if (loading || pending) {
+	if (loading || pending || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

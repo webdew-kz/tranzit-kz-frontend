@@ -154,7 +154,7 @@ export default function MyCargoList() {
 		})
 	}
 
-	if (loading || pending) {
+	if (loading || pending || !user) {
 		return <Loader />
 	}
 

@@ -19,7 +19,8 @@ import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyReviewList() {
 
-	// const { rates, loading } = useCurrencyRates()
+
+	const { user } = useUserStore();
 
 	const [reviews, setReviews] = useState<IReview[]>([]);
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
@@ -134,11 +135,9 @@ export default function MyReviewList() {
 		})
 	}
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
-
-	const { user } = useUserStore()
 
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (

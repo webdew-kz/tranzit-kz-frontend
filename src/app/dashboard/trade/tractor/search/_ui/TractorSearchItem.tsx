@@ -124,7 +124,7 @@ const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLen
 	const link = `https://wa.me/${tractor.userPhone}?text=${encodeURIComponent(message)}`
 
 
-	if (pending) {
+	if (pending || !user) {
 		return <Loader />
 	}
 

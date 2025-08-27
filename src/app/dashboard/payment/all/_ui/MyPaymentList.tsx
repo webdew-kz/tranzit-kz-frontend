@@ -138,7 +138,7 @@ export default function MyPaymentList() {
 		}
 	};
 
-	if (loading || pending) {
+	if (loading || pending || !user) {
 		return <Loader />
 	}
 
