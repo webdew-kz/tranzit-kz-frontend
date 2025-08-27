@@ -770,7 +770,7 @@ export default function CargoFormAdd() {
 						</div>
 					) : (
 						<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-							<div className="text-center md:text-start">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+							<div className="text-center">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
 							<Button
 								className=' bg-(--dark-accent)'
 								asChild
