@@ -27,6 +27,12 @@ export default function MyUserList() {
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 
+
+	const [total, setTotal] = useState(0);
+
+	const [todayCount, setTodayCount] = useState(0);
+
+
 	const loadMore = async () => {
 
 		if (!hasMore) return;
@@ -81,7 +87,8 @@ export default function MyUserList() {
 				return
 
 			} else {
-
+				setTotal(res.total)
+				setTodayCount(res.todayCount)
 				setUsers(res.users)
 			}
 		} catch (error) {
@@ -192,95 +199,109 @@ export default function MyUserList() {
 
 	if (user?.role !== 'ADMIN') return null
 
+	// return (
+	// 	<div className='pb-[60px]'>
+	// 		<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
+	// 			<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
+
+	// 				<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
+	// 					{users && users.length > 0 && (
+	// 						<div className="flex items-center gap-3">
+	// 							<Checkbox
+	// 								id="terms"
+	// 								checked={(selectedIds.length === users.length) || (users.length > selectedIds.length && selectedIds.length > 0 && 'indeterminate')}
+	// 								onCheckedChange={handleSelectAll}
+	// 								className='border-(--dark-accent)'
+	// 							/>
+	// 							<label
+	// 								htmlFor="terms"
+	// 								className="text-sm cursor-pointer flex"
+	// 							>
+	// 								<span className='text-(--dark-accent) underline underline-offset-2'>
+	// 									{selectedIds.length === users.length ? `Отменить` : 'Выбрать все'}
+	// 								</span>
+	// 							</label>
+	// 							<span>{selectedIds.length > 0 && `Выбрано: ${selectedIds.length}`}</span>
+	// 						</div>
+	// 					)}
+	// 					{selectedIds && selectedIds.length > 0 && (
+	// 						<Popover>
+	// 							<PopoverTrigger asChild>
+	// 								<Button
+	// 									className='border border-(--dark-accent) bg-(--dark-accent) hover:bg-accent hover:text-muted-foreground'
+	// 								>
+	// 									Действия
+	// 								</Button>
+	// 							</PopoverTrigger>
+	// 							<PopoverContent
+	// 								align='end'
+	// 								className='w-full grid justify-end'
+	// 							>
+	// 								<Button
+	// 									variant='link'
+	// 									onClick={handleUnlockMany}
+	// 								>
+	// 									Разблокировать
+	// 								</Button>
+	// 								<Button
+	// 									variant='link'
+	// 									onClick={handleLockMany}
+	// 								>
+	// 									Заблокировать
+	// 								</Button>
+	// 								<Button
+	// 									variant='link'
+	// 									onClick={handleRemoveMany}
+	// 								>
+	// 									Удалить
+	// 								</Button>
+	// 							</PopoverContent>
+	// 						</Popover>
+	// 					)}
+	// 				</div>
+	// 			</CardContent>
+	// 		</Card>
+	// 		<div className=' grid gap-5'>
+	// 			{users && users.length > 0 && users.map((user) => (
+	// 				<MyUserItem
+	// 					userInitial={user}
+	// 					key={user.id}
+	// 					selected={selectedIds.includes(user.id!)}
+	// 					onToggle={() => toggleSelect(user.id!)}
+	// 					setUsers={setUsers}
+	// 					rates={rates}
+	// 					loading={pending}
+	// 				/>
+	// 			))}
+
+	// 			{!users.length && (
+	// 				<div className='flex justify-center items-center'>
+	// 					<p className='text-muted-foreground'>Нет зарегистрированных пользователей</p>
+	// 				</div>
+	// 			)}
+	// 			{isLoading &&
+	// 				<div className="flex justify-center items-center">
+	// 					<Loader2 className="animate-spin" />
+	// 				</div>
+	// 			}
+	// 		</div>
+	// 		{hasMore && (
+	// 			<div ref={bottomRef} className="h-10" />
+	// 		)}
+	// 	</div>
+	// )
+
 	return (
 		<div className='pb-[60px]'>
-			<Card className='w-full mb-3 lg:mb-5 sticky top-[120px] md:top-[60px] p-0 rounded-t-none'>
-				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
+			<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+				<span className="font-medium leading-none">
+					Всего пользователей: {total}
+				</span>
 
-					<div className="flex items-center gap-4 justify-between w-full lg:justify-end h-[36px]">
-						{users && users.length > 0 && (
-							<div className="flex items-center gap-3">
-								<Checkbox
-									id="terms"
-									checked={(selectedIds.length === users.length) || (users.length > selectedIds.length && selectedIds.length > 0 && 'indeterminate')}
-									onCheckedChange={handleSelectAll}
-									className='border-(--dark-accent)'
-								/>
-								<label
-									htmlFor="terms"
-									className="text-sm cursor-pointer flex"
-								>
-									<span className='text-(--dark-accent) underline underline-offset-2'>
-										{selectedIds.length === users.length ? `Отменить` : 'Выбрать все'}
-									</span>
-								</label>
-								<span>{selectedIds.length > 0 && `Выбрано: ${selectedIds.length}`}</span>
-							</div>
-						)}
-						{selectedIds && selectedIds.length > 0 && (
-							<Popover>
-								<PopoverTrigger asChild>
-									<Button
-										className='border border-(--dark-accent) bg-(--dark-accent) hover:bg-accent hover:text-muted-foreground'
-									>
-										Действия
-									</Button>
-								</PopoverTrigger>
-								<PopoverContent
-									align='end'
-									className='w-full grid justify-end'
-								>
-									<Button
-										variant='link'
-										onClick={handleUnlockMany}
-									>
-										Разблокировать
-									</Button>
-									<Button
-										variant='link'
-										onClick={handleLockMany}
-									>
-										Заблокировать
-									</Button>
-									<Button
-										variant='link'
-										onClick={handleRemoveMany}
-									>
-										Удалить
-									</Button>
-								</PopoverContent>
-							</Popover>
-						)}
-					</div>
-				</CardContent>
-			</Card>
-			<div className=' grid gap-5'>
-				{users && users.length > 0 && users.map((user) => (
-					<MyUserItem
-						userInitial={user}
-						key={user.id}
-						selected={selectedIds.includes(user.id!)}
-						onToggle={() => toggleSelect(user.id!)}
-						setUsers={setUsers}
-						rates={rates}
-						loading={pending}
-					/>
-				))}
-
-				{!users.length && (
-					<div className='flex justify-center items-center'>
-						<p className='text-muted-foreground'>У вас нет активных грузов</p>
-					</div>
-				)}
-				{isLoading &&
-					<div className="flex justify-center items-center">
-						<Loader2 className="animate-spin" />
-					</div>
-				}
+				<span className="font-medium leading-none">
+					Зарегистрировались сегодня: {todayCount}
+				</span>
 			</div>
-			{hasMore && (
-				<div ref={bottomRef} className="h-10" />
-			)}
 		</div>
 	)
 }
