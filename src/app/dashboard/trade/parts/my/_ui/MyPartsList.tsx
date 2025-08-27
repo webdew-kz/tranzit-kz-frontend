@@ -145,7 +145,7 @@ export default function MyPartsList() {
 	}
 
 	return (
-		<>
+		<div className='pb-[60px]'>
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[119px] md:top-[60px] p-0 rounded-t-none z-10'>
 				<CardContent className=' flex flex-col lg:flex-row gap-3 p-3 lg:p-5 justify-between items-center'>
 					<div className=" grid grid-cols-2 w-full lg:flex ">
@@ -237,6 +237,6 @@ export default function MyPartsList() {
 			{/* {hasMore && (
 				<div ref={bottomRef} className="h-10" />
 			)} */}
-		</>
+		</div>
 	)
 }
