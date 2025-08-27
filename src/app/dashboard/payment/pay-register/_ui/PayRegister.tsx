@@ -49,7 +49,7 @@ export default function PayRegister() {
 					widget.pay('charge',
 						{
 							publicId: paymentPublicId,
-							description: 'Оплата за регистрацию tranzit.kz',
+							description: 'Ежемесячная абонплата tranzit.kz',
 							amount: data.amount,
 							currency: 'KZT',
 							skin: "modern",
@@ -112,6 +112,7 @@ export default function PayRegister() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid gap-3 md:gap-5'
 				>
+					<p>Абонентская плата предоставляет право размещать, копировать, редактировать и удалять собственные объявления, а также открывает доступ к контактной информации в чужих объявлениях.</p>
 					<div className="grid items-start justify-center w-full">
 						<Button
 							type='submit'
