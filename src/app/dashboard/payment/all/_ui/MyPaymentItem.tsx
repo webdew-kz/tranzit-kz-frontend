@@ -24,12 +24,11 @@ interface MyPaymentItemProps {
 	loading?: boolean
 }
 
-const MyPaymentItem = memo(({ paymentInitial, selected, setPayments, rates, loading }: MyPaymentItemProps) => {
-
-	const [payment, setPayment] = useState<IPayment>(paymentInitial)
+function MyPaymentItemComponent({ paymentInitial, selected, setPayments, rates, loading }: MyPaymentItemProps) {
+	const [payment, setPayment] = useState<IPayment>(paymentInitial);
 
 	if (loading) {
-		return <p className='text-center py-5'>Загрузка ...</p>
+		return <p className='text-center py-5'>Загрузка ...</p>;
 	}
 
 	return (
@@ -38,37 +37,32 @@ const MyPaymentItem = memo(({ paymentInitial, selected, setPayments, rates, load
 				<div className=" flex flex-col lg:flex-row justify-between w-full lg:items-center mb-2">
 
 					<div className=" flex flex-col order-2 lg:order-1 gap-1 lg:flex-row lg:gap-4 mb-3">
-
 						<span className=' flex items-center gap-1'>
 							<ArrowBigDown size={16} />
 							<span className='truncate block text-sm'>
 								<span className=' mr-2 font-light'>Оплачено:</span>
-								<span className=' font-medium'>{payment.createdAt
-									? new Date(payment.createdAt).toLocaleString('ru-RU')
-									: ''}</span>
+								<span className=' font-medium'>
+									{payment.createdAt
+										? new Date(payment.createdAt).toLocaleString('ru-RU')
+										: ''}
+								</span>
 							</span>
 						</span>
-					</div>
-
-					<div className=" flex items-center order-1 lg:order-2 gap-4 justify-end">
 					</div>
 				</div>
 
 				<div className=" flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
-
 					<div className=" grid gap-2 lg:gap-4">
-
 						<div className="flex items-center gap-2">
 							<span>Платеж на сумму:</span>
-							<span className="block">
-								{payment.amount} ₸
-							</span>
+							<span className="block">{payment.amount} ₸</span>
 						</div>
 					</div>
 				</div>
 			</CardContent>
 		</Card>
-	)
-})
+	);
+}
 
-export default MyPaymentItem
+const MyPaymentItem = memo(MyPaymentItemComponent);
+export default MyPaymentItem;
