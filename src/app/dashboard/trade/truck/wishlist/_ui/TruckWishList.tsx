@@ -6,6 +6,8 @@ import Loader from '@/shared/components/widgets/Loader'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import TruckWishItem from './TruckWishItem'
+import { Button } from '@/shared/components/ui/button'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 
 
@@ -40,6 +42,24 @@ export default function TruckWishList() {
 
 	if (pending) {
 		return <Loader />
+	}
+
+	const { user } = useUserStore()
+
+	if (!user?.isRegistered) {
+		return (
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
+				</Button>
+			</div>
+
+
+		)
 	}
 
 	return (

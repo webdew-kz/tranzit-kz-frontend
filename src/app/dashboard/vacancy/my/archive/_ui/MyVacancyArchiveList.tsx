@@ -143,6 +143,24 @@ export default function MyVacancyArchiveList() {
 		return <Loader />
 	}
 
+	const { user } = useUserStore()
+
+	if (!user?.isRegistered) {
+		return (
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
+				</Button>
+			</div>
+
+
+		)
+	}
+
 	return (
 		<>
 			<Card className='w-full mb-3 lg:mb-5 sticky top-[60px] p-0 rounded-t-none'>

@@ -16,6 +16,7 @@ import { toast } from 'sonner'
 import { DriveEnum, ExistEnum, ITractor, StatusEnum, SteeringEnum, TransmissionEnum, TractorBrandEnum, TractorWheelEnum, TypeEngineEnum, TypeCabinEnum, CabinSuspensionEnum } from '@/shared/types/tractor.type'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog'
 import Loader from '@/shared/components/widgets/Loader'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 interface TractorSearchItemProps {
 	tractorInitial: ITractor
@@ -28,6 +29,8 @@ interface TractorSearchItemProps {
 
 const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: TractorSearchItemProps) => {
 
+
+	const { user } = useUserStore()
 	const [tractor, setTractor] = useState<ITractor>(tractorInitial)
 	const [pending, startTransition] = useTransition()
 	const [isWishlist, setIsWishlist] = useState(false)
@@ -378,73 +381,87 @@ const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLen
 									</Button>
 								</PopoverTrigger>
 								<PopoverContent align='end' className='p-5 w-auto'>
-									<div className="grid gap-2 justify-start">
-										{tractor.userPhone && (
-											<Button variant='link' asChild>
-												<Link
-													href={`tel:+${tractor.userPhone}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Phone size={16} />
-													<span>{`+${tractor.userPhone}`}</span>
-												</Link>
+
+									{!user?.isRegistered ? (
+										<div className="grid gap-2 justify-start">
+											<span >Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</span>
+											<Button
+												className=' bg-(--dark-accent)'
+												asChild
+											>
+												<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
 											</Button>
-										)}
-										{tractor?.user?.whatsapp && (
-											<Button variant='link' asChild>
-												<Link
-													href={link}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
-													<span>WhatsApp</span>
-												</Link>
-											</Button>
-										)}
-										{tractor?.user?.viber && (
-											<Button variant='link' asChild>
-												<Link
-													href={`viber://chat?number=%2B${tractor?.user?.viber}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
-													<span>Viber</span>
-												</Link>
-											</Button>
-										)}
-										{tractor?.user?.skype && (
-											<Button variant='link' asChild>
-												<Link
-													href={`skype:live.${tractor?.user?.skype}?chat`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
-													<span>Skype</span>
-												</Link>
-											</Button>
-										)}
-										{tractor?.user?.telegram && (
-											<Button variant='link' asChild>
-												<Link
-													href={`https://t.me/${tractor?.user?.telegram}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
-													<span>Telegram</span>
-												</Link>
-											</Button>
-										)}
-									</div>
+										</div>
+									) : (
+
+										<div className="grid gap-2 justify-start">
+											{tractor.userPhone && (
+												<Button variant='link' asChild>
+													<Link
+														href={`tel:+${tractor.userPhone}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Phone size={16} />
+														<span>{`+${tractor.userPhone}`}</span>
+													</Link>
+												</Button>
+											)}
+											{tractor?.user?.whatsapp && (
+												<Button variant='link' asChild>
+													<Link
+														href={link}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
+														<span>WhatsApp</span>
+													</Link>
+												</Button>
+											)}
+											{tractor?.user?.viber && (
+												<Button variant='link' asChild>
+													<Link
+														href={`viber://chat?number=%2B${tractor?.user?.viber}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
+														<span>Viber</span>
+													</Link>
+												</Button>
+											)}
+											{tractor?.user?.skype && (
+												<Button variant='link' asChild>
+													<Link
+														href={`skype:live.${tractor?.user?.skype}?chat`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
+														<span>Skype</span>
+													</Link>
+												</Button>
+											)}
+											{tractor?.user?.telegram && (
+												<Button variant='link' asChild>
+													<Link
+														href={`https://t.me/${tractor?.user?.telegram}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
+														<span>Telegram</span>
+													</Link>
+												</Button>
+											)}
+										</div>
+									)}
 								</PopoverContent>
 							</Popover>
 						)}

@@ -16,6 +16,7 @@ import { toast } from 'sonner'
 import { IParts, StatusEnum, PartsBrandEnum } from '@/shared/types/parts.type'
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog'
 import Loader from '@/shared/components/widgets/Loader'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 interface PartsSearchItemProps {
 	partsInitial: IParts
@@ -27,7 +28,7 @@ interface PartsSearchItemProps {
 }
 
 const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: PartsSearchItemProps) => {
-
+	const { user } = useUserStore()
 	const [parts, setParts] = useState<IParts>(partsInitial)
 	const [pending, startTransition] = useTransition()
 	const [isWishlist, setIsWishlist] = useState(false)
@@ -300,73 +301,88 @@ const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength,
 									</Button>
 								</PopoverTrigger>
 								<PopoverContent align='end' className='p-5 w-auto'>
-									<div className="grid gap-2 justify-start">
-										{parts.userPhone && (
-											<Button variant='link' asChild>
-												<Link
-													href={`tel:+${parts.userPhone}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Phone size={16} />
-													<span>{`+${parts.userPhone}`}</span>
-												</Link>
+
+									{!user?.isRegistered ? (
+										<div className="grid gap-2 justify-start">
+											<span >Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</span>
+											<Button
+												className=' bg-(--dark-accent)'
+												asChild
+											>
+												<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
 											</Button>
-										)}
-										{parts?.user?.whatsapp && (
-											<Button variant='link' asChild>
-												<Link
-													href={link}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
-													<span>WhatsApp</span>
-												</Link>
-											</Button>
-										)}
-										{parts?.user?.viber && (
-											<Button variant='link' asChild>
-												<Link
-													href={`viber://chat?number=%2B${parts?.user?.viber}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
-													<span>Viber</span>
-												</Link>
-											</Button>
-										)}
-										{parts?.user?.skype && (
-											<Button variant='link' asChild>
-												<Link
-													href={`skype:live.${parts?.user?.skype}?chat`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
-													<span>Skype</span>
-												</Link>
-											</Button>
-										)}
-										{parts?.user?.telegram && (
-											<Button variant='link' asChild>
-												<Link
-													href={`https://t.me/${parts?.user?.telegram}`}
-													target='_blank'
-													rel="noopener noreferrer"
-													className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
-												>
-													<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
-													<span>Telegram</span>
-												</Link>
-											</Button>
-										)}
-									</div>
+										</div>
+									) : (
+										<div className="grid gap-2 justify-start">
+											{parts.userPhone && (
+												<Button variant='link' asChild>
+													<Link
+														href={`tel:+${parts.userPhone}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Phone size={16} />
+														<span>{`+${parts.userPhone}`}</span>
+													</Link>
+												</Button>
+											)}
+											{parts.userPhone && (
+												<Button variant='link' asChild>
+													<Link
+														href={link}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/whatsapp.svg' alt='whatsapp' width={18} height={18} />
+														<span>WhatsApp</span>
+													</Link>
+												</Button>
+											)}
+											{parts?.user?.viber && (
+												<Button variant='link' asChild>
+													<Link
+														href={`viber://chat?number=%2B${parts?.user?.viber}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/viber.svg' alt='viber' width={18} height={18} />
+														<span>Viber</span>
+													</Link>
+												</Button>
+											)}
+											{parts?.user?.skype && (
+												<Button variant='link' asChild>
+													<Link
+														href={`skype:live.${parts?.user?.skype}?chat`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/skype.svg' alt='skype' width={18} height={18} />
+														<span>Skype</span>
+													</Link>
+												</Button>
+											)}
+											{parts?.user?.telegram && (
+												<Button variant='link' asChild>
+													<Link
+														href={`https://t.me/${parts?.user?.telegram}`}
+														target='_blank'
+														rel="noopener noreferrer"
+														className=' text-sm text-muted-foreground flex gap-2 justify-start items-center !px-0'
+													>
+														<Image src='/icons/telegram.svg' alt='telegram' width={18} height={18} />
+														<span>Telegram</span>
+													</Link>
+												</Button>
+											)}
+										</div>
+									)}
+
+
 								</PopoverContent>
 							</Popover>
 						)}

@@ -19,6 +19,7 @@ export default function ReviewSearchList() {
 		return null
 	}
 
+
 	return (
 		<div className='grid gap-5'>
 			<h2 className=' text-xl text-(--dark-accent) text-center font-bold'>Средний рейтинг: {averageRating}</h2>

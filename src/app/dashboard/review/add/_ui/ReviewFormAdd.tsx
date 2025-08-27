@@ -221,27 +221,40 @@ export default function ReviewFormAdd() {
 						</Button>
 					</div>
 
-					{(user?.balance ?? 0) < price && (
-						<>
-							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
-								<div className='md:col-start-2 text-center'>Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
-							</div>
+					{user?.isRegistered ? (
+						(user?.balance ?? 0) < price && (
+							<>
+								<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
+									<div className="md:col-start-2 text-center">
+										Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸
+									</div>
+								</div>
 
-							<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
-								<Button
-									variant={'outline'}
-									className='w-full md:col-start-2'
-									asChild
-								>
-									<Link
-										href='/dashboard/payment/add'
-										className='flex gap-3 items-center justify-center text-(--dark-accent)'
+								<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
+									<Button
+										variant="outline"
+										className="w-full md:col-start-2"
+										asChild
 									>
-										Пополнить баланс
-									</Link>
-								</Button>
+										<Link
+											href="/dashboard/payment/add"
+											className="flex gap-3 items-center justify-center text-(--dark-accent)"
+										>
+											Пополнить баланс
+										</Link>
+									</Button>
+								</div>
+							</>
+						)
+					) : (
+						<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+							<div className="text-center">
+								Размещение доступно по абонентской плате — 1000 тенге в месяц.
 							</div>
-						</>
+							<Button className="bg-(--dark-accent)" asChild>
+								<Link href="/dashboard/payment/pay-register">Перейти к оплате</Link>
+							</Button>
+						</div>
 					)}
 
 				</form>

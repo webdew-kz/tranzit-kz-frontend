@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import { addTransport } from '../actions';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 export default function TransportFormAdd() {
@@ -747,19 +748,28 @@ export default function TransportFormAdd() {
 						/> */}
 					</div>
 
-					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+					{user?.isRegistered ? (
+						<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+							<Button
+								type='submit'
+								className=' bg-(--dark-accent) md:col-start-2 w-full'
+								disabled={pending}
+							>
+								{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить транспорт</>) : "Добавить транспорт"}
+							</Button>
+						</div>
+					) : (
+						<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+							<div className="text-center">
+								Размещение доступно по абонентской плате — 1000 тенге в месяц.
+							</div>
+							<Button className="bg-(--dark-accent)" asChild>
+								<Link href="/dashboard/payment/pay-register">Перейти к оплате</Link>
+							</Button>
+						</div>
+					)}
 
 
-
-
-						<Button
-							type='submit'
-							className=' bg-(--dark-accent) md:col-start-2 w-full'
-							disabled={pending}
-						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить транспорт</>) : "Добавить транспорт"}
-						</Button>
-					</div>
 				</form>
 			</CardContent>
 		</Card>
