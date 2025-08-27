@@ -15,7 +15,7 @@ export default function PayRegister() {
 
 	useCloudPayments()
 
-	const paymentPublicId = 'test_api_00000000000000000000002'
+	const paymentPublicId = 'pk_9cba1fd1be39c1e60da521409a1c9'
 
 	const { user, setUser } = useUserStore()
 

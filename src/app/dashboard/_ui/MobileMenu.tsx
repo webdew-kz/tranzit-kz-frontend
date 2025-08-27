@@ -10,11 +10,11 @@ export default function MobileMenu() {
 
 	const pathname = usePathname();
 
-	const { user } = useUserStore()
+	// const { user } = useUserStore()
 
-	if (user?.role === 'USER' && !user?.isRegistered) {
-		return null
-	}
+	// if (user?.role === 'USER' && !user?.isRegistered) {
+	// 	return null
+	// }
 
 	return (
 		<div className=" z-1 md:hidden fixed h-15 w-full top-15 right-0 left-0 bg-background border-b border-(--dark-accent) grid grid-cols-5 items-center px-0">

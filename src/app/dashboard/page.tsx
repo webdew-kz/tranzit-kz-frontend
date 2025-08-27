@@ -3,7 +3,6 @@ import { useUserStore } from '@/shared/store/useUserStore'
 import React from 'react'
 import FormNameEmail from './_ui/FormNameEmail'
 import Loader from '@/shared/components/widgets/Loader'
-import PayRegister from './_ui/PayRegister'
 
 export default function DashboardPage() {
 
