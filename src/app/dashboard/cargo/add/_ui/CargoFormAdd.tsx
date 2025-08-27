@@ -758,7 +758,7 @@ export default function CargoFormAdd() {
 						/> */}
 					</div>
 
-					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+					<div className="grid w-full gap-3 md:gap-5 items-center">
 						{user?.isRegistered ? (
 							<Button
 								type='submit'
@@ -769,12 +769,12 @@ export default function CargoFormAdd() {
 							</Button>
 						) : (
 							<div className="grid md:flex w-full gap-3 md:gap-5 items-start">
-								<div className="">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+								<div className="text-center md:text-start">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
 								<Button
 									className=' bg-(--dark-accent) md:col-start-2 w-full'
 									asChild
 								>
-									<Link href='/'>Оплатить </Link>
+									<Link href='dashboard/payment/pay-register'>Оплатить </Link>
 								</Button>
 							</div>
 						)}

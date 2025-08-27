@@ -18,11 +18,8 @@ import { Loader2 } from 'lucide-react';
 import { useUserStore } from '@/shared/store/useUserStore';
 
 export default function MyCargoList() {
-	const router = useRouter()
 	const { user } = useUserStore()
-	if (!user?.isRegistered) {
-		router.replace('/dashboard')
-	}
+
 	const { rates, loading } = useCurrencyRates()
 
 	const [cargos, setCargos] = useState<ICargo[]>([]);
@@ -159,6 +156,22 @@ export default function MyCargoList() {
 
 	if (loading || pending) {
 		return <Loader />
+	}
+
+	if (!user?.isRegistered) {
+		return (
+			<div className="grid w-full gap-3 md:gap-5 items-center">
+				<div className="grid md:flex w-full gap-3 md:gap-5 items-start">
+					<div className="text-center md:text-start">Доступ в данный раздел доступен по абонентской плате — 1000 тенге в месяц.</div>
+					<Button
+						className=' bg-(--dark-accent) md:col-start-2 w-full'
+						asChild
+					>
+						<Link href='dashboard/payment/pay-register'>Оплатить </Link>
+					</Button>
+				</div>
+			</div>
+		)
 	}
 
 	return (
