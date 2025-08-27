@@ -125,7 +125,7 @@ export default function MyUserList() {
 
 				setUsers(res.users)
 
-				window.location.reload()
+				// window.location.reload()
 
 			} catch (error) {
 				console.error(error)
@@ -150,7 +150,7 @@ export default function MyUserList() {
 
 				setUsers(res.users)
 
-				window.location.reload()
+				// window.location.reload()
 
 			} catch (error) {
 				console.error(error)
@@ -175,7 +175,7 @@ export default function MyUserList() {
 
 				setUsers(prev => prev.filter(user => !selectedIds.includes(user.id)))
 
-				window.location.reload()
+				// window.location.reload()
 
 			} catch (error) {
 				console.error(error)
