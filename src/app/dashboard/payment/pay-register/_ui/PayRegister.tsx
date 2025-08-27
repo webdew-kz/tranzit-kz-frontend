@@ -103,7 +103,7 @@ export default function PayRegister() {
 	const amount = form.watch('amount')
 
 	return (
-		<Card className="w-[calc(100vw-32px)] max-w-full sm:max-w-xs  p-3 md:p-5 gap-3 md:gap-5">
+		<Card className="w-[calc(100vw-32px)] max-w-full   p-3 md:p-5 gap-3 md:gap-5">
 			<CardHeader className='px-0'>
 				<CardTitle className='text-xl text-center'>Ежемесячная абонплата</CardTitle>
 			</CardHeader>
@@ -115,7 +115,7 @@ export default function PayRegister() {
 					<div className="grid items-start justify-center w-full">
 						<Button
 							type='submit'
-							className='bg-(--dark-accent) w-[320px]'
+							className='bg-(--dark-accent) w-full sm:w-auto'
 							disabled={pending}
 						>
 							Оплатить 1 000 ₸

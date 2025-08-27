@@ -166,7 +166,7 @@ export default function MyCargoList() {
 					className=' bg-(--dark-accent)'
 					asChild
 				>
-					<Link href='dashboard/payment/pay-register'>Оплатить </Link>
+					<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
 				</Button>
 			</div>
 

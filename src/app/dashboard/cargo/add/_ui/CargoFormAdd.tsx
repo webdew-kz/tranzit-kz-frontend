@@ -775,9 +775,7 @@ export default function CargoFormAdd() {
 								className=' bg-(--dark-accent)'
 								asChild
 							>
-								<Link href='/dashboard/payment/pay-register
-													Сохранить
-												</Button>'>Оплатить </Link>
+								<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
 							</Button>
 						</div>
 					)}
