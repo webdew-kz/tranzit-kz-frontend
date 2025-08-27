@@ -70,7 +70,7 @@ export default function MyPaymentList() {
 
 	};
 
-	const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
+	// const { bottomRef, isLoading } = useInfiniteScroll({ loadMore, hasMore })
 
 	useEffect(() => {
 
@@ -177,15 +177,15 @@ export default function MyPaymentList() {
 						<p className='text-muted-foreground'>Нет платежей</p>
 					</div>
 				)}
-				{isLoading &&
+				{/* {isLoading &&
 					<div className="flex justify-center items-center">
 						<Loader2 className="animate-spin" />
 					</div>
-				}
+				} */}
 			</div>
-			{hasMore && (
+			{/* {hasMore && (
 				<div ref={bottomRef} className="h-10" />
-			)}
+			)} */}
 		</>
 	)
 }
