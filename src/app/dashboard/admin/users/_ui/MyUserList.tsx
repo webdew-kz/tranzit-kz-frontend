@@ -32,6 +32,10 @@ export default function MyUserList() {
 
 	const [todayCount, setTodayCount] = useState(0);
 
+	const [registered, setRegistered] = useState(0);
+
+
+
 
 	const loadMore = async () => {
 
@@ -89,6 +93,7 @@ export default function MyUserList() {
 			} else {
 				setTotal(res.total)
 				setTodayCount(res.todayCount)
+				setRegistered(res.registered)
 				setUsers(res.users)
 			}
 		} catch (error) {
@@ -269,6 +274,10 @@ export default function MyUserList() {
 
 				<span className="font-medium leading-none">
 					Зарегистрировано сегодня: {todayCount}
+				</span>
+
+				<span className="font-medium leading-none">
+					Пользователи с абонплатой: {registered}
 				</span>
 			</div>
 
