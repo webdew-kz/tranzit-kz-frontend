@@ -267,7 +267,7 @@ export default function MyUserList() {
 				</CardContent>
 			</Card> */}
 
-			<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+			<div className="flex flex-col gap-3 w-full mb-3">
 				<span className="font-medium leading-none">
 					Всего пользователей: {total}
 				</span>
