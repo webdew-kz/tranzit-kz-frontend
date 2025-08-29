@@ -202,7 +202,19 @@ export default function CargoFormAdd() {
 		)
 	}
 
-
+	if (!user?.isRegistered) {
+		return (
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
+				</Button>
+			</div>
+		)
+	}
 
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
@@ -758,27 +770,17 @@ export default function CargoFormAdd() {
 						/> */}
 					</div>
 
-					{user?.isRegistered ? (
-						<div className="grid md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
-							<Button
-								type='submit'
-								className=' bg-(--dark-accent) md:col-start-2 w-full'
-								disabled={pending}
-							>
-								{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
-							</Button>
-						</div>
-					) : (
-						<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-							<div className="text-center">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
-							<Button
-								className=' bg-(--dark-accent)'
-								asChild
-							>
-								<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
-							</Button>
-						</div>
-					)}
+					<div className="grid md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+						<Button
+							type='submit'
+							className=' bg-(--dark-accent) md:col-start-2 w-full'
+							disabled={pending}
+						>
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
+						</Button>
+					</div>
+
+
 				</form>
 			</CardContent>
 		</Card>

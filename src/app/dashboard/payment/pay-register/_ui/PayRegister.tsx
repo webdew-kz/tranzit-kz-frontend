@@ -13,7 +13,7 @@ import useCloudPayments from '@/shared/hooks/useCloudPayments';
 
 export default function PayRegister() {
 
-	const price = 100;
+	const price = 1000;
 
 	useCloudPayments()
 
