@@ -9,11 +9,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { payRegister } from '../actions';
 import useCloudPayments from '@/shared/hooks/useCloudPayments';
+import { useRouter } from 'next/navigation';
 
 
 export default function PayRegister() {
 
 	const price = 1000;
+
+	const router = useRouter()
 
 	useCloudPayments()
 
@@ -70,6 +73,11 @@ export default function PayRegister() {
 								toast.success(res.message, {
 									position: 'top-center',
 								})
+
+								// Дать время Next.js на переход
+								setTimeout(() => {
+									router.back();
+								}, 500);
 							},
 							onFail: function () {
 								toast.error('Ошибка платежа', {

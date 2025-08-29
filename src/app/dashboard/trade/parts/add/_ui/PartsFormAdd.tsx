@@ -171,6 +171,20 @@ export default function PartsFormAdd() {
 		form.setValue("photos", newPhotos, { shouldValidate: true });
 	};
 
+	if (!user?.isRegistered) {
+		return (
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
+				</Button>
+			</div>
+		)
+	}
+
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
 			<CardHeader className='px-0'>
@@ -425,8 +439,18 @@ export default function PartsFormAdd() {
 						/>
 					</div>
 
+					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
 
-					{user?.isRegistered ? (
+						<Button
+							type='submit'
+							className=' bg-(--dark-accent) md:col-start-2 w-full'
+							disabled={pending}
+						>
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить объявление</>) : "Добавить объявление"}
+						</Button>
+					</div>
+
+					{/* {user?.isRegistered ? (
 						<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
 
 							<Button
@@ -446,7 +470,7 @@ export default function PartsFormAdd() {
 								<Link href="/dashboard/payment/pay-register">Перейти к оплате</Link>
 							</Button>
 						</div>
-					)}
+					)} */}
 				</form>
 			</CardContent>
 		</Card>
