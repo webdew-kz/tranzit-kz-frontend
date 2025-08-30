@@ -366,7 +366,7 @@ export default function TransportFormAdd() {
 									value={String(field.value)}
 								>
 									<SelectTrigger className="w-full">
-										<SelectValue placeholder='Валюта' />
+										<SelectValue placeholder='Валюта ⇄' />
 									</SelectTrigger>
 									<SelectContent className="bg-background">
 										{Object.entries(CurrencyEnum).map(([key, value]) => (

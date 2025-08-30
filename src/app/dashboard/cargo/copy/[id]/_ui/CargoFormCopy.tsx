@@ -74,7 +74,7 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
-		weight: z.string().min(1),
+		weight: z.number().positive(),
 		volume: z.number().positive(),
 		periodDays: z.number().int().min(1).max(30),
 		startDate: z.string(),
@@ -408,7 +408,7 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 									value={String(field.value)}
 								>
 									<SelectTrigger className="w-full">
-										<SelectValue placeholder='Валюта' />
+										<SelectValue placeholder='Валюта ⇄' />
 									</SelectTrigger>
 									<SelectContent className="bg-background">
 										{Object.entries(CurrencyEnum).map(([key, value]) => (
