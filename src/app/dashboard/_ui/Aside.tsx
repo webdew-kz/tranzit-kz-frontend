@@ -207,7 +207,7 @@ export default function Aside() {
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
 								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'text-background' : ''}`)}
-								href='https://t.me/tranzit_kz'
+								href='https://t.me/itranzit_kz'
 								target='_blank'
 							><ShieldUser
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? '!text-background' : ''}`)}

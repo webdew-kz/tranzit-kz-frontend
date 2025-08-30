@@ -49,7 +49,7 @@ export default function page() {
 			>
 
 				<Link
-					href='https://t.me/tranzit_kz'
+					href='https://t.me/itranzit_kz'
 					target='_blank'
 					className='flex gap-3 items-center justify-start'
 				>
