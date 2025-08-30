@@ -4,7 +4,7 @@ import ReviewFormSearch from './_ui/ReviewFormSearch';
 
 export default function page() {
 	return (
-		<div className='grid gap-5'>
+		<div className='grid gap-5 pb-[60px]'>
 			<ReviewFormSearch />
 			<ReviewSearchList />
 		</div>

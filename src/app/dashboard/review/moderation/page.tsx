@@ -25,7 +25,7 @@ export default function Page() {
 	if (!isAllowed) return null; // безопасное завершение
 
 	return (
-		<div className='grid gap-5'>
+		<div className='grid gap-5  pb-[60px]'>
 			<ReviewFormSearch />
 			<ReviewSearchList />
 		</div>

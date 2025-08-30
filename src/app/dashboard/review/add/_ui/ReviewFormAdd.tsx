@@ -19,7 +19,7 @@ import useCloudPayments from '@/shared/hooks/useCloudPayments';
 
 export default function ReviewFormAdd() {
 
-	const price = 100;
+	const price = 1000;
 
 	const router = useRouter()
 
