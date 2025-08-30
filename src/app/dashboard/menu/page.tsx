@@ -28,19 +28,7 @@ export default function page() {
 					<CircleUserRound /> Личный кабинет
 				</Link>
 			</Button> */}
-			<Button
-				variant={'outline'}
-				className='w-full sm:hidden'
-				asChild
-			>
 
-				<Link
-					href='/dashboard/payment'
-					className='flex gap-3 items-center justify-start'
-				>
-					<CreditCard /> Баланс личного кабинета
-				</Link>
-			</Button>
 			<Button
 				variant={'outline'}
 				className='w-full sm:hidden'
@@ -61,7 +49,8 @@ export default function page() {
 			>
 
 				<Link
-					href='/dashboard/support'
+					href='https://t.me/tranzit_kz'
+					target='_blank'
 					className='flex gap-3 items-center justify-start'
 				>
 					<ShieldUser /> Техподдержка сайта

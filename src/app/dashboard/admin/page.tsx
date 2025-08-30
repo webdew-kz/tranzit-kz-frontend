@@ -24,6 +24,20 @@ export default function page() {
 					<User /> Все пользователи
 				</Link>
 			</Button>
+
+			<Button
+				variant={'outline'}
+				className='w-full'
+				asChild
+			>
+
+				<Link
+					href='/dashboard/payment/all'
+					className='flex gap-3 items-center justify-start'
+				>
+					<User /> Все платежи
+				</Link>
+			</Button>
 		</div>
 	)
 }

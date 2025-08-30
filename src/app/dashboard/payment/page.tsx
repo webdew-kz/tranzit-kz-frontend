@@ -10,7 +10,7 @@ export default function page() {
 
 	return (
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
-			<div className="font-semibold text-xl text-center">Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
+			{/* <div className="font-semibold text-xl text-center">Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
 			<Button
 				variant={'outline'}
 				className='w-full '
@@ -23,9 +23,9 @@ export default function page() {
 				>
 					<CirclePlus /> Пополнить
 				</Link>
-			</Button>
+			</Button> */}
 
-			<Button
+			{/* <Button
 				variant={'outline'}
 				className='w-full '
 				asChild
@@ -35,9 +35,9 @@ export default function page() {
 					href='/dashboard/payment/my'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Box /> Мои платежи
+					<Box /> История платежей
 				</Link>
-			</Button>
+			</Button> */}
 
 
 

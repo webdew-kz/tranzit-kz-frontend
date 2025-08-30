@@ -209,7 +209,7 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 								onValueChange={(currency) => convertFromKZT(baseAmountPriceKZT, setAmountPrice, baseAmountTariffKZT, setAmountTariff, currency, rates, (value) => setCurrency(value as CurrencyEnum))}
 							>
 								<SelectTrigger className=" w-full lg:w-auto">
-									<SelectValue placeholder="Изменить валюту" />
+									<SelectValue placeholder="Валюта" />
 								</SelectTrigger>
 								<SelectContent align='end'>
 									{Object.entries(CurrencyEnum).map(([key, currency]) => (

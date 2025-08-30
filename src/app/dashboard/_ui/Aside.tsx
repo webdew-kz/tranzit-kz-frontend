@@ -195,16 +195,6 @@ export default function Aside() {
 				<div className="grid gap-2">
 					<p className=' font-bold'>Меню</p>
 					<ul className=' grid gap-2'>
-
-						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? 'bg-(--dark-accent)' : ''}`)}>
-							<Link
-								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? 'text-background' : ''}`)}
-								href={'/dashboard/payment'}
-							><CreditCard
-									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/payment') ? '!text-background' : ''}`)}
-									size={16}
-								/> Баланс личного кабинета</Link>
-						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
 								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'text-background' : ''}`)}
@@ -217,16 +207,8 @@ export default function Aside() {
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
 								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'text-background' : ''}`)}
-								href={'/dashboard/support'}
-							><ShieldUser
-									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? '!text-background' : ''}`)}
-									size={16}
-								/> Техподдержка сайта</Link>
-						</li>
-						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'bg-(--dark-accent)' : ''}`)}>
-							<Link
-								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? 'text-background' : ''}`)}
-								href={'/dashboard/support'}
+								href='https://t.me/tranzit_kz'
+								target='_blank'
 							><ShieldUser
 									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/support') ? '!text-background' : ''}`)}
 									size={16}

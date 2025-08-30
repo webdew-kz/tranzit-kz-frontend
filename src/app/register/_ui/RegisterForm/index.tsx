@@ -315,7 +315,7 @@ export default function RegisterForm() {
 										name="phone"
 										render={({ field }) => (
 											<FormItem>
-												<FormDescription>Введите номер телефона</FormDescription>
+												<FormDescription>Введите номер WhatsApp</FormDescription>
 												<FormControl>
 													<PhoneInput
 														localization={ru}

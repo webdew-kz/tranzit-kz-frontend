@@ -72,7 +72,7 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
-		weight: z.number().positive(),
+		weight: z.string().min(1),
 		volume: z.number().positive(),
 		periodDays: z.number().int().min(1).max(30),
 		startDate: z.string(),

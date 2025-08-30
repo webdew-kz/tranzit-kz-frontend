@@ -15,7 +15,7 @@ export enum TypeJobEnum {
 }
 
 export enum JobEnum {
-    DRIVER = "Водитель",
+    DRIVER = "Водитель-дальнобойщик",
     DISPATCHER = "Диспетчер",
     LOG_DISPATCHER = "Логист-Диспечер",
     FORWARDER = "Экспедитор",
