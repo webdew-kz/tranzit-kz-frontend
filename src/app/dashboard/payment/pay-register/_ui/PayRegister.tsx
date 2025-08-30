@@ -52,7 +52,7 @@ export default function PayRegister() {
 					widget.pay('charge',
 						{
 							publicId: paymentPublicId,
-							description: 'Ежемесячная абонплата tranzit.kz',
+							description: 'Ежемесячная абонплата itranzit.kz',
 							amount: data.amount,
 							currency: 'KZT',
 							skin: "modern",

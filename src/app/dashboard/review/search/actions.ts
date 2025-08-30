@@ -48,6 +48,26 @@ export async function findByIin(data: any) {
     }
 }
 
+export async function removeReview(id: string) {
+    try {
+        const res = await fetch(`${process.env.SERVER_URL}/review/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+        });
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error instanceof Error ? error.message : String(error));
+    }
+}
+
 // export async function addView(id: string) {
 //     try {
 //         const res = await fetch(`${process.env.SERVER_URL}/review/add-view`, {

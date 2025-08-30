@@ -12,13 +12,18 @@ import { cn } from '@/shared/lib/utils'
 import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, LockKeyhole, LockKeyholeOpen, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
-import { lock, unlock } from '../actions'
+import { lock, removeReview, unlock } from '../actions'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { IReview } from '@/shared/types/review.type'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/components/ui/dialog'
 import { Textarea } from '@/shared/components/ui/textarea'
+import { useRouter } from 'next/navigation'
+import useCloudPayments from '@/shared/hooks/useCloudPayments'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface ReviewSearchItemProps {
 	review: IReview
@@ -38,7 +43,94 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 
 	const [open, setOpen] = useState(false);
 
-	const { user } = useUserStore()
+	const price = 100;
+
+	const router = useRouter()
+
+	useCloudPayments()
+
+	const paymentPublicId = 'pk_9cba1fd1be39c1e60da521409a1c9'
+
+	const { user, setUser } = useUserStore()
+
+	const [pending, startTransition] = useTransition()
+
+	const paymentSchema = z.object({
+		amount: z.number().min(price),
+		reviewId: z.string().optional()
+	});
+
+
+	type IPayment = z.infer<typeof paymentSchema>
+
+	const form = useForm({
+		resolver: zodResolver(paymentSchema),
+		defaultValues: {
+			amount: price,
+			reviewId: review.id
+		},
+	})
+
+	const onSubmit = async (data: IPayment) => {
+
+		startTransition(async () => {
+
+			try {
+
+				if (typeof window !== "undefined" && "tiptop" in window) {
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					const widget = new (window as any).tiptop.Widget(); // <--- Кастомный тип `any`
+					widget.pay('charge',
+						{
+							publicId: paymentPublicId,
+							description: 'Удаление отзыва/жалобы на itranzit.kz',
+							amount: data.amount,
+							currency: 'KZT',
+							skin: "modern",
+							autoClose: 3,
+							data: { myProp: 'myProp value' }
+						},
+						{
+							onSuccess: async function () {
+								const res = await removeReview(data.reviewId!)
+
+								toast.success(res.message, {
+									position: 'top-center',
+								})
+
+								// Дать время Next.js на переход
+								setTimeout(() => {
+									router.refresh();
+								}, 500);
+							},
+							onFail: function () {
+								toast.error('Ошибка платежа', {
+									position: 'top-center',
+								})
+							},
+						}
+					);
+				} else {
+					throw new Error("CloudPayments SDK не загружен");
+				}
+
+			} catch (error) {
+				console.error(error)
+				toast.error('Ошибка платежа', {
+					position: 'top-center',
+				})
+			}
+		})
+
+	}
+
+	const onError = (errors: any) => {
+		toast.error(errors.message ?? `Минимум ${price} ₸`, {
+			position: 'top-center',
+		})
+		console.error(errors);
+
+	};
 
 	const handleToggleBlock = async (reviewId: string) => {
 		if (review.isBlocked) {
@@ -77,7 +169,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 	const link = `https://wa.me/${review.user?.phone}`
 
 
-	if (loading) {
+	if (loading || !review) {
 		return <p className='text-center py-5'>Загрузка ...</p>
 	}
 
@@ -208,10 +300,18 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 							</div>
 						</div>
 
-						<div className=" flex items-start justify-between w-full">
-							<div>
-
-							</div>
+						<div className=" flex items-center justify-between w-full">
+							<form
+								onSubmit={form.handleSubmit(onSubmit, onError)}
+							>
+								<Button
+									type='submit'
+									className='bg-(--dark-accent) w-full sm:w-auto'
+									disabled={pending}
+								>
+									Удалить за {price} ₸
+								</Button>
+							</form>
 							<div>
 								{(review.user?.phone || review.user?.whatsapp) && (
 									<Popover>

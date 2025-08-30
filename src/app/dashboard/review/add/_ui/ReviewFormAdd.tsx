@@ -2,16 +2,9 @@
 import { Button } from '@/shared/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/components/ui/card';
 import { Input } from '@/shared/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select';
-import { MultiCityInput } from '@/shared/components/widgets/InputCity';
 import { z } from "zod"
-import { useEffect, useTransition } from 'react';
-import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle, DialogFooter, DialogClose } from '@/shared/components/ui/dialog';
-// import { AdditionallyEnum, CurrencyEnum, DocumentsAdrEnum, DocumentsEnum, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/review.type';
+import { useTransition } from 'react';
 import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
-import MultiCheckbox from '@/shared/components/widgets/MultiCheckbox';
-import { TimePicker } from '@/shared/components/widgets/TimePicker';
-import { DatePicker } from '@/shared/components/widgets/DatePicker';
 import { useUserStore } from '@/shared/store/useUserStore';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,21 +12,24 @@ import { toast } from 'sonner';
 import { addReview } from '../actions';
 import { Loader2, Star } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { CityInput } from '@/shared/components/widgets/CityInput';
-import { cn } from '@/shared/lib/utils';
 import { Textarea } from '@/shared/components/ui/textarea';
 import Link from 'next/link';
+import useCloudPayments from '@/shared/hooks/useCloudPayments';
 
 
 export default function ReviewFormAdd() {
 
-	const { user, updateBalance } = useUserStore()
-
-	const [pending, startTransition] = useTransition()
-
-	const price = 1000
+	const price = 1000;
 
 	const router = useRouter()
+
+	useCloudPayments()
+
+	const paymentPublicId = 'pk_9cba1fd1be39c1e60da521409a1c9'
+
+	const { user } = useUserStore()
+
+	const [pending, startTransition] = useTransition()
 
 	const tagsValue = {
 		'Порядочный 👍': 'Порядочный 👍',
@@ -65,7 +61,8 @@ export default function ReviewFormAdd() {
 		title: z.string().optional(),
 		description: z.string().optional(),
 		tags: z.array(z.string()).optional(),
-		value: z.number()
+		value: z.number(),
+		amount: z.number().min(price)
 
 	});
 
@@ -80,26 +77,80 @@ export default function ReviewFormAdd() {
 			description: undefined,
 			tags: [],
 			value: 0,
+			amount: price
 		},
 	})
+
+	// const onSubmit = async (data: IReview) => {
+
+	// 	startTransition(async () => {
+
+	// 		try {
+	// 			const res = await addReview(data)
+
+	// 			toast.success(res.message, {
+	// 				position: 'top-center',
+	// 			})
+
+	// 			// updateBalance((user?.balance ?? 0) - price)
+
+	// 			router.replace('/dashboard/review/my')
+	// 		} catch (error) {
+	// 			console.error(error)
+	// 			toast.error('Ошибка при добавлении отзыва', {
+	// 				position: 'top-center',
+	// 			})
+	// 		}
+	// 	})
+
+	// }
 
 	const onSubmit = async (data: IReview) => {
 
 		startTransition(async () => {
 
 			try {
-				const res = await addReview(data)
 
-				toast.success(res.message, {
-					position: 'top-center',
-				})
+				if (typeof window !== "undefined" && "tiptop" in window) {
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+					const widget = new (window as any).tiptop.Widget(); // <--- Кастомный тип `any`
+					widget.pay('charge',
+						{
+							publicId: paymentPublicId,
+							description: 'Добавиль отзыв/жалобу на itranzit.kz',
+							amount: data.amount,
+							currency: 'KZT',
+							skin: "modern",
+							autoClose: 3,
+							data: { myProp: 'myProp value' }
+						},
+						{
+							onSuccess: async function () {
+								const res = await addReview(data)
 
-				updateBalance((user?.balance ?? 0) - price)
+								toast.success(res.message, {
+									position: 'top-center',
+								})
 
-				router.replace('/dashboard/review/my')
+								// Дать время Next.js на переход
+								setTimeout(() => {
+									router.replace('/dashboard/review/my')
+								}, 500);
+							},
+							onFail: function () {
+								toast.error('Ошибка платежа', {
+									position: 'top-center',
+								})
+							},
+						}
+					);
+				} else {
+					throw new Error("CloudPayments SDK не загружен");
+				}
+
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении отзыва', {
+				toast.error('Ошибка платежа', {
 					position: 'top-center',
 				})
 			}
@@ -115,7 +166,19 @@ export default function ReviewFormAdd() {
 
 	};
 
-
+	if (!user?.isRegistered) {
+		return (
+			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+				<div className="text-center">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+				<Button
+					className=' bg-(--dark-accent)'
+					asChild
+				>
+					<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
+				</Button>
+			</div>
+		)
+	}
 
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
@@ -206,22 +269,20 @@ export default function ReviewFormAdd() {
 						<Button
 							type='submit'
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
-							disabled={pending || (user?.balance ?? 0) < price}
+							disabled={pending}
 						>
 							{pending ? (
 								<>
 									<Loader2 className="animate-spin stroke-accent" />
 									Отправляю ...
 								</>
-							) : (user?.balance ?? 0) < price ? (
-								"Недостаточно средств"
 							) : (
 								`Отправить за ${price} ₸`
 							)}
 						</Button>
 					</div>
 
-					{user?.isRegistered ? (
+					{/* {user?.isRegistered ? (
 						(user?.balance ?? 0) < price && (
 							<>
 								<div className="grid sm:grid-cols-2 md:grid-cols-3 w-full gap-3 md:gap-5 items-center">
@@ -255,7 +316,7 @@ export default function ReviewFormAdd() {
 								<Link href="/dashboard/payment/pay-register">Перейти к оплате</Link>
 							</Button>
 						</div>
-					)}
+					)} */}
 
 				</form>
 			</CardContent>
