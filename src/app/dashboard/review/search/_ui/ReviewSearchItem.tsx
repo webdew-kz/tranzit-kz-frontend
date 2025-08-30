@@ -57,7 +57,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 
 	const paymentSchema = z.object({
 		amount: z.number().min(price),
-		reviewId: z.string().optional()
+		reviewId: z.string()
 	});
 
 
@@ -67,7 +67,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 		resolver: zodResolver(paymentSchema),
 		defaultValues: {
 			amount: price,
-			reviewId: review.id
+			reviewId: review.id!
 		},
 	})
 
@@ -92,7 +92,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 						},
 						{
 							onSuccess: async function () {
-								const res = await removeReview(data.reviewId!, data.amount)
+								const res = await removeReview(data.reviewId, data.amount)
 
 								toast.success(res.message, {
 									position: 'top-center',
