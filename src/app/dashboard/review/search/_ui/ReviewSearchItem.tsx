@@ -99,9 +99,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 								})
 
 								// Дать время Next.js на переход
-								setTimeout(() => {
-									router.refresh();
-								}, 500);
+								router.refresh()
 							},
 							onFail: function () {
 								toast.error('Ошибка платежа', {
@@ -256,7 +254,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 					<>
 						<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
 							<div className=" w-full flex gap-2 flex-wrap">
-								<span className="font-medium leading-none uppercase">
+								<span className="font-medium leading-none">
 									Телефон или ИИН/БИН: {review.iin}
 								</span>
 							</div>
@@ -306,7 +304,8 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 							>
 								<Button
 									type='submit'
-									className='bg-(--dark-accent) w-full sm:w-auto'
+									variant='outline'
+									className=' w-full sm:w-auto'
 									disabled={pending}
 								>
 									Удалить за {price} ₸
