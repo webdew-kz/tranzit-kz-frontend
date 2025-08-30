@@ -27,7 +27,7 @@ export default function ReviewFormSearch() {
 				return val.replace(/[^\d]/g, '')
 			}
 			return val
-		}, z.string().length(11, { message: 'минимум 11 цифр если номер телефона, 12 цифр если ИИН' })),
+		}, z.string().min(11, { message: 'минимум 11 цифр если номер телефона, 12 цифр если ИИН' })),
 	});
 
 	type IReview = z.infer<typeof reviewSchema>
