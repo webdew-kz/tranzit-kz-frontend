@@ -48,13 +48,13 @@ export async function findByIin(data: any) {
     }
 }
 
-export async function removeReview(id: string, amount: number) {
+export async function removeReview(reviewId: string, amount: number) {
     try {
         const res = await fetch(`${process.env.SERVER_URL}/review/remove`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify({ id, amount }), // ✅ используем сами параметры
+            body: JSON.stringify({ reviewId, amount }), // ✅ используем сами параметры
         });
 
         if (!res.ok) {
