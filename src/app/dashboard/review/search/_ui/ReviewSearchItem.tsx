@@ -51,7 +51,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 
 	const paymentPublicId = 'pk_9cba1fd1be39c1e60da521409a1c9'
 
-	const { user, setUser } = useUserStore()
+	const { user } = useUserStore()
 
 	const [pending, startTransition] = useTransition()
 
@@ -92,7 +92,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 						},
 						{
 							onSuccess: async function () {
-								const res = await removeReview(data.reviewId!)
+								const res = await removeReview(data.reviewId!, data.amount)
 
 								toast.success(res.message, {
 									position: 'top-center',
