@@ -53,10 +53,10 @@ export default function page() {
 					target='_blank'
 					className='flex gap-3 items-center justify-start'
 				>
-					<ShieldUser /> Техподдержка сайта
+					<ShieldUser /> Написать администратору
 				</Link>
 			</Button>
-			<Button
+			{/* <Button
 				variant={'outline'}
 				className='w-full sm:hidden'
 				asChild
@@ -68,7 +68,7 @@ export default function page() {
 				>
 					<ShieldCheck /> Написать администратору
 				</Link>
-			</Button>
+			</Button> */}
 
 			{user?.role === 'ADMIN' && (
 				<>
