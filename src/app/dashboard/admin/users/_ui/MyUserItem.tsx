@@ -3,11 +3,15 @@ import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { Checkbox } from '@/shared/components/ui/checkbox'
 import { cn } from '@/shared/lib/utils'
-import { Lock, Trash, Unlock, } from 'lucide-react'
+import { Loader2, Lock, Trash, Unlock, } from 'lucide-react'
 import React, { memo, SetStateAction, useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { User } from '@/shared/types/user.type'
-import { lock, remove, unlock } from '../actions'
+import { changePassword, lock, remove, unlock } from '../actions'
+import { Input } from '@/shared/components/ui/input'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface MyUserItemProps {
 	userInitial: User
@@ -25,6 +29,51 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 	const [user, setUser] = useState<User>(userInitial)
 
 	const [pending, startTransition] = useTransition()
+
+	const userSchema = z.object({
+		password: z.string().optional(),
+		id: z.string().optional()
+	});
+
+	type IUser = z.infer<typeof userSchema>
+
+	const form = useForm({
+		resolver: zodResolver(userSchema),
+		defaultValues: {
+			password: undefined,
+			id: user.id
+		},
+	})
+
+	const onSubmit = async (data: IUser) => {
+
+		startTransition(async () => {
+
+			try {
+
+				const res = await changePassword(data.password!, data.id!)
+
+				toast.success(res.message, {
+					position: 'top-center',
+				})
+
+			} catch (error) {
+				console.error(error)
+				toast.error('Ошибка при поиске', {
+					position: 'top-center',
+				})
+			}
+		})
+
+	}
+
+	const onError = (errors: any) => {
+		toast.error(errors.message ?? 'Некорректные данные', {
+			position: 'top-center',
+		})
+		console.error(errors);
+
+	};
 
 	const handleUnlock = async (id: string) => {
 
@@ -147,6 +196,32 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 						Дата регистрации: {new Date(user.createdAt).toLocaleDateString("ru-RU")}
 					</span>
 				</div>
+
+				<form
+					onSubmit={form.handleSubmit(onSubmit, onError)}
+					className=' grid gap-3 md:gap-5'
+				>
+					<div className={cn('grid w-full gap-3 md:gap-5 items-start')}>
+						<Input
+							type='text'
+							placeholder="Укажите логин"
+							className='text-sm'
+							required
+							{...form.register('password')}
+						/>
+					</div>
+
+					<div className="grid sm:grid-cols-2 md:grid-cols-6  w-full gap-3 md:gap-5 items-start">
+
+						<Button
+							type='submit'
+							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
+							disabled={pending}
+						>
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Изменить пароль</>) : "Найти отзывы"}
+						</Button>
+					</div>
+				</form>
 
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">
 					<div className=" flex gap-2 w-full lg:w-auto">

@@ -154,14 +154,42 @@ export async function findAllUsersByPage(page: number) {
     }
 }
 
-export async function findByLogin(login: string) {
+export async function findUserByLogin(login: string) {
     try {
         const res = await fetch(
-            `${process.env.SERVER_URL}/user/find-by-login`,
+            `${process.env.SERVER_URL}/user/find-user-by-login`,
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ login }),
+                credentials: "include",
+            }
+        );
+
+        if (!res.ok) {
+            const errorData = await res.json();
+            return { data: null, error: errorData.message || "Ошибка запроса" };
+        }
+
+        return await res.json();
+    } catch (error) {
+        console.error(error);
+        return {
+            data: null,
+            error:
+                error instanceof Error ? error.message : "Неизвестная ошибка",
+        };
+    }
+}
+
+export async function changePassword(newPassword: string, userId: string) {
+    try {
+        const res = await fetch(
+            `${process.env.SERVER_URL}/user/change-password`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ newPassword, userId }),
                 credentials: "include",
             }
         );

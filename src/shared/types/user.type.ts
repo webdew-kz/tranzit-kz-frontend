@@ -24,4 +24,5 @@ export interface User {
     isBlocked: boolean | null;
     isRegistered: boolean | null;
     documents: string[];
+    password?: string;
 }

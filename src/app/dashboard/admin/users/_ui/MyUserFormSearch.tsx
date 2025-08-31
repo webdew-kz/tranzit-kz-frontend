@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { useReviewSearchStore } from '@/shared/store/useReviewSearchStore';
 import { cn } from '@/shared/lib/utils';
-import { findByLogin } from '../actions';
+import { findUserByLogin } from '../actions';
 import { User } from '@/shared/types/user.type';
 import { useUserSearchStore } from '@/shared/store/useUserSearchStore';
 
@@ -40,7 +40,7 @@ export default function MyUserFormSearch() {
 			try {
 				setSearchUsers([])
 
-				const res = await findByLogin(data.login)
+				const res = await findUserByLogin(data.login)
 
 				toast.success(res.message, {
 					position: 'top-center',
@@ -92,7 +92,7 @@ export default function MyUserFormSearch() {
 							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти пользователя</>) : "Найти отзывы"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти пользователя</>) : "Найти пользователя"}
 						</Button>
 					</div>
 				</form>
