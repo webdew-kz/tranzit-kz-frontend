@@ -41,8 +41,8 @@ export default function VacancyFormAdd() {
 		description: z.string().optional(),
 		work_schedule_at: z.string().optional(),
 		work_schedule_to: z.string().optional(),
-		salary_at: z.string().optional(),
-		salary_to: z.string().optional(),
+		salary_at: z.number().nullable().optional(),
+		salary_to: z.number().nullable().optional(),
 
 		experience_type: z.array(z.enum(Object.keys(ExperienceTypeEnum) as [keyof typeof ExperienceTypeEnum])).optional(),
 
@@ -315,17 +315,17 @@ export default function VacancyFormAdd() {
 												<div className=" flex flex-col gap-2">
 													<h3 className=' mb-2 font-bold text-muted-foreground'>Заработная плата </h3>
 													<Input
-														type='text'
+														type='number'
 														placeholder="от"
 														className='text-sm'
-														{...form.register('salary_at')}
+														{...form.register('salary_at', { valueAsNumber: true })}
 													/>
 
 													<Input
-														type='text'
+														type='number'
 														placeholder="до"
 														className='text-sm'
-														{...form.register('salary_to')}
+														{...form.register('salary_to', { valueAsNumber: true })}
 													/>
 												</div>
 											</div>
