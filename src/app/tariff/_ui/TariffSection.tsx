@@ -12,11 +12,11 @@ export default function TariffSection() {
 				>Тарифы</h2>
 
 				<div className="">
-					<p>Регистрация на платформе - <strong>1 000 ₸</strong></p>
+					<p>Абонентская плата - <strong>1 000 ₸ в месяц</strong></p>
 					<br />
 					<p>Добавление отзыва - <strong>1 000 ₸</strong></p>
 					<br />
-					<p>Запрос на удаление отзыва - <strong>5 000 ₸</strong></p>
+					<p>Удаление отзыва - <strong>5 000 ₸</strong></p>
 					<br />
 				</div>
 
