@@ -327,22 +327,59 @@ export default function VacancyFormAdd() {
 
 
 
-												<div className=" flex flex-col gap-2">
+												{/* <div className=" flex flex-col gap-2">
 													<h3 className=' mb-2 font-bold text-muted-foreground'>Заработная плата </h3>
 													<Input
 														type='number'
 														placeholder="от"
 														className='text-sm'
-														{...form.register('salary_at', { valueAsNumber: true })}
+														{...form.register('salary_at')}
 													/>
 
 													<Input
 														type='number'
 														placeholder="до"
 														className='text-sm'
-														{...form.register('salary_to', { valueAsNumber: true })}
+														{...form.register('salary_to')}
+													/>
+												</div> */}
+
+												<div className="flex flex-col gap-2">
+													<h3 className="mb-2 font-bold text-muted-foreground">Заработная плата</h3>
+
+													<Controller
+														name="salary_at"
+														control={form.control}
+														render={({ field }) => (
+															<Input
+																type="number"
+																placeholder="от"
+																className="text-sm"
+																value={field.value !== undefined ? String(field.value) : ""}
+																onChange={(e) =>
+																	field.onChange(e.target.value === "" ? undefined : Number(e.target.value))
+																}
+															/>
+														)}
+													/>
+
+													<Controller
+														name="salary_to"
+														control={form.control}
+														render={({ field }) => (
+															<Input
+																type="number"
+																placeholder="до"
+																className="text-sm"
+																value={field.value !== undefined ? String(field.value) : ""}
+																onChange={(e) =>
+																	field.onChange(e.target.value === "" ? undefined : Number(e.target.value))
+																}
+															/>
+														)}
 													/>
 												</div>
+
 											</div>
 
 
