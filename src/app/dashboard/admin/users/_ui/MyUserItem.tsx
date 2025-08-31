@@ -199,28 +199,23 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
-					className=' grid gap-3 md:gap-5'
+					className=' grid w-full gap-2 mb-3'
 				>
-					<div className={cn('grid w-full gap-3 md:gap-5 items-start')}>
-						<Input
-							type='text'
-							placeholder="Укажите логин"
-							className='text-sm'
-							required
-							{...form.register('password')}
-						/>
-					</div>
+					<Input
+						type='text'
+						placeholder="Новый пароль"
+						className='text-sm'
+						required
+						{...form.register('password')}
+					/>
 
-					<div className="grid sm:grid-cols-2 md:grid-cols-6  w-full gap-3 md:gap-5 items-start">
-
-						<Button
-							type='submit'
-							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
-							disabled={pending}
-						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Изменить пароль</>) : "Найти отзывы"}
-						</Button>
-					</div>
+					<Button
+						type='submit'
+						className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
+						disabled={pending}
+					>
+						{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Изменить пароль</>) : "Изменить пароль"}
+					</Button>
 				</form>
 
 				<div className=" flex flex-col gap-3 items-start lg:flex-row justify-between w-full">

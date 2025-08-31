@@ -271,7 +271,7 @@ export default function MyUserList() {
 				</CardContent>
 			</Card> */}
 
-			<div className="flex flex-col gap-3 w-full mb-3">
+			<div className="flex flex-col gap-3 w-full mb-5">
 				<span className="font-medium leading-none">
 					Всего пользователей: {total}
 				</span>
@@ -285,7 +285,9 @@ export default function MyUserList() {
 				</span>
 			</div>
 
-			<MyUserFormSearch />
+			<div className="w-full mb-3">
+				<MyUserFormSearch />
+			</div>
 
 			<div className=' grid gap-5'>
 				{searchUsers && searchUsers.length > 0 && searchUsers.map((user) => (
