@@ -13,9 +13,13 @@ import { Loader2 } from 'lucide-react';
 import { useUserStore } from '@/shared/store/useUserStore';
 import { findAllUsersByPage, lockMany, removeMany, unlockMany } from '../actions';
 import { User } from '@/shared/types/user.type';
+import MyUserFormSearch from './MyUserFormSearch';
+import { useUserSearchStore } from '@/shared/store/useUserSearchStore';
 
 export default function MyUserList() {
 	const { user } = useUserStore()
+
+	const { searchUsers } = useUserSearchStore()
 
 	const { rates, loading } = useCurrencyRates()
 
@@ -281,8 +285,10 @@ export default function MyUserList() {
 				</span>
 			</div>
 
-			{/* <div className=' grid gap-5'>
-				{users && users.length > 0 && users.map((user) => (
+			<MyUserFormSearch />
+
+			<div className=' grid gap-5'>
+				{searchUsers && searchUsers.length > 0 && searchUsers.map((user) => (
 					<MyUserItem
 						userInitial={user}
 						key={user.id}
@@ -294,7 +300,7 @@ export default function MyUserList() {
 					/>
 				))}
 
-				{!users.length && (
+				{/* {!users.length && (
 					<div className='flex justify-center items-center'>
 						<p className='text-muted-foreground'>Нет зарегистрированных пользователей</p>
 					</div>
@@ -303,25 +309,11 @@ export default function MyUserList() {
 					<div className="flex justify-center items-center">
 						<Loader2 className="animate-spin" />
 					</div>
-				}
-			</div> */}
+				} */}
+			</div>
 			{/* {hasMore && (
 				<div ref={bottomRef} className="h-10" />
 			)} */}
-		</div>
-	)
-
-	return (
-		<div className='pb-[60px]'>
-			<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
-				<span className="font-medium leading-none">
-					Всего пользователей: {total}
-				</span>
-
-				<span className="font-medium leading-none">
-					Зарегистрировались сегодня: {todayCount}
-				</span>
-			</div>
 		</div>
 	)
 }

@@ -14,6 +14,7 @@ interface MyUserItemProps {
 	selected: boolean
 	onToggle: () => void
 	setUsers: (value: SetStateAction<User[]>) => void
+	// setSearchUsers: (users: User[] | ((prev: User[]) => User[])) => void;
 	rates?: any
 	loading?: boolean
 }
@@ -116,7 +117,7 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 
 					</div>
 					<div className=" flex items-center gap-4 justify-end">
-						<div className="flex items-center gap-2">
+						{/* <div className="flex items-center gap-2">
 							<Checkbox
 								id={user.id}
 								className='border-(--dark-accent)'
@@ -129,7 +130,7 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 							>
 								Выбрать
 							</label>
-						</div>
+						</div> */}
 					</div>
 				</div>
 
