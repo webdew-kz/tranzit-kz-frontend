@@ -528,7 +528,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 													</Link>
 												</Button>
 											)}
-											{cargo.user.phone && (
+											{cargo.userPhone && (
 												<Button variant='link' asChild>
 													<Link
 														href={link}
