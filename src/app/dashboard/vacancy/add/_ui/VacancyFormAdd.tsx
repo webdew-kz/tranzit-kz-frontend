@@ -41,8 +41,8 @@ export default function VacancyFormAdd() {
 		description: z.string().optional(),
 		work_schedule_at: z.string().optional(),
 		work_schedule_to: z.string().optional(),
-		salary_at: z.number().optional(),
-		salary_to: z.number().optional(),
+		salary_at: z.number().nullable().optional(),
+		salary_to: z.number().nullable().optional(),
 		experience_type: z.array(z.enum(Object.keys(ExperienceTypeEnum) as [keyof typeof ExperienceTypeEnum])).optional(),
 
 		userName: z.string().min(1),
@@ -341,7 +341,7 @@ export default function VacancyFormAdd() {
 																className="text-sm"
 																value={field.value !== undefined ? String(field.value) : ""}
 																onChange={(e) =>
-																	field.onChange(e.target.value === "" ? undefined : Number(e.target.value))
+																	field.onChange(e.target.value === "" ? null : Number(e.target.value))
 																}
 															/>
 														)}
@@ -357,7 +357,7 @@ export default function VacancyFormAdd() {
 																className="text-sm"
 																value={field.value !== undefined ? String(field.value) : ""}
 																onChange={(e) =>
-																	field.onChange(e.target.value === "" ? undefined : Number(e.target.value))
+																	field.onChange(e.target.value === "" ? null : Number(e.target.value))
 																}
 															/>
 														)}
