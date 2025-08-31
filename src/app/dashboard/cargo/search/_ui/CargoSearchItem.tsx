@@ -280,12 +280,21 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 
 
 					</div>
-					{cargo.note && (
+					{/* {cargo.note && (
 						<div className=" flex items-center gap-2">
 							<MessageCircleMore size={16} className=' shrink-0' />
 							<span className=' ' >{cargo.note}</span>
 						</div>
-					)}
+					)} */}
+
+					{user?.isRegistered ? (
+						cargo.note && (
+							<div className=" flex items-center gap-2">
+								<MessageCircleMore size={16} className=' shrink-0' />
+								<span className=' ' >{cargo.note}</span>
+							</div>
+						)
+					) : null}
 				</div>
 
 				<div className=" flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">

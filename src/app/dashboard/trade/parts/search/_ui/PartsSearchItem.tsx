@@ -220,12 +220,21 @@ const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength,
 								<span className=' col-span-2'>{parts.city}</span>
 							</div>
 
-							{parts.description && (
+							{/* {parts.description && (
 								<div className=" grid grid-cols-3  items-center gap-2">
 									<span className=' text-muted-foreground col-span-1'>Описание:</span>
 									<span className=' col-span-2'>{parts.description}</span>
 								</div>
-							)}
+							)} */}
+
+							{user?.isRegistered ? (
+								parts.description && (
+									<div className=" grid grid-cols-3  items-center gap-2">
+										<span className=' text-muted-foreground col-span-1'>Описание:</span>
+										<span className=' col-span-2'>{parts.description}</span>
+									</div>
+								)
+							) : null}
 						</div>
 					</div>
 				</div>

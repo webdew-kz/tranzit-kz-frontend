@@ -225,12 +225,21 @@ const TrailerSearchItem = memo(({ trailerInitial, rates, loading, setWishlistLen
 								<span className=' col-span-1 truncate'>{TypeTrailerEnum[trailer.typeTrailer as unknown as keyof typeof TypeTrailerEnum]}</span>
 							</div>
 
-							{trailer.description && (
+							{/* {trailer.description && (
 								<div className=" grid grid-cols-2  items-center gap-2">
 									<span className=' text-muted-foreground col-span-1'>Описание:</span>
 									<span className=' col-span-1 truncate'>{trailer.description}</span>
 								</div>
-							)}
+							)} */}
+
+							{user?.isRegistered ? (
+								trailer.description && (
+									<div className=" grid grid-cols-2  items-center gap-2">
+										<span className=' text-muted-foreground col-span-1'>Описание:</span>
+										<span className=' col-span-1 truncate'>{trailer.description}</span>
+									</div>
+								)
+							) : null}
 						</div>
 					</div>
 				</div>

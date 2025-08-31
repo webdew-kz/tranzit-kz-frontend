@@ -223,12 +223,21 @@ const TruckSearchItem = memo(({ truckInitial, rates, loading, setWishlistLength,
 								<span className=' col-span-2'>{TypeTruckEnum[truck.typeTruck as unknown as keyof typeof TypeTruckEnum]}</span>
 							</div>
 
-							{truck.description && (
+							{/* {truck.description && (
 								<div className=" grid grid-cols-3  items-center gap-2">
 									<span className=' text-muted-foreground col-span-1'>Описание:</span>
 									<span className=' col-span-2'>{truck.description}</span>
 								</div>
-							)}
+							)} */}
+
+							{user?.isRegistered ? (
+								truck.description && (
+									<div className=" grid grid-cols-3  items-center gap-2">
+										<span className=' text-muted-foreground col-span-1'>Описание:</span>
+										<span className=' col-span-2'>{truck.description}</span>
+									</div>
+								)
+							) : null}
 						</div>
 					</div>
 				</div>

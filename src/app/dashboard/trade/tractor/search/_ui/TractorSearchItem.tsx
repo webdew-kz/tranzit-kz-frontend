@@ -221,12 +221,21 @@ const TractorSearchItem = memo(({ tractorInitial, rates, loading, setWishlistLen
 								<span className=' col-span-2'>{tractor.city}</span>
 							</div>
 
-							{tractor.description && (
+							{/* {tractor.description && (
 								<div className=" grid grid-cols-3  items-center gap-2">
 									<span className=' text-muted-foreground col-span-1'>Описание:</span>
 									<span className=' col-span-2'>{tractor.description}</span>
 								</div>
-							)}
+							)} */}
+
+							{user?.isRegistered ? (
+								tractor.description && (
+									<div className=" grid grid-cols-3  items-center gap-2">
+										<span className=' text-muted-foreground col-span-1'>Описание:</span>
+										<span className=' col-span-2'>{tractor.description}</span>
+									</div>
+								)
+							) : null}
 						</div>
 					</div>
 				</div>
