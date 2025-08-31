@@ -199,19 +199,19 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
-					className=' grid w-full gap-2 mb-3'
+					className=' flex flex-col w-full gap-2 mb-3'
 				>
 					<Input
 						type='text'
 						placeholder="Новый пароль"
-						className='text-sm'
+						className='text-sm w-full'
 						required
 						{...form.register('password')}
 					/>
 
 					<Button
 						type='submit'
-						className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
+						className=' bg-(--dark-accent) w-full'
 						disabled={pending}
 					>
 						{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Изменить пароль</>) : "Изменить пароль"}
