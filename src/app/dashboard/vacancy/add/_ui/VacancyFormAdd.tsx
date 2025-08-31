@@ -41,8 +41,23 @@ export default function VacancyFormAdd() {
 		description: z.string().optional(),
 		work_schedule_at: z.string().optional(),
 		work_schedule_to: z.string().optional(),
-		salary_at: z.number().nullable().optional(),
-		salary_to: z.number().nullable().optional(),
+		salary_at: z.preprocess(
+			(val) => {
+				if (val === '' || val === undefined || val === null) return undefined;
+				const num = Number(val);
+				return isNaN(num) ? undefined : num;
+			},
+			z.number().optional()
+		),
+		salary_to: z.preprocess(
+			(val) => {
+				if (val === '' || val === undefined || val === null) return undefined;
+				const num = Number(val);
+				return isNaN(num) ? undefined : num;
+			},
+			z.number().optional()
+		),
+
 
 		experience_type: z.array(z.enum(Object.keys(ExperienceTypeEnum) as [keyof typeof ExperienceTypeEnum])).optional(),
 
