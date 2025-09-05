@@ -9,7 +9,7 @@ import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
 import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
-import { ArrowBigDown, ArrowBigUp, ArrowDownUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowDownUp, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
 import { addToWishlist, addView, removeFromWishlist } from '../actions'
@@ -638,7 +638,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 				<Collapsible className='sm:hidden flex flex-col gap-2' open={isOpen} onOpenChange={setIsOpen}>
 					<CollapsibleTrigger asChild className='flex gap-2 items-center justify-center'>
 						<span>{isOpen ? "Скрыть" : "Подробнее"}</span>
-						<ArrowDownUp />
+						{isOpen ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
 						<div className="flex flex-col gap-2 ">
