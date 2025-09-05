@@ -43,8 +43,8 @@ export default function page() {
 
 			{user?.role === 'ADMIN' && (
 				<Button
-					variant={'outline'}
-					className='w-full '
+					variant='default'
+					className='w-full bg-accent'
 					asChild
 				>
 

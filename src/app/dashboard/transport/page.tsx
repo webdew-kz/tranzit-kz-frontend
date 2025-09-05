@@ -6,8 +6,8 @@ export default function page() {
 	return (
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
 			<Button
-				variant={'outline'}
-				className='w-full sm:hidden'
+				variant='default'
+				className='w-full sm:hidden bg-accent'
 				asChild
 			>
 
@@ -19,8 +19,8 @@ export default function page() {
 				</Link>
 			</Button>
 			<Button
-				variant={'outline'}
-				className='w-full sm:hidden'
+				variant='default'
+				className='w-full sm:hidden bg-accent'
 				asChild
 			>
 
@@ -32,8 +32,8 @@ export default function page() {
 				</Link>
 			</Button>
 			<Button
-				variant={'outline'}
-				className='w-full sm:hidden'
+				variant='default'
+				className='w-full sm:hidden bg-accent'
 				asChild
 			>
 
@@ -45,8 +45,8 @@ export default function page() {
 				</Link>
 			</Button>
 			<Button
-				variant={'outline'}
-				className='w-full sm:hidden'
+				variant='default'
+				className='w-full sm:hidden bg-accent'
 				asChild
 			>
 
