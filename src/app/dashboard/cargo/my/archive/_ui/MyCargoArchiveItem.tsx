@@ -305,7 +305,49 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 						{isOpen ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
+						{(cargo.distance && amountTariff && amountPrice) ? (
 
+							<div className=" grid grid-cols-2 lg:flex gap-2 lg:gap-4 items-center flex-wrap justify-center">
+								<div className=" flex gap-2 items-center">
+									{Number(cargo.distance) > 0 && (
+										<>
+											<MoveHorizontal size={16} />
+											<span className='truncate block'>{`${cargo.distance?.toLocaleString('ru-RU')} км`}</span>
+										</>
+									)}
+								</div>
+								<div className=" flex gap-2 items-center">
+									{Number(amountTariff) > 0 && (
+										<>
+											<BanknoteArrowUp size={16} />
+											<span className='truncate block'>{`${Number(amountTariff?.toFixed(2))?.toLocaleString('ru-RU')} ${getCurrencySymbol(currency)}/км`}</span>
+										</>
+									)}
+								</div>
+								<div className=" flex gap-2 items-center">
+									{Number(amountPrice) > 0 && (
+										<>
+											<Wallet size={16} />
+											<span className='truncate block'>{`${Number(amountPrice?.toFixed(2)).toLocaleString('ru-RU')} ${getCurrencySymbol(currency)}`}</span>
+										</>
+									)}
+								</div>
+								<Select
+									onValueChange={(currency) => convertFromKZT(baseAmountPriceKZT, setAmountPrice, baseAmountTariffKZT, setAmountTariff, currency, rates, (value) => setCurrency(value as CurrencyEnum))}
+								>
+									<SelectTrigger className=" w-full lg:w-auto">
+										<SelectValue placeholder="Валюта" />
+									</SelectTrigger>
+									<SelectContent align='end'>
+										{Object.entries(CurrencyEnum).map(([key, currency]) => (
+											<SelectItem key={key} value={currency}>
+												{currency}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							</div>
+						) : null}
 
 						<div className="mb-2 flex flex-col gap-2 ">
 							<div className="grid gap-2 lg:flex lg:gap-4">
