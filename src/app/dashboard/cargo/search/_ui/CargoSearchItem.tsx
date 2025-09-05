@@ -165,7 +165,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 						)}
 					</div>
 				</div>
-				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-3">
+				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-2">
 					<div className=" w-full flex gap-2 flex-wrap">
 						{places.length > 0 && places.map((place, index) => {
 							const [city, country] = place.split(",").map((str) => str.trim());
@@ -187,7 +187,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					>Посмотреть маршрут</a>
 				</div>
 
-				<div className=" hidden sm:flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
+				<div className=" hidden sm:flex flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-2">
 
 					<div className=" grid gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
@@ -248,7 +248,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					) : null}
 				</div>
 
-				<div className=" flex sm:hidden flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-3">
+				<div className=" flex sm:hidden flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-2">
 
 					<div className=" grid gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
@@ -327,7 +327,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					) : null} */}
 				</div>
 
-				<div className="hidden sm:flex mb-3 flex-col gap-2 ">
+				<div className="hidden sm:flex mb-2 flex-col gap-2 ">
 					<div className="grid gap-2 lg:flex lg:gap-4">
 
 						<div className="grid grid-cols-2 lg:flex items-center gap-2">
@@ -377,7 +377,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 						)
 					) : null}
 				</div>
-				<div className="hidden sm:flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+				<div className="hidden sm:flex flex-col gap-1 lg:flex-row lg:gap-4 mb-2">
 					<span className=' flex items-center gap-1'>
 						<ArrowBigUp size={16} />
 						<span className='truncate block text-sm'>
@@ -677,10 +677,13 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					</div>
 				</div>
 
-				<Collapsible className='block sm:hidden'>
-					<CollapsibleTrigger>Подробнее</CollapsibleTrigger>
+				<Collapsible className='sm:hidden flex flex-col gap-2'>
+					<CollapsibleTrigger className='flex gap-2 items-center'>
+						<span>Подробнее</span>
+						<ArrowBigDown />
+					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between'>
-						<div className="flex mb-3 flex-col gap-2 ">
+						<div className="flex mb-2 flex-col gap-2 ">
 							<div className="grid gap-2 lg:flex lg:gap-4">
 								<div className=" flex items-center gap-2 ">
 									<Container size={16} />
@@ -714,7 +717,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								)
 							) : null}
 						</div>
-						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
+						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-2">
 							<span className=' flex items-center gap-1'>
 								<ArrowBigUp size={16} />
 								<span className='truncate block text-sm'>
