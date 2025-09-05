@@ -248,7 +248,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					) : null}
 				</div>
 
-				<div className=" flex sm:hidden flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-2">
+				<div className=" flex sm:hidden flex-col lg:flex-row gap-1 w-full lg:justify-between lg:items-center mb-4">
 
 					<div className=" grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
@@ -281,50 +281,6 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 							)}
 						</div>
 					</div>
-
-					{/* {(cargo.distance && amountTariff && amountPrice) ? (
-
-						<div className=" grid grid-cols-2 lg:flex gap-2 lg:gap-4 items-center flex-wrap justify-center">
-							<div className=" flex gap-2 items-center">
-								{Number(cargo.distance) > 0 && (
-									<>
-										<MoveHorizontal size={16} />
-										<span className='truncate block'>{`${cargo.distance?.toLocaleString('ru-RU')} км`}</span>
-									</>
-								)}
-							</div>
-							<div className=" flex gap-2 items-center">
-								{Number(amountTariff) > 0 && (
-									<>
-										<BanknoteArrowUp size={16} />
-										<span className='truncate block'>{`${Number(amountTariff?.toFixed(2))?.toLocaleString('ru-RU')} ${getCurrencySymbol(currency)}/км`}</span>
-									</>
-								)}
-							</div>
-							<div className=" flex gap-2 items-center">
-								{Number(amountPrice) > 0 && (
-									<>
-										<Wallet size={16} />
-										<span className='truncate block'>{`${Number(amountPrice?.toFixed(2)).toLocaleString('ru-RU')} ${getCurrencySymbol(currency)}`}</span>
-									</>
-								)}
-							</div>
-							<Select
-								onValueChange={(currency) => convertFromKZT(baseAmountPriceKZT, setAmountPrice, baseAmountTariffKZT, setAmountTariff, currency, rates, (value) => setCurrency(value as CurrencyEnum))}
-							>
-								<SelectTrigger className=" w-full lg:w-auto">
-									<SelectValue placeholder="Валюта" />
-								</SelectTrigger>
-								<SelectContent align='end'>
-									{Object.entries(CurrencyEnum).map(([key, currency]) => (
-										<SelectItem key={key} value={currency}>
-											{currency}
-										</SelectItem>
-									))}
-								</SelectContent>
-							</Select>
-						</div>
-					) : null} */}
 				</div>
 
 				<div className="hidden sm:flex mb-2 flex-col gap-2 ">
@@ -682,8 +638,8 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 						<span>Подробнее</span>
 						<ArrowDownUp />
 					</CollapsibleTrigger>
-					<CollapsibleContent className='flex flex-col justify-between'>
-						<div className="flex mb-2 flex-col gap-2 ">
+					<CollapsibleContent className='flex flex-col justify-between gap-1'>
+						<div className="flex flex-col gap-2 ">
 							<div className="grid gap-2 lg:flex lg:gap-4">
 								<div className=" flex items-center gap-2 ">
 									<Container size={16} />
@@ -717,7 +673,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								)
 							) : null}
 						</div>
-						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-2">
+						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4">
 							<span className=' flex items-center gap-1'>
 								<ArrowBigUp size={16} />
 								<span className='truncate block text-sm'>
