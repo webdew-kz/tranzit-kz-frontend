@@ -174,7 +174,7 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 									<span className="font-medium leading-none uppercase">
 										{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
 									</span>
-									{index < places.length - 1 && <MoveRight size={16} />}
+									{index < places.length - 1 && <MoveRight stroke='#fff' size={16} />}
 								</span>
 							);
 						})}
