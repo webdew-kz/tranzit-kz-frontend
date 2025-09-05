@@ -13,7 +13,7 @@ export default function DashboardLayout({
 			{/* <div className="grid grid-cols-12 pt-[120px] md:pt-[60px] pb-[60px]"> */}
 			<div className="grid grid-cols-12 pt-[120px] md:pt-[60px]">
 				<Aside />
-				<main className="col-span-12 md:col-span-10 p-4 bg-[url(/images/bg-home.jpg)] md:bg-[url(/images/bg-home-full.jpg)] bg-no-repeat bg-cover bg-center h-[calc(100vh-120px)]">
+				<main className="col-span-12 md:col-span-10 p-4 bg-[url(/images/bg-home.jpg)] md:bg-[url(/images/bg-home-full.jpg)] bg-no-repeat bg-cover bg-center min-h-[calc(100vh-120px)]">
 					{children}
 				</main>
 			</div>
