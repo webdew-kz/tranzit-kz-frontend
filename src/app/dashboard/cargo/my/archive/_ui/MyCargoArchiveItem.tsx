@@ -159,7 +159,7 @@ const MyCargoArchiveItem = memo(({ cargoInitial, selected, onToggle, setCargos, 
 					<a
 						href={cargo.routeLink}
 						target='_blank'
-						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
+						className='hidden sm:block text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
 					>Посмотреть маршрут</a>
 				</div>
 
