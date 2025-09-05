@@ -9,7 +9,7 @@ import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
 import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
-import { ArrowBigDown, ArrowBigUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, ArrowDownUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
 import { addToWishlist, addView, removeFromWishlist } from '../actions'
@@ -183,7 +183,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					<a
 						href={cargo.routeLink}
 						target='_blank'
-						className=' text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
+						className='hidden sm:block text-sm text-nowrap text-(--dark-accent) underline underline-offset-3'
 					>Посмотреть маршрут</a>
 				</div>
 
@@ -250,7 +250,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 
 				<div className=" flex sm:hidden flex-col lg:flex-row gap-2 w-full lg:justify-between lg:items-center mb-2">
 
-					<div className=" grid gap-2 lg:flex lg:gap-4">
+					<div className=" grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
 							<Box size={16} />
 							<span className=' truncate block'>{cargo.title}</span>
@@ -678,9 +678,9 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 				</div>
 
 				<Collapsible className='sm:hidden flex flex-col gap-2'>
-					<CollapsibleTrigger className='flex gap-2 items-center'>
+					<CollapsibleTrigger className='flex gap-2 items-center justify-center'>
 						<span>Подробнее</span>
-						<ArrowBigDown />
+						<ArrowDownUp />
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between'>
 						<div className="flex mb-2 flex-col gap-2 ">
