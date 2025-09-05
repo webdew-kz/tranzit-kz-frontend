@@ -153,7 +153,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								onClick={handleToggleWishlist}
 								className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} fill='#b4802e' />
-								<span>Убрать из избранного</span>
+								<span>Из избранного</span>
 							</button>
 						) : isWishBtn && (
 							<button
@@ -161,7 +161,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								onClick={handleToggleWishlist}
 								className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} />
-								<span>Добавить в избранное</span>
+								<span>В избранное</span>
 							</button>
 						)}
 					</div>

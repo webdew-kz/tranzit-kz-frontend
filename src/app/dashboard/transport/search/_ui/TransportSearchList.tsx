@@ -116,7 +116,7 @@ export default function TransportSearchList() {
 			transports?.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5">
+						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3">
 							<span>Всего транспортов: {total}</span>
 
 							{wishlistLength > 0 ? (

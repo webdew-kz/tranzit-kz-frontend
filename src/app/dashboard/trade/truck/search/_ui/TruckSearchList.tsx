@@ -95,7 +95,7 @@ export default function TruckSearchList() {
 		searchTrucks.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
-					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
 						<span>Найдено: {searchTrucks.length}</span>
 						<Button
 							variant='link'
@@ -115,7 +115,7 @@ export default function TruckSearchList() {
 			trucks?.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
 							<span>Всего грузовиков: {total}</span>
 
 							{wishlistLength > 0 ? (

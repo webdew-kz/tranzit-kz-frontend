@@ -91,7 +91,7 @@ export default function TrailerSearchList() {
 		searchTrailers.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
-					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
 						<span>Найдено: {searchTrailers.length}</span>
 						<Button
 							variant='link'
@@ -111,7 +111,7 @@ export default function TrailerSearchList() {
 			trailers?.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
 							<span>Всего прицепов: {total}</span>
 
 							{wishlistLength > 0 ? (

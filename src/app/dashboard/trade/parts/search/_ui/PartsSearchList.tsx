@@ -95,7 +95,7 @@ export default function PartsSearchList() {
 		searchPartss.length > 0 ? (
 			<>
 				<div className='grid gap-5'>
-					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+					<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
 						<span>Найдено: {searchPartss.length}</span>
 						<Button
 							variant='link'
@@ -115,7 +115,7 @@ export default function PartsSearchList() {
 			partss?.length > 0 ? (
 				<>
 					<div className='grid gap-5'>
-						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 z-10">
+						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
 							<span>Всего запчастей: {total}</span>
 
 							{wishlistLength > 0 ? (

@@ -108,7 +108,7 @@ const TransportWishItem = memo(
 						<div className=" flex items-center">
 							<button type='button' onClick={handleRemoveFromWishlist} className="flex items-center gap-1 cursor-pointer text-sm text-(--dark-accent) underline underline-offset-4">
 								<Star size={16} fill='#b4802e' />
-								<span>Убрать из избранного</span>
+								<span>Из избранного</span>
 							</button>
 						</div>
 					</div>
