@@ -46,6 +46,8 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 	const [pending, startTransition] = useTransition()
 	const [isWishlist, setIsWishlist] = useState(false)
 
+	const [isOpen, setIsOpen] = useState(false)
+
 	useEffect(() => {
 		const current = getWishlist();
 		if (current.includes(cargo.id!)) {
@@ -633,9 +635,9 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					</div>
 				</div>
 
-				<Collapsible className='sm:hidden flex flex-col gap-2'>
-					<CollapsibleTrigger className='flex gap-2 items-center justify-center'>
-						<span>Подробнее</span>
+				<Collapsible className='sm:hidden flex flex-col gap-2' open={isOpen} onOpenChange={setIsOpen}>
+					<CollapsibleTrigger asChild className='flex gap-2 items-center justify-center'>
+						<span>{isOpen ? "Скрыть" : "Подробнее"}</span>
 						<ArrowDownUp />
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
