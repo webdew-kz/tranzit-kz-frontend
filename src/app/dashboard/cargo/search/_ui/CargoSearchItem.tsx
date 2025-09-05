@@ -192,7 +192,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					<div className=" grid gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
 							<Box size={16} />
-							<span className=' truncate block'>{cargo.title}</span>
+							<span className=' block'>{cargo.title}</span>
 						</div>
 
 						<div className=" flex items-center gap-2 max-w-full">
