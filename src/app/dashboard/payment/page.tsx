@@ -12,8 +12,8 @@ export default function page() {
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
 			{/* <div className="font-semibold text-xl text-center">Ваш баланс: {user?.balance?.toLocaleString('ru-RU') ?? 0} ₸</div>
 			<Button
-				variant={'outline'}
-				className='w-full '
+				variant='default'
+				className='w-full bg-accent'
 				asChild
 			>
 
@@ -26,8 +26,8 @@ export default function page() {
 			</Button> */}
 
 			{/* <Button
-				variant={'outline'}
-				className='w-full '
+				variant='default'
+				className='w-full bg-accent'
 				asChild
 			>
 
