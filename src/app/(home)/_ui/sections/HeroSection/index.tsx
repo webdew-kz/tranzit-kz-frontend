@@ -13,6 +13,9 @@ export default function HeroSection() {
 				<Button className=' w-full border-(--dark-accent) dark:border-(--dark-accent) hover:bg-(--foreground) hover:border-(--foreground) hover:text-(--background) hover:dark:bg-(--foreground) hover:dark:border-(--foreground) hover:dark:text-(--background)' variant="outline" asChild>
 					<Link href='/register'>Регистрация</Link>
 				</Button>
+				<Button className=' w-full border-(--dark-accent) dark:border-(--dark-accent) hover:bg-(--foreground) hover:border-(--foreground) hover:text-(--background) hover:dark:bg-(--foreground) hover:dark:border-(--foreground) hover:dark:text-(--background)' variant="outline" asChild>
+					<Link href='/reset'>Восстановить пароль</Link>
+				</Button>
 			</div>
 			<div className="flex flex-col gap-3 text-center">
 				<Link href='/policy' className='text-white hover:text-(--foreground)'>Политика конфиденциальности</Link>
