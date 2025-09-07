@@ -103,11 +103,13 @@ export default function LoginForm() {
 					localStorage.setItem("accessToken", data.token);
 					toast.success(data.message, { position: "top-center" });
 					router.push("/dashboard");
+					router.refresh();
 				} else {
 					toast.error(data.message ?? "Ошибка авторизации", { position: "top-center" });
 				}
 
 				router.push('/dashboard')
+				router.refresh();
 
 			} catch (error) {
 				console.error(error)
