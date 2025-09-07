@@ -17,10 +17,10 @@ export default function HeroSection() {
 						href={'/register'}
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
 					>Нет аккаунта?</Link>
-					{/* <Link
+					<Link
 						href={'/reset'}
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
-					>Забыли пароль?</Link> */}
+					>Забыли пароль?</Link>
 				</div>
 			</div>
 		</div>
