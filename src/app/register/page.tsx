@@ -21,9 +21,9 @@ export default function Register() {
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
 					>Уже есть аккаунт?</Link>
 					<Link
-						href={'/'}
+						href={'/reset'}
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
-					>На главную</Link>
+					>Забыли пароль?</Link>
 				</div>
 
 			</div>
