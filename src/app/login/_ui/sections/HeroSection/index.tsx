@@ -12,7 +12,7 @@ export default function HeroSection() {
 
 				<LoginForm />
 
-				<div className=" flex justify-center w-full">
+				<div className=" flex justify-between w-full">
 					<Link
 						href={'/register'}
 						className='text-[12px] text-(--dark-accent) hover:text-(--foreground) border-b border-dashed border-(--dark-accent) hover:border-(--foreground)'
