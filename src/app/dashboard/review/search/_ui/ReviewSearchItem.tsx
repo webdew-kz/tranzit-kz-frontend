@@ -43,7 +43,7 @@ const ReviewSearchItem = memo(({ review, setSearchReviews, rates, loading, setWi
 
 	const [open, setOpen] = useState(false);
 
-	const price = 5000;
+	const price = 50000;
 
 	const router = useRouter()
 

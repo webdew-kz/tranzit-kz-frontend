@@ -53,14 +53,14 @@ export default function page() {
 			{user?.role === 'ADMIN' && (
 				<>
 					<Button
-						variant={'outline'}
-						className='w-full'
+						variant='default'
+						className='w-full bg-accent'
 						asChild
 					>
 
 						<Link
 							href='/dashboard/review/moderation'
-							className='flex gap-3 items-center justify-start'
+							className='flex gap-3 items-center justify-start '
 						>
 							<ShieldCheck /> Модерация
 						</Link>
