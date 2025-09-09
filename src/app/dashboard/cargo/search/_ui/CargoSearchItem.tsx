@@ -166,7 +166,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 						)}
 					</div>
 				</div>
-				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-2 bg-(--dark-accent) px-3 py-2 rounded-lg">
+				<div className="flex flex-col gap-3 md:flex-row md:items-center w-full mb-2 bg-(--dark-accent) p-1">
 					<div className=" w-full flex gap-2 flex-wrap">
 						{places.length > 0 && places.map((place, index) => {
 							const [city, country] = place.split(",").map((str) => str.trim());

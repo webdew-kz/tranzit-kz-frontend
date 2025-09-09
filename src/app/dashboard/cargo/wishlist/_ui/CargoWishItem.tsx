@@ -127,7 +127,7 @@ const CargoWishItem = memo(
 						</div>
 					</div>
 
-					<div className=" w-full flex gap-2  flex-wrap mb-2 bg-(--dark-accent) px-3 py-2 rounded-lg">
+					<div className=" w-full flex gap-2  flex-wrap mb-2 bg-(--dark-accent) p-1">
 						{places.length > 0 && places.map((place, index) => {
 							const [city, country] = place.split(",").map((str) => str.trim());
 
