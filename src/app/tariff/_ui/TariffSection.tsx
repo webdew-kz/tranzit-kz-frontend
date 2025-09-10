@@ -16,7 +16,7 @@ export default function TariffSection() {
 					<br />
 					<p>Добавление отзыва - <strong>1 000 ₸</strong></p>
 					<br />
-					<p>Удаление отзыва - <strong>5 000 ₸</strong></p>
+					<p>Удаление отзыва - <strong>50 000 ₸</strong></p>
 					<br />
 				</div>
 
