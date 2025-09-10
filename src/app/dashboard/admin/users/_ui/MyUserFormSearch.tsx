@@ -21,7 +21,13 @@ export default function MyUserFormSearch() {
 	const [pending, startTransition] = useTransition()
 
 	const reviewSchema = z.object({
-		login: z.string()
+		login: z
+			.string()
+			.transform((val) =>
+				val
+					.replace(/\D/g, "") // оставляем только цифры
+					.replace(/^7/, "") // убираем первую 7 (так как +7 уже есть)
+			),
 	});
 
 	type User = z.infer<typeof reviewSchema>
