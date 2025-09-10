@@ -40,7 +40,7 @@ export default function MyUserFormSearch() {
 			try {
 				setSearchUsers([])
 
-				const formattedLogin = data.login.replace(/\D/g, "").replace(/^7/, "")
+				const formattedLogin = data.login.replace(/\D/g, "");
 
 				const res = await findUserByLogin(formattedLogin)
 
