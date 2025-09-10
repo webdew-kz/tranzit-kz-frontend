@@ -21,13 +21,7 @@ export default function MyUserFormSearch() {
 	const [pending, startTransition] = useTransition()
 
 	const reviewSchema = z.object({
-		login: z
-			.string()
-			.transform((val) =>
-				val
-					.replace(/\D/g, "") // оставляем только цифры
-					.replace(/^7/, "") // убираем первую 7 (так как +7 уже есть)
-			),
+		login: z.string()
 	});
 
 	type User = z.infer<typeof reviewSchema>
@@ -46,7 +40,9 @@ export default function MyUserFormSearch() {
 			try {
 				setSearchUsers([])
 
-				const res = await findUserByLogin(data.login)
+				const formattedLogin = data.login.replace(/\D/g, "").replace(/^7/, "")
+
+				const res = await findUserByLogin(formattedLogin)
 
 				toast.success(res.message, {
 					position: 'top-center',
