@@ -33,7 +33,7 @@ const CityInput = ({
 		setValue,
 		clearSuggestions,
 	} = usePlacesAutocomplete({
-		requestOptions: { types: ['(cities)'] },
+		requestOptions: { types: ["(regions)"] },
 		debounce: 300,
 	});
 
