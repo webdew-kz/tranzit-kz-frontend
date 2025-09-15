@@ -58,7 +58,6 @@ const CityInput = ({
 		<div className="relative flex gap-2 items-start">
 			<div className="w-full relative">
 				<Input
-					required
 					value={value}
 					onChange={handleInput}
 					disabled={!ready}

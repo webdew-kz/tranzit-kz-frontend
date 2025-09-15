@@ -61,10 +61,8 @@ export default function CargoFormSearch() {
 			// currency: CurrencyEnum.KZT,
 			// note: undefined,
 
-			// placesLoading: [""],
-			// placesUnloading: [""],
-			placesLoading: [] as string[],
-			placesUnloading: [] as string[],
+			placesLoading: [""],
+			placesUnloading: [""],
 			weight: undefined,
 			volume: undefined,
 			startDate: undefined,
@@ -124,7 +122,7 @@ export default function CargoFormSearch() {
 							name="placesLoading"
 							render={({ field }) => (
 								<MultiCityInput
-									values={field.value ?? []}
+									values={field.value || []}
 									onChange={field.onChange}
 									placeholder="Пункт погрузки"
 									addBtnText="Добавить пункт погрузки"
@@ -137,7 +135,7 @@ export default function CargoFormSearch() {
 							render={({ field }) => (
 
 								<MultiCityInput
-									values={field.value ?? []}
+									values={field.value || []}
 									onChange={field.onChange}
 									addBtnText="Добавить пункт разгрузки"
 									placeholder='Пункт разгрузки'
