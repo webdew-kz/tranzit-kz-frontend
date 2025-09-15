@@ -26,8 +26,8 @@ export default function CargoFormSearch() {
 	const [pending, startTransition] = useTransition()
 
 	const cargoSchema = z.object({
-		placesLoading: z.array(z.string()).min(1),
-		placesUnloading: z.array(z.string()).min(1),
+		placesLoading: z.array(z.string()).optional(),
+		placesUnloading: z.array(z.string()).optional(),
 		weight: z
 			.string()
 			.optional()
@@ -61,8 +61,10 @@ export default function CargoFormSearch() {
 			// currency: CurrencyEnum.KZT,
 			// note: undefined,
 
-			placesLoading: [""],
-			placesUnloading: [""],
+			// placesLoading: [""],
+			// placesUnloading: [""],
+			placesLoading: [] as string[],
+			placesUnloading: [] as string[],
 			weight: undefined,
 			volume: undefined,
 			startDate: undefined,
@@ -122,7 +124,7 @@ export default function CargoFormSearch() {
 							name="placesLoading"
 							render={({ field }) => (
 								<MultiCityInput
-									values={field.value}
+									values={field.value ?? []}
 									onChange={field.onChange}
 									placeholder="Пункт погрузки"
 									addBtnText="Добавить пункт погрузки"
@@ -135,7 +137,7 @@ export default function CargoFormSearch() {
 							render={({ field }) => (
 
 								<MultiCityInput
-									values={field.value}
+									values={field.value ?? []}
 									onChange={field.onChange}
 									addBtnText="Добавить пункт разгрузки"
 									placeholder='Пункт разгрузки'
