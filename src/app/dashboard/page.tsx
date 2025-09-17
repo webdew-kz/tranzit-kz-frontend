@@ -34,12 +34,9 @@ export default function DashboardPage() {
 				{user.role === 'ADMIN' ? <span className='text-(--dark-accent)'>Статус: Администратор</span> : null}
 
 
-				{!user?.isRegistered && (
-					<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-						<div className="text-center">iTranzit.kz - Ваша надёжная платформа для перевозок. <br /> Мы объединяем грузовладельцев и транспортные компании, чтобы каждый груз дошёл точно в срок. Удобный поиск, прозрачные условия и проверенные партнёры — всё для вашего спокойствия.</div>
-
-					</div>
-				)}
+				<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
+					<div className="text-center">iTranzit.kz - Ваша надёжная платформа для перевозок. <br /> Мы объединяем грузовладельцев и транспортные компании, чтобы каждый груз дошёл точно в срок. Удобный поиск, прозрачные условия и проверенные партнёры — всё для вашего спокойствия.</div>
+				</div>
 			</div>
 		</div>
 	)
