@@ -36,13 +36,8 @@ export default function DashboardPage() {
 
 				{!user?.isRegistered && (
 					<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-						<div className="text-center">Для полного доступа к приложению требуется абонентская плата 1000 тенге за 1 месяц. <br /> Абонентская плата предоставляет право размещать, копировать, редактировать и удалять собственные объявления, а также открывает доступ к контактной информации в чужих объявлениях.</div>
-						<Button
-							className=' bg-(--dark-accent)'
-							asChild
-						>
-							<Link href='/dashboard/payment/pay-register'>Перейти к оплате</Link>
-						</Button>
+						<div className="text-center">iTranzit.kz - Ваша надёжная платформа для перевозок. <br /> Мы объединяем грузовладельцев и транспортные компании, чтобы каждый груз дошёл точно в срок. Удобный поиск, прозрачные условия и проверенные партнёры — всё для вашего спокойствия.</div>
+
 					</div>
 				)}
 			</div>
