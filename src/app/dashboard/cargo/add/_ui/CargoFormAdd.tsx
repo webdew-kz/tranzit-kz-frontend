@@ -16,7 +16,7 @@ import { useUserStore } from '@/shared/store/useUserStore';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { addCargo } from '../actions';
+import { addCargo, getUser } from '../actions';
 import { Loader2 } from 'lucide-react';
 import { redirect, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -30,8 +30,21 @@ export default function CargoFormAdd() {
 
 	const router = useRouter()
 
-	const { user, isInitialized } = useUserStore()
+	const { user, isInitialized, setUser } = useUserStore()
 
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) setUser(res.user)
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	const cargoSchema = z.object({
 		title: z.string().min(1),
