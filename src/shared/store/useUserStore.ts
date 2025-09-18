@@ -7,7 +7,7 @@ import { User } from "../types/user.type";
 interface UserState {
     user: User | null;
     isInitialized: boolean;
-    setUser: (user: User) => void;
+    setUser: (updater: User | ((prev: User | null) => User)) => void;
     clearUser: () => void;
     updateBalance: (newBalance: number) => void;
 }
@@ -17,7 +17,14 @@ export const useUserStore = create<UserState>()(
         (set, get) => ({
             user: null,
             isInitialized: false, // 👈 добавлено
-            setUser: (user) => set({ user, isInitialized: true }),
+            setUser: (updater) =>
+                set((state) => ({
+                    user:
+                        typeof updater === "function"
+                            ? updater(state.user)
+                            : updater,
+                    isInitialized: true,
+                })),
             clearUser: () => set({ user: null, isInitialized: true }),
             updateBalance: (newBalance: number) => {
                 const { user } = get();

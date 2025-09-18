@@ -38,7 +38,12 @@ export default function CargoFormAdd() {
 			try {
 				const res = await getUser()
 
-				if (res.user) setUser(res.user)
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
 
 			} catch (error) {
 				console.error(error)
