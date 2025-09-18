@@ -25,7 +25,6 @@ export async function getUser() {
         const res = await fetch(`${process.env.SERVER_URL}/user`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
-            // body: JSON.stringify(data),
             credentials: "include",
         });
 

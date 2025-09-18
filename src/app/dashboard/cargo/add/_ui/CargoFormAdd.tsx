@@ -43,7 +43,11 @@ export default function CargoFormAdd() {
 						...prev,
 						...res.user
 					}));
+
+					console.log(res.user);
 				}
+
+
 
 			} catch (error) {
 				console.error(error)
