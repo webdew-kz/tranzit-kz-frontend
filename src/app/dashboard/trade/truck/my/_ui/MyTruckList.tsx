@@ -13,18 +13,35 @@ import { activateMany, archivateMany, findAllActiveByUserId } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
 import MyTruckItem from './MyTruckItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTruckList() {
 
-	const { user } = useUserStore()
-
+	const { user, setUser } = useUserStore()
 	const [isLoading, setIsLoading] = useState<boolean>(true);
-
 	const [trucks, setTrucks] = useState<ITruck[]>([]);
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
-
 	const [pending, startTransition] = useTransition()
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 

@@ -8,14 +8,34 @@ import { toast } from 'sonner'
 import PartsWishItem from './PartsWishItem'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { Button } from '@/shared/components/ui/button'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
 export default function PartsWishList() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 	const [partss, setPartss] = useState<IParts[]>([])
 	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {

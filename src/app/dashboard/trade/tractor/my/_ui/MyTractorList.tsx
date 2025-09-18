@@ -13,10 +13,12 @@ import { activateMany, archivateMany, findAllActiveByUserId } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
 import MyTractorItem from './MyTractorItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTractorList() {
 
-	const { user } = useUserStore()
+
+	const { user, setUser } = useUserStore()
 
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -25,6 +27,25 @@ export default function MyTractorList() {
 
 	const [pending, startTransition] = useTransition()
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 

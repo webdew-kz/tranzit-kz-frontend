@@ -16,10 +16,11 @@ import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll';
 import { Loader2 } from 'lucide-react';
 import MyTransportItem from './MyTransportItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTransportList() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const { rates, loading } = useCurrencyRates()
 
@@ -31,6 +32,25 @@ export default function MyTransportList() {
 
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	const loadMore = async () => {
 

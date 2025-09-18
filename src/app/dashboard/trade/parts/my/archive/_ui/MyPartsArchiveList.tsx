@@ -14,10 +14,11 @@ import { activateMany } from '../../actions';
 import { findAllArchivedByUserId, removeMany } from '../actions';
 import MyPartsArchiveItem from './MyPartsArchiveItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyPartsArchiveList() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [partss, setPartss] = useState<IParts[]>([]);
 
@@ -27,6 +28,25 @@ export default function MyPartsArchiveList() {
 
 	const [pending, startTransition] = useTransition()
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 

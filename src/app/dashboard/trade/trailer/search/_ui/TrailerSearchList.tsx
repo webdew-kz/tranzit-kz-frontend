@@ -9,10 +9,14 @@ import Link from 'next/link'
 import { useTrailerStore } from '@/shared/store/useTrailerStore'
 import { useTrailerSearchStore } from '@/shared/store/useTrailerSearchStore'
 import TrailerSearchItem from './TrailerSearchItem'
+import { useUserStore } from '@/shared/store/useUserStore'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
 export default function TrailerSearchList() {
+
+	const { user, setUser } = useUserStore()
 
 	const { searchTrailers, setSearchTrailers } = useTrailerSearchStore()
 	const { trailers, setTrailers } = useTrailerStore()
@@ -25,6 +29,25 @@ export default function TrailerSearchList() {
 	const [pending, startTransition] = useTransition()
 
 	const [wishlistLength, setWishlistLength] = useState(0)
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const stored = JSON.parse(localStorage.getItem("wishlistTrailers") || "[]");

@@ -1,5 +1,5 @@
 "use client"
-import React, { use, useCallback, useEffect, useState } from 'react'
+import React, { use, useCallback, useEffect, useState, useTransition } from 'react'
 import { findAll } from '../actions'
 import { ITransport } from '@/shared/types/transport.type'
 import TransportSearchItem from './TransportSearchItem'
@@ -11,6 +11,8 @@ import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
+import { useUserStore } from '@/shared/store/useUserStore'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
@@ -27,6 +29,29 @@ export default function TransportSearchList() {
 	const [isLoad, setIsLoad] = useState(false);
 
 	const [wishlistLength, setWishlistLength] = useState(0)
+
+	const { user, setUser } = useUserStore()
+
+	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const stored = JSON.parse(localStorage.getItem("wishlistTransport") || "[]");
@@ -86,7 +111,7 @@ export default function TransportSearchList() {
 
 
 
-	if (isLoad || loading) {
+	if (isLoad || loading || pending) {
 		return <Loader />
 	}
 

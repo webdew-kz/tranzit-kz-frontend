@@ -8,16 +8,34 @@ import { toast } from 'sonner'
 import TruckWishItem from './TruckWishItem'
 import { Button } from '@/shared/components/ui/button'
 import { useUserStore } from '@/shared/store/useUserStore'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
 export default function TruckWishList() {
 
-	const { user } = useUserStore()
-
-	// const { rates, loading } = useCurrencyRates()
+	const { user, setUser } = useUserStore()
 	const [trucks, setTrucks] = useState<ITruck[]>([])
 	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {

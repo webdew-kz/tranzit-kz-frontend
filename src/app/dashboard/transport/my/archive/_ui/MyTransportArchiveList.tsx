@@ -15,10 +15,11 @@ import { activateMany } from '../../actions';
 import { removeMany } from '../actions';
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates';
 import MyTransportArchiveItem from './MyTransportArchiveItem';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTransportArchiveList() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const { rates, loading } = useCurrencyRates()
 
@@ -27,6 +28,25 @@ export default function MyTransportArchiveList() {
 
 	const [pending, startTransition] = useTransition()
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 
@@ -140,7 +160,7 @@ export default function MyTransportArchiveList() {
 		})
 	}
 
-	if (loading || loading || !user) {
+	if (loading || pending || !user) {
 		return <Loader />
 	}
 

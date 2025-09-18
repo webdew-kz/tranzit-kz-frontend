@@ -17,17 +17,37 @@ import { DriveEnum, ExistEnum, StatusEnum, SteeringEnum, TransmissionEnum, Truck
 import { CityInput } from '@/shared/components/widgets/CityInput';
 import { cn } from '@/shared/lib/utils';
 import Link from 'next/link';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 
 export default function TruckFormAdd() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [open, setOpen] = useState(false);
 
 	const [pending, startTransition] = useTransition()
 
 	const router = useRouter()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	const truckSchema = z.object({
 		city: z.string(),

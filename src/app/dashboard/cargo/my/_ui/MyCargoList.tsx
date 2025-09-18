@@ -43,8 +43,6 @@ export default function MyCargoList() {
 						...prev,
 						...res.user
 					}));
-
-					console.log(res.user);
 				}
 
 

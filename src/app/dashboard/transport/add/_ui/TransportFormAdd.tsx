@@ -20,15 +20,35 @@ import { addTransport } from '../actions';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 
 export default function TransportFormAdd() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [pending, startTransition] = useTransition()
 
 	const router = useRouter()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	const transportSchema = z.object({
 		// title: z.string().min(1),

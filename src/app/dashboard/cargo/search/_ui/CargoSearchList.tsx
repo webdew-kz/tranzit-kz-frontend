@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useTransition } from 'react'
 import { findAll } from '../actions'
 import { ICargo } from '@/shared/types/cargo.type'
 import CargoSearchItem from './CargoSearchItem'
@@ -10,12 +10,15 @@ import { useInfiniteScroll } from '@/shared/hooks/useInfiniteScroll'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
+import { getUser } from '../../add/actions'
+import { useUserStore } from '@/shared/store/useUserStore'
 
 
 
 export default function CargoSearchList() {
 
 
+	const { user, setUser } = useUserStore()
 	const { rates, loading } = useCurrencyRates()
 	const { searchCargos, setSearchCargos } = useCargoSearchStore()
 	const [cargos, setCargos] = useState<ICargo[]>([])
@@ -25,7 +28,29 @@ export default function CargoSearchList() {
 	const [hasMore, setHasMore] = useState(true);
 	const [isLoad, setIsLoad] = useState(false);
 
+
+	const [pending, startTransition] = useTransition()
+
 	const [wishlistLength, setWishlistLength] = useState(0)
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const stored = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -85,7 +110,7 @@ export default function CargoSearchList() {
 
 
 
-	if (isLoad || loading) {
+	if (isLoad || loading || pending) {
 		return <Loader />
 	}
 

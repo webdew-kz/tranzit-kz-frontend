@@ -14,10 +14,12 @@ import { activateMany } from '../../actions';
 import { findAllArchivedByUserId, removeMany } from '../actions';
 import MyTractorArchiveItem from './MyTractorArchiveItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTractorArchiveList() {
 
-	const { user } = useUserStore()
+
+	const { user, setUser } = useUserStore()
 
 	const [tractors, setTractors] = useState<ITractor[]>([]);
 
@@ -27,6 +29,25 @@ export default function MyTractorArchiveList() {
 
 	const [pending, startTransition] = useTransition()
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 

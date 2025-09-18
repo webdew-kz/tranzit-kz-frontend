@@ -14,10 +14,11 @@ import { activateMany } from '../../actions';
 import { findAllArchivedByUserId, removeMany } from '../actions';
 import MyTrailerArchiveItem from './MyTrailerArchiveItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTrailerArchiveList() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [trailers, setTrailers] = useState<ITrailer[]>([]);
 
@@ -26,7 +27,27 @@ export default function MyTrailerArchiveList() {
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
 
 	const [pending, startTransition] = useTransition()
+
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 

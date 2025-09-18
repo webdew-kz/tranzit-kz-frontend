@@ -11,6 +11,8 @@ import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
 import { useTractorStore } from '@/shared/store/useTractorStore'
+import { useUserStore } from '@/shared/store/useUserStore'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
@@ -26,9 +28,30 @@ export default function TractorSearchList() {
 	const [hasMore, setHasMore] = useState(true);
 	const [isLoad, setIsLoad] = useState(true);
 
+	const [wishlistLength, setWishlistLength] = useState(0)
+
+	const { user, setUser } = useUserStore()
+
 	const [pending, startTransition] = useTransition()
 
-	const [wishlistLength, setWishlistLength] = useState(0)
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const stored = JSON.parse(localStorage.getItem("wishlistTractors") || "[]");

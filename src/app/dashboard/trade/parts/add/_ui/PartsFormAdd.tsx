@@ -19,15 +19,35 @@ import { cn } from '@/shared/lib/utils';
 import { Checkbox } from '@/shared/components/ui/checkbox';
 import { Label } from '@/shared/components/ui/label';
 import Link from 'next/link';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 
 export default function PartsFormAdd() {
 
-	const { user } = useUserStore()
-
 	const [open, setOpen] = useState(false);
 
+	const { user, setUser } = useUserStore()
+
 	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	const router = useRouter()
 

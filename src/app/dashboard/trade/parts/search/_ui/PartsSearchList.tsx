@@ -11,13 +11,15 @@ import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { Loader2, Star } from 'lucide-react'
 import Link from 'next/link'
 import { usePartsStore } from '@/shared/store/usePartsStore'
+import { useUserStore } from '@/shared/store/useUserStore'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
 export default function PartsSearchList() {
 
 
-	// const { rates, loading } = useCurrencyRates()
+	const { user, setUser } = useUserStore()
 	const { searchPartss, setSearchPartss } = usePartsSearchStore()
 	const { partss, setPartss } = usePartsStore()
 	const [total, setTotal] = useState(0)
@@ -29,6 +31,25 @@ export default function PartsSearchList() {
 	const [pending, startTransition] = useTransition()
 
 	const [wishlistLength, setWishlistLength] = useState(0)
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const stored = JSON.parse(localStorage.getItem("wishlistPartss") || "[]");

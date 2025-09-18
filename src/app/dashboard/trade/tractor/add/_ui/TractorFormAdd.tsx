@@ -17,15 +17,35 @@ import { CityInput } from '@/shared/components/widgets/CityInput';
 import { cn } from '@/shared/lib/utils';
 import { CabinSuspensionEnum, DriveEnum, ExistEnum, StatusEnum, SteeringEnum, TractorBrandEnum, TractorWheelEnum, TransmissionEnum, TypeCabinEnum, TypeEngineEnum, VariantEnum } from '@/shared/types/tractor.type';
 import Link from 'next/link';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 
 export default function TractorFormAdd() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [open, setOpen] = useState(false);
 
 	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	const router = useRouter()
 

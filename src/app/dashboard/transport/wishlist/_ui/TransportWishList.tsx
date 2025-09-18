@@ -1,5 +1,5 @@
 "use client"
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useTransition } from 'react'
 import { getWishlist, removeAllFromWishlist } from '../actions'
 import { ITransport } from '@/shared/types/transport.type'
 import Loader from '@/shared/components/widgets/Loader'
@@ -9,15 +9,36 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { Button } from '@/shared/components/ui/button'
+import { getUser } from '@/app/dashboard/cargo/add/actions'
 
 
 
 export default function TransportWishList() {
 
-
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 	const { rates, loading } = useCurrencyRates()
 	const [transports, setTransports] = useState<ITransport[]>([])
+
+	const [pending, startTransition] = useTransition()
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -44,7 +65,7 @@ export default function TransportWishList() {
 		})
 	};
 
-	if (loading || !rates) {
+	if (loading || !rates || pending) {
 		return <Loader />
 	}
 

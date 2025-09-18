@@ -13,10 +13,11 @@ import { activateMany, archivateMany, findAllActiveByUserId } from '../actions';
 import Loader from '@/shared/components/widgets/Loader';
 import MyTrailerItem from './MyTrailerItem';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { getUser } from '@/app/dashboard/cargo/add/actions';
 
 export default function MyTrailerList() {
 
-	const { user } = useUserStore()
+	const { user, setUser } = useUserStore()
 
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -24,7 +25,27 @@ export default function MyTrailerList() {
 	const [selectedIds, setSelectedIds] = useState<string[]>([])
 
 	const [pending, startTransition] = useTransition()
+
 	const path = usePathname();
+
+	useEffect(() => {
+		startTransition(async () => {
+
+			try {
+				const res = await getUser()
+
+				if (res.user) {
+					setUser(prev => ({
+						...prev,
+						...res.user
+					}));
+				}
+
+			} catch (error) {
+				console.error(error)
+			}
+		})
+	}, []);
 
 	useEffect(() => {
 
