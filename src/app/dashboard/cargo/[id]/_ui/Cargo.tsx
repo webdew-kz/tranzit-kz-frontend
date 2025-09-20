@@ -13,7 +13,7 @@ import { User } from '@/shared/types/user.type'
 
 export default function Cargo({ id }: { id: string }) {
 
-	const [user, setUser] = useState<User | null>(null)
+	const [isRegistered, setIsRegistered] = useState(false)
 
 	const [pending, startTransition] = useTransition()
 
@@ -31,10 +31,7 @@ export default function Cargo({ id }: { id: string }) {
 				console.log(res);
 
 				if (res.user) {
-					setUser(prev => ({
-						...prev,
-						...res.user
-					}));
+					setIsRegistered(res.user.isRegistered)
 				}
 
 
@@ -62,5 +59,5 @@ export default function Cargo({ id }: { id: string }) {
 		return <Loader />
 	}
 
-	return <CargoSearchItem cargo={cargo} rates={rates} loading={loading} isContact={false} isWishBtn={false} customUser={user} />
+	return <CargoSearchItem cargo={cargo} rates={rates} loading={loading} isContact={false} isWishBtn={false} isRegistered={isRegistered} />
 }

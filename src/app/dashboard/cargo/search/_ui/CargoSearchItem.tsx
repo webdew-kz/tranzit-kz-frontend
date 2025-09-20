@@ -26,10 +26,10 @@ interface CargoSearchItemProps {
 	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>
 	isContact?: boolean
 	isWishBtn?: boolean
-	customUser?: User | null
+	isRegistered?: boolean
 }
 
-const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true, customUser }: CargoSearchItemProps) => {
+const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true, isRegistered }: CargoSearchItemProps) => {
 
 
 	const { user } = useUserStore()
@@ -1021,7 +1021,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									</Popover>
 								)}
 							</div>
-							{(user?.isRegistered || customUser?.isRegistered) && (
+							{(user?.isRegistered || isRegistered) && (
 								<Button
 									variant='default'
 									className='bg-(--dark-accent) '
