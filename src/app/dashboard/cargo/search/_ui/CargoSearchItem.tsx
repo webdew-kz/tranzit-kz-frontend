@@ -930,7 +930,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 												variant='default'
 												className=' group border border-(--dark-accent) bg-(--dark-accent) hover:bg-transparent hover:text-(--dark-accent) !px-2'
 												onClick={() => {
-													if (!user?.isRegistered || !cargo?.id) return;
+													if (!user?.isRegistered || !cargo?.id || !isRegistered) return;
 													handleAddView(cargo.id);
 												}}
 											>
@@ -938,7 +938,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 											</Button>
 										</PopoverTrigger>
 										<PopoverContent align='end' className='p-5 break-words max-w-xs'>
-											{!user?.isRegistered ? (
+											{(!user?.isRegistered || !isRegistered) ? (
 												<div className="grid gap-2 justify-start">
 													<span >Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</span>
 													<Button
