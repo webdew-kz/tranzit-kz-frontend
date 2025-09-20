@@ -751,7 +751,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (
 									<Popover>
 										<PopoverTrigger asChild>
-											<Button variant='link' className=' text-sm underline text-(--dark-accent) !px-0'>
+											<Button variant='link' className=' text-xs underline text-(--dark-accent) !px-0'>
 												Дополнительно
 												<ChevronDown size={16} />
 											</Button>
@@ -1019,21 +1019,22 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									</Popover>
 								)}
 							</div>
-
-							<Button
-								variant='default'
-								className='bg-(--dark-accent) '
-								asChild
-							>
-								<Link
-									href={`https://wa.me/?text=${wamsg}`}
-									target="_blank"
-									rel="noopener noreferrer"
-									className='flex gap-3 items-center justify-start'
+							{user?.isRegistered && (
+								<Button
+									variant='default'
+									className='bg-(--dark-accent) '
+									asChild
 								>
-									<Share stroke='#fff' />
-								</Link>
-							</Button>
+									<Link
+										href={`https://wa.me/?text=${wamsg}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										className='flex gap-3 items-center justify-start'
+									>
+										<Share stroke='#fff' />
+									</Link>
+								</Button>
+							)}
 						</div>
 					</CollapsibleContent>
 				</Collapsible>
