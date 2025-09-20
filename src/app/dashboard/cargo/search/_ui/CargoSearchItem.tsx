@@ -938,7 +938,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 											</Button>
 										</PopoverTrigger>
 										<PopoverContent align='end' className='p-5 break-words max-w-xs'>
-											{(!user?.isRegistered || !isRegistered) ? (
+											{(!user?.isRegistered) ? (
 												<div className="grid gap-2 justify-start">
 													<span >Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</span>
 													<Button
