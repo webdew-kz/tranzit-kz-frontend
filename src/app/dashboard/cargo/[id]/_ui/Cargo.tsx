@@ -9,10 +9,11 @@ import Loader from '@/shared/components/widgets/Loader'
 import { useCurrencyRates } from '@/shared/hooks/useCurrencyRates'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { getUser } from '../../add/actions'
+import { User } from '@/shared/types/user.type'
 
 export default function Cargo({ id }: { id: string }) {
 
-	const { user, setUser } = useUserStore()
+	const [user, setUser] = useState<User | null>(null)
 
 	const [pending, startTransition] = useTransition()
 
@@ -27,6 +28,7 @@ export default function Cargo({ id }: { id: string }) {
 
 			try {
 				const res = await getUser()
+				console.log(res);
 
 				if (res.user) {
 					setUser(prev => ({
@@ -44,18 +46,16 @@ export default function Cargo({ id }: { id: string }) {
 	}, []);
 
 	useEffect(() => {
-		const fetchData = async () => {
+		startTransition(async () => {
 			try {
 				const res = await findById(id)
 				setCargo(res)
-				console.log(res);
 
 			} catch (error) {
 				console.error("Ошибка загрузки:", error)
 				router.push('/dashboard/cargo/search')
 			}
-		}
-		fetchData()
+		})
 	}, [id])
 
 	if (loading || !cargo || pending) {
