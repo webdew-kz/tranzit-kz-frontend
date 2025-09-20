@@ -11,21 +11,16 @@ import { useUserStore } from '@/shared/store/useUserStore'
 import { getUser } from '../../add/actions'
 
 export default function Cargo({ id }: { id: string }) {
-	const router = useRouter()
-	const [cargo, setCargo] = useState<ICargo | null>(null)
-	// const [loading, setLoading] = useState(true)
-
-	const { rates, loading } = useCurrencyRates()
-
-	const [pending, startTransition] = useTransition()
 
 	const { user, setUser } = useUserStore()
 
-	if (pending) {
-		return (
-			<Loader />
-		)
-	}
+	const [pending, startTransition] = useTransition()
+
+	const router = useRouter()
+
+	const [cargo, setCargo] = useState<ICargo | null>(null)
+
+	const { rates, loading } = useCurrencyRates()
 
 	useEffect(() => {
 		startTransition(async () => {
@@ -63,7 +58,7 @@ export default function Cargo({ id }: { id: string }) {
 		fetchData()
 	}, [id])
 
-	if (loading || !cargo) {
+	if (loading || !cargo || pending) {
 		return <Loader />
 	}
 
