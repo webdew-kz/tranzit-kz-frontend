@@ -1021,7 +1021,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									</Popover>
 								)}
 							</div>
-							{(user?.isRegistered || isRegistered) && (
+							{(user?.isRegistered) && (
 								<Button
 									variant='default'
 									className='bg-(--dark-accent) '

@@ -64,7 +64,7 @@ export default function CargoFormAdd() {
 
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
-		weight: z.number().positive(),
+		weight: z.number(),
 		volume: z.number().positive(),
 		periodDays: z.number().int().min(1).max(30),
 		startDate: z.string(),
@@ -309,6 +309,8 @@ export default function CargoFormAdd() {
 						<div className=" relative w-full">
 							<Input
 								type='number'
+								step="any"
+								// step="0.1"
 								required
 								placeholder="Тоннаж"
 								className='text-sm'
