@@ -298,6 +298,7 @@ export default function TransportFormAdd() {
 						<div className=" relative w-full">
 							<Input
 								type='number'
+								step="any"
 								required
 								placeholder="Тоннаж"
 								className='text-sm'
