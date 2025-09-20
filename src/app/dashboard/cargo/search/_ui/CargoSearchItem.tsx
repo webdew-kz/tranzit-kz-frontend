@@ -9,7 +9,7 @@ import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
 import { AdditionallyEnum, CurrencyEnum, DocumentsEnum, ICargo, LoadingsEnum, LoadingTypeEnum, PaymentMethodEnum, PaymentOtherEnum, PaymentPeriodEnum, TermsEnum, TermsPalletsTypeEnum, TruckTypeEnum } from '@/shared/types/cargo.type'
-import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowDownUp, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
+import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowDownUp, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, Share, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
 import { addToWishlist, addView, removeFromWishlist } from '../actions'
@@ -130,6 +130,8 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 
 	const message = `Здравствуйте. Данная заявка актуальна?\n\nГруз: ${cargo.title}\nМаршрут: ${route}\nЦена: ${cargo.price} ${getCurrencySymbol(cargo.currency)}\nТип фуры: ${truckTypes}\n\nСсылка на груз: https://${process.env.DOMAIN}/dashboard/cargo/${cargo.id}`
 	const link = `https://wa.me/${cargo.userPhone}?text=${encodeURIComponent(message)}`
+
+	const wamsg = `https://${process.env.DOMAIN}/dashboard/cargo/${cargo.id}`
 
 
 	if (loading) {
@@ -744,7 +746,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								</span>
 							</span>
 						</div>
-						<div className="flex items-start justify-between w-full">
+						<div className="grid grid-cols-2 w-full gap-2">
 							<div>
 								{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (
 									<Popover>
@@ -918,7 +920,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									</Popover>
 								)}
 							</div>
-							<div>
+							<div className='flex gap-1'>
 								{(cargo.userPhone && isContact) && (
 									<Popover>
 										<PopoverTrigger asChild>
@@ -1016,7 +1018,25 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 										</PopoverContent>
 									</Popover>
 								)}
+
+
+								<Button
+									variant='default'
+									className='w-full bg-accent'
+									asChild
+								>
+
+									<Link
+										href={`https://wa.me/?text=${wamsg}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										className='flex gap-3 items-center justify-start'
+									>
+										<Share />
+									</Link>
+								</Button>
 							</div>
+
 						</div>
 					</CollapsibleContent>
 				</Collapsible>
