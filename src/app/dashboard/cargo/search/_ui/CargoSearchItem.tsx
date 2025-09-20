@@ -747,7 +747,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 							</span>
 						</div>
 						<div className="flex w-full gap-2">
-							<div>
+							<div className='flex-1'>
 								{((cargo.paymentPeriod && cargo.paymentPeriod.length > 0) || (cargo.paymentOther && cargo.paymentOther.length > 0) || cargo.paymentPrepaymentPercent || cargo.paymentDeferredDays || (cargo.optionDocuments && cargo.optionDocuments.length > 0) || cargo.optionDocumentsAdr || (cargo.optionLoadings && cargo.optionLoadings.length > 0) || cargo.optionLoadingsBigBag || cargo.optionLoadingsDateUnloading || cargo.optionLoadingsPlaceLoading || cargo.optionLoadingsPlaceUnloading || cargo.optionLoadingsTimeLoading || cargo.optionLoadingsTimeUnloading || (cargo.optionTerms && cargo.optionTerms.length > 0) || cargo.optionTermsBelts || cargo.optionTermsCorners || cargo.optionTermsPalletsType || cargo.optionTermsQtyPallets || cargo.optionTermsTemperature || (cargo.optionAdditionally && cargo.optionAdditionally.length > 0)) && (
 									<Popover>
 										<PopoverTrigger asChild>
@@ -1018,16 +1018,13 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 										</PopoverContent>
 									</Popover>
 								)}
-
 							</div>
-
 
 							<Button
 								variant='default'
 								className='bg-(--dark-accent) '
 								asChild
 							>
-
 								<Link
 									href={`https://wa.me/?text=${wamsg}`}
 									target="_blank"
