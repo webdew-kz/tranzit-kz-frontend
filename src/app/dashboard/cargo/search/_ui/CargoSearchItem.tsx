@@ -723,7 +723,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 								)
 							) : null}
 						</div>
-						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4">
+						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-3">
 							<span className=' flex items-center gap-1'>
 								<ArrowBigUp size={16} />
 								<span className='truncate block text-sm'>
