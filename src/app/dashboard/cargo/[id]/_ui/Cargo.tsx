@@ -59,5 +59,5 @@ export default function Cargo({ id }: { id: string }) {
 		return <Loader />
 	}
 
-	return <CargoSearchItem cargo={cargo} rates={rates} loading={loading} isContact={false} isWishBtn={false} isRegistered={isRegistered} />
+	return <CargoSearchItem cargo={cargo} rates={rates} loading={loading} isContact={true} isWishBtn={false} isRegistered={isRegistered} />
 }
