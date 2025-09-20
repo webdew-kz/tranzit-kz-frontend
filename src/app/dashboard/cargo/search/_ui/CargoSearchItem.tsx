@@ -926,7 +926,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 										<PopoverTrigger asChild>
 											<Button
 												variant='default'
-												className=' group border border-(--dark-accent) bg-(--dark-accent) hover:bg-transparent hover:text-(--dark-accent)'
+												className=' group border border-(--dark-accent) bg-(--dark-accent) hover:bg-transparent hover:text-(--dark-accent) !px-2'
 												onClick={() => {
 													if (!user?.isRegistered || !cargo?.id) return;
 													handleAddView(cargo.id);
