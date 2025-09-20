@@ -17,6 +17,7 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/components/ui/collapsible'
+import { User } from '@/shared/types/user.type'
 
 interface CargoSearchItemProps {
 	cargo: ICargo
@@ -25,9 +26,10 @@ interface CargoSearchItemProps {
 	setWishlistLength?: React.Dispatch<React.SetStateAction<number>>
 	isContact?: boolean
 	isWishBtn?: boolean
+	customUser?: User | null
 }
 
-const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true }: CargoSearchItemProps) => {
+const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isContact = true, isWishBtn = true, customUser }: CargoSearchItemProps) => {
 
 
 	const { user } = useUserStore()
@@ -1019,7 +1021,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									</Popover>
 								)}
 							</div>
-							{user?.isRegistered && (
+							{(user?.isRegistered || customUser?.isRegistered) && (
 								<Button
 									variant='default'
 									className='bg-(--dark-accent) '
