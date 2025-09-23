@@ -57,7 +57,7 @@ export default function CargoFormAdd() {
 
 	const cargoSchema = z.object({
 		title: z.string().min(1),
-		price: z.number().int().nonnegative(),
+		price: z.number().int().optional(),
 		currency: z.enum(Object.keys(CurrencyEnum) as [keyof typeof CurrencyEnum]),
 
 		note: z.string().optional(),
@@ -386,7 +386,6 @@ export default function CargoFormAdd() {
 							type='number'
 							placeholder="Стоимость"
 							className='text-sm'
-							required
 							{...form.register('price', { valueAsNumber: true })}
 						/>
 
