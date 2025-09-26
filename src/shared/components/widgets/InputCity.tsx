@@ -191,21 +191,24 @@ const CityInput = ({
 		clearSuggestions();
 		onChangeAt(index, description);
 
-		// --- определяем регион и страну ---
 		const results = await getGeocode({ placeId });
 		const components =
 			(results[0]?.address_components ??
 				[]) as google.maps.GeocoderAddressComponent[];
 
+		// 🟢 пробуем уровни 1 → 2 → 3
 		const region =
-			components.find((c) =>
-				c.types.includes('administrative_area_level_1')
-			)?.long_name || '';
+			components.find(c => c.types.includes('administrative_area_level_1'))?.long_name ||
+			components.find(c => c.types.includes('administrative_area_level_2'))?.long_name ||
+			components.find(c => c.types.includes('administrative_area_level_3'))?.long_name ||
+			'';
+
 		const country =
-			components.find((c) => c.types.includes('country'))?.long_name || '';
+			components.find(c => c.types.includes('country'))?.long_name || '';
 
 		onSelectMeta(index, { region, country });
 	};
+
 
 	return (
 		<div className="relative flex gap-2 items-start">
@@ -319,7 +322,7 @@ export const MultiCityInput = ({
 				variant="link"
 				type="button"
 				onClick={addInput}
-				className="underline decoration-dotted py-0 px-1 text-sm h-auto"
+				className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
 			>
 				{addBtnText}
 			</Button>
