@@ -249,19 +249,19 @@ const CityInput = ({
 
 interface MultiCityProps {
 	values: string[];
-	regions: string[];
-	countries: string[];
-	onChange: (values: string[]) => void;
-	onChangeRegion: (regions: string[]) => void;
-	onChangeCountry: (countries: string[]) => void;
-	addBtnText?: string;
-	placeholder?: string;
+	regions?: string[];
+	countries?: string[];
+	onChange: (v: string[]) => void;
+	onChangeRegion?: (v: string[]) => void;
+	onChangeCountry?: (v: string[]) => void;
+	addBtnText: string;
+	placeholder: string;
 }
 
 export const MultiCityInput = ({
 	values,
-	regions,
-	countries,
+	regions = [],          // значение по умолчанию
+	countries = [],         // значение по умолчанию
 	onChange,
 	onChangeRegion,
 	onChangeCountry,
@@ -270,8 +270,8 @@ export const MultiCityInput = ({
 }: MultiCityProps) => {
 	const addInput = () => {
 		onChange([...values, '']);
-		onChangeRegion([...regions, '']);
-		onChangeCountry([...countries, '']);
+		onChangeRegion?.([...regions, '']);       // безопасный вызов
+		onChangeCountry?.([...countries, '']);    // безопасный вызов
 	};
 
 	const updateAt = (index: number, value: string) => {
@@ -284,11 +284,9 @@ export const MultiCityInput = ({
 		if (values.length === 1) return;
 
 		onChange(values.filter((_, i) => i !== index));
-		onChangeRegion(regions.filter((_, i) => i !== index));
-		onChangeCountry(countries.filter((_, i) => i !== index));
+		onChangeRegion?.(regions.filter((_, i) => i !== index));
+		onChangeCountry?.(countries.filter((_, i) => i !== index));
 	};
-
-
 
 	const handleSelectMeta = (
 		index: number,
@@ -296,14 +294,12 @@ export const MultiCityInput = ({
 	) => {
 		const newRegions = [...regions];
 		if (index < newRegions.length) newRegions[index] = meta.region;
-		onChangeRegion(newRegions);
+		onChangeRegion?.(newRegions);
 
 		const newCountries = [...countries];
 		if (index < newCountries.length) newCountries[index] = meta.country;
-		onChangeCountry(newCountries);
+		onChangeCountry?.(newCountries);
 	};
-
-
 
 	return (
 		<div className="flex flex-col gap-2">
