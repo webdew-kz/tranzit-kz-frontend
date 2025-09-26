@@ -275,7 +275,6 @@ export const MultiCityInput = ({
 	onChangeCountry,
 	addBtnText,
 	placeholder,
-	addBtn = true
 }: MultiCityProps) => {
 	const addInput = () => {
 		onChange([...values, '']);
@@ -324,16 +323,14 @@ export const MultiCityInput = ({
 					onSelectMeta={handleSelectMeta}
 				/>
 			))}
-			{addBtn && (
-				<Button
-					variant="link"
-					type="button"
-					onClick={addInput}
-					className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
-				>
-					{addBtnText}
-				</Button>
-			)}
+			<Button
+				variant="link"
+				type="button"
+				onClick={addInput}
+				className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
+			>
+				{addBtnText}
+			</Button>
 		</div>
 	);
 };
