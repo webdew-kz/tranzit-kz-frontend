@@ -186,6 +186,54 @@ const CityInput = ({
 		onChangeAt(index, val);
 	};
 
+	// const handleSelect = async (description: string, placeId: string) => {
+	// 	setValue(description, false);
+	// 	clearSuggestions();
+	// 	onChangeAt(index, description);
+
+	// 	const results = await getGeocode({ placeId });
+	// 	const components =
+	// 		(results[0]?.address_components ??
+	// 			[]) as google.maps.GeocoderAddressComponent[];
+
+	// 	// ✅ Собираем все уровни 1–3 в массив
+	// 	const regions = components
+	// 		.filter(c =>
+	// 			c.types.some(t =>
+	// 				['administrative_area_level_1', 'administrative_area_level_2', 'administrative_area_level_3'].includes(t)
+	// 			)
+	// 		)
+	// 		.map(c => c.long_name);
+
+	// 	const country =
+	// 		components.find(c => c.types.includes('country'))?.long_name || '';
+
+	// 	// передаём массив регионов
+	// 	onSelectMeta(index, { region: regions.join(', '), country });
+	// };
+
+	const federalCityToRegion: Record<string, string> = {
+		"Москва": "Московская область",
+		"Санкт-Петербург": "Ленинградская область",
+		"Севастополь": "Крым",
+		"Астана": "Акмолинская область",
+		"Бишкек": "Чуйская область",
+		"Ереван": "Ереванская область",
+		"Ташкент": "Ташкентская область",
+		"Минск": "Минская область",
+		"Кишинёв": "Кишинёвская область",
+		"Баку": "Баку",
+		"Тбилиси": "Тбилисская область",
+		"Ашхабад": "Ашхабадская область",
+		"Душанбе": "Душанбинская область",
+		"Алматы": "Алматинская область",
+		"Могилёв": "Могилёвская область",
+		"Вильнюс": "Вильнюсский район",
+		"Рига": "Рижский район",
+		"Таллин": "Таллиннский район",
+	};
+
+
 	const handleSelect = async (description: string, placeId: string) => {
 		setValue(description, false);
 		clearSuggestions();
@@ -193,25 +241,38 @@ const CityInput = ({
 
 		const results = await getGeocode({ placeId });
 		const components =
-			(results[0]?.address_components ??
-				[]) as google.maps.GeocoderAddressComponent[];
+			(results[0]?.address_components ?? []) as google.maps.GeocoderAddressComponent[];
 
-		// ✅ Собираем все уровни 1–3 в массив
-		const regions = components
+		// Ищем страну
+		const country = components.find(c => c.types.includes("country"))?.long_name || "";
+
+		// Ищем город (locality или fallback на административную единицу)
+		let city =
+			components.find(c => c.types.includes("locality"))?.long_name ||
+			components.find(c => c.types.includes("administrative_area_level_1"))?.long_name ||
+			"";
+
+		// Ищем регион (administrative_area_level_1 или административная единица)
+		let region =
+			components.find(c => c.types.includes("administrative_area_level_1"))?.long_name || "";
+
+		// Если город федеральный, подставляем "виртуальную" область
+		if (city in federalCityToRegion) {
+			region = federalCityToRegion[city];
+		}
+
+		// Можно объединить города/районы 1–3 уровня, если нужно
+		const otherRegions = components
 			.filter(c =>
 				c.types.some(t =>
-					['administrative_area_level_1', 'administrative_area_level_2', 'administrative_area_level_3'].includes(t)
+					["administrative_area_level_2", "administrative_area_level_3"].includes(t)
 				)
 			)
 			.map(c => c.long_name);
 
-		const country =
-			components.find(c => c.types.includes('country'))?.long_name || '';
-
-		// передаём массив регионов
-		onSelectMeta(index, { region: regions.join(', '), country });
+		// Передаем массив регионов и стран
+		onSelectMeta(index, { region: [region, ...otherRegions].filter(Boolean).join(", "), country });
 	};
-
 
 
 	return (
