@@ -10,6 +10,7 @@ interface Props {
 	onChange: (values: string[]) => void;
 	addBtnText?: string;
 	placeholder?: string;
+	addBtn?: boolean
 }
 
 const RegionInput = ({
@@ -92,7 +93,7 @@ const RegionInput = ({
 	);
 };
 
-export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder }: Props) => {
+export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder, addBtn = true }: Props) => {
 	const addInput = () => {
 		onChange([...values, '']);
 	};
@@ -122,12 +123,14 @@ export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder }: 
 					placeholder={placeholder}
 				/>
 			))}
-			<Button
-				variant="link"
-				type="button"
-				onClick={addInput}
-				className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
-			>{addBtnText}</Button>
+			{addBtn && (
+				<Button
+					variant="link"
+					type="button"
+					onClick={addInput}
+					className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
+				>{addBtnText}</Button>
+			)}
 		</div>
 	);
 };

@@ -127,6 +127,7 @@ export default function CargoFormSearch() {
 									onChange={field.onChange}
 									placeholder="Пункт погрузки"
 									addBtnText="Добавить пункт погрузки"
+									addBtn={false}
 								/>
 							)}
 						/>
