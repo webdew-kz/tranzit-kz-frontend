@@ -176,7 +176,7 @@ const CityInput = ({
 		setValue,
 		clearSuggestions,
 	} = usePlacesAutocomplete({
-		// requestOptions: { types: ['(cities)'] },
+		requestOptions: { types: ['(cities)'] },
 		debounce: 300,
 	});
 
@@ -231,6 +231,7 @@ const CityInput = ({
 		"Вильнюс": "Вильнюсский район",
 		"Рига": "Рижский район",
 		"Таллин": "Таллиннский район",
+		"Шымкент": "Туркестанская область",
 	};
 
 
