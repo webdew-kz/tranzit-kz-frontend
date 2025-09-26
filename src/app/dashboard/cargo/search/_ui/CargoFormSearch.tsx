@@ -127,7 +127,7 @@ export default function CargoFormSearch() {
 									onChange={field.onChange}
 									placeholder="Пункт погрузки"
 									addBtnText="Добавить пункт погрузки"
-								// addBtn={false}
+									addBtn={false}
 								/>
 							)}
 						/>
@@ -141,7 +141,7 @@ export default function CargoFormSearch() {
 									onChange={field.onChange}
 									addBtnText="Добавить пункт разгрузки"
 									placeholder='Пункт разгрузки'
-								// addBtn={false}
+									addBtn={false}
 								/>
 							)}
 						/>

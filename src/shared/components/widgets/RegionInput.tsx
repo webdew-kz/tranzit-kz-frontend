@@ -140,7 +140,7 @@ export const MultiRegionInput = ({
 	onChange,
 	addBtnText,
 	placeholder,
-	// addBtn = true,
+	addBtn = true,
 }: Props) => {
 	const addInput = () => {
 		onChange([...values, '']);
@@ -171,21 +171,14 @@ export const MultiRegionInput = ({
 					placeholder={placeholder}
 				/>
 			))}
-			{/* {addBtn && (
+			{addBtn && (
 				<Button
 					variant="link"
 					type="button"
 					onClick={addInput}
 					className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
 				>{addBtnText}</Button>
-			)} */}
-
-			<Button
-				variant="link"
-				type="button"
-				onClick={addInput}
-				className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
-			>{addBtnText}</Button>
+			)}
 		</div>
 	);
 };
