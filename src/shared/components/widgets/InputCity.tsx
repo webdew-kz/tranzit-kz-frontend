@@ -176,7 +176,7 @@ const CityInput = ({
 		setValue,
 		clearSuggestions,
 	} = usePlacesAutocomplete({
-		requestOptions: { types: ['(cities)'] },
+		// requestOptions: { types: ['(cities)'] },
 		debounce: 300,
 	});
 
