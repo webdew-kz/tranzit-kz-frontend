@@ -64,6 +64,13 @@ export default function CargoFormAdd() {
 
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
+
+		placesRegionLoading: z.array(z.string()).min(1),
+		placesRegionUnloading: z.array(z.string()).min(1),
+
+		placesCountryLoading: z.array(z.string()).min(1),
+		placesCountryUnloading: z.array(z.string()).min(1),
+
 		weight: z.number(),
 		volume: z.number().positive(),
 		periodDays: z.number().int().min(1).max(30),
@@ -120,6 +127,10 @@ export default function CargoFormAdd() {
 
 			placesLoading: [""],
 			placesUnloading: [""],
+			placesRegionLoading: [''],
+			placesRegionUnloading: [''],
+			placesCountryLoading: [''],
+			placesCountryUnloading: [''],
 			weight: 20,
 			volume: 86,
 			periodDays: 5,
@@ -238,6 +249,8 @@ export default function CargoFormAdd() {
 		)
 	}
 
+	const { setValue, watch } = form;
+
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
 			<CardHeader className='px-0'>
@@ -249,19 +262,30 @@ export default function CargoFormAdd() {
 					className=' grid gap-3 md:gap-5'
 				>
 					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
-						<Controller
-							control={form.control}
-							name="placesLoading"
-							render={({ field }) => (
-								<MultiCityInput
-									values={field.value}
-									onChange={field.onChange}
-									placeholder="Пункт погрузки"
-									addBtnText="Добавить пункт погрузки"
-								/>
-							)}
+						<MultiCityInput
+							values={watch('placesLoading') || []}
+							regions={watch('placesRegionLoading') || []}
+							countries={watch('placesCountryLoading') || []}
+							onChange={(v) => setValue('placesLoading', v)}
+							onChangeRegion={(v) => setValue('placesRegionLoading', v)}
+							onChangeCountry={(v) => setValue('placesCountryLoading', v)}
+							addBtnText="Добавить город погрузки"
+							placeholder="Пункт погрузки"
 						/>
-						<Controller
+
+						<MultiCityInput
+							values={watch('placesUnloading') || []}
+							regions={watch('placesRegionUnloading') || []}
+							countries={watch('placesCountryUnloading') || []}
+							onChange={(v) => setValue('placesUnloading', v)}
+							onChangeRegion={(v) => setValue('placesRegionUnloading', v)}
+							onChangeCountry={(v) => setValue('placesCountryUnloading', v)}
+							addBtnText="Добавить пункт разгрузки"
+							placeholder='Пункт разгрузки'
+						/>
+
+
+						{/* <Controller
 							control={form.control}
 							name="placesUnloading"
 							render={({ field }) => (
@@ -273,7 +297,7 @@ export default function CargoFormAdd() {
 									placeholder='Пункт разгрузки'
 								/>
 							)}
-						/>
+						/> */}
 					</div>
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full gap-3 md:gap-5 items-start">
 
