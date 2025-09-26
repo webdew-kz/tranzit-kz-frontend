@@ -263,9 +263,9 @@ export default function CargoFormAdd() {
 				>
 					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
 						<MultiCityInput
-							values={watch('placesLoading') || []}
-							regions={watch('placesRegionLoading') || []}
-							countries={watch('placesCountryLoading') || []}
+							values={watch('placesLoading')}
+							regions={watch('placesRegionLoading')}
+							countries={watch('placesCountryLoading')}
 							onChange={(v) => setValue('placesLoading', v)}
 							onChangeRegion={(v) => setValue('placesRegionLoading', v)}
 							onChangeCountry={(v) => setValue('placesCountryLoading', v)}
@@ -274,15 +274,16 @@ export default function CargoFormAdd() {
 						/>
 
 						<MultiCityInput
-							values={watch('placesUnloading') || []}
-							regions={watch('placesRegionUnloading') || []}
-							countries={watch('placesCountryUnloading') || []}
+							values={watch('placesUnloading')}
+							regions={watch('placesRegionUnloading')}
+							countries={watch('placesCountryUnloading')}
 							onChange={(v) => setValue('placesUnloading', v)}
 							onChangeRegion={(v) => setValue('placesRegionUnloading', v)}
 							onChangeCountry={(v) => setValue('placesCountryUnloading', v)}
 							addBtnText="Добавить пункт разгрузки"
-							placeholder='Пункт разгрузки'
+							placeholder="Пункт разгрузки"
 						/>
+
 
 
 						{/* <Controller
