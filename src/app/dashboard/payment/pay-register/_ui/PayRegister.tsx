@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 
 export default function PayRegister() {
 
-	const price = 1000;
+	const price = 1988;
 
 	const router = useRouter()
 
