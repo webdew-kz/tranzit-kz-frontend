@@ -193,6 +193,10 @@ const MyUserItem = memo(({ userInitial, selected, onToggle, setUsers, loading }:
 					</span>
 
 					<span className="font-medium leading-none">
+						Дата оплаты: {new Date(user?.registeredDate ?? '').toLocaleDateString('ru-RU')}
+					</span>
+
+					<span className="font-medium leading-none">
 						Дата регистрации: {new Date(user.createdAt).toLocaleDateString("ru-RU")}
 					</span>
 				</div>

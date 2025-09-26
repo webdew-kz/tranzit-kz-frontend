@@ -23,6 +23,7 @@ export interface User {
     isVerified: boolean | null;
     isBlocked: boolean | null;
     isRegistered: boolean | null;
+    registeredDate: string;
     documents: string[];
     password?: string;
 }
