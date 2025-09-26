@@ -196,18 +196,22 @@ const CityInput = ({
 			(results[0]?.address_components ??
 				[]) as google.maps.GeocoderAddressComponent[];
 
-		// 🟢 пробуем уровни 1 → 2 → 3
-		const region =
-			components.find(c => c.types.includes('administrative_area_level_1'))?.long_name ||
-			components.find(c => c.types.includes('administrative_area_level_2'))?.long_name ||
-			components.find(c => c.types.includes('administrative_area_level_3'))?.long_name ||
-			'';
+		// ✅ Собираем все уровни 1–3 в массив
+		const regions = components
+			.filter(c =>
+				c.types.some(t =>
+					['administrative_area_level_1', 'administrative_area_level_2', 'administrative_area_level_3'].includes(t)
+				)
+			)
+			.map(c => c.long_name);
 
 		const country =
 			components.find(c => c.types.includes('country'))?.long_name || '';
 
-		onSelectMeta(index, { region, country });
+		// передаём массив регионов
+		onSelectMeta(index, { region: regions.join(', '), country });
 	};
+
 
 
 	return (
