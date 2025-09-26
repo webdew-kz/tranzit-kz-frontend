@@ -14,6 +14,7 @@ import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
 import { useCargoSearchStore } from '@/shared/store/useCargoSearchStore';
 import { findManyByFilter } from '../actions';
+import { MultiRegionInput } from '@/shared/components/widgets/RegionInput';
 
 export default function CargoFormSearch() {
 
@@ -121,7 +122,7 @@ export default function CargoFormSearch() {
 							control={form.control}
 							name="placesLoading"
 							render={({ field }) => (
-								<MultiCityInput
+								<MultiRegionInput
 									values={field.value || []}
 									onChange={field.onChange}
 									placeholder="Пункт погрузки"
@@ -134,7 +135,7 @@ export default function CargoFormSearch() {
 							name="placesUnloading"
 							render={({ field }) => (
 
-								<MultiCityInput
+								<MultiRegionInput
 									values={field.value || []}
 									onChange={field.onChange}
 									addBtnText="Добавить пункт разгрузки"

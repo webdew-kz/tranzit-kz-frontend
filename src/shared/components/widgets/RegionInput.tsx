@@ -12,7 +12,7 @@ interface Props {
 	placeholder?: string;
 }
 
-const CityInput = ({
+const RegionInput = ({
 	index,
 	value,
 	onChangeAt,
@@ -33,7 +33,7 @@ const CityInput = ({
 		setValue,
 		clearSuggestions,
 	} = usePlacesAutocomplete({
-		requestOptions: { types: ["(cities)"] },
+		requestOptions: { types: ["(regions)"] },
 		debounce: 300,
 	});
 
@@ -92,7 +92,7 @@ const CityInput = ({
 	);
 };
 
-export const MultiCityInput = ({ values, onChange, addBtnText, placeholder }: Props) => {
+export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder }: Props) => {
 	const addInput = () => {
 		onChange([...values, '']);
 	};
@@ -112,7 +112,7 @@ export const MultiCityInput = ({ values, onChange, addBtnText, placeholder }: Pr
 	return (
 		<div className='flex flex-col gap-2'>
 			{values.map((val, i) => (
-				<CityInput
+				<RegionInput
 					key={i}
 					index={i}
 					value={val}
