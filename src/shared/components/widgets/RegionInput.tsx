@@ -93,7 +93,55 @@ const RegionInput = ({
 	);
 };
 
-export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder, addBtn = true }: Props) => {
+// export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder, addBtn = true }: Props) => {
+// 	const addInput = () => {
+// 		onChange([...values, '']);
+// 	};
+
+// 	const updateAt = (index: number, value: string) => {
+// 		const updated = [...values];
+// 		updated[index] = value;
+// 		onChange(updated);
+// 	};
+
+// 	const removeAt = (index: number) => {
+// 		if (values.length === 1) return; // минимум один город
+// 		const updated = values.filter((_, i) => i !== index);
+// 		onChange(updated);
+// 	};
+
+// 	return (
+// 		<div className='flex flex-col gap-2'>
+// 			{values.map((val, i) => (
+// 				<RegionInput
+// 					key={i}
+// 					index={i}
+// 					value={val}
+// 					onChangeAt={updateAt}
+// 					onRemove={removeAt}
+// 					canRemove={values.length > 1 && i > 0}
+// 					placeholder={placeholder}
+// 				/>
+// 			))}
+// 			{addBtn && (
+// 				<Button
+// 					variant="link"
+// 					type="button"
+// 					onClick={addInput}
+// 					className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
+// 				>{addBtnText}</Button>
+// 			)}
+// 		</div>
+// 	);
+// };
+
+export const MultiRegionInput = ({
+	values = [],           // <- значение по умолчанию
+	onChange,
+	addBtnText,
+	placeholder,
+	addBtn = true,
+}: Props) => {
 	const addInput = () => {
 		onChange([...values, '']);
 	};
@@ -105,21 +153,21 @@ export const MultiRegionInput = ({ values, onChange, addBtnText, placeholder, ad
 	};
 
 	const removeAt = (index: number) => {
-		if (values.length === 1) return; // минимум один город
+		if ((values?.length || 0) <= 1) return; // безопасно
 		const updated = values.filter((_, i) => i !== index);
 		onChange(updated);
 	};
 
 	return (
 		<div className='flex flex-col gap-2'>
-			{values.map((val, i) => (
+			{(values || []).map((val, i) => (
 				<RegionInput
 					key={i}
 					index={i}
 					value={val}
 					onChangeAt={updateAt}
 					onRemove={removeAt}
-					canRemove={values.length > 1 && i > 0}
+					canRemove={(values?.length || 0) > 1 && i > 0}
 					placeholder={placeholder}
 				/>
 			))}
