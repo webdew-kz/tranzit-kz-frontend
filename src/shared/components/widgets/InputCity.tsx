@@ -66,15 +66,20 @@ const CityInput = ({
 				/>
 				{status === 'OK' && (
 					<ul className="absolute bg-background border mt-2 w-full z-10 text-foreground rounded-lg overflow-hidden">
-						{data.map(({ place_id, description }) => (
-							<li
-								key={place_id}
-								onClick={() => handleSelect(description)}
-								className="py-2 px-3 cursor-pointer hover:bg-accent hover:text-foreground text-sm"
-							>
-								{description}
-							</li>
-						))}
+						{data
+							.filter((item) =>
+								item.types?.includes('locality') ||
+								item.types?.includes('administrative_area_level_3') // иногда города помечаются так
+							)
+							.map(({ place_id, description }) => (
+								<li
+									key={place_id}
+									onClick={() => handleSelect(description)}
+									className="py-2 px-3 cursor-pointer hover:bg-accent hover:text-foreground text-sm"
+								>
+									{description}
+								</li>
+							))}
 					</ul>
 				)}
 			</div>
