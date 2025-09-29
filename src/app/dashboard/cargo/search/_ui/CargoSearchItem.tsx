@@ -180,7 +180,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 									<span className="font-medium leading-none uppercase">
 										{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
 									</span>
-									{index < places.length - 1 && <MoveRight stroke='#fff' size={16} />}
+									{index < places.filter(p => p && p.trim() !== '').length - 1 && <MoveRight stroke='#fff' size={16} />}
 								</span>
 							);
 						})}

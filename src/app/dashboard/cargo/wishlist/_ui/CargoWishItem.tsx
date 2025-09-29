@@ -128,7 +128,7 @@ const CargoWishItem = memo(
 					</div>
 
 					<div className=" w-full flex gap-2  flex-wrap mb-2 bg-(--dark-accent) p-1">
-						{places.length > 0 && places.map((place, index) => {
+						{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => {
 							const [city, country] = place.split(",").map((str) => str.trim());
 
 							return (
@@ -136,7 +136,7 @@ const CargoWishItem = memo(
 									<span className="font-medium leading-none uppercase">
 										{`${city} ${getCountryCode(country) ? `(${getCountryCode(country)})` : ''}`}
 									</span>
-									{index < places.length - 1 && <MoveRight stroke='#fff' size={16} />}
+									{index < places.filter(p => p && p.trim() !== '').length - 1 && <MoveRight stroke='#fff' size={16} />}
 								</span>
 							);
 						})}
