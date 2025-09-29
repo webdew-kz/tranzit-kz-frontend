@@ -269,7 +269,7 @@ export default function CargoFormAdd() {
 							onChange={(v) => setValue('placesLoading', v)}
 							onChangeRegion={(v) => setValue('placesRegionLoading', v)}
 							onChangeCountry={(v) => setValue('placesCountryLoading', v)}
-							addBtnText="Добавить город погрузки"
+							addBtnText="Добавить пункт погрузки"
 							placeholder="Пункт погрузки"
 						/>
 
