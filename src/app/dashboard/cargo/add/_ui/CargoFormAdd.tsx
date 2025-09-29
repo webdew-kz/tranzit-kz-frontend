@@ -789,12 +789,12 @@ export default function CargoFormAdd() {
 							{...form.register('userPhone')}
 						/>
 
-						<Input
+						{/* <Input
 							type="text"
 							placeholder="Whatsapp (необязательно)"
 							className="text-sm"
 							{...form.register('whatsapp')}
-						/>
+						/> */}
 					</div>
 
 					<div className="grid md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
