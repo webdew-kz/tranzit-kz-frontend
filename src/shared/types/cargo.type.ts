@@ -69,6 +69,7 @@ export enum TruckTypeEnum {
     EMPTY_CONTAINER = "Контейнер пустой", // контейнер_пустой
     CONTAINER_TRUCK = "Контейнеровоз", // контейнеровоз
     FEED_TRUCK = "Кормовоз", // кормовоз
+    CLOSE_TRUCK = "Кормовоз", // кормовоз
     TIMBER_TRUCK = "Лесовоз", // лесовоз
     MANIPULATOR = "Манипулятор", // манипулятор
     OIL_TANKER = "Масловоз", // масловоз
