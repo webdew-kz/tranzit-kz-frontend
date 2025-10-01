@@ -61,8 +61,6 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 
 	const [pending, startTransition] = useTransition()
 
-
-
 	const cargoSchema = z.object({
 		title: z.string().min(1),
 		price: z.number().int().nonnegative(),
@@ -117,7 +115,6 @@ export default function CargoFormEdit({ id }: { id?: string }) {
 		userPhone: z.string().min(5),
 		whatsapp: z.string().nullable().default('')
 	});
-
 
 	type Cargo = z.infer<typeof cargoSchema>
 
