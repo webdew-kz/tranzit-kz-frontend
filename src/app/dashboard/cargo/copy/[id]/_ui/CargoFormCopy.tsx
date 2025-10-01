@@ -74,6 +74,13 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
+
+		placesRegionLoading: z.array(z.string()).min(1),
+		placesRegionUnloading: z.array(z.string()).min(1),
+
+		placesCountryLoading: z.array(z.string()).min(1),
+		placesCountryUnloading: z.array(z.string()).min(1),
+
 		weight: z.number().positive(),
 		volume: z.number().positive(),
 		periodDays: z.number().int().min(1).max(30),
@@ -126,6 +133,11 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 
 			placesLoading: [""],
 			placesUnloading: [""],
+
+			placesRegionLoading: [''],
+			placesRegionUnloading: [''],
+			placesCountryLoading: [''],
+			placesCountryUnloading: [''],
 			weight: undefined,
 			volume: undefined,
 			periodDays: 5,
@@ -176,6 +188,10 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 				...(cargo.note != null && { note: cargo.note }),
 				...(cargo.placesLoading != null && { placesLoading: cargo.placesLoading }),
 				...(cargo.placesUnloading != null && { placesUnloading: cargo.placesUnloading }),
+				...(cargo.placesRegionLoading != null && { placesRegionLoading: cargo.placesRegionLoading }),
+				...(cargo.placesRegionUnloading != null && { placesRegionUnloading: cargo.placesRegionUnloading }),
+				...(cargo.placesCountryLoading != null && { placesCountryLoading: cargo.placesCountryLoading }),
+				...(cargo.placesCountryUnloading != null && { placesCountryUnloading: cargo.placesCountryUnloading }),
 				...(cargo.weight != null && { weight: cargo.weight }),
 				...(cargo.volume != null && { volume: cargo.volume }),
 				...(cargo.periodDays != null && { periodDays: cargo.periodDays }),
