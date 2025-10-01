@@ -51,6 +51,13 @@ const MyPaymentItem = ({
 					<div className=" grid gap-2 lg:gap-4">
 
 						<div className="flex items-center gap-2">
+							<span>Пользователь:</span>
+							<span className="block">
+								{paymentInitial.user?.login}
+							</span>
+						</div>
+
+						<div className="flex items-center gap-2">
 							<span>Назначение:</span>
 							<span className="block">
 								{paymentInitial.descr}
