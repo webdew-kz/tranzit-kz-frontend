@@ -53,7 +53,7 @@ const MyPaymentItem = ({
 						<div className="flex items-center gap-2">
 							<span>Пользователь:</span>
 							<span className="block">
-								{paymentInitial.user?.login}
+								{paymentInitial.user?.login || paymentInitial.user?.phone}
 							</span>
 						</div>
 
