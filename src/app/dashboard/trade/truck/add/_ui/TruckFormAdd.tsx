@@ -228,7 +228,7 @@ export default function TruckFormAdd() {
 	if (!user?.isRegistered) {
 		return (
 			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-				<div className="text-center">Размещение объявлений доступно по абонентской плате — 1000 тенге в месяц.</div>
+				<div className="text-center">Размещение объявлений доступно по абонентской плате.</div>
 				<Button
 					className=' bg-(--dark-accent)'
 					asChild
@@ -748,7 +748,7 @@ export default function TruckFormAdd() {
 					) : (
 						<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
 							<div className="text-center">
-								Размещение доступно по абонентской плате — 1000 тенге в месяц.
+								Размещение доступно по абонентской плате.
 							</div>
 							<Button className="bg-(--dark-accent)" asChild>
 								<Link href="/dashboard/payment/pay-register">Перейти к оплате</Link>

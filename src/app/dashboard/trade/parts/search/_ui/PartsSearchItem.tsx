@@ -315,7 +315,7 @@ const PartsSearchItem = memo(({ partsInitial, rates, loading, setWishlistLength,
 
 									{!user?.isRegistered ? (
 										<div className="grid gap-2 justify-start">
-											<span >Доступ к контактам доступен по абонентской плате — 1000 тенге в месяц.</span>
+											<span >Доступ к контактам доступен по абонентской плате.</span>
 											<Button
 												className=' bg-(--dark-accent)'
 												asChild
