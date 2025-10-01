@@ -113,11 +113,13 @@ export enum LoadingTypeEnum {
 }
 
 export enum DocumentsEnum {
+    ADR = "ADR",
+    REPAIR = "Ремонт",
+    HOT_BOX = "Теплые боксы",
     CMR = "CMR", // CMR
     TIR = "TIR", // TIR
     T1 = "T1", // T1
     T2 = "T2", // T2
-    // EKMT = "EKMT", // EKMT
     SAN_PASSPORT = "Санпаспорт", // Сан паспорт
     SAN_BOOK = "Санкнижка", // Сан книжка
     CUSTOMS_CERT = "Тамож. свид-во", // Таможня
