@@ -368,7 +368,7 @@ export default function CargoFormAdd() {
 									value={field.value?.[0] ?? ""}
 								>
 									<SelectTrigger className="w-full">
-										<SelectValue placeholder="Тип фуры" />
+										<SelectValue placeholder="Тип погрузки" />
 									</SelectTrigger>
 									<SelectContent className="bg-background max-h-60 overflow-y-auto">
 										{Object.entries(LoadingTypeEnum).map(([key, value]) => (
