@@ -821,7 +821,7 @@ export default function CargoFormAdd() {
 					</div>
 
 
-					<div className="grid md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+					<div className="grid md:grid-cols-2  w-full gap-3 md:gap-5 items-start">
 
 						<Input
 							type="text"
