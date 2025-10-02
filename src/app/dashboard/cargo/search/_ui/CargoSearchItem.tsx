@@ -253,7 +253,7 @@ const CargoSearchItem = memo(({ cargo, rates, loading, setWishlistLength, isCont
 					) : null}
 				</div>
 
-				<div className=" flex sm:hidden flex-col lg:flex-row gap-1 w-full lg:justify-between lg:items-center mb-4">
+				<div className=" flex sm:hidden flex-col lg:flex-row gap-1 w-full lg:justify-between lg:items-center mb-2">
 
 					<div className=" grid grid-cols-2 gap-2 lg:flex lg:gap-4">
 						<div className=" flex items-center gap-2">
