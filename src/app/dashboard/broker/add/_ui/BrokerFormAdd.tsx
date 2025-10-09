@@ -175,9 +175,16 @@ export default function BrokerFormAdd() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid gap-3 md:gap-5'
 				>
-
-
 					<div className='grid md:grid-cols-3 gap-3 md:gap-5'>
+
+						<div className='grid'>
+							<Input
+								type='text'
+								placeholder="Название компании, описание"
+								className='text-sm'
+								{...form.register('note')}
+							/>
+						</div>
 
 						<div className='grid'>
 							<Controller
@@ -193,16 +200,6 @@ export default function BrokerFormAdd() {
 								)}
 							/>
 						</div>
-
-						<div className='grid'>
-							<Input
-								type='text'
-								placeholder="Подробнее (необязательно)"
-								className='text-sm'
-								{...form.register('note')}
-							/>
-						</div>
-
 
 						<div className='grid'>
 							<MultiCityInput
