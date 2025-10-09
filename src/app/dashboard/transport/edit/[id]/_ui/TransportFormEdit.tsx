@@ -839,13 +839,6 @@ export default function TransportFormEdit({ id }: { id?: string }) {
 							{...form.register('userPhone')}
 						/>
 
-						<Input
-							type="text"
-							placeholder="Whatsapp (необязательно)"
-							className="text-sm"
-							{...form.register('whatsapp')}
-						/>
-
 						<Button
 							type='submit'
 							className=' bg-(--dark-accent)'

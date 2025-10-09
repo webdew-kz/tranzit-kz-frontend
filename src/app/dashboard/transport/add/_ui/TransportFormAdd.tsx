@@ -830,36 +830,7 @@ export default function TransportFormAdd() {
 							{...form.register('userPhone')}
 						/>
 
-						<Input
-							type="text"
-							placeholder="Whatsapp (необязательно)"
-							className="text-sm"
-							{...form.register('whatsapp')}
-						/>
 
-						{/* <Input
-							type="text"
-							placeholder="Telegram"
-							className="text-sm"
-
-							{...form.register('telegram')}
-						/>
-
-						<Input
-							type="text"
-							placeholder="Viber"
-							className="text-sm"
-
-							{...form.register('viber')}
-						/>
-
-						<Input
-							type="text"
-							placeholder="Skype"
-							className="text-sm"
-
-							{...form.register('skype')}
-						/> */}
 					</div>
 
 					<div className="grid sm:grid-cols-2 md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
