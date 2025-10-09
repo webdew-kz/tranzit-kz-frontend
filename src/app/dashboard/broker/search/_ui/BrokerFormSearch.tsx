@@ -80,7 +80,7 @@ export default function BrokerFormSearch() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid md:grid-cols-3 gap-3 md:gap-5 w-full'
 				>
-					<div>
+					<div className='grid'>
 						<Input
 							type='text'
 							placeholder="Город"
@@ -89,7 +89,7 @@ export default function BrokerFormSearch() {
 						/>
 					</div>
 
-					<div>
+					<div className='grid truncate'>
 						<Controller
 							control={form.control}
 							name="brokerService"
@@ -104,7 +104,7 @@ export default function BrokerFormSearch() {
 						/>
 					</div>
 
-					<div>
+					<div className='grid'>
 						<Button
 							type='submit'
 							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
