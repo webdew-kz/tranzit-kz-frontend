@@ -184,7 +184,7 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 						</div>
 
 						<div className="flex w-full gap-2">
-							<div></div>
+							<div className='flex-1'></div>
 							<div className='flex gap-1'>
 								{(broker.userPhone && isContact) && (
 									<Popover>
