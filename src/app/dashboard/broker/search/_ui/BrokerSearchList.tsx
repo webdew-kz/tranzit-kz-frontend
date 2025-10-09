@@ -52,10 +52,10 @@ export default function BrokerSearchList() {
 		})
 	}, []);
 
-	useEffect(() => {
-		const stored = JSON.parse(localStorage.getItem("wishlistBroker") || "[]");
-		setWishlistLength(stored.length);
-	}, []);
+	// useEffect(() => {
+	// 	const stored = JSON.parse(localStorage.getItem("wishlistBroker") || "[]");
+	// 	setWishlistLength(stored.length);
+	// }, []);
 
 	const loadMore = async () => {
 		if (!hasMore) return;
