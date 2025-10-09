@@ -41,7 +41,7 @@ export default function MobileMenu() {
 			</Link>
 			<Link
 				href='/dashboard/broker'
-				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/vacancy') ? 'bg-accent' : ''}`)}
+				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/broker') ? 'bg-accent' : ''}`)}
 			>
 				<FileCheck />
 				<span>Брокеры</span>
