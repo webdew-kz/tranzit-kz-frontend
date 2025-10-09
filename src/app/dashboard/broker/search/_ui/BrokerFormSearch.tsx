@@ -16,11 +16,7 @@ import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
 
 export default function BrokerFormSearch() {
 
-	const { user } = useUserStore()
-
 	const { setSearchBrokers } = useBrokerSearchStore()
-
-	// const { brokers, setBrokers } = useBrokerStore()
 
 	const [pending, startTransition] = useTransition()
 
@@ -29,14 +25,6 @@ export default function BrokerFormSearch() {
 		city: z.array(z.string()).optional(),
 		note: z.string().optional(),
 		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).optional(),
-
-		userName: z.string().min(1),
-		userPhone: z.string().min(5),
-
-		skype: z.string().nullable().default(''),
-		telegram: z.string().nullable().default(''),
-		viber: z.string().nullable().default(''),
-		whatsapp: z.string().nullable().default('')
 	});
 
 	type IBroker = z.infer<typeof brokerSchema>
@@ -46,15 +34,8 @@ export default function BrokerFormSearch() {
 		defaultValues: {
 			city: [],
 			note: undefined,
-			brokerService: [],
+			brokerService: []
 
-			userName: user?.name!,
-			userPhone: user?.phone!,
-
-			whatsapp: user?.whatsapp,
-			telegram: user?.telegram,
-			viber: user?.viber,
-			skype: user?.skype,
 		},
 	})
 
