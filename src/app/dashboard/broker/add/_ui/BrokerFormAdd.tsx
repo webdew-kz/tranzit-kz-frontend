@@ -178,7 +178,7 @@ export default function BrokerFormAdd() {
 
 
 					<div className='grid md:grid-cols-3 gap-3 md:gap-5'>
-						<div>
+						<div className='grid'>
 							<MultiCityInput
 								values={watch('city') || []}
 								onChange={(v) => setValue('city', v)}
@@ -186,7 +186,7 @@ export default function BrokerFormAdd() {
 							/>
 						</div>
 
-						<div>
+						<div className='grid'>
 							<Controller
 								control={form.control}
 								name="brokerService"
@@ -201,7 +201,7 @@ export default function BrokerFormAdd() {
 							/>
 						</div>
 
-						<div>
+						<div className='grid'>
 							<Input
 								type='text'
 								placeholder="Подробнее (необязательно)"
