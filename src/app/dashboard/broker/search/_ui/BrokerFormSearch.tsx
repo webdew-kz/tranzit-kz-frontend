@@ -23,7 +23,7 @@ export default function BrokerFormSearch() {
 
 	const brokerSchema = z.object({
 		city: z.array(z.string()).optional(),
-		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).optional(),
+		brokerService: z.array(z.nativeEnum(BrokerServiceEnum)).optional(),
 	});
 
 	type IBroker = z.infer<typeof brokerSchema>
