@@ -133,7 +133,7 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 
 				{broker.note && (
 					<div className="flex items-center gap-2">
-						<MessageCircleMore size={16} className=' shrink-0' />
+
 						<span className=' ' >{broker.note}</span>
 					</div>
 				)}
@@ -147,8 +147,8 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 
 						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
 							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
-								<div className="flex items-center gap-2 w-full" key={index}>
-									<Check size={16} className=' shrink-0' />
+								<div className="flex items-center gap-2 w-full text-xs" key={index}>
+									<Check size={14} className=' shrink-0' />
 									<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
 								</div>
 							))}
