@@ -69,6 +69,7 @@ export enum TruckTypeEnum {
     EMPTY_CONTAINER = "Контейнер пустой", // контейнер_пустой
     CONTAINER_TRUCK = "Контейнеровоз", // контейнеровоз
     FEED_TRUCK = "Кормовоз", // кормовоз
+    CLOSE_TRUCK = "Крытая", // кормовоз
     TIMBER_TRUCK = "Лесовоз", // лесовоз
     MANIPULATOR = "Манипулятор", // манипулятор
     OIL_TANKER = "Масловоз", // масловоз
@@ -108,6 +109,10 @@ export enum LoadingTypeEnum {
     REAR = "Задняя", // задняя
     SIDE = "Боковая", // боковая
     TOP = "Верхняя", // верхняя
+    SIDE_TOP = "Бок+Верх", // боковая
+    REAR_TOP = "Зад+Верх", // боковая
+    REAR_SIDE = "Зад+Бок", // боковая
+    REAR_SIDE_TOP = "Зад+Бок+Верх", // боковая
     FULL = "Растентовка", // растентовка
 }
 
