@@ -118,6 +118,7 @@ const BrokerWishItem = memo(
 						</div>
 					))}
 
+
 					<Collapsible className='sm:hidden flex flex-col gap-2' open={isOpen} onOpenChange={setIsOpen}>
 						<CollapsibleTrigger className='flex gap-2 items-center justify-center'>
 							<span>{isOpen ? "Скрыть" : "Подробнее"}</span>
