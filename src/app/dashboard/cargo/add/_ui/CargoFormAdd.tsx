@@ -341,22 +341,6 @@ export default function CargoFormAdd() {
 							)}
 						/>
 
-
-
-						{/* <Controller
-							control={form.control}
-							name='loadingType'
-							render={({ field }) => (
-
-								<MultiSelect
-									options={LoadingTypeEnum}
-									value={field.value}
-									onChange={field.onChange}
-									placeholder="Тип погрузки"
-								/>
-							)}
-						/> */}
-
 						<Controller
 							control={form.control}
 							name="loadingType"

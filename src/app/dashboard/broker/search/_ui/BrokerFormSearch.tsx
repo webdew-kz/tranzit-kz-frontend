@@ -99,27 +99,25 @@ export default function BrokerFormSearch() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid gap-3 md:gap-5 w-full'
 				>
-					<div className="grid md:grid-cols-2 w-full gap-3 md:gap-5 items-start">
-						<Controller
-							control={form.control}
-							name="brokerService"
-							render={({ field }) => (
-								<MultiSelect
-									options={BrokerServiceEnum}
-									value={field.value || []}
-									onChange={field.onChange}
-									placeholder="Выберите услуги"
-								/>
-							)}
-						/>
+					<Controller
+						control={form.control}
+						name="brokerService"
+						render={({ field }) => (
+							<MultiSelect
+								options={BrokerServiceEnum}
+								value={field.value || []}
+								onChange={field.onChange}
+								placeholder="Выберите услуги"
+							/>
+						)}
+					/>
 
-						<Input
-							type='text'
-							placeholder="Город"
-							className='text-sm'
-							{...form.register('city')}
-						/>
-					</div>
+					<Input
+						type='text'
+						placeholder="Город"
+						className='text-sm'
+						{...form.register('city')}
+					/>
 
 					<Button
 						type='submit'

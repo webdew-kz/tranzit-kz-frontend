@@ -317,28 +317,47 @@ export default function CargoFormCopy({ cargoId }: ICargoFormCopyProps) {
 							control={form.control}
 							name="truckType"
 							render={({ field }) => (
-
-
-								<MultiSelect
-									options={TruckTypeEnum}
-									value={field.value}
-									onChange={field.onChange}
-									placeholder="Тип фуры"
-								/>
+								<Select
+									// при выборе мы кладём массив с одним значением
+									onValueChange={(value) => field.onChange([value])}
+									// при отображении берём первый элемент массива
+									value={field.value?.[0] ?? ""}
+								>
+									<SelectTrigger className="w-full">
+										<SelectValue placeholder="Тип фуры" />
+									</SelectTrigger>
+									<SelectContent className="bg-background max-h-60 overflow-y-auto">
+										{Object.entries(TruckTypeEnum).map(([key, value]) => (
+											<SelectItem key={key} value={key}>
+												{value}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
 							)}
 						/>
 
 						<Controller
 							control={form.control}
-							name='loadingType'
+							name="loadingType"
 							render={({ field }) => (
-
-								<MultiSelect
-									options={LoadingTypeEnum}
-									value={field.value}
-									onChange={field.onChange}
-									placeholder="Тип погрузки"
-								/>
+								<Select
+									// при выборе мы кладём массив с одним значением
+									onValueChange={(value) => field.onChange([value])}
+									// при отображении берём первый элемент массива
+									value={field.value?.[0] ?? ""}
+								>
+									<SelectTrigger className="w-full">
+										<SelectValue placeholder="Тип погрузки" />
+									</SelectTrigger>
+									<SelectContent className="bg-background max-h-60 overflow-y-auto">
+										{Object.entries(LoadingTypeEnum).map(([key, value]) => (
+											<SelectItem key={key} value={key}>
+												{value}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
 							)}
 						/>
 

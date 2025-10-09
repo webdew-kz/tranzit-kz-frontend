@@ -278,7 +278,7 @@ export default function TransportFormEdit({ id }: { id?: string }) {
 					</div>
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full gap-3 md:gap-5 items-start">
 
-						<Controller
+						{/* <Controller
 							control={form.control}
 							name="truckType"
 							render={({ field }) => (
@@ -304,6 +304,54 @@ export default function TransportFormEdit({ id }: { id?: string }) {
 									onChange={field.onChange}
 									placeholder="Тип погрузки"
 								/>
+							)}
+						/> */}
+
+						<Controller
+							control={form.control}
+							name="truckType"
+							render={({ field }) => (
+								<Select
+									// при выборе мы кладём массив с одним значением
+									onValueChange={(value) => field.onChange([value])}
+									// при отображении берём первый элемент массива
+									value={field.value?.[0] ?? ""}
+								>
+									<SelectTrigger className="w-full">
+										<SelectValue placeholder="Тип фуры" />
+									</SelectTrigger>
+									<SelectContent className="bg-background max-h-60 overflow-y-auto">
+										{Object.entries(TruckTypeEnum).map(([key, value]) => (
+											<SelectItem key={key} value={key}>
+												{value}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+							)}
+						/>
+
+						<Controller
+							control={form.control}
+							name="loadingType"
+							render={({ field }) => (
+								<Select
+									// при выборе мы кладём массив с одним значением
+									onValueChange={(value) => field.onChange([value])}
+									// при отображении берём первый элемент массива
+									value={field.value?.[0] ?? ""}
+								>
+									<SelectTrigger className="w-full">
+										<SelectValue placeholder="Тип погрузки" />
+									</SelectTrigger>
+									<SelectContent className="bg-background max-h-60 overflow-y-auto">
+										{Object.entries(LoadingTypeEnum).map(([key, value]) => (
+											<SelectItem key={key} value={key}>
+												{value}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
 							)}
 						/>
 

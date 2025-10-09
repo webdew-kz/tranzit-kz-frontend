@@ -77,7 +77,7 @@ export default function BrokerFormAdd() {
 		defaultValues: {
 			city: [],
 			note: undefined,
-			brokerService: undefined,
+			brokerService: [],
 
 			userName: user?.name!,
 			userPhone: user?.phone!,
@@ -182,7 +182,7 @@ export default function BrokerFormAdd() {
 							render={({ field }) => (
 								<MultiSelect
 									options={BrokerServiceEnum}
-									value={field.value}
+									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Выберите услуги"
 								/>
