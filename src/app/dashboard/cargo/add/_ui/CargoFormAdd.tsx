@@ -238,7 +238,7 @@ export default function CargoFormAdd() {
 	if (!user?.isRegistered) {
 		return (
 			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-				<div className="text-center">Размещение объявлений доступно по абонентской плате.</div>
+				<div className="text-center">Размещение объявлений доступно по ежемесячной абонентской плате.</div>
 				<Button
 					className=' bg-(--dark-accent)'
 					asChild

@@ -152,7 +152,7 @@ export default function BrokerFormAdd() {
 	if (!user?.isRegistered) {
 		return (
 			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-				<div className="text-center">Размещение объявлений доступно по абонентской плате.</div>
+				<div className="text-center">Размещение объявлений доступно по ежемесячной абонентской плате.</div>
 				<Button
 					className=' bg-(--dark-accent)'
 					asChild
@@ -229,7 +229,7 @@ export default function BrokerFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить груз</>) : "Добавить груз"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить объявление</>) : "Добавить объявление"}
 						</Button>
 					</div>
 

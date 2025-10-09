@@ -4,7 +4,7 @@ import BrokerFormSearch from './_ui/BrokerFormSearch';
 export default function page() {
 	return (
 		<div className='grid gap-5'>
-			{/* <BrokerFormSearch /> */}
+			<BrokerFormSearch />
 			<BrokerSearchList />
 		</div>
 	)
