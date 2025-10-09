@@ -149,12 +149,14 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 				)}
 
 
-				{limitedPlaces.map((place, index) => (
-					<div className="flex items-center gap-2 w-full text-xs" key={index}>
-						<Check size={14} className="shrink-0" />
-						<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
-					</div>
-				))}
+				<div className='grid mb-2'>
+					{limitedPlaces.map((place, index) => (
+						<div className="flex items-center gap-2 w-full text-xs" key={index}>
+							<Check size={14} className="shrink-0" />
+							<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
+						</div>
+					))}
+				</div>
 
 				<Collapsible className='sm:hidden flex flex-col gap-2' open={isOpen} onOpenChange={setIsOpen}>
 					<CollapsibleTrigger className='flex gap-2 items-center justify-center'>
@@ -203,16 +205,16 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 						</div>
 
 						<div className="flex w-full gap-2">
-							<div className='flex-1'></div>
+							<div></div>
 							<div className='flex gap-1'>
-								{(broker.userPhone && isContact) && (
+								{(broker.userPhone) && (
 									<Popover>
 										<PopoverTrigger asChild>
 											<Button
 												variant='default'
 												className=' group border border-(--dark-accent) bg-(--dark-accent) hover:bg-transparent hover:text-(--dark-accent) !px-2'
 												onClick={() => {
-													if (!user?.isRegistered || !broker?.id || !isRegistered) return;
+													if (!user?.isRegistered || !broker?.id) return;
 													handleAddView(broker.id);
 												}}
 											>

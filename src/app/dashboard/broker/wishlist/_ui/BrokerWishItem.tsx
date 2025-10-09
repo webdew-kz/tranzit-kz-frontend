@@ -110,13 +110,14 @@ const BrokerWishItem = memo(
 						</div>
 					)}
 
-
-					{limitedPlaces.map((place, index) => (
-						<div className="flex items-center gap-2 w-full text-xs" key={index}>
-							<Check size={14} className="shrink-0" />
-							<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
-						</div>
-					))}
+					<div className='grid mb-2'>
+						{limitedPlaces.map((place, index) => (
+							<div className="flex items-center gap-2 w-full text-xs" key={index}>
+								<Check size={14} className="shrink-0" />
+								<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
+							</div>
+						))}
+					</div>
 
 
 					<Collapsible className='sm:hidden flex flex-col gap-2' open={isOpen} onOpenChange={setIsOpen}>
