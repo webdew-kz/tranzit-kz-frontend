@@ -57,7 +57,7 @@ export default function BrokerFormAdd() {
 
 	const brokerSchema = z.object({
 
-		city: z.array(z.string()).optional(),
+		city: z.array(z.string()).min(1),
 		note: z.string().optional(),
 		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).min(1),
 
@@ -75,7 +75,7 @@ export default function BrokerFormAdd() {
 	const form = useForm({
 		resolver: zodResolver(brokerSchema),
 		defaultValues: {
-			city: [],
+			city: [''],
 			note: undefined,
 			brokerService: [],
 
@@ -173,9 +173,19 @@ export default function BrokerFormAdd() {
 			<CardContent className='px-0'>
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
-					className=' grid gap-3 md:gap-5'
+					className=' grid md:grid-cols-3 gap-3 md:gap-5'
 				>
-					<div className="grid sm:grid-cols-3 w-full gap-3 md:gap-5 items-start">
+
+
+					<div>
+						<MultiCityInput
+							values={watch('city') || []}
+							onChange={(v) => setValue('city', v)}
+							placeholder="Город"
+						/>
+					</div>
+
+					<div>
 						<Controller
 							control={form.control}
 							name="brokerService"
@@ -188,18 +198,14 @@ export default function BrokerFormAdd() {
 								/>
 							)}
 						/>
+					</div>
 
+					<div>
 						<Input
 							type='text'
 							placeholder="Подробнее (необязательно)"
 							className='text-sm'
 							{...form.register('note')}
-						/>
-
-						<MultiCityInput
-							values={watch('city') || []}
-							onChange={(v) => setValue('city', v)}
-							placeholder="Город"
 						/>
 					</div>
 

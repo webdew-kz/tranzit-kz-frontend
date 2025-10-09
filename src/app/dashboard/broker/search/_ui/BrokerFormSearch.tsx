@@ -80,33 +80,39 @@ export default function BrokerFormSearch() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid gap-3 md:gap-5 w-full'
 				>
-					<Controller
-						control={form.control}
-						name="brokerService"
-						render={({ field }) => (
-							<MultiSelect
-								options={BrokerServiceEnum}
-								value={field.value || []}
-								onChange={field.onChange}
-								placeholder="Выберите услуги"
-							/>
-						)}
-					/>
+					<div>
+						<Input
+							type='text'
+							placeholder="Город"
+							className='text-sm'
+							{...form.register('city')}
+						/>
+					</div>
 
-					<Input
-						type='text'
-						placeholder="Город"
-						className='text-sm'
-						{...form.register('city')}
-					/>
+					<div>
+						<Controller
+							control={form.control}
+							name="brokerService"
+							render={({ field }) => (
+								<MultiSelect
+									options={BrokerServiceEnum}
+									value={field.value || []}
+									onChange={field.onChange}
+									placeholder="Выберите услуги"
+								/>
+							)}
+						/>
+					</div>
 
-					<Button
-						type='submit'
-						className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
-						disabled={pending}
-					>
-						{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти объявление</>) : "Найти объявление"}
-					</Button>
+					<div>
+						<Button
+							type='submit'
+							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
+							disabled={pending}
+						>
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти объявление</>) : "Найти объявление"}
+						</Button>
+					</div>
 				</form>
 			</CardContent>
 		</Card >
