@@ -124,7 +124,7 @@ export default function BrokerSearchList() {
 							variant='link'
 							onClick={handleShowAllBrokers}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все объявления</Button>
+						>Показать все услуги</Button>
 					</div>
 					{searchBrokers.map((broker) => (
 						<BrokerSearchItem
@@ -174,12 +174,12 @@ export default function BrokerSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Объявления не найдены</span>
+					<span>услуги не найдены</span>
 					<Button
 						variant='link'
 						onClick={() => firstLoad()}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все объявления</Button>
+					>Показать все услуги</Button>
 				</div>
 			)
 		)

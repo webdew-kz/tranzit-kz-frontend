@@ -63,7 +63,7 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при обновлении объявления', {
+				toast.error('Ошибка при обновлении услуги', {
 					position: 'top-center',
 				})
 			}
@@ -85,7 +85,7 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при архивации объявления', {
+				toast.error('Ошибка при архивации услуги', {
 					position: 'top-center',
 				})
 			}

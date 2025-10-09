@@ -124,7 +124,7 @@ export default function BrokerFormSearch() {
 							className=' bg-(--dark-accent) lg:col-start-3 col-span-6 lg:col-span-2 mt-4 '
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти объявление</>) : "Найти объявление"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Найти услугу</>) : "Найти услугу"}
 						</Button>
 					</div>
 				</form>

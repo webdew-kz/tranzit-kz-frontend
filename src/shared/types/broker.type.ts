@@ -68,7 +68,7 @@ export interface IBroker {
     createdAt?: string; // дата создания
     updatedAt?: string; // дата обновления
 
-    city?: string; // город
+    city?: string[]; // город
     note?: string; // Коммент
     brokerService: BrokerServiceEnum; //
 

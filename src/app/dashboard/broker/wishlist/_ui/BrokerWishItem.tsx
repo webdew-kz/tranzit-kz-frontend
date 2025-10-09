@@ -77,7 +77,7 @@ const BrokerWishItem = memo(
 			return <p className='text-center py-5'>Загрузка ...</p>
 		}
 
-		const message = `Здравствуйте. Данное объявление актуально?\n\nОписание: ${broker.note}\n\nСсылка на объявление: https://${process.env.DOMAIN}/dashboard/broker/${broker.id}`
+		const message = `Здравствуйте. Данное услугу актуально?\n\nОписание: ${broker.note}\n\nСсылка на услугу: https://${process.env.DOMAIN}/dashboard/broker/${broker.id}`
 		const link = `https://wa.me/${broker.userPhone}?text=${encodeURIComponent(message)}`
 
 		const wamsg = `https://${process.env.DOMAIN}/dashboard/broker/${broker.id}`

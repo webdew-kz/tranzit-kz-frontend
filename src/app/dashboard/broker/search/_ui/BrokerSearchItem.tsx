@@ -92,7 +92,7 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 		return getWishlist().includes(brokerId);
 	}
 
-	const message = `Здравствуйте. Данное объявление актуально?\n\nОписание: ${broker.note}\n\nСсылка на объявление: https://${process.env.DOMAIN}/dashboard/broker/${broker.id}`
+	const message = `Здравствуйте. Данное услугу актуально?\n\nОписание: ${broker.note}\n\nСсылка на услугу: https://${process.env.DOMAIN}/dashboard/broker/${broker.id}`
 	const link = `https://wa.me/${broker.userPhone}?text=${encodeURIComponent(message)}`
 
 	const wamsg = `https://${process.env.DOMAIN}/dashboard/broker/${broker.id}`

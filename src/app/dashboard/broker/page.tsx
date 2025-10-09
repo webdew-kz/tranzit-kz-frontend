@@ -15,7 +15,7 @@ export default function page() {
 					href='/dashboard/broker/add'
 					className='flex gap-3 items-center justify-start'
 				>
-					<CirclePlus /> Добавить объявление
+					<CirclePlus /> Добавить услугу
 				</Link>
 			</Button>
 			<Button
@@ -28,7 +28,7 @@ export default function page() {
 					href='/dashboard/broker/search'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Search /> Найти объявление
+					<Search /> Найти услугу
 				</Link>
 			</Button>
 			<Button
@@ -41,7 +41,7 @@ export default function page() {
 					href='/dashboard/broker/wishlist'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Star /> Избранные объявления
+					<Star /> Избранные услуги
 				</Link>
 			</Button>
 			<Button
@@ -54,7 +54,7 @@ export default function page() {
 					href='/dashboard/broker/my'
 					className='flex gap-3 items-center justify-start'
 				>
-					<Box /> Мои объявления
+					<Box /> Мои услуги
 				</Link>
 			</Button>
 		</div>

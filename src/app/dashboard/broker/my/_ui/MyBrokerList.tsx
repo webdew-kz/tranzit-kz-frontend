@@ -144,7 +144,7 @@ export default function MyBrokerList() {
 		startTransition(() => {
 			activateMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Объявления повторены", {
+					toast.success("услуги повторены", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));
@@ -162,7 +162,7 @@ export default function MyBrokerList() {
 		startTransition(() => {
 			archivateMany({ ids: selectedIds })
 				.then(() => {
-					toast.success("Объявления сняты", {
+					toast.success("услуги сняты", {
 						position: 'top-center',
 					});
 					fetchData().catch((error) => console.error(error));

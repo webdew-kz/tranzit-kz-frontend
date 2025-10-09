@@ -164,7 +164,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Копировать объявление</CardTitle>
+				<CardTitle className='text-xl text-center'>Копировать услугу</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form

@@ -127,7 +127,7 @@ export default function BrokerFormAdd() {
 				router.replace('/dashboard/broker/my')
 			} catch (error) {
 				console.error(error)
-				toast.error('Ошибка при добавлении объявления', {
+				toast.error('Ошибка при добавлении услуги', {
 					position: 'top-center',
 				})
 			}
@@ -168,7 +168,7 @@ export default function BrokerFormAdd() {
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
 			<CardHeader className='px-0'>
-				<CardTitle className='text-xl text-center'>Добавить объявление</CardTitle>
+				<CardTitle className='text-xl text-center'>Добавить услугу</CardTitle>
 			</CardHeader>
 			<CardContent className='px-0'>
 				<form
@@ -237,7 +237,7 @@ export default function BrokerFormAdd() {
 							className=' bg-(--dark-accent) md:col-start-2 w-full'
 							disabled={pending}
 						>
-							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить объявление</>) : "Добавить объявление"}
+							{pending ? (<><Loader2 className="animate-spin stroke-accent" /> Добавить услугу</>) : "Добавить услугу"}
 						</Button>
 					</div>
 
