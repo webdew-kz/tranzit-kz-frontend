@@ -124,7 +124,6 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 				</div>
 
 				<div className="flex items-center gap-2">
-					<span>Город:</span>
 					<span>{broker.city}</span>
 				</div>
 
@@ -141,7 +140,7 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-2'>
 
-						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap border-b border-(--dark-accent) mb-2">
+						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap border-b border-(--dark-accent) mb-2 pb-2">
 							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
 								<div className="flex items-center gap-2 w-full text-xs" key={index}>
 									<Check size={14} className=' shrink-0' />
