@@ -20,6 +20,7 @@ export enum BrokerServiceEnum {
     IBR = "ИБР",
     KAT_DLYA_ZAEZDA_V_KITAY = "Кат для заезда в Китай",
     KARTA_VODITELYA_DLYA_TAHOGRAFA = "Карта водителя для тахографа",
+    OBUCHENIE_LOGISTIKA_PO_KAZAHSTANU = "Обучение: Логистика по Казахстану",
     OBUCHENIE_BROKERSKIE_USLUGI = "Обучение брокерские услуги",
     OBUCHENIE_LOGISTIKA_I_GRUZOPEREVOZKI_SNG_EUROPA = "Обучение логистика и грузоперевозки СНГ/Европа",
     OBUCHENIE_TAMOJENNYY_I_TRANSPORTNYY_BROKER = "Обучение таможенный и транспортный брокер",
