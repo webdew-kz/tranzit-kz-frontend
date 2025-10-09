@@ -151,46 +151,47 @@ export default function Aside() {
 				</div>
 
 				<div className="grid gap-2">
-					<p className=' font-bold'>Вакансии</p>
+					<p className=' font-bold'>Брокеры</p>
 					<ul className=' grid gap-2'>
-						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/vacancy/add' ? 'bg-(--dark-accent)' : ''}`)}>
+						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/broker/add' ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
-								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/vacancy/add' ? 'text-background' : ''}`)}
-								href={'/dashboard/vacancy/add'}
+								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/broker/add' ? 'text-background' : ''}`)}
+								href={'/dashboard/broker/add'}
 							><CirclePlus
-									className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/add' ? '!text-background' : ''}`)}
+									className={cn('transition-all duration-200', `${pathname === '/dashboard/broker/add' ? '!text-background' : ''}`)}
 									size={16}
 								/> Добавить</Link>
 						</li>
-						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/vacancy/search' ? 'bg-(--dark-accent)' : ''}`)}>
+						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/broker/search' ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
-								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/vacancy/search' ? 'text-background' : ''}`)}
-								href={'/dashboard/vacancy/search'}
+								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/broker/search' ? 'text-background' : ''}`)}
+								href={'/dashboard/broker/search'}
 							><Search
-									className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/search' ? '!text-background' : ''}`)}
+									className={cn('transition-all duration-200', `${pathname === '/dashboard/broker/search' ? '!text-background' : ''}`)}
 									size={16}
 								/> Найти</Link>
 						</li>
-						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/vacancy/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
+						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/broker/wishlist' ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
-								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/vacancy/wishlist' ? 'text-background' : ''}`)}
-								href={'/dashboard/vacancy/wishlist'}
+								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/broker/wishlist' ? 'text-background' : ''}`)}
+								href={'/dashboard/broker/wishlist'}
 							><Star
-									className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/wishlist' ? '!text-background' : ''}`)}
+									className={cn('transition-all duration-200', `${pathname === '/dashboard/broker/wishlist' ? '!text-background' : ''}`)}
 									size={16}
 								/> Избранные</Link>
 						</li>
-						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/vacancy/my' ? 'bg-(--dark-accent)' : ''}`)}>
+						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname === '/dashboard/broker/my' ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
-								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/vacancy/my' ? 'text-background' : ''}`)}
-								href={'/dashboard/vacancy/my'}
+								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname === '/dashboard/broker/my' ? 'text-background' : ''}`)}
+								href={'/dashboard/broker/my'}
 							><SquareUserRound
-									className={cn('transition-all duration-200', `${pathname === '/dashboard/vacancy/my' ? '!text-background' : ''}`)}
+									className={cn('transition-all duration-200', `${pathname === '/dashboard/broker/my' ? '!text-background' : ''}`)}
 									size={16}
-								/> Мои заявки</Link>
+								/> Мои объявления</Link>
 						</li>
 					</ul>
 				</div>
+
 
 				<div className="grid gap-2">
 					<p className=' font-bold'>Меню</p>
