@@ -12,6 +12,7 @@ import { Loader2 } from 'lucide-react';
 import { useBrokerSearchStore } from '@/shared/store/useBrokerSearchStore';
 import { findManyByFilter } from '../actions';
 import { useUserStore } from '@/shared/store/useUserStore';
+import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
 
 export default function BrokerFormSearch() {
 
@@ -27,7 +28,7 @@ export default function BrokerFormSearch() {
 
 		city: z.array(z.string()).optional(),
 		note: z.string().optional(),
-		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).min(1),
+		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).optional(),
 
 		userName: z.string().min(1),
 		userPhone: z.string().min(5),
@@ -45,7 +46,7 @@ export default function BrokerFormSearch() {
 		defaultValues: {
 			city: [],
 			note: undefined,
-			brokerService: undefined,
+			brokerService: [],
 
 			userName: user?.name!,
 			userPhone: user?.phone!,
@@ -96,21 +97,21 @@ export default function BrokerFormSearch() {
 			<CardContent className='px-0'>
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
-					className=' grid gap-3 md:gap-5'
+					className=' grid gap-3 md:gap-5 w-full'
 				>
-					<div className="grid sm:grid-cols-3 w-full gap-3 md:gap-5 items-start">
-						{/* <Controller
+					<div className="grid md:grid-cols-2 w-full gap-3 md:gap-5 items-start">
+						<Controller
 							control={form.control}
 							name="brokerService"
 							render={({ field }) => (
 								<MultiSelect
 									options={BrokerServiceEnum}
-									value={field.value}
+									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Выберите услуги"
 								/>
 							)}
-						/> */}
+						/>
 
 						<Input
 							type='text'

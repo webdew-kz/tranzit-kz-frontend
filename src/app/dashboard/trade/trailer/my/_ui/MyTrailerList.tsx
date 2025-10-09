@@ -152,7 +152,7 @@ export default function MyTrailerList() {
 	if (!user?.isRegistered && user?.role === 'USER') {
 		return (
 			<div className="flex flex-col justify-center w-full gap-3 md:gap-5 items-center">
-				<div className="text-center">Доступ в данный раздел доступен по абонентской плате.</div>
+				<div className="text-center">Доступ в данный раздел доступен по ежемесячной абонентской плате.</div>
 				<Button
 					className=' bg-(--dark-accent)'
 					asChild
