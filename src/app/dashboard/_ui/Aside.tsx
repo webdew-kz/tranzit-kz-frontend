@@ -195,6 +195,15 @@ export default function Aside() {
 				<div className="grid gap-2">
 					<p className=' font-bold'>Меню</p>
 					<ul className=' grid gap-2'>
+						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/vacancy') ? 'bg-(--dark-accent)' : ''}`)}>
+							<Link
+								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/vacancy') ? 'text-background' : ''}`)}
+								href={'/dashboard/vacancy'}
+							><SquareUserRound
+									className={cn('transition-all duration-200', `${pathname.startsWith('/dashboard/vacancy') ? '!text-background' : ''}`)}
+									size={16}
+								/> Вакансии</Link>
+						</li>
 						<li className={cn('px-3 rounded-sm hover:bg-(--dark-accent) asideLink transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'bg-(--dark-accent)' : ''}`)}>
 							<Link
 								className={cn('text-(--dark-accent) flex gap-2 items-center hover:text-background transition-all duration-200', `${pathname.startsWith('/dashboard/review') ? 'text-background' : ''}`)}

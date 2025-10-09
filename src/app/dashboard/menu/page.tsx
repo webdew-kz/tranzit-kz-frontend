@@ -1,7 +1,7 @@
 'use client'
 import { Button } from '@/shared/components/ui/button'
 import { useUserStore } from '@/shared/store/useUserStore'
-import { Box, ChartNoAxesCombined, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, PhoneOff, Search, ShieldCheck, ShieldUser, Star } from 'lucide-react'
+import { Box, ChartNoAxesCombined, CirclePlus, CircleUserRound, CreditCard, MessageCircleMore, PhoneOff, Search, ShieldCheck, ShieldUser, SquareUserRound, Star } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -15,19 +15,19 @@ export default function page() {
 	// }
 	return (
 		<div className=' flex flex-col gap-4 justify-center h-[calc(100vh-160px)]'>
-			{/* <Button
+			<Button
 				variant='default'
 				className='w-full sm:hidden bg-accent'
 				asChild
 			>
 
 				<Link
-					href='/dashboard/cabinet'
+					href='/dashboard/vacancy'
 					className='flex gap-3 items-center justify-start'
 				>
-					<CircleUserRound /> Личный кабинет
+					<SquareUserRound /> Вакансии
 				</Link>
-			</Button> */}
+			</Button>
 
 			<Button
 				variant='default'

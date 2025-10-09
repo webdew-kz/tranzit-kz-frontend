@@ -10,8 +10,8 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { IBroker } from '@/shared/types/broker.type'
-import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Truck, Wallet, Weight, X } from 'lucide-react'
+import { BrokerServiceEnum, IBroker } from '@/shared/types/broker.type'
+import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, RefreshCcw, SquarePen, Truck, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
 import { activateBroker, archivateBroker } from '../actions'
@@ -137,13 +137,14 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-2'>
 
-						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
-							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
-								<div key={`${place}-${index}`} >
-									{place}
-								</div>
+						<div className="flex items-center gap-2 w-full">
+							<Check size={16} />
+							{places.length > 0 && places.map((item, index) => (
+								<div key={index} >{BrokerServiceEnum[item as unknown as keyof typeof BrokerServiceEnum]}</div>
 							))}
 						</div>
+
+
 
 						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-2">
 							<span className=' flex items-center gap-1'>

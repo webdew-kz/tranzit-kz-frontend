@@ -1,7 +1,7 @@
 'use client'
 import { cn } from '@/shared/lib/utils';
 import { useUserStore } from '@/shared/store/useUserStore';
-import { Box, Menu, Route, SquareUserRound, Truck } from 'lucide-react'
+import { Box, FileCheck, Menu, Route, SquareUserRound, Truck } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
@@ -40,11 +40,11 @@ export default function MobileMenu() {
 				<span>Авторынок</span>
 			</Link>
 			<Link
-				href='/dashboard/vacancy'
+				href='/dashboard/broker'
 				className={cn('flex flex-col items-center justify-center text-(--dark-accent) text-xs h-full', `${pathname.startsWith('/dashboard/vacancy') ? 'bg-accent' : ''}`)}
 			>
-				<SquareUserRound />
-				<span>Вакансии</span>
+				<FileCheck />
+				<span>Брокеры</span>
 			</Link>
 			<Link
 				href='/dashboard/menu'
