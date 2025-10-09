@@ -134,7 +134,7 @@ const MyBrokerArchiveItem = memo(({ brokerInitial, selected, onToggle, setBroker
 						{isOpen ? <ArrowUp size={18} /> : <ArrowDown size={18} />}
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
-						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
+						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap border-b border-(--dark-accent) mb-2">
 							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
 								<div className="flex items-center gap-2 w-full text-xs" key={index}>
 									<Check size={14} className=' shrink-0' />
