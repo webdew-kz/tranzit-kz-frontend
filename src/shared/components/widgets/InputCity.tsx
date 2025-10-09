@@ -547,7 +547,7 @@ interface MultiCityProps {
 	onChangeRegion?: (v: string[]) => void;
 	onChangeCountry?: (v: string[]) => void;
 	addBtn?: boolean
-	addBtnText: string;
+	addBtnText?: string;
 	placeholder: string;
 }
 
@@ -608,14 +608,16 @@ export const MultiCityInput = ({
 					onSelectMeta={handleSelectMeta}
 				/>
 			))}
-			<Button
-				variant="link"
-				type="button"
-				onClick={addInput}
-				className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
-			>
-				{addBtnText}
-			</Button>
+			{addBtnText && (
+				<Button
+					variant="link"
+					type="button"
+					onClick={addInput}
+					className='underline decoration-dotted py-0 px-1 text-sm text-(--dark-accent) hover:text-(--light-accent) h-auto'
+				>
+					{addBtnText}
+				</Button>
+			)}
 		</div>
 	);
 };
