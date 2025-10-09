@@ -78,7 +78,7 @@ export default function BrokerFormSearch() {
 			<CardContent className='px-0'>
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
-					className=' grid gap-3 md:gap-5 w-full'
+					className=' grid md:grid-cols-3 gap-3 md:gap-5 w-full'
 				>
 					<div>
 						<Input

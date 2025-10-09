@@ -173,40 +173,42 @@ export default function BrokerFormAdd() {
 			<CardContent className='px-0'>
 				<form
 					onSubmit={form.handleSubmit(onSubmit, onError)}
-					className=' grid md:grid-cols-3 gap-3 md:gap-5'
+					className=' grid gap-3 md:gap-5'
 				>
 
 
-					<div>
-						<MultiCityInput
-							values={watch('city') || []}
-							onChange={(v) => setValue('city', v)}
-							placeholder="Город"
-						/>
-					</div>
+					<div className='grid md:grid-cols-3 gap-3 md:gap-5'>
+						<div>
+							<MultiCityInput
+								values={watch('city') || []}
+								onChange={(v) => setValue('city', v)}
+								placeholder="Город"
+							/>
+						</div>
 
-					<div>
-						<Controller
-							control={form.control}
-							name="brokerService"
-							render={({ field }) => (
-								<MultiSelect
-									options={BrokerServiceEnum}
-									value={field.value || []}
-									onChange={field.onChange}
-									placeholder="Выберите услуги"
-								/>
-							)}
-						/>
-					</div>
+						<div>
+							<Controller
+								control={form.control}
+								name="brokerService"
+								render={({ field }) => (
+									<MultiSelect
+										options={BrokerServiceEnum}
+										value={field.value || []}
+										onChange={field.onChange}
+										placeholder="Выберите услуги"
+									/>
+								)}
+							/>
+						</div>
 
-					<div>
-						<Input
-							type='text'
-							placeholder="Подробнее (необязательно)"
-							className='text-sm'
-							{...form.register('note')}
-						/>
+						<div>
+							<Input
+								type='text'
+								placeholder="Подробнее (необязательно)"
+								className='text-sm'
+								{...form.register('note')}
+							/>
+						</div>
 					</div>
 
 					<div className="grid md:grid-cols-2  w-full gap-3 md:gap-5 items-start">
