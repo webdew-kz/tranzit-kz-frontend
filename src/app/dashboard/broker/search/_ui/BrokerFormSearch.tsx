@@ -22,9 +22,7 @@ export default function BrokerFormSearch() {
 	const [pending, startTransition] = useTransition()
 
 	const brokerSchema = z.object({
-
 		city: z.array(z.string()).optional(),
-		note: z.string().optional(),
 		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).optional(),
 	});
 
@@ -34,9 +32,7 @@ export default function BrokerFormSearch() {
 		resolver: zodResolver(brokerSchema),
 		defaultValues: {
 			city: [''],
-			note: undefined,
 			brokerService: []
-
 		},
 	})
 
@@ -90,7 +86,7 @@ export default function BrokerFormSearch() {
 									values={field.value || []}
 									onChange={field.onChange}
 									placeholder="Город"
-									// addBtnText="Добавить пункт погрузки"
+									addBtnText="Добавить пункт погрузки"
 									addBtn={false}
 								/>
 							)}
