@@ -8,7 +8,7 @@ export default function page() {
 	return (
 		<div className='grid gap-5'>
 			<BrokerFormSearch />
-			<BrokerSearchList />
+			{/* <BrokerSearchList /> */}
 		</div>
 	)
 }
