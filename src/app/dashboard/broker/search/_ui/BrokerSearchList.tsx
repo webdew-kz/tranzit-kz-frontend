@@ -143,25 +143,14 @@ export default function BrokerSearchList() {
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3">
 							<span>Всего грузов: {total}</span>
 
-							{wishlistLength > 0 ? (
-								<Link
-									href='/dashboard/broker/wishlist'
-									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
+							<Link
+								href='/dashboard/broker/wishlist'
+								className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
 
-								>
-									<Star size={16} fill='#b4802e' />
-									<span>{`В избранном (${wishlistLength})`}</span>
-								</Link>
-							) : (
-								<Link
-									href='/dashboard/broker/wishlist'
-									className=' underline underline-offset-4  text-(--dark-accent) flex gap-1.5 items-center'
-
-								>
-									<Star size={16} />
-									<span>Избранное</span>
-								</Link>
-							)}
+							>
+								<Star size={16} />
+								<span>Избранное</span>
+							</Link>
 
 						</div>
 						{brokers.map((broker) => (
