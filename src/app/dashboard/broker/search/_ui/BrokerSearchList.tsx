@@ -115,7 +115,7 @@ export default function BrokerSearchList() {
 	}
 
 	return (
-		searchBrokers.length > 0 ? (
+		(searchBrokers && searchBrokers?.length > 0) ? (
 			<>
 				<div className='grid gap-5'>
 					<div className=" flex justify-between items-center">
@@ -124,7 +124,7 @@ export default function BrokerSearchList() {
 							variant='link'
 							onClick={handleShowAllBrokers}
 							className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-						>Показать все грузы</Button>
+						>Показать все объявления</Button>
 					</div>
 					{searchBrokers.map((broker) => (
 						<BrokerSearchItem
@@ -137,7 +137,7 @@ export default function BrokerSearchList() {
 				</div>
 			</>
 		) : (
-			brokers.length > 0 ? (
+			(brokers && brokers?.length > 0) ? (
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3">
@@ -174,12 +174,12 @@ export default function BrokerSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>Грузы не найдены</span>
+					<span>Объявления не найдены</span>
 					<Button
 						variant='link'
 						onClick={() => firstLoad()}
 						className=' underline underline-offset-3 decoration-dotted text-(--dark-accent) hover:text-muted-foreground'
-					>Показать все грузы</Button>
+					>Показать все объявления</Button>
 				</div>
 			)
 		)
