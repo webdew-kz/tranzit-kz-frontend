@@ -115,7 +115,7 @@ export default function BrokerSearchList() {
 	}
 
 	return (
-		(searchBrokers && searchBrokers?.length > 0) ? (
+		(searchBrokers?.length && searchBrokers?.length > 0) ? (
 			<>
 				<div className='grid gap-5'>
 					<div className=" flex justify-between items-center">
@@ -137,7 +137,7 @@ export default function BrokerSearchList() {
 				</div>
 			</>
 		) : (
-			(brokers && brokers?.length > 0) ? (
+			(brokers?.length && brokers?.length > 0) ? (
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3">

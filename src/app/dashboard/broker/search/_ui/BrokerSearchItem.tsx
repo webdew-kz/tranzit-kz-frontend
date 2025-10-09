@@ -2,8 +2,6 @@
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select'
-import { convertFromKZT, convertToKZT, getCurrencySymbol } from '@/shared/lib/convertToKZT'
 import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { IBroker } from '@/shared/types/broker.type'
 import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowDownUp, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, Share, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
@@ -14,7 +12,6 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { useUserStore } from '@/shared/store/useUserStore'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/components/ui/collapsible'
-import { User } from '@/shared/types/user.type'
 
 interface BrokerSearchItemProps {
 	broker: IBroker
@@ -149,7 +146,7 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
 
 						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
-							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
+							{places.length && places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
 								<div key={`${place}-${index}`} >
 									{place}
 								</div>
