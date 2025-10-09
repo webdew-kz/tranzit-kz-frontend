@@ -71,6 +71,14 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 
 		placesLoading: z.array(z.string()).min(1),
 		placesUnloading: z.array(z.string()).min(1),
+
+
+		placesRegionLoading: z.array(z.string()).min(1),
+		placesRegionUnloading: z.array(z.string()).min(1),
+
+		placesCountryLoading: z.array(z.string()).min(1),
+		placesCountryUnloading: z.array(z.string()).min(1),
+
 		weight: z.number().positive(),
 		volume: z.number().positive(),
 		periodDays: z.number().int().min(1).max(30),
@@ -123,6 +131,10 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 
 			placesLoading: [""],
 			placesUnloading: [""],
+			placesRegionLoading: [''],
+			placesRegionUnloading: [''],
+			placesCountryLoading: [''],
+			placesCountryUnloading: [''],
 			weight: undefined,
 			volume: undefined,
 			periodDays: 5,
@@ -173,6 +185,10 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 				...(transport.note != null && { note: transport.note }),
 				...(transport.placesLoading != null && { placesLoading: transport.placesLoading }),
 				...(transport.placesUnloading != null && { placesUnloading: transport.placesUnloading }),
+				...(transport.placesRegionLoading != null && { placesRegionLoading: transport.placesRegionLoading }),
+				...(transport.placesRegionUnloading != null && { placesRegionUnloading: transport.placesRegionUnloading }),
+				...(transport.placesCountryLoading != null && { placesCountryLoading: transport.placesCountryLoading }),
+				...(transport.placesCountryUnloading != null && { placesCountryUnloading: transport.placesCountryUnloading }),
 				...(transport.weight != null && { weight: transport.weight }),
 				...(transport.volume != null && { volume: transport.volume }),
 				...(transport.periodDays != null && { periodDays: transport.periodDays }),
@@ -255,6 +271,9 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 		return <Loader />
 	}
 
+
+	const { setValue, watch } = form;
+
 	return (
 		<Card className="w-full p-3 md:p-5 gap-3 md:gap-5 pb-[60px]">
 			<CardHeader className='px-0'>
@@ -266,7 +285,7 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 					className=' grid gap-3 md:gap-5'
 				>
 					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
-						<Controller
+						{/* <Controller
 							control={form.control}
 							name="placesLoading"
 							render={({ field }) => (
@@ -290,6 +309,27 @@ export default function TransportFormCopy({ transportId }: ITransportFormCopyPro
 									placeholder='Пункт разгрузки'
 								/>
 							)}
+						/> */}
+						<MultiCityInput
+							values={watch('placesLoading') || []}
+							regions={watch('placesRegionLoading') || []}
+							countries={watch('placesCountryLoading') || []}
+							onChange={(v) => setValue('placesLoading', v)}
+							onChangeRegion={(v) => setValue('placesRegionLoading', v)}
+							onChangeCountry={(v) => setValue('placesCountryLoading', v)}
+							addBtnText="Добавить город погрузки"
+							placeholder="Пункт погрузки"
+						/>
+
+						<MultiCityInput
+							values={watch('placesUnloading') || []}
+							regions={watch('placesRegionUnloading') || []}
+							countries={watch('placesCountryUnloading') || []}
+							onChange={(v) => setValue('placesUnloading', v)}
+							onChangeRegion={(v) => setValue('placesRegionUnloading', v)}
+							onChangeCountry={(v) => setValue('placesCountryUnloading', v)}
+							addBtnText="Добавить пункт разгрузки"
+							placeholder='Пункт разгрузки'
 						/>
 					</div>
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 w-full gap-3 md:gap-5 items-start">
