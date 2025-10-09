@@ -3,8 +3,8 @@ import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent } from '@/shared/components/ui/card'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/components/ui/popover'
 import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
-import { IBroker } from '@/shared/types/broker.type'
-import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowDownUp, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, Share, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
+import { BrokerServiceEnum, IBroker } from '@/shared/types/broker.type'
+import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowDownUp, ArrowUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, Share, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
 import { addToWishlist, addView, removeFromWishlist } from '../actions'
@@ -146,9 +146,10 @@ const BrokerSearchItem = memo(({ broker, rates, loading, setWishlistLength, isCo
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
 
 						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
-							{places.length && places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
-								<div key={`${place}-${index}`} >
-									{place}
+							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
+								<div className="flex items-center gap-2 w-full" key={index}>
+									<Check size={16} className=' shrink-0' />
+									<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
 								</div>
 							))}
 						</div>

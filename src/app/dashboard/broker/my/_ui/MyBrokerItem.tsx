@@ -137,14 +137,14 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-2'>
 
-						<div className="flex items-center gap-2 w-full">
-							<Check size={16} />
-							{places.length > 0 && places.map((item, index) => (
-								<div key={index} >{BrokerServiceEnum[item as unknown as keyof typeof BrokerServiceEnum]}</div>
+						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
+							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
+								<div className="flex items-center gap-2 w-full" key={index}>
+									<Check size={16} className=' shrink-0' />
+									<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
+								</div>
 							))}
 						</div>
-
-
 
 						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-2">
 							<span className=' flex items-center gap-1'>

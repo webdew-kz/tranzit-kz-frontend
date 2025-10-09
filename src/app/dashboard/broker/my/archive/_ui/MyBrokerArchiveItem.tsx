@@ -10,7 +10,7 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { IBroker } from '@/shared/types/broker.type'
+import { BrokerServiceEnum, IBroker } from '@/shared/types/broker.type'
 import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, SquarePen, Trash, Truck, Wallet, Weight, X } from 'lucide-react'
 import React, { memo, SetStateAction, useEffect, useState, useTransition } from 'react'
 import { toast } from 'sonner'
@@ -136,8 +136,9 @@ const MyBrokerArchiveItem = memo(({ brokerInitial, selected, onToggle, setBroker
 					<CollapsibleContent className='flex flex-col justify-between gap-1'>
 						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
 							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
-								<div key={`${place}-${index}`} >
-									{place}
+								<div className="flex items-center gap-2 w-full" key={index}>
+									<Check size={16} className=' shrink-0' />
+									<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
 								</div>
 							))}
 						</div>

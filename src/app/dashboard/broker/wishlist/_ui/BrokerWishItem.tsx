@@ -7,8 +7,8 @@ import { formatRelativeDate } from '@/shared/lib/formatRelativeDate'
 import { getCountryCode } from '@/shared/lib/getCountryCode'
 import { checkEndDate, isEndedDate } from '@/shared/lib/isEndedDate'
 import { cn } from '@/shared/lib/utils'
-import { IBroker } from '@/shared/types/broker.type'
-import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowUp, BanknoteArrowUp, Box, CalendarDays, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, Share, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
+import { BrokerServiceEnum, IBroker } from '@/shared/types/broker.type'
+import { ArrowBigDown, ArrowBigUp, ArrowDown, ArrowUp, BanknoteArrowUp, Box, CalendarDays, Check, ChevronDown, Container, Copy, EllipsisVertical, Eye, HandCoins, MessageCircleMore, Move3d, MoveHorizontal, MoveRight, Phone, RefreshCcw, Share, ShieldCheck, ShieldOff, SquarePen, Star, Truck, Wallet, Weight, X } from 'lucide-react'
 import Image from 'next/image'
 import React, { memo, useEffect, useState, useTransition } from 'react'
 import Link from 'next/link'
@@ -112,8 +112,9 @@ const BrokerWishItem = memo(
 
 							<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap">
 								{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
-									<div key={`${place}-${index}`} >
-										{place}
+									<div className="flex items-center gap-2 w-full" key={index}>
+										<Check size={16} className=' shrink-0' />
+										<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
 									</div>
 								))}
 							</div>
