@@ -77,27 +77,6 @@ export default function BrokerFormSearch() {
 					onSubmit={form.handleSubmit(onSubmit, onError)}
 					className=' grid md:grid-cols-3 gap-3 md:gap-5 w-full'
 				>
-					<div className='grid'>
-						<Controller
-							control={form.control}
-							name="city"
-							render={({ field }) => (
-								<MultiRegionInput
-									values={field.value || []}
-									onChange={field.onChange}
-									placeholder="Город"
-									addBtnText="Добавить пункт погрузки"
-									addBtn={false}
-								/>
-							)}
-						/>
-						{/* <Input
-							type='text'
-							placeholder="Город"
-							className='text-sm'
-							{...form.register('city')}
-						/> */}
-					</div>
 
 					<div className='grid truncate'>
 						<Controller
@@ -109,6 +88,22 @@ export default function BrokerFormSearch() {
 									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Выберите услуги"
+								/>
+							)}
+						/>
+					</div>
+
+
+					<div className='grid'>
+						<Controller
+							control={form.control}
+							name="city"
+							render={({ field }) => (
+								<MultiRegionInput
+									values={field.value || []}
+									onChange={field.onChange}
+									placeholder="Город/Страна (необязательно)"
+									addBtn={false}
 								/>
 							)}
 						/>

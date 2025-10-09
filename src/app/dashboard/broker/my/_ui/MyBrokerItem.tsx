@@ -96,6 +96,11 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 		return <p className='text-center py-5'>Загрузка ...</p>
 	}
 
+
+	const filteredPlaces = places.filter(p => p && p.trim() !== '');
+	const limitedPlaces = filteredPlaces.length > 4 ? filteredPlaces.slice(0, 4) : filteredPlaces;
+	const rest = filteredPlaces.slice(4);
+
 	return (
 		<Card className='p-0 border-1 border-(--dark-accent) '>
 			<CardContent className='p-3 lg:p-5 flex flex-col justify-between'>
@@ -123,15 +128,25 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 					</div>
 				</div>
 
-				<div className="flex items-center gap-2">
-					<span>{broker.city}</span>
-				</div>
-
 				{broker.note && (
 					<div className="flex items-center gap-2">
 						<span>{broker.note}</span>
 					</div>
 				)}
+
+				{broker.city && (
+					<div className="flex items-center gap-2">
+						<span>{broker.city}</span>
+					</div>
+				)}
+
+
+				{limitedPlaces.map((place, index) => (
+					<div className="flex items-center gap-2 w-full text-xs" key={index}>
+						<Check size={14} className="shrink-0" />
+						<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
+					</div>
+				))}
 
 				<Collapsible className='sm:hidden flex flex-col gap-2' open={isOpen} onOpenChange={setIsOpen}>
 					<CollapsibleTrigger className='flex gap-2 items-center justify-center'>
@@ -140,14 +155,18 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 					</CollapsibleTrigger>
 					<CollapsibleContent className='flex flex-col justify-between gap-2'>
 
-						<div className=" w-full flex flex-col md:flex-row gap-2 md:flex-wrap border-b border-(--dark-accent) mb-2 pb-2">
-							{places.length > 0 && places.filter(p => p && p.trim() !== '').map((place, index) => (
-								<div className="flex items-center gap-2 w-full text-xs" key={index}>
-									<Check size={14} className=' shrink-0' />
-									<span>{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}</span>
-								</div>
-							))}
-						</div>
+						{rest.length > 0 && (
+							<div className="flex flex-col md:flex-row gap-2 md:flex-wrap border-b border-(--dark-accent) mb-2 pb-2">
+								{rest.map((place, index) => (
+									<div className="flex items-center gap-2 w-full text-xs" key={index}>
+										<Check size={14} className="shrink-0" />
+										<span>
+											{BrokerServiceEnum[place as unknown as keyof typeof BrokerServiceEnum]}
+										</span>
+									</div>
+								))}
+							</div>
+						)}
 
 						<div className="flex flex-col gap-1 lg:flex-row lg:gap-4 mb-2">
 							<span className=' flex items-center gap-1'>
