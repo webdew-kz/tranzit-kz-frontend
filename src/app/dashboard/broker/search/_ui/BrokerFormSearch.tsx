@@ -13,6 +13,7 @@ import { useBrokerSearchStore } from '@/shared/store/useBrokerSearchStore';
 import { findManyByFilter } from '../actions';
 import { useUserStore } from '@/shared/store/useUserStore';
 import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
+import { MultiRegionInput } from '@/shared/components/widgets/RegionInput';
 
 export default function BrokerFormSearch() {
 
@@ -32,7 +33,7 @@ export default function BrokerFormSearch() {
 	const form = useForm({
 		resolver: zodResolver(brokerSchema),
 		defaultValues: {
-			city: [],
+			city: [''],
 			note: undefined,
 			brokerService: []
 
@@ -81,12 +82,25 @@ export default function BrokerFormSearch() {
 					className=' grid md:grid-cols-3 gap-3 md:gap-5 w-full'
 				>
 					<div className='grid'>
-						<Input
+						<Controller
+							control={form.control}
+							name="city"
+							render={({ field }) => (
+								<MultiRegionInput
+									values={field.value || []}
+									onChange={field.onChange}
+									placeholder="Город"
+									// addBtnText="Добавить пункт погрузки"
+									addBtn={false}
+								/>
+							)}
+						/>
+						{/* <Input
 							type='text'
 							placeholder="Город"
 							className='text-sm'
 							{...form.register('city')}
-						/>
+						/> */}
 					</div>
 
 					<div className='grid truncate'>

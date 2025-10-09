@@ -73,9 +73,9 @@ export function MultiSelect<T extends string>({
 							<CommandItem
 								key={key}
 								onSelect={() => toggleValue(key as T)}
-								className="flex justify-between items-center cursor-pointer"
+								className="flex justify-between items-start cursor-pointer"
 							>
-								<span className="block truncate">{label}</span>
+								<span className="block">{label}</span>
 								<Checkbox
 									checked={value.includes(key as T)}
 									onCheckedChange={() => toggleValue(key as T)}
