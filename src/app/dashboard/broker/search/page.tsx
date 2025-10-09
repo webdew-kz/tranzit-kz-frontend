@@ -1,4 +1,4 @@
-
+"use client";
 import BrokerSearchList from './_ui/BrokerSearchList';
 import BrokerFormSearch from './_ui/BrokerFormSearch';
 
