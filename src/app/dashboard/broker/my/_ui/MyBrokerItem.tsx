@@ -123,10 +123,14 @@ const MyBrokerItem = memo(({ brokerInitial, selected, onToggle, setBrokers, rate
 					</div>
 				</div>
 
+				<div className="flex items-center gap-2">
+					<span>Город:</span>
+					<span>{broker.city}</span>
+				</div>
+
 				{broker.note && (
 					<div className="flex items-center gap-2">
-
-						<span className=' ' >{broker.note}</span>
+						<span>{broker.note}</span>
 					</div>
 				)}
 

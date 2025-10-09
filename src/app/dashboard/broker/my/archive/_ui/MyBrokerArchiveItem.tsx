@@ -121,6 +121,11 @@ const MyBrokerArchiveItem = memo(({ brokerInitial, selected, onToggle, setBroker
 					</div>
 				</div>
 
+				<div className="flex items-center gap-2">
+					<span className=' ' >Город:</span>
+					<span className=' ' >{broker.city}</span>
+				</div>
+
 				{broker.note && (
 					<div className="flex items-center gap-2">
 
