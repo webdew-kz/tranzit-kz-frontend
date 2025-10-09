@@ -141,7 +141,7 @@ export default function BrokerSearchList() {
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3">
-							<span>Всего грузов: {total}</span>
+							<span>Всего услуг: {total}</span>
 
 							<Link
 								href='/dashboard/broker/wishlist'
@@ -174,7 +174,7 @@ export default function BrokerSearchList() {
 				</>
 			) : (
 				<div className="flex flex-col items-center gap-5 justify-center py-5">
-					<span>услуги не найдены</span>
+					<span>Услуги не найдены</span>
 					<Button
 						variant='link'
 						onClick={() => firstLoad()}
