@@ -110,7 +110,7 @@ const BrokerWishItem = memo(
 						</div>
 					)}
 
-					<div className='grid mb-2'>
+					<div className='grid gap-1 mb-2'>
 						{limitedPlaces.map((place, index) => (
 							<div className="flex items-center gap-2 w-full text-xs" key={index}>
 								<Check size={14} className="shrink-0" />
