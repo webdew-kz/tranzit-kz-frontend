@@ -85,7 +85,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 	const form = useForm({
 		resolver: zodResolver(brokerSchema),
 		defaultValues: {
-			city: [],
+			city: [''],
 			note: undefined,
 			brokerService: undefined,
 

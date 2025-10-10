@@ -81,7 +81,7 @@ export default function BrokerFormEdit({ id }: { id?: string }) {
 	const form = useForm({
 		resolver: zodResolver(brokerSchema),
 		defaultValues: {
-			city: [],
+			city: [''],
 			note: undefined,
 			brokerService: undefined,
 
