@@ -87,7 +87,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 		defaultValues: {
 			city: [''],
 			note: undefined,
-			brokerService: undefined,
+			brokerService: [],
 
 			userName: user?.name!,
 			userPhone: user?.phone!,
@@ -179,7 +179,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 							render={({ field }) => (
 								<MultiSelect
 									options={BrokerServiceEnum}
-									value={field.value}
+									value={field.value || []}
 									onChange={field.onChange}
 									placeholder="Выберите услуги"
 								/>
