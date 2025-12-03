@@ -4,6 +4,7 @@ import { Views } from "./cargo.type";
 import { User } from "./user.type";
 
 export enum BrokerServiceEnum {
+    MKAD = "Пропуск МКАД",
     ADR = "АДР",
     ARENDA_GRUZOVOY_TEHNIKI = "Аренда грузовой техники",
     BRONIROVANIE_BILETA_NA_PORT_MEJDUNARODNOE = "Бронирование билета на порт (международное)",
