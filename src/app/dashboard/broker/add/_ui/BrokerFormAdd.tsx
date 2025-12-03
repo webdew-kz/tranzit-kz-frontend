@@ -2,16 +2,11 @@
 import { Button } from '@/shared/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/shared/components/ui/card';
 import { Input } from '@/shared/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/components/ui/select';
 import { MultiCityInput } from '@/shared/components/widgets/InputCity';
 import { z } from "zod"
 import { useEffect, useTransition } from 'react';
-import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle, DialogFooter, DialogClose } from '@/shared/components/ui/dialog';
 import { BrokerServiceEnum } from '@/shared/types/broker.type';
 import { MultiSelect } from '@/shared/components/widgets/MultiSelect';
-import MultiCheckbox from '@/shared/components/widgets/MultiCheckbox';
-import { TimePicker } from '@/shared/components/widgets/TimePicker';
-import { DatePicker } from '@/shared/components/widgets/DatePicker';
 import { useUserStore } from '@/shared/store/useUserStore';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -59,6 +54,7 @@ export default function BrokerFormAdd() {
 
 		city: z.array(z.string()).min(1),
 		note: z.string().optional(),
+		descr: z.string().optional(),
 		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).min(1),
 
 		userName: z.string().min(1),
@@ -77,6 +73,7 @@ export default function BrokerFormAdd() {
 		defaultValues: {
 			city: [''],
 			note: undefined,
+			descr: undefined,
 			brokerService: [],
 
 			userName: user?.name!,
@@ -210,7 +207,16 @@ export default function BrokerFormAdd() {
 						</div>
 					</div>
 
-					<div className="grid md:grid-cols-2  w-full gap-3 md:gap-5 items-start">
+					<div className="grid md:grid-cols-3  w-full gap-3 md:gap-5 items-start">
+
+						<div className='grid'>
+							<Input
+								type='text'
+								placeholder="Комментарий к услуге (необязательно)"
+								className='text-sm'
+								{...form.register('descr')}
+							/>
+						</div>
 
 						<Input
 							type="text"

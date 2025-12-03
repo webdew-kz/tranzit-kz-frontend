@@ -69,6 +69,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 
 		city: z.array(z.string()).optional(),
 		note: z.string().optional(),
+		descr: z.string().optional(),
 		brokerService: z.array(z.enum(Object.keys(BrokerServiceEnum) as [keyof typeof BrokerServiceEnum])).min(1),
 
 		userName: z.string().min(1),
@@ -87,6 +88,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 		defaultValues: {
 			city: [''],
 			note: undefined,
+			descr: undefined,
 			brokerService: [],
 
 			userName: user?.name!,
@@ -106,6 +108,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 				...(broker.city != null && { city: broker.city }),
 				...(broker.brokerService != null && { brokerService: broker.brokerService }),
 				...(broker.note != null && { note: broker.note }),
+				...(broker.descr != null && { descr: broker.descr }),
 				...(broker.userName != null && { userName: broker.userName }),
 				...(broker.userPhone != null && { userPhone: broker.userPhone }),
 				...(broker.whatsapp != null && { whatsapp: broker.whatsapp }),
@@ -172,7 +175,7 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 					className=' grid gap-3 md:gap-5'
 				>
 
-					<div className="grid sm:grid-cols-3 w-full gap-3 md:gap-5 items-start">
+					<div className="grid sm:grid-cols-2 w-full gap-3 md:gap-5 items-start">
 						<Controller
 							control={form.control}
 							name="brokerService"
@@ -197,6 +200,13 @@ export default function BrokerFormCopy({ brokerId }: IBrokerFormCopyProps) {
 							values={watch('city') || []}
 							onChange={(v) => setValue('city', v)}
 							placeholder="Город"
+						/>
+
+						<Input
+							type='text'
+							placeholder="Подробнее (необязательно)"
+							className='text-sm'
+							{...form.register('descr')}
 						/>
 					</div>
 

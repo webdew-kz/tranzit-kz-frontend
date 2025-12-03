@@ -71,6 +71,7 @@ export interface IBroker {
 
     city?: string[]; // город
     note?: string; // Коммент
+    descr?: string; // Коммент
     brokerService: BrokerServiceEnum; //
 
     views: Views; // просмотры

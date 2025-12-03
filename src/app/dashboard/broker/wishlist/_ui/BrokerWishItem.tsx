@@ -104,6 +104,12 @@ const BrokerWishItem = memo(
 						</div>
 					)}
 
+					{broker.descr && (
+						<div className="flex items-center gap-2">
+							<span>{broker.descr}</span>
+						</div>
+					)}
+
 					{broker.city && (
 						<div className="flex items-center gap-2">
 							<span>{broker.city}</span>
