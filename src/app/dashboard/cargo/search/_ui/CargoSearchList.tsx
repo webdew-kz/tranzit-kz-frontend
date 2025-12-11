@@ -141,7 +141,7 @@ export default function CargoSearchList() {
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3">
-							<span>Всего грузов: {total * 123}</span>
+							<span>Всего грузов: {total * 1234}</span>
 
 							{wishlistLength > 0 ? (
 								<Link
