@@ -374,13 +374,13 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 								</span>
 							</span>
 
-							<span className=' flex items-center gap-1'>
+							{/* <span className=' flex items-center gap-1'>
 								<Eye size={16} />
 								<span className='truncate block text-sm'>
 									<span className=' mr-2 font-light'>Просмотров:</span>
 									<span className=' font-medium'>{cargo.views.count}</span>
 								</span>
-							</span>
+							</span> */}
 						</div>
 
 						<div className="flex flex-col gap-2 items-start lg:flex-row justify-between w-full">
@@ -618,13 +618,13 @@ const MyCargoItem = memo(({ cargoInitial, selected, onToggle, setCargos, rates, 
 						</span>
 					</span>
 
-					<span className=' flex items-center gap-1'>
+					{/* <span className=' flex items-center gap-1'>
 						<Eye size={16} />
 						<span className='truncate block text-sm'>
 							<span className=' mr-2 font-light'>Просмотров:</span>
 							<span className=' font-medium'>{cargo.views.count}</span>
 						</span>
-					</span>
+					</span> */}
 				</div>
 
 				<div className=" hidden sm:flex flex-col gap-2 items-start lg:flex-row justify-between w-full">

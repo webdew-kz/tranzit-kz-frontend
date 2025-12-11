@@ -163,13 +163,13 @@ const BrokerWishItem = memo(
 									</span>
 								</span>
 
-								<span className=' flex items-center gap-1'>
+								{/* <span className=' flex items-center gap-1'>
 									<Eye size={16} />
 									<span className='truncate block text-sm'>
 										<span className=' mr-2 font-light'>Просмотров:</span>
 										<span className=' font-medium'>{broker.views.count}</span>
 									</span>
-								</span>
+								</span> */}
 							</div>
 
 							<div className="flex w-full gap-2">
