@@ -139,7 +139,8 @@ export default function TruckSearchList() {
 				<>
 					<div className='grid gap-5'>
 						<div className=" flex justify-between items-center sticky top-30 md:top-15 bg-background py-5 px-3 z-10">
-							<span>Всего грузовиков: {total}</span>
+							<span></span>
+							{/* <span>Всего грузовиков: {total}</span> */}
 
 							{wishlistLength > 0 ? (
 								<Link
